@@ -1,0 +1,29 @@
+# vscode
+.vscode
+
+# jetbrains
+.idea
+
+# MacOS
+.DS_Store
+
+# build
+build
+cmake-build-debug
+**/*.so
+**/*.a
+**/*.dll
+**/*.dylib
+**/*.o
+**/*.out
+**/*.exe
+**/*.app
+
+# clangd
+**/*.idx
+
+# tmp
+**/tmp
+
+# C++
+**/*.d
