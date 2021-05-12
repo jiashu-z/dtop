@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(server)
 add_subdirectory(client)
 add_subdirectory(proto)
+add_subdirectory(worker)
 
 # add_executable(demo_grpc main.cpp ConcreteObjService.cpp proto/hello.pb.cc proto/hello.grpc.pb.cc)
 # target_include_directories(demo_grpc
