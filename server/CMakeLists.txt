@@ -4,7 +4,7 @@ project(server)
 add_executable(server
 src/main.cpp
 src/Server.cpp
-src/ConcreteGRPCServer.cpp)
+src/ConcreteGRPCService.cpp)
 
 target_include_directories(server
 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc
