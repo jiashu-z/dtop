@@ -1,18 +1,35 @@
 #include "Client.h"
+#include "ConcreteGRPCServiceClient.h"
+#include "grpcpp/create_channel.h"
+#include "grpcpp/security/credentials.h"
+#include <memory>
 #include <sstream>
+#include <string>
+#include <utility>
 
 dtop::client::Client::Client() {
-  this->server_name = "default";
-  this->server_ip = "0.0.0.0";
-  this->server_port = 0;
+  
 }
 
 std::string dtop::client::Client::to_string() {
-  std::stringstream ss;
-  ss << "name: " << this->server_name << "\n";
-  ss << "ip: " << this->server_ip << "\n";
-  ss << "port: " << this->server_port << "\n";
-  std::string str;
-  ss >> str;
-  return str;
+  return "unimplemented!";
+}
+
+void dtop::client::Client::add_target(const std::string& addr) {
+  std::string s = addr;
+  ConcreteGRPCServiceClient client(grpc::CreateChannel(addr, grpc::InsecureChannelCredentials()));
+  std::shared_ptr<ConcreteGRPCServiceClient> ptr = std::make_shared<ConcreteGRPCServiceClient>(grpc::CreateChannel(addr, grpc::InsecureChannelCredentials()));
+  this->client_map.insert(std::pair<std::string, std::shared_ptr<ConcreteGRPCServiceClient>>(s, ptr));
+}
+
+void dtop::client::Client::remove_target(const std::string &addr) {
+  this->client_map.erase(addr);
+}
+
+std::vector<std::string> dtop::client::Client::get_all_targets_addr() {
+  std::vector<std::string> addr_vector;
+  for (auto iter : this->client_map) {
+    addr_vector.push_back(iter.second->get_addr());
+  }
+  return addr_vector;
 }
