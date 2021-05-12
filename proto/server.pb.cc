@@ -25,11 +25,13 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances
 
 const char descriptor_table_protodef_server_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\014server.proto\032\rmessage.proto\032\033google/pr"
-  "otobuf/empty.proto2\245\001\n\013GRPCService\022/\n\005Ge"
+  "otobuf/empty.proto2\332\001\n\013GRPCService\022/\n\005Ge"
   "tIP\022\026.google.protobuf.Empty\032\016.StringMess"
   "age\0222\n\007GetPort\022\026.google.protobuf.Empty\032\017"
   ".IntegerMessage\0221\n\007GetAddr\022\026.google.prot"
-  "obuf.Empty\032\016.StringMessageb\006proto3"
+  "obuf.Empty\032\016.StringMessage\0223\n\007Profile\022\024."
+  "FetchRequestMessage\032\022.FetchReplyMessageb"
+  "\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_server_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -37,7 +39,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_server_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_server_2eproto = {
-  false, false, 234, descriptor_table_protodef_server_2eproto, "server.proto", 
+  false, false, 287, descriptor_table_protodef_server_2eproto, "server.proto", 
   &descriptor_table_server_2eproto_once, descriptor_table_server_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_server_2eproto::offsets,
   file_level_metadata_server_2eproto, file_level_enum_descriptors_server_2eproto, file_level_service_descriptors_server_2eproto,

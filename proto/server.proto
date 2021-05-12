@@ -7,5 +7,5 @@ service GRPCService {
   rpc GetIP (google.protobuf.Empty) returns (StringMessage);
   rpc GetPort (google.protobuf.Empty) returns (IntegerMessage);
   rpc GetAddr (google.protobuf.Empty) returns (StringMessage);
-  rpc Profile (FetchRequst) returns (FetchResponse);
+  rpc Profile (FetchRequestMessage) returns (FetchReplyMessage);
 }
