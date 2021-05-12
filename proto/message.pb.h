@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[10]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[14]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -54,12 +54,21 @@ struct TableStruct_message_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto;
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_message_2eproto_metadata_getter(int index);
+class CpuMessage;
+struct CpuMessageDefaultTypeInternal;
+extern CpuMessageDefaultTypeInternal _CpuMessage_default_instance_;
 class DoubleArrayMessage;
 struct DoubleArrayMessageDefaultTypeInternal;
 extern DoubleArrayMessageDefaultTypeInternal _DoubleArrayMessage_default_instance_;
 class DoubleMessage;
 struct DoubleMessageDefaultTypeInternal;
 extern DoubleMessageDefaultTypeInternal _DoubleMessage_default_instance_;
+class FetchReplyMessage;
+struct FetchReplyMessageDefaultTypeInternal;
+extern FetchReplyMessageDefaultTypeInternal _FetchReplyMessage_default_instance_;
+class FetchRequestMessage;
+struct FetchRequestMessageDefaultTypeInternal;
+extern FetchRequestMessageDefaultTypeInternal _FetchRequestMessage_default_instance_;
 class FloatArrayMessage;
 struct FloatArrayMessageDefaultTypeInternal;
 extern FloatArrayMessageDefaultTypeInternal _FloatArrayMessage_default_instance_;
@@ -78,6 +87,9 @@ extern LongArrayMessageDefaultTypeInternal _LongArrayMessage_default_instance_;
 class LongMessage;
 struct LongMessageDefaultTypeInternal;
 extern LongMessageDefaultTypeInternal _LongMessage_default_instance_;
+class MemUsageMessage;
+struct MemUsageMessageDefaultTypeInternal;
+extern MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
 class StringArrayMessage;
 struct StringArrayMessageDefaultTypeInternal;
 extern StringArrayMessageDefaultTypeInternal _StringArrayMessage_default_instance_;
@@ -85,14 +97,18 @@ class StringMessage;
 struct StringMessageDefaultTypeInternal;
 extern StringMessageDefaultTypeInternal _StringMessage_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::CpuMessage* Arena::CreateMaybeMessage<::CpuMessage>(Arena*);
 template<> ::DoubleArrayMessage* Arena::CreateMaybeMessage<::DoubleArrayMessage>(Arena*);
 template<> ::DoubleMessage* Arena::CreateMaybeMessage<::DoubleMessage>(Arena*);
+template<> ::FetchReplyMessage* Arena::CreateMaybeMessage<::FetchReplyMessage>(Arena*);
+template<> ::FetchRequestMessage* Arena::CreateMaybeMessage<::FetchRequestMessage>(Arena*);
 template<> ::FloatArrayMessage* Arena::CreateMaybeMessage<::FloatArrayMessage>(Arena*);
 template<> ::FloatMessage* Arena::CreateMaybeMessage<::FloatMessage>(Arena*);
 template<> ::IntegerArrayMessage* Arena::CreateMaybeMessage<::IntegerArrayMessage>(Arena*);
 template<> ::IntegerMessage* Arena::CreateMaybeMessage<::IntegerMessage>(Arena*);
 template<> ::LongArrayMessage* Arena::CreateMaybeMessage<::LongArrayMessage>(Arena*);
 template<> ::LongMessage* Arena::CreateMaybeMessage<::LongMessage>(Arena*);
+template<> ::MemUsageMessage* Arena::CreateMaybeMessage<::MemUsageMessage>(Arena*);
 template<> ::StringArrayMessage* Arena::CreateMaybeMessage<::StringArrayMessage>(Arena*);
 template<> ::StringMessage* Arena::CreateMaybeMessage<::StringMessage>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -1545,6 +1561,634 @@ class DoubleArrayMessage PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
+// -------------------------------------------------------------------
+
+class FetchRequestMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchRequestMessage) */ {
+ public:
+  inline FetchRequestMessage() : FetchRequestMessage(nullptr) {}
+  virtual ~FetchRequestMessage();
+  explicit constexpr FetchRequestMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  FetchRequestMessage(const FetchRequestMessage& from);
+  FetchRequestMessage(FetchRequestMessage&& from) noexcept
+    : FetchRequestMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline FetchRequestMessage& operator=(const FetchRequestMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FetchRequestMessage& operator=(FetchRequestMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FetchRequestMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const FetchRequestMessage* internal_default_instance() {
+    return reinterpret_cast<const FetchRequestMessage*>(
+               &_FetchRequestMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(FetchRequestMessage& a, FetchRequestMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FetchRequestMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(FetchRequestMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FetchRequestMessage* New() const final {
+    return CreateMaybeMessage<FetchRequestMessage>(nullptr);
+  }
+
+  FetchRequestMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FetchRequestMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FetchRequestMessage& from);
+  void MergeFrom(const FetchRequestMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FetchRequestMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "FetchRequestMessage";
+  }
+  protected:
+  explicit FetchRequestMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRequestArrFieldNumber = 1,
+  };
+  // repeated string request_arr = 1;
+  int request_arr_size() const;
+  private:
+  int _internal_request_arr_size() const;
+  public:
+  void clear_request_arr();
+  const std::string& request_arr(int index) const;
+  std::string* mutable_request_arr(int index);
+  void set_request_arr(int index, const std::string& value);
+  void set_request_arr(int index, std::string&& value);
+  void set_request_arr(int index, const char* value);
+  void set_request_arr(int index, const char* value, size_t size);
+  std::string* add_request_arr();
+  void add_request_arr(const std::string& value);
+  void add_request_arr(std::string&& value);
+  void add_request_arr(const char* value);
+  void add_request_arr(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& request_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_request_arr();
+  private:
+  const std::string& _internal_request_arr(int index) const;
+  std::string* _internal_add_request_arr();
+  public:
+
+  // @@protoc_insertion_point(class_scope:FetchRequestMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> request_arr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FetchReplyMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchReplyMessage) */ {
+ public:
+  inline FetchReplyMessage() : FetchReplyMessage(nullptr) {}
+  virtual ~FetchReplyMessage();
+  explicit constexpr FetchReplyMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  FetchReplyMessage(const FetchReplyMessage& from);
+  FetchReplyMessage(FetchReplyMessage&& from) noexcept
+    : FetchReplyMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline FetchReplyMessage& operator=(const FetchReplyMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FetchReplyMessage& operator=(FetchReplyMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FetchReplyMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const FetchReplyMessage* internal_default_instance() {
+    return reinterpret_cast<const FetchReplyMessage*>(
+               &_FetchReplyMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(FetchReplyMessage& a, FetchReplyMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FetchReplyMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(FetchReplyMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FetchReplyMessage* New() const final {
+    return CreateMaybeMessage<FetchReplyMessage>(nullptr);
+  }
+
+  FetchReplyMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FetchReplyMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FetchReplyMessage& from);
+  void MergeFrom(const FetchReplyMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FetchReplyMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "FetchReplyMessage";
+  }
+  protected:
+  explicit FetchReplyMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCpuMessageFieldNumber = 1,
+    kMemUsageMessageFieldNumber = 2,
+  };
+  // .CpuMessage cpu_message = 1;
+  bool has_cpu_message() const;
+  private:
+  bool _internal_has_cpu_message() const;
+  public:
+  void clear_cpu_message();
+  const ::CpuMessage& cpu_message() const;
+  ::CpuMessage* release_cpu_message();
+  ::CpuMessage* mutable_cpu_message();
+  void set_allocated_cpu_message(::CpuMessage* cpu_message);
+  private:
+  const ::CpuMessage& _internal_cpu_message() const;
+  ::CpuMessage* _internal_mutable_cpu_message();
+  public:
+  void unsafe_arena_set_allocated_cpu_message(
+      ::CpuMessage* cpu_message);
+  ::CpuMessage* unsafe_arena_release_cpu_message();
+
+  // .MemUsageMessage mem_usage_message = 2;
+  bool has_mem_usage_message() const;
+  private:
+  bool _internal_has_mem_usage_message() const;
+  public:
+  void clear_mem_usage_message();
+  const ::MemUsageMessage& mem_usage_message() const;
+  ::MemUsageMessage* release_mem_usage_message();
+  ::MemUsageMessage* mutable_mem_usage_message();
+  void set_allocated_mem_usage_message(::MemUsageMessage* mem_usage_message);
+  private:
+  const ::MemUsageMessage& _internal_mem_usage_message() const;
+  ::MemUsageMessage* _internal_mutable_mem_usage_message();
+  public:
+  void unsafe_arena_set_allocated_mem_usage_message(
+      ::MemUsageMessage* mem_usage_message);
+  ::MemUsageMessage* unsafe_arena_release_mem_usage_message();
+
+  // @@protoc_insertion_point(class_scope:FetchReplyMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::CpuMessage* cpu_message_;
+  ::MemUsageMessage* mem_usage_message_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CpuMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CpuMessage) */ {
+ public:
+  inline CpuMessage() : CpuMessage(nullptr) {}
+  virtual ~CpuMessage();
+  explicit constexpr CpuMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CpuMessage(const CpuMessage& from);
+  CpuMessage(CpuMessage&& from) noexcept
+    : CpuMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline CpuMessage& operator=(const CpuMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CpuMessage& operator=(CpuMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const CpuMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CpuMessage* internal_default_instance() {
+    return reinterpret_cast<const CpuMessage*>(
+               &_CpuMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(CpuMessage& a, CpuMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CpuMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CpuMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CpuMessage* New() const final {
+    return CreateMaybeMessage<CpuMessage>(nullptr);
+  }
+
+  CpuMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<CpuMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const CpuMessage& from);
+  void MergeFrom(const CpuMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CpuMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "CpuMessage";
+  }
+  protected:
+  explicit CpuMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUsageArrFieldNumber = 2,
+    kCoreNumFieldNumber = 1,
+  };
+  // repeated float usage_arr = 2;
+  int usage_arr_size() const;
+  private:
+  int _internal_usage_arr_size() const;
+  public:
+  void clear_usage_arr();
+  private:
+  float _internal_usage_arr(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >&
+      _internal_usage_arr() const;
+  void _internal_add_usage_arr(float value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >*
+      _internal_mutable_usage_arr();
+  public:
+  float usage_arr(int index) const;
+  void set_usage_arr(int index, float value);
+  void add_usage_arr(float value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >&
+      usage_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >*
+      mutable_usage_arr();
+
+  // int32 core_num = 1;
+  void clear_core_num();
+  ::PROTOBUF_NAMESPACE_ID::int32 core_num() const;
+  void set_core_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_core_num() const;
+  void _internal_set_core_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:CpuMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< float > usage_arr_;
+  mutable std::atomic<int> _usage_arr_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::int32 core_num_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MemUsageMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MemUsageMessage) */ {
+ public:
+  inline MemUsageMessage() : MemUsageMessage(nullptr) {}
+  virtual ~MemUsageMessage();
+  explicit constexpr MemUsageMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MemUsageMessage(const MemUsageMessage& from);
+  MemUsageMessage(MemUsageMessage&& from) noexcept
+    : MemUsageMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline MemUsageMessage& operator=(const MemUsageMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MemUsageMessage& operator=(MemUsageMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MemUsageMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MemUsageMessage* internal_default_instance() {
+    return reinterpret_cast<const MemUsageMessage*>(
+               &_MemUsageMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(MemUsageMessage& a, MemUsageMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MemUsageMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MemUsageMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MemUsageMessage* New() const final {
+    return CreateMaybeMessage<MemUsageMessage>(nullptr);
+  }
+
+  MemUsageMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MemUsageMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MemUsageMessage& from);
+  void MergeFrom(const MemUsageMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MemUsageMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MemUsageMessage";
+  }
+  protected:
+  explicit MemUsageMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMaxMemFieldNumber = 1,
+    kUsedMemFieldNumber = 2,
+  };
+  // int64 max_mem = 1;
+  void clear_max_mem();
+  ::PROTOBUF_NAMESPACE_ID::int64 max_mem() const;
+  void set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_max_mem() const;
+  void _internal_set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 used_mem = 2;
+  void clear_used_mem();
+  ::PROTOBUF_NAMESPACE_ID::int64 used_mem() const;
+  void set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_used_mem() const;
+  void _internal_set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:MemUsageMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 max_mem_;
+  ::PROTOBUF_NAMESPACE_ID::int64 used_mem_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
 // ===================================================================
 
 
@@ -1995,9 +2639,380 @@ DoubleArrayMessage::mutable_arr() {
   return _internal_mutable_arr();
 }
 
+// -------------------------------------------------------------------
+
+// FetchRequestMessage
+
+// repeated string request_arr = 1;
+inline int FetchRequestMessage::_internal_request_arr_size() const {
+  return request_arr_.size();
+}
+inline int FetchRequestMessage::request_arr_size() const {
+  return _internal_request_arr_size();
+}
+inline void FetchRequestMessage::clear_request_arr() {
+  request_arr_.Clear();
+}
+inline std::string* FetchRequestMessage::add_request_arr() {
+  // @@protoc_insertion_point(field_add_mutable:FetchRequestMessage.request_arr)
+  return _internal_add_request_arr();
+}
+inline const std::string& FetchRequestMessage::_internal_request_arr(int index) const {
+  return request_arr_.Get(index);
+}
+inline const std::string& FetchRequestMessage::request_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchRequestMessage.request_arr)
+  return _internal_request_arr(index);
+}
+inline std::string* FetchRequestMessage::mutable_request_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchRequestMessage.request_arr)
+  return request_arr_.Mutable(index);
+}
+inline void FetchRequestMessage::set_request_arr(int index, const std::string& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.request_arr)
+  request_arr_.Mutable(index)->assign(value);
+}
+inline void FetchRequestMessage::set_request_arr(int index, std::string&& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.request_arr)
+  request_arr_.Mutable(index)->assign(std::move(value));
+}
+inline void FetchRequestMessage::set_request_arr(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  request_arr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:FetchRequestMessage.request_arr)
+}
+inline void FetchRequestMessage::set_request_arr(int index, const char* value, size_t size) {
+  request_arr_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:FetchRequestMessage.request_arr)
+}
+inline std::string* FetchRequestMessage::_internal_add_request_arr() {
+  return request_arr_.Add();
+}
+inline void FetchRequestMessage::add_request_arr(const std::string& value) {
+  request_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.request_arr)
+}
+inline void FetchRequestMessage::add_request_arr(std::string&& value) {
+  request_arr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.request_arr)
+}
+inline void FetchRequestMessage::add_request_arr(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  request_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:FetchRequestMessage.request_arr)
+}
+inline void FetchRequestMessage::add_request_arr(const char* value, size_t size) {
+  request_arr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:FetchRequestMessage.request_arr)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+FetchRequestMessage::request_arr() const {
+  // @@protoc_insertion_point(field_list:FetchRequestMessage.request_arr)
+  return request_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+FetchRequestMessage::mutable_request_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchRequestMessage.request_arr)
+  return &request_arr_;
+}
+
+// -------------------------------------------------------------------
+
+// FetchReplyMessage
+
+// .CpuMessage cpu_message = 1;
+inline bool FetchReplyMessage::_internal_has_cpu_message() const {
+  return this != internal_default_instance() && cpu_message_ != nullptr;
+}
+inline bool FetchReplyMessage::has_cpu_message() const {
+  return _internal_has_cpu_message();
+}
+inline void FetchReplyMessage::clear_cpu_message() {
+  if (GetArena() == nullptr && cpu_message_ != nullptr) {
+    delete cpu_message_;
+  }
+  cpu_message_ = nullptr;
+}
+inline const ::CpuMessage& FetchReplyMessage::_internal_cpu_message() const {
+  const ::CpuMessage* p = cpu_message_;
+  return p != nullptr ? *p : reinterpret_cast<const ::CpuMessage&>(
+      ::_CpuMessage_default_instance_);
+}
+inline const ::CpuMessage& FetchReplyMessage::cpu_message() const {
+  // @@protoc_insertion_point(field_get:FetchReplyMessage.cpu_message)
+  return _internal_cpu_message();
+}
+inline void FetchReplyMessage::unsafe_arena_set_allocated_cpu_message(
+    ::CpuMessage* cpu_message) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(cpu_message_);
+  }
+  cpu_message_ = cpu_message;
+  if (cpu_message) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:FetchReplyMessage.cpu_message)
+}
+inline ::CpuMessage* FetchReplyMessage::release_cpu_message() {
+  
+  ::CpuMessage* temp = cpu_message_;
+  cpu_message_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::CpuMessage* FetchReplyMessage::unsafe_arena_release_cpu_message() {
+  // @@protoc_insertion_point(field_release:FetchReplyMessage.cpu_message)
+  
+  ::CpuMessage* temp = cpu_message_;
+  cpu_message_ = nullptr;
+  return temp;
+}
+inline ::CpuMessage* FetchReplyMessage::_internal_mutable_cpu_message() {
+  
+  if (cpu_message_ == nullptr) {
+    auto* p = CreateMaybeMessage<::CpuMessage>(GetArena());
+    cpu_message_ = p;
+  }
+  return cpu_message_;
+}
+inline ::CpuMessage* FetchReplyMessage::mutable_cpu_message() {
+  // @@protoc_insertion_point(field_mutable:FetchReplyMessage.cpu_message)
+  return _internal_mutable_cpu_message();
+}
+inline void FetchReplyMessage::set_allocated_cpu_message(::CpuMessage* cpu_message) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete cpu_message_;
+  }
+  if (cpu_message) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(cpu_message);
+    if (message_arena != submessage_arena) {
+      cpu_message = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cpu_message, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  cpu_message_ = cpu_message;
+  // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.cpu_message)
+}
+
+// .MemUsageMessage mem_usage_message = 2;
+inline bool FetchReplyMessage::_internal_has_mem_usage_message() const {
+  return this != internal_default_instance() && mem_usage_message_ != nullptr;
+}
+inline bool FetchReplyMessage::has_mem_usage_message() const {
+  return _internal_has_mem_usage_message();
+}
+inline void FetchReplyMessage::clear_mem_usage_message() {
+  if (GetArena() == nullptr && mem_usage_message_ != nullptr) {
+    delete mem_usage_message_;
+  }
+  mem_usage_message_ = nullptr;
+}
+inline const ::MemUsageMessage& FetchReplyMessage::_internal_mem_usage_message() const {
+  const ::MemUsageMessage* p = mem_usage_message_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MemUsageMessage&>(
+      ::_MemUsageMessage_default_instance_);
+}
+inline const ::MemUsageMessage& FetchReplyMessage::mem_usage_message() const {
+  // @@protoc_insertion_point(field_get:FetchReplyMessage.mem_usage_message)
+  return _internal_mem_usage_message();
+}
+inline void FetchReplyMessage::unsafe_arena_set_allocated_mem_usage_message(
+    ::MemUsageMessage* mem_usage_message) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mem_usage_message_);
+  }
+  mem_usage_message_ = mem_usage_message;
+  if (mem_usage_message) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:FetchReplyMessage.mem_usage_message)
+}
+inline ::MemUsageMessage* FetchReplyMessage::release_mem_usage_message() {
+  
+  ::MemUsageMessage* temp = mem_usage_message_;
+  mem_usage_message_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::MemUsageMessage* FetchReplyMessage::unsafe_arena_release_mem_usage_message() {
+  // @@protoc_insertion_point(field_release:FetchReplyMessage.mem_usage_message)
+  
+  ::MemUsageMessage* temp = mem_usage_message_;
+  mem_usage_message_ = nullptr;
+  return temp;
+}
+inline ::MemUsageMessage* FetchReplyMessage::_internal_mutable_mem_usage_message() {
+  
+  if (mem_usage_message_ == nullptr) {
+    auto* p = CreateMaybeMessage<::MemUsageMessage>(GetArena());
+    mem_usage_message_ = p;
+  }
+  return mem_usage_message_;
+}
+inline ::MemUsageMessage* FetchReplyMessage::mutable_mem_usage_message() {
+  // @@protoc_insertion_point(field_mutable:FetchReplyMessage.mem_usage_message)
+  return _internal_mutable_mem_usage_message();
+}
+inline void FetchReplyMessage::set_allocated_mem_usage_message(::MemUsageMessage* mem_usage_message) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete mem_usage_message_;
+  }
+  if (mem_usage_message) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(mem_usage_message);
+    if (message_arena != submessage_arena) {
+      mem_usage_message = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mem_usage_message, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  mem_usage_message_ = mem_usage_message;
+  // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.mem_usage_message)
+}
+
+// -------------------------------------------------------------------
+
+// CpuMessage
+
+// int32 core_num = 1;
+inline void CpuMessage::clear_core_num() {
+  core_num_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CpuMessage::_internal_core_num() const {
+  return core_num_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CpuMessage::core_num() const {
+  // @@protoc_insertion_point(field_get:CpuMessage.core_num)
+  return _internal_core_num();
+}
+inline void CpuMessage::_internal_set_core_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  core_num_ = value;
+}
+inline void CpuMessage::set_core_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_core_num(value);
+  // @@protoc_insertion_point(field_set:CpuMessage.core_num)
+}
+
+// repeated float usage_arr = 2;
+inline int CpuMessage::_internal_usage_arr_size() const {
+  return usage_arr_.size();
+}
+inline int CpuMessage::usage_arr_size() const {
+  return _internal_usage_arr_size();
+}
+inline void CpuMessage::clear_usage_arr() {
+  usage_arr_.Clear();
+}
+inline float CpuMessage::_internal_usage_arr(int index) const {
+  return usage_arr_.Get(index);
+}
+inline float CpuMessage::usage_arr(int index) const {
+  // @@protoc_insertion_point(field_get:CpuMessage.usage_arr)
+  return _internal_usage_arr(index);
+}
+inline void CpuMessage::set_usage_arr(int index, float value) {
+  usage_arr_.Set(index, value);
+  // @@protoc_insertion_point(field_set:CpuMessage.usage_arr)
+}
+inline void CpuMessage::_internal_add_usage_arr(float value) {
+  usage_arr_.Add(value);
+}
+inline void CpuMessage::add_usage_arr(float value) {
+  _internal_add_usage_arr(value);
+  // @@protoc_insertion_point(field_add:CpuMessage.usage_arr)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >&
+CpuMessage::_internal_usage_arr() const {
+  return usage_arr_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >&
+CpuMessage::usage_arr() const {
+  // @@protoc_insertion_point(field_list:CpuMessage.usage_arr)
+  return _internal_usage_arr();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >*
+CpuMessage::_internal_mutable_usage_arr() {
+  return &usage_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< float >*
+CpuMessage::mutable_usage_arr() {
+  // @@protoc_insertion_point(field_mutable_list:CpuMessage.usage_arr)
+  return _internal_mutable_usage_arr();
+}
+
+// -------------------------------------------------------------------
+
+// MemUsageMessage
+
+// int64 max_mem = 1;
+inline void MemUsageMessage::clear_max_mem() {
+  max_mem_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_max_mem() const {
+  return max_mem_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::max_mem() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.max_mem)
+  return _internal_max_mem();
+}
+inline void MemUsageMessage::_internal_set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  max_mem_ = value;
+}
+inline void MemUsageMessage::set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_max_mem(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.max_mem)
+}
+
+// int64 used_mem = 2;
+inline void MemUsageMessage::clear_used_mem() {
+  used_mem_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_used_mem() const {
+  return used_mem_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::used_mem() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.used_mem)
+  return _internal_used_mem();
+}
+inline void MemUsageMessage::_internal_set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  used_mem_ = value;
+}
+inline void MemUsageMessage::set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_used_mem(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.used_mem)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

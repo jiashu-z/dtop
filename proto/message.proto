@@ -39,3 +39,22 @@ message FloatArrayMessage {
 message DoubleArrayMessage {
   repeated double arr = 1;
 }
+
+message FetchRequestMessage {
+  repeated string request_arr = 1;
+}
+
+message FetchReplyMessage {
+  CpuMessage cpu_message = 1;
+  MemUsageMessage mem_usage_message = 2;
+}
+
+message CpuMessage {
+  int32 core_num = 1;
+  repeated float usage_arr = 2;
+}
+
+message MemUsageMessage {
+  int64 max_mem = 1;
+  int64 used_mem = 2;
+}
