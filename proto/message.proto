@@ -49,6 +49,16 @@ message FetchReplyMessage {
   MemUsageMessage mem_usage_message = 2;
 }
 
+message MachineMessage {
+  string ip = 1;
+  int32 port = 2;
+  string addr = 3;
+}
+
+message MachineArrMessage {
+  repeated MachineMessage machine_arr = 1;
+}
+
 message CpuMessage {
   int32 core_num = 1;
   repeated float usage_arr = 2;
