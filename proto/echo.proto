@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "message.proto";
+
+service EchoService {
+  rpc Echo(StringMessage) returns StringMessage;
+  rpc Echo(IntegerMessage) returns IntegerMessage;
+  rpc Echo(LongMessage) returns LongMessage;
+  rpc Echo(FloatMessage) returns FloatMessage;
+  rpc Echo(DoubleMessage) returns DoubleMessage;
+  rpc Echo(StringArrayMessage) returns StringArrayMessage;
+  rpc Echo(IntegerArrayMessage) returns IntegerArrayMessage;
+  rpc Echo(LongArrayMessage) returns LongArrayMessage;
+  rpc Echo(FloatArrayMessage) returns FloatArrayMessage;
+  rpc Echo(DoubleArrayMessage) returns DoubleArrayMessage;
+}
