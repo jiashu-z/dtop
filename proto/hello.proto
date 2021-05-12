@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-message EchoRequest {
+message DemoRequest {
   string request = 1;
 }
 
-message EchoResponse {
+message DemoResponse {
   string response = 1;
 }
 
-service EchoService {
-  rpc Echo (EchoRequest) returns(EchoResponse);
+service DemoService {
+  rpc Echo (DemoRequest) returns(DemoResponse);
 }
