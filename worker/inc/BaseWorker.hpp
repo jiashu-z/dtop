@@ -20,7 +20,7 @@ namespace worker {
 	public:
 		const std::string worker_name;
 		virtual bool setup() = 0;
-		virtual bool act(const QueryParam& params, EchoResponse& response) = 0;
+//		virtual bool act(const QueryParam& params, EchoResponse& response) = 0;
 		virtual bool shutdown() = 0;
 
 		std::string to_string() const;

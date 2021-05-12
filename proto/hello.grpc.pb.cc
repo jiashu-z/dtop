@@ -20,60 +20,60 @@
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
 
-static const char* EchoService_method_names[] = {
-  "/EchoService/Echo",
+static const char* DemoService_method_names[] = {
+  "/DemoService/Echo",
 };
 
-std::unique_ptr< EchoService::Stub> EchoService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< DemoService::Stub> DemoService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< EchoService::Stub> stub(new EchoService::Stub(channel));
+  std::unique_ptr< DemoService::Stub> stub(new DemoService::Stub(channel));
   return stub;
 }
 
-EchoService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_Echo_(EchoService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+DemoService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_Echo_(DemoService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status EchoService::Stub::Echo(::grpc::ClientContext* context, const ::EchoRequest& request, ::EchoResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::EchoRequest, ::EchoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Echo_, context, request, response);
+::grpc::Status DemoService::Stub::Echo(::grpc::ClientContext* context, const ::DemoRequest& request, ::DemoResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::DemoRequest, ::DemoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Echo_, context, request, response);
 }
 
-void EchoService::Stub::experimental_async::Echo(::grpc::ClientContext* context, const ::EchoRequest* request, ::EchoResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::EchoRequest, ::EchoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Echo_, context, request, response, std::move(f));
+void DemoService::Stub::experimental_async::Echo(::grpc::ClientContext* context, const ::DemoRequest* request, ::DemoResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::DemoRequest, ::DemoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Echo_, context, request, response, std::move(f));
 }
 
-void EchoService::Stub::experimental_async::Echo(::grpc::ClientContext* context, const ::EchoRequest* request, ::EchoResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+void DemoService::Stub::experimental_async::Echo(::grpc::ClientContext* context, const ::DemoRequest* request, ::DemoResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Echo_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::EchoResponse>* EchoService::Stub::PrepareAsyncEchoRaw(::grpc::ClientContext* context, const ::EchoRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::EchoResponse, ::EchoRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Echo_, context, request);
+::grpc::ClientAsyncResponseReader< ::DemoResponse>* DemoService::Stub::PrepareAsyncEchoRaw(::grpc::ClientContext* context, const ::DemoRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::DemoResponse, ::DemoRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Echo_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::EchoResponse>* EchoService::Stub::AsyncEchoRaw(::grpc::ClientContext* context, const ::EchoRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::DemoResponse>* DemoService::Stub::AsyncEchoRaw(::grpc::ClientContext* context, const ::DemoRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncEchoRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-EchoService::Service::Service() {
+DemoService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EchoService_method_names[0],
+      DemoService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EchoService::Service, ::EchoRequest, ::EchoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](EchoService::Service* service,
+      new ::grpc::internal::RpcMethodHandler< DemoService::Service, ::DemoRequest, ::DemoResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](DemoService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::EchoRequest* req,
-             ::EchoResponse* resp) {
+             const ::DemoRequest* req,
+             ::DemoResponse* resp) {
                return service->Echo(ctx, req, resp);
              }, this)));
 }
 
-EchoService::Service::~Service() {
+DemoService::Service::~Service() {
 }
 
-::grpc::Status EchoService::Service::Echo(::grpc::ServerContext* context, const ::EchoRequest* request, ::EchoResponse* response) {
+::grpc::Status DemoService::Service::Echo(::grpc::ServerContext* context, const ::DemoRequest* request, ::DemoResponse* response) {
   (void) context;
   (void) request;
   (void) response;

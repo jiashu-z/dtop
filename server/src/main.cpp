@@ -1,5 +1,8 @@
 #include <iostream>
+#include "Server.h"
 
 int main(int argc, char** argv) {
-  std::cout << "Hello world!" << std::endl;
+  if (argc == 0) {
+    std::cout << "Hello world!" << std::endl;
+  }
 }

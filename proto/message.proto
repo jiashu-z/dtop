@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message StringMessage {
+  string val = 1;
+}
+
+message IntegerMessage {
+  int32 val = 1;
+}
+
+message LongMessage {
+  int64 val = 1;
+}
+
+message FloatMessage {
+  float val = 1;
+}
+
+message DoubleMessage {
+  double val = 1;
+}
+
+message StringArrayMessage {
+  repeated string arr = 1;
+}
+
+message IntegerArrayMessage {
+  repeated int32 arr = 1;
+}
+
+message LongArrayMessage {
+  repeated int64 arr = 1;
+}
+
+message FloatArrayMessage {
+  repeated float arr = 1;
+}
+
+message DoubleArrayMessage {
+  repeated double arr = 1;
+}

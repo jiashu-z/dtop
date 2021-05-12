@@ -21,6 +21,7 @@ cmake-build-debug
 
 # clangd
 **/*.idx
+**/.cache
 
 # tmp
 **/tmp

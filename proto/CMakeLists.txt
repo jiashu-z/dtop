@@ -3,13 +3,17 @@ project(proto)
 
 include(${CMAKE_SOURCE_DIR}/common.cmake)
 
-set(PROTO_FILES hello.proto)
+set(PROTO_FILES 
+hello.proto 
+message.proto
+server.proto
+echo.proto)
 
 add_library(proto SHARED
 ${PROTO_FILES})
 
 target_include_directories(proto
-PRIVATE proto)
+PUBLIC proto)
 
 target_link_libraries(proto
 ${_REFLECTION}
