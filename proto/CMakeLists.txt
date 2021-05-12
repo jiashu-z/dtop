@@ -3,7 +3,7 @@ project(proto)
 
 include(${CMAKE_SOURCE_DIR}/common.cmake)
 
-set(PROTO_FILES hello.proto)
+set(PROTO_FILES hello.proto message.proto)
 
 add_library(proto SHARED
 ${PROTO_FILES})
