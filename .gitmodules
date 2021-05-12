@@ -1,0 +1,3 @@
+[submodule "third-party/dtop-java"]
+	path = third-party/dtop-java
+	url = https://github.com/Carl-Rabbit/dtop-java.git
