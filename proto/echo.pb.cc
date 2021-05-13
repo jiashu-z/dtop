@@ -38,14 +38,15 @@ const char descriptor_table_protodef_echo_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "Message\0228\n\016EchoFloatArray\022\022.FloatArrayMe"
   "ssage\032\022.FloatArrayMessage\022;\n\017EchoDoubleA"
   "rray\022\023.DoubleArrayMessage\032\023.DoubleArrayM"
-  "essageb\006proto3"
+  "essageB\031\n\027grp.dtop.dtopjava.protob\006proto"
+  "3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_echo_2eproto_deps[1] = {
   &::descriptor_table_message_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_echo_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_echo_2eproto = {
-  false, false, 574, descriptor_table_protodef_echo_2eproto, "echo.proto", 
+  false, false, 601, descriptor_table_protodef_echo_2eproto, "echo.proto", 
   &descriptor_table_echo_2eproto_once, descriptor_table_echo_2eproto_deps, 1, 0,
   schemas, file_default_instances, TableStruct_echo_2eproto::offsets,
   file_level_metadata_echo_2eproto, file_level_enum_descriptors_echo_2eproto, file_level_service_descriptors_echo_2eproto,

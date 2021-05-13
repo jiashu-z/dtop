@@ -7,6 +7,8 @@
 #include <utility>
 #include <sys/time.h>
 #include "WorkerConfig.hpp"
+#include "ProfileQuery.h"
+#include "message.grpc.pb.h"
 
 namespace dtop {
 namespace worker {
@@ -20,7 +22,7 @@ namespace worker {
 	public:
 		const std::string worker_name;
 		virtual bool setup() = 0;
-//		virtual bool act(const QueryParam& params, EchoResponse& response) = 0;
+		virtual bool act(ProfileQuery& query, FetchReplyMessage& reply) = 0;
 		virtual bool shutdown() = 0;
 
 		std::string to_string() const;

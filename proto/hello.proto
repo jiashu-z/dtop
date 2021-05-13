@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option java_package = "grp.dtop.dtopjava.proto";
+
 message DemoRequest {
   string request = 1;
 }

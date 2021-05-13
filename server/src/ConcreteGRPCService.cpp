@@ -17,5 +17,10 @@ const ::google::protobuf::Empty* request,
 
 ::grpc::Status dtop::server::ConcreteGRPCService::GetAddr(::grpc::ServerContext *context, const ::google::protobuf::Empty *request, ::StringMessage *response) {
   response->set_val(this->server->get_address());
+  response->set_val("abc");
   return ::grpc::Status::OK;
+}
+
+::grpc::Status dtop::server::ConcreteGRPCService::Profile(::grpc::ServerContext *context, const ::FetchRequestMessage *request, ::FetchReplyMessage *response) {
+	return ::grpc::Status::OK;
 }

@@ -27,7 +27,8 @@ const char descriptor_table_protodef_api_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\n\tapi.proto\032\rmessage.proto\032\033google/proto"
   "buf/empty.proto2J\n\nAPIService\022<\n\016GetAllM"
   "achines\022\026.google.protobuf.Empty\032\022.Machin"
-  "eArrMessageb\006proto3"
+  "eArrMessageB\031\n\027grp.dtop.dtopjava.protob\006"
+  "proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_api_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -35,7 +36,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_api_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_api_2eproto = {
-  false, false, 139, descriptor_table_protodef_api_2eproto, "api.proto", 
+  false, false, 166, descriptor_table_protodef_api_2eproto, "api.proto", 
   &descriptor_table_api_2eproto_once, descriptor_table_api_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_api_2eproto::offsets,
   file_level_metadata_api_2eproto, file_level_enum_descriptors_api_2eproto, file_level_service_descriptors_api_2eproto,

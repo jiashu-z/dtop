@@ -30,8 +30,8 @@ const char descriptor_table_protodef_server_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "age\0222\n\007GetPort\022\026.google.protobuf.Empty\032\017"
   ".IntegerMessage\0221\n\007GetAddr\022\026.google.prot"
   "obuf.Empty\032\016.StringMessage\0223\n\007Profile\022\024."
-  "FetchRequestMessage\032\022.FetchReplyMessageb"
-  "\006proto3"
+  "FetchRequestMessage\032\022.FetchReplyMessageB"
+  "\031\n\027grp.dtop.dtopjava.protob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_server_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -39,7 +39,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_server_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_server_2eproto = {
-  false, false, 287, descriptor_table_protodef_server_2eproto, "server.proto", 
+  false, false, 314, descriptor_table_protodef_server_2eproto, "server.proto", 
   &descriptor_table_server_2eproto_once, descriptor_table_server_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_server_2eproto::offsets,
   file_level_metadata_server_2eproto, file_level_enum_descriptors_server_2eproto, file_level_service_descriptors_server_2eproto,

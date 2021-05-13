@@ -3,9 +3,13 @@ project(worker)
 
 add_executable(worker
 src/main.cpp
-src/MemUsageWorker.cpp)
+src/MemUsageWorker.cpp
+src/ProfileQuery.cpp)
 
 target_include_directories(worker
-PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
+PUBLIC ${CMAKE_SOURCE_DIR}/proto
+)
+
 target_link_libraries(worker
 PRIVATE proto)

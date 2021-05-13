@@ -9,15 +9,16 @@ bool dtop::worker::MemUsageWorker::setup() {
 	return true;
 }
 
+bool dtop::worker::MemUsageWorker::act(dtop::worker::ProfileQuery &query,
+																			 FetchReplyMessage &reply) {
+	return false;
+}
+
 bool dtop::worker::MemUsageWorker::shutdown() {
 	return true;
 }
 
-long long dtop::worker::MemUsageWorker::get_max_mem() const {
-	return max_mem;
-}
-
-long long dtop::worker::MemUsageWorker::get_used_mem() {
+long long dtop::worker::MemUsageWorker::compute_used_mem() {
 	if (compute_timestamp() - timestamp >= config.cache_time) {
 		timestamp = compute_timestamp();
 		used_mem = 0;

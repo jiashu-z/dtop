@@ -72,11 +72,12 @@ const char descriptor_table_protodef_hello_2eproto[] PROTOBUF_SECTION_VARIABLE(p
   "\n\013hello.proto\"\036\n\013DemoRequest\022\017\n\007request\030"
   "\001 \001(\t\" \n\014DemoResponse\022\020\n\010response\030\001 \001(\t2"
   "2\n\013DemoService\022#\n\004Echo\022\014.DemoRequest\032\r.D"
-  "emoResponseb\006proto3"
+  "emoResponseB\031\n\027grp.dtop.dtopjava.protob\006"
+  "proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_hello_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_hello_2eproto = {
-  false, false, 139, descriptor_table_protodef_hello_2eproto, "hello.proto", 
+  false, false, 166, descriptor_table_protodef_hello_2eproto, "hello.proto", 
   &descriptor_table_hello_2eproto_once, nullptr, 0, 2,
   schemas, file_default_instances, TableStruct_hello_2eproto::offsets,
   file_level_metadata_hello_2eproto, file_level_enum_descriptors_hello_2eproto, file_level_service_descriptors_hello_2eproto,

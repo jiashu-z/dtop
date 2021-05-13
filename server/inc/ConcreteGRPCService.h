@@ -55,6 +55,19 @@ class ConcreteGRPCService final : public GRPCService::Service {
   ::StringMessage* response) override;
 
   /**
+   * @brief Collect profiling data of current machine.
+   *        Called by another server.
+   *
+   * @param context
+   * @param request
+   * @param response
+   * @return ::grpc::Status
+   */
+  ::grpc::Status Profile(::grpc::ServerContext* context,
+                         const ::FetchRequestMessage* request,
+                         ::FetchReplyMessage* response) override;
+
+  /**
    * @brief Run the grpc server.
    * 
    */

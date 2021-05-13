@@ -381,11 +381,12 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "$\n\013machine_arr\030\001 \003(\0132\017.MachineMessage\"1\n"
   "\nCpuMessage\022\020\n\010core_num\030\001 \001(\005\022\021\n\tusage_a"
   "rr\030\002 \003(\002\"4\n\017MemUsageMessage\022\017\n\007max_mem\030\001"
-  " \001(\003\022\020\n\010used_mem\030\002 \001(\003b\006proto3"
+  " \001(\003\022\020\n\010used_mem\030\002 \001(\003B\031\n\027grp.dtop.dtopj"
+  "ava.protob\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 710, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 737, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 16,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,

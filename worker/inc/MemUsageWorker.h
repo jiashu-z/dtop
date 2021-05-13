@@ -14,13 +14,12 @@ namespace worker {
 		long long timestamp;
 
 		static long long compute_max_mem();
+		long long compute_used_mem();
 
 	public:
 		bool setup() override;
+		bool act(ProfileQuery& query, FetchReplyMessage& reply) override;
 		bool shutdown() override;
-
-		long long get_max_mem() const;
-		long long get_used_mem();
 	};
 
 }
