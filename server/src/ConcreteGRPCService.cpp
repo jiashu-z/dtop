@@ -1,7 +1,7 @@
 #include "ConcreteGRPCService.h"
 #include "grpcpp/impl/codegen/status.h"
 #include "Server.h"
-#include <sstream>
+#include <cassert>
 
 ::grpc::Status dtop::server::ConcreteGRPCService::GetIP(::grpc::ServerContext* context, 
 const ::google::protobuf::Empty* request, 
@@ -16,8 +16,8 @@ const ::google::protobuf::Empty* request,
 }
 
 ::grpc::Status dtop::server::ConcreteGRPCService::GetAddr(::grpc::ServerContext *context, const ::google::protobuf::Empty *request, ::StringMessage *response) {
-//  response->set_val(this->server->get_address());
-  response->set_val("abc");
+	assert(this->server != nullptr);
+	response->set_val(this->server->get_address());
   return ::grpc::Status::OK;
 }
 

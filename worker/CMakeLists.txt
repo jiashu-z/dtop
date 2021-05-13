@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.19)
 project(worker)
 
-add_executable(worker
-src/main.cpp
+add_library(worker SHARED
+inc/BaseWorker.hpp
 src/MemUsageWorker.cpp
 src/ProfileQuery.cpp)
 

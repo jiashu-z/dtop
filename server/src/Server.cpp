@@ -4,7 +4,6 @@
 #include <memory>
 #include <sstream>
 #include <string>
-#include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 
@@ -42,5 +41,6 @@ void dtop::server::Server::run() {
   builder.AddListeningPort(this->get_address(), grpc::InsecureServerCredentials());
   builder.RegisterService(this->grpc_service.get());
   this->grpc_server = builder.BuildAndStart();
+  this->grpc_service->server = this;
   this->grpc_server->Wait();
 }
