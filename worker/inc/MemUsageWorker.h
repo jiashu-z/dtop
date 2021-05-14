@@ -2,7 +2,7 @@
 #define DEMO_GRPC_MEMUSAGEWORKER_H
 
 #include <string>
-#include "BaseWorker.hpp"
+#include "BaseWorker.h"
 
 namespace dtop {
 namespace worker {
@@ -17,6 +17,7 @@ namespace worker {
 		long long compute_used_mem();
 
 	public:
+		bool create() override;
 		bool setup() override;
 		bool act(ProfileQuery& query, FetchReplyMessage& reply) override;
 		bool shutdown() override;

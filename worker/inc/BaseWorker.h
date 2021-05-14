@@ -1,12 +1,13 @@
-#ifndef DEMO_GRPC_BASEWORKER_HPP
-#define DEMO_GRPC_BASEWORKER_HPP
+#ifndef DEMO_GRPC_BASEWORKER_H
+#define DEMO_GRPC_BASEWORKER_H
 
 #include <memory>
 #include <sstream>
 #include <string>
 #include <utility>
 #include <sys/time.h>
-#include "WorkerConfig.hpp"
+#include "WorkerConfig.h"
+#include "WorkerCtrlBlock.h"
 #include "ProfileQuery.h"
 #include "message.grpc.pb.h"
 
@@ -21,6 +22,7 @@ namespace worker {
 
 	public:
 		const std::string worker_name;
+		virtual bool create() = 0;
 		virtual bool setup() = 0;
 		virtual bool act(ProfileQuery& query, FetchReplyMessage& reply) = 0;
 		virtual bool shutdown() = 0;
@@ -28,22 +30,9 @@ namespace worker {
 		std::string to_string() const;
 	};
 
+	typedef std::shared_ptr<BaseWorker> (*WorkerCreator)();
+
 }
 }
 
-dtop::worker::BaseWorker::BaseWorker(std::string worker_name,
-											 const WorkerConfig& config) :
-		worker_name(std::move(worker_name)),
-		config(config) {}
-
-std::string dtop::worker::BaseWorker::to_string() const {
-	return this->worker_name;
-}
-
-long long dtop::worker::BaseWorker::compute_timestamp() {
-	timeval tv{};
-	gettimeofday(&tv, nullptr);
-	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
-}
-
-#endif //DEMO_GRPC_BASEWORKER_HPP
+#endif //DEMO_GRPC_BASEWORKER_H
