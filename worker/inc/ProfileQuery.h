@@ -4,6 +4,10 @@
 namespace dtop {
 namespace worker {
 
+	enum ProfileType {
+			CPU_USAGE, MEM_USAGE
+	};
+
 	class ProfileQuery {
 
 	};

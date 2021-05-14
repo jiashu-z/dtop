@@ -25,6 +25,7 @@
   return ::grpc::Status::OK;
 }
 
+
 ::grpc::Status dtop::server::ConcreteGRPCService::Profile(::grpc::ServerContext *context,
                                                           const ::FetchRequestMessage *request,
                                                           ::FetchReplyMessage *response) {
