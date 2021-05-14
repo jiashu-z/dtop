@@ -4,13 +4,12 @@
 namespace dtop {
 namespace worker {
 
-	class WorkerCtrlBlock {
-	private:
-	public:
+class WorkerCtrlBlock {
+ private:
+ public:
+};
 
-	};
+}  // namespace worker
+}  // namespace dtop
 
-}
-}
-
-#endif //DTOP_RPC_WORKERCTRLBLOCK_H
+#endif  // DTOP_RPC_WORKERCTRLBLOCK_H

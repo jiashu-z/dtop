@@ -17,4 +17,5 @@ PUBLIC ${CMAKE_SOURCE_DIR}/proto
 
 target_link_libraries(worker
 PUBLIC gcov
-PRIVATE proto)
+PRIVATE proto
+)

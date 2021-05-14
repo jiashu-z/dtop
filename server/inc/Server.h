@@ -1,21 +1,20 @@
 #ifndef DTOP_SERVER_SERVER_H
 #define DTOP_SERVER_SERVER_H
 
-#include <iostream>
-#include <memory>
-#include "ConcreteGRPCService.h"
 #include <grpcpp/server.h>
-#include "ManagerMeta.h"
-
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "pslib.h"
 
+#include <iostream>
+#include <memory>
+
+#include "ConcreteGRPCService.h"
+#include "ManagerMeta.h"
 #include "ServerProperty.h"
-
+#include "pslib.h"
 
 namespace dtop {
 namespace server {
@@ -24,35 +23,35 @@ class ConcreteGRPCService;
 
 /**
  * @brief An encapsulation of grpc server and monitor guards.
- * 
+ *
  */
 class Server {
  private:
-		void test_virtualmeminfo() {
-			VmemInfo r;
-			// Empty out to prevent garbage in platform-specific fields
-			memset(&r, 0, sizeof(VmemInfo));
-			if (!virtual_memory(&r)) {
-				printf("Aborting\n");
-				return;
-			}
-			printf(" -- virtual_memory\n");
-			printf("Total: %" PRIu64 "\n", r.total);
-			printf("Available: %" PRIu64 "\n", r.available);
-			printf("Percent: %.1f\n", r.percent);
-			printf("Used: %" PRIu64 "\n", r.used);
-			printf("Free: %" PRIu64 "\n", r.free);
-			printf("Active: %" PRIu64 "\n", r.active);
-			printf("Inactive: %" PRIu64 "\n", r.inactive);
-			printf("Buffers: %" PRIu64 "\n", r.buffers);
-			printf("Cached: %" PRIu64 "\n", r.cached);
-			printf("Wired: %" PRIu64 "\n", r.wired);
-			printf("\n");
-		}
+  void test_virtualmeminfo() {
+    VmemInfo r;
+    // Empty out to prevent garbage in platform-specific fields
+    memset(&r, 0, sizeof(VmemInfo));
+    if (!virtual_memory(&r)) {
+      printf("Aborting\n");
+      return;
+    }
+    printf(" -- virtual_memory\n");
+    printf("Total: %" PRIu64 "\n", r.total);
+    printf("Available: %" PRIu64 "\n", r.available);
+    printf("Percent: %.1f\n", r.percent);
+    printf("Used: %" PRIu64 "\n", r.used);
+    printf("Free: %" PRIu64 "\n", r.free);
+    printf("Active: %" PRIu64 "\n", r.active);
+    printf("Inactive: %" PRIu64 "\n", r.inactive);
+    printf("Buffers: %" PRIu64 "\n", r.buffers);
+    printf("Cached: %" PRIu64 "\n", r.cached);
+    printf("Wired: %" PRIu64 "\n", r.wired);
+    printf("\n");
+  }
 
   /**
    * @brief Path to config xml file.
-   * 
+   *
    */
   std::string config_file_path;
 
@@ -69,8 +68,7 @@ class Server {
   std::unique_ptr<grpc::Server> grpc_server;
 
  public:
-
-	worker::ManagerMeta manager_meta;
+  worker::ManagerMeta manager_meta;
 
   /**
    * @brief Pointer to ServerProperty object.
@@ -91,9 +89,7 @@ class Server {
    */
   explicit Server(const std::string &config_file_path);
 
-  ~Server() {
-
-  }
+  ~Server() {}
 
   /**
    * @brief Run this server.
@@ -124,12 +120,12 @@ class Server {
 
   /**
    * @brief Init config according to config xml.
-   * 
+   *
    */
   void init_config();
 };
 
-}
-}
+}  // namespace server
+}  // namespace dtop
 
 #endif

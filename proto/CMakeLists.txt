@@ -24,11 +24,11 @@ protobuf_generate(TARGET proto
 LANGUAGE cpp
 GENERATE_EXTENSIONS .pb.h .pb.cc
 PROTOC_OUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-PLUGIN "protoc-gen-cpp=/home/zhangjiashu/env/bin/protoc-gen-cpp"
+PLUGIN "protoc-gen-cpp=/home/zjs/env/bin/protoc-gen-cpp"
 )
 protobuf_generate(TARGET proto
 LANGUAGE grpc 
 GENERATE_EXTENSIONS .grpc.pb.h .grpc.pb.cc
 PROTOC_OUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-PLUGIN "protoc-gen-grpc=/home/zhangjiashu/env/bin/protoc-gen-grpc"
+PLUGIN "protoc-gen-grpc=/home/zjs/env/bin/protoc-gen-grpc"
 )

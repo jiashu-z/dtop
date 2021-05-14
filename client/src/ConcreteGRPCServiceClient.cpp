@@ -1,4 +1,5 @@
 #include "ConcreteGRPCServiceClient.h"
+
 #include "google/protobuf/empty.pb.h"
 #include "grpcpp/impl/codegen/client_context.h"
 #include "message.pb.h"

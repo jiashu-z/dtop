@@ -18,7 +18,7 @@ bool is_valid_int(const std::string& str);
 
 /**
  * @brief Check if left < mid && mid < right.
- * 
+ *
  * @tparam T The type name.
  * @param left smaller bond.
  * @param right greater bond.
@@ -26,14 +26,14 @@ bool is_valid_int(const std::string& str);
  * @return true left < mid < right
  * @return false !(left < mid < right)
  */
-template<class T>
+template <class T>
 bool between_strict(const T& left, const T& right, const T& mid) {
   return left < mid && mid < right;
 }
 
 /**
  * @brief Check if left <= mid && mid <= right.
- * 
+ *
  * @tparam T The type name.
  * @param left smaller bond.
  * @param right greater bond.
@@ -41,12 +41,12 @@ bool between_strict(const T& left, const T& right, const T& mid) {
  * @return true left < mid < right
  * @return false !(left < mid < right)
  */
-template<class T>
+template <class T>
 bool between_nonstrict(const T& left, const T& right, const T& mid) {
   return left <= mid && mid <= right;
 }
 
-}
-}
+}  // namespace common
+}  // namespace dtop
 
 #endif

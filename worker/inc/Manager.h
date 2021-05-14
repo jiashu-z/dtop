@@ -1,21 +1,22 @@
 #ifndef DTOP_RPC_MANAGER_H
 #define DTOP_RPC_MANAGER_H
 
-#include <vector>
 #include <memory>
+#include <vector>
+
 #include "BaseWorker.h"
 #include "ManagerMeta.h"
 
 namespace dtop {
 namespace worker {
 
-	class Manager {
-	private:
-		std::vector<BaseWorker> workers;
-	public:
+class Manager {
+ private:
+  std::vector<BaseWorker> workers;
 
-	};
-}
-}
+ public:
+};
+}  // namespace worker
+}  // namespace dtop
 
-#endif //DTOP_RPC_MANAGER_H
+#endif  // DTOP_RPC_MANAGER_H

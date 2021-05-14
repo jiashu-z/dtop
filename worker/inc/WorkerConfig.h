@@ -6,12 +6,12 @@
 namespace dtop {
 namespace worker {
 
-	class WorkerConfig {
-	public:
-		long long cache_time = DEFAULT_CACHE_TIME;
-	};
+class WorkerConfig {
+ public:
+  long long cache_time = DEFAULT_CACHE_TIME;
+};
 
-}
-}
+}  // namespace worker
+}  // namespace dtop
 
-#endif //DEMO_GRPC_WORKERCONFIG_H
+#endif  // DEMO_GRPC_WORKERCONFIG_H

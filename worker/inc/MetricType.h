@@ -4,11 +4,11 @@
 namespace dtop {
 namespace metric {
 
-	enum MetricType {
-			MEM_USAGE,
-	};
+enum MetricType {
+  MEM_USAGE,
+};
 
 }
-}
+}  // namespace dtop
 
-#endif //DTOP_RPC_METRICTYPE_H
+#endif  // DTOP_RPC_METRICTYPE_H

@@ -4,12 +4,11 @@
 namespace dtop {
 namespace worker {
 
-	enum WorkerType {
-			MEM_USAGE_WORKER,
-	};
+enum WorkerType {
+  MEM_USAGE_WORKER,
+};
 
 }
-}
+}  // namespace dtop
 
-
-#endif //DTOP_RPC_WORKERTYPE_H
+#endif  // DTOP_RPC_WORKERTYPE_H

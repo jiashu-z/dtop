@@ -4,14 +4,10 @@
 namespace dtop {
 namespace worker {
 
-	enum ProfileType {
-			CPU_USAGE, MEM_USAGE
-	};
+enum ProfileType { CPU_USAGE, MEM_USAGE };
 
-	class ProfileQuery {
+class ProfileQuery {};
+}  // namespace worker
+}  // namespace dtop
 
-	};
-}
-}
-
-#endif //DTOP_RPC_PROFILEQUERY_H
+#endif  // DTOP_RPC_PROFILEQUERY_H

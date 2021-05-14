@@ -1,11 +1,13 @@
 #include "Server.h"
+
+#include <grpcpp/ext/proto_server_reflection_plugin.h>
+#include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/security/credentials.h>
 #include <grpcpp/server_builder.h>
+
 #include <memory>
 #include <sstream>
 #include <string>
-#include <grpcpp/health_check_service_interface.h>
-#include <grpcpp/ext/proto_server_reflection_plugin.h>
 
 std::string dtop::server::Server::to_string() const {
   return this->server_property->to_string();
@@ -40,15 +42,18 @@ void dtop::server::Server::run() {
   this->grpc_server = builder.BuildAndStart();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->grpc_service->server = this;
+  this->test_virtualmeminfo();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->grpc_server->Wait();
 }
 
 void dtop::server::Server::init_config() {
-  this->server_property = std::make_unique<ServerProperty>(this->config_file_path);
+  this->server_property =
+      std::make_unique<ServerProperty>(this->config_file_path);
 }
 
-dtop::server::Server::Server(const std::string &config_file_path) {
+dtop::server::Server::Server(const std::string &config_file_path)
+    : manager_meta(*(new dtop::worker::WorkerConfig())) {
   this->config_file_path = config_file_path;
   this->init_config();
 }

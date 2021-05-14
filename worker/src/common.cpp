@@ -1,8 +1,8 @@
+#include "../inc/common.h"
+
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-
-#include "../inc/common.h"
 
 float percentage(uint64_t n, uint64_t d) {
   /* TODO: Error check here */
