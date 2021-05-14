@@ -14,6 +14,9 @@
 #include <unistd.h>
 #include "pslib.h"
 
+#include "ServerProperty.h"
+
+
 namespace dtop {
 namespace server {
 
@@ -47,17 +50,11 @@ class Server {
 			printf("\n");
 		}
 
-		/**
-   * @brief The ip addr of this server. By default "localhost".
-   *
-   */
-  std::string ip;
-
   /**
-   * @brief The port number this sever binds. By default 8080.
-   *
+   * @brief Path to config xml file.
+   * 
    */
-  int port;
+  std::string config_file_path;
 
   /**
    * @brief Pointer to the grpc service.
@@ -76,6 +73,11 @@ class Server {
 	worker::ManagerMeta manager_meta;
 
   /**
+   * @brief Pointer to ServerProperty object.
+   */
+  std::unique_ptr<ServerProperty> server_property;
+
+  /**
    * @brief Returns a string that describes this Server object.
    *
    * @return std::string The description string.
@@ -85,10 +87,9 @@ class Server {
   /**
    * @brief Construct a new Server object
    *
-   * @param ip_addr The ip addr of this server.
-   * @param port The port this server binds.
+   * @param config_file_path path to config xml.
    */
-  Server(const std::string &ip_addr, const int& port);
+  explicit Server(const std::string &config_file_path);
 
   ~Server() {
 
@@ -119,9 +120,14 @@ class Server {
    *
    * @return std::string The address string.
    */
-  std::string get_address() const;
-};
+  std::string get_addr() const;
 
+  /**
+   * @brief Init config according to config xml.
+   * 
+   */
+  void init_config();
+};
 
 }
 }

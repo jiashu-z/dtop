@@ -1,0 +1,5 @@
+<properties>
+    <server-addr>127.0.0.1</server-addr>
+    <server-port>8080</server-port>
+    <thread-num>8</thread-num>
+</properties>
