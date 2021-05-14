@@ -1,7 +1,9 @@
 #include "BaseWorker.h"
 
-dtop::worker::BaseWorker::BaseWorker(std::string worker_name,
+dtop::worker::BaseWorker::BaseWorker(dtop::worker::WorkerType type,
+																		 std::string worker_name,
                                      const WorkerConfig& config) :
+        worker_type(type),
 				worker_name(std::move(worker_name)),
 				config(config) {}
 

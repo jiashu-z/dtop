@@ -17,7 +17,7 @@ namespace worker {
 		long long compute_used_mem();
 
 	public:
-		bool create() override;
+		explicit MemUsageWorker(WorkerType type, std::string worker_name, const WorkerConfig& config);
 		bool setup() override;
 		bool act(ProfileQuery& query, FetchReplyMessage& reply) override;
 		bool shutdown() override;

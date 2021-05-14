@@ -10,27 +10,28 @@
 #include "WorkerCtrlBlock.h"
 #include "ProfileQuery.h"
 #include "message.grpc.pb.h"
+#include "WorkerType.h"
 
 namespace dtop {
 namespace worker {
 
 	class BaseWorker {
 	protected:
-		explicit BaseWorker(std::string worker_name, const WorkerConfig& config);
-		static long long compute_timestamp();
 		const WorkerConfig& config;
 
+		explicit BaseWorker(WorkerType type, std::string worker_name, const WorkerConfig& config);
+		static long long compute_timestamp();
+
 	public:
+		const WorkerType worker_type;
 		const std::string worker_name;
-		virtual bool create() = 0;
+
 		virtual bool setup() = 0;
 		virtual bool act(ProfileQuery& query, FetchReplyMessage& reply) = 0;
 		virtual bool shutdown() = 0;
 
 		std::string to_string() const;
 	};
-
-	typedef std::shared_ptr<BaseWorker> (*WorkerCreator)();
 
 }
 }

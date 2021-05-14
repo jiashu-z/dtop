@@ -16,7 +16,7 @@ std::string dtop::server::Server::to_string() const {
   return str;
 }
 
-dtop::server::Server::Server(const std::string &ip_addr, const int& port) {
+dtop::server::Server::Server(const std::string &ip_addr, const int& port) : manager_meta(*(new worker::WorkerConfig())){
   this->ip = ip_addr;
   this->port = port;
 }
