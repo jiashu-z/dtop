@@ -22,8 +22,10 @@ void dtop::worker::ManagerMeta::init_registered_worker_map() {
                                        worker_config);
 }
 
-std::shared_ptr<dtop::worker::BaseWorker> dtop::worker::ManagerMeta::get_worker(
+dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker(
     dtop::worker::WorkerType type) {
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   auto* base_ptr = (dtop::worker::BaseWorker*)this->registered_worker_map[type];
-  return std::shared_ptr<dtop::worker::BaseWorker>(base_ptr);
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  return base_ptr;
 }

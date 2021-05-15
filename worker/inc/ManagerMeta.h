@@ -22,7 +22,7 @@ class ManagerMeta final {
   void init_registered_worker_map();
 
  public:
-  std::shared_ptr<BaseWorker> get_worker(WorkerType type);
+  BaseWorker* get_worker(WorkerType type);
 
   ~ManagerMeta();
 
