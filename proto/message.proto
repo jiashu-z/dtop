@@ -44,11 +44,14 @@ message DoubleArrayMessage {
 
 message FetchRequestMessage {
   repeated string request_arr = 1;
+  repeated string param_arr = 2;
 }
 
 message FetchReplyMessage {
   CpuMessage cpu_message = 1;
   MemUsageMessage mem_usage_message = 2;
+
+  repeated string infos = 15;
 }
 
 message MachineMessage {

@@ -1,24 +1,27 @@
 #include "MemUsageWorker.h"
 
-#include <utility>
-
 #include "pslib.h"
 
-long long dtop::worker::MemUsageWorker::compute_max_mem() { return 0; }
+dtop::worker::MemUsageWorker::MemUsageWorker() : BaseWorker("Memory usage worker") {}
 
-dtop::worker::MemUsageWorker::MemUsageWorker(
-    dtop::worker::WorkerType type, std::string worker_name,
-    const dtop::worker::WorkerConfig &config)
-    : BaseWorker(type, std::move(worker_name), config) {}
+void dtop::worker::MemUsageWorker::init_futures() {
+	futures.push_back(new Future(MEM_USAGE, "MEM_USAGE", "The overall memory usage"));
+	futures.push_back(new Future(MEM_PER_PROC, "MEM_PER_PROC", "The detail memory info of processes"));
+}
 
-bool dtop::worker::MemUsageWorker::setup() {
-  max_mem = compute_max_mem();
+bool dtop::worker::MemUsageWorker::setup_config(dtop::worker::WorkerConfig& worker_config) {
+	return true;
+}
+
+bool dtop::worker::MemUsageWorker::handle_start() {
   return true;
 }
 
-bool dtop::worker::MemUsageWorker::act(dtop::worker::ProfileQuery &query,
-                                       FetchReplyMessage &reply) {
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+bool dtop::worker::MemUsageWorker::handle_process(dtop::worker::ProfileQuery* query,
+                                                  FetchReplyMessage* reply) {
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	std::cout << query->to_string() << std::endl;
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   VmemInfo info;
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   memset(&info, 0, sizeof(VmemInfo));
@@ -41,19 +44,17 @@ bool dtop::worker::MemUsageWorker::act(dtop::worker::ProfileQuery &query,
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   mem_usage_message.set_used_mem(used);
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  reply.mutable_mem_usage_message()->set_used_mem(used);
+  reply->mutable_mem_usage_message()->set_used_mem(used);
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  reply.mutable_mem_usage_message()->set_max_mem(total);
+  reply->mutable_mem_usage_message()->set_max_mem(total);
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   return true;
 }
 
-bool dtop::worker::MemUsageWorker::shutdown() { return true; }
+bool dtop::worker::MemUsageWorker::handle_pause() {
+	return true;
+}
 
-long long dtop::worker::MemUsageWorker::compute_used_mem() {
-  if (compute_timestamp() - timestamp >= config.cache_time) {
-    timestamp = compute_timestamp();
-    used_mem = 0;
-  }
-  return used_mem;
+bool dtop::worker::MemUsageWorker::handle_stop() {
+	return true;
 }

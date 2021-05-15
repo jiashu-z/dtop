@@ -2,31 +2,48 @@
 #define DTOP_RPC_MANAGERMETA_H
 
 #include "BaseWorker.h"
-#include "MetricType.h"
-#include "WorkerType.h"
 
 namespace dtop {
 namespace worker {
 
 class ManagerMeta final {
  private:
-  typedef std::unordered_map<const WorkerType, BaseWorker*> WorkerMap;
-
-  WorkerConfig& worker_config;
+  /**
+   * @brief Save all worker obj.
+   */
+  std::vector<BaseWorker*> workers;
 
   /**
-   * @brief Map worker type to worker obj.
-   *        Developer need to register worker in init function.
+   * @brief Register workers. These workers will be maintained by the container.
    */
-  WorkerMap registered_worker_map;
-  void init_registered_worker_map();
+  void register_workers();
 
  public:
-  BaseWorker* get_worker(WorkerType type);
 
-  ~ManagerMeta();
+	ManagerMeta();
+	~ManagerMeta();
 
-  explicit ManagerMeta(WorkerConfig& config);
+	/**
+	 * @brief Creat all registered workers.
+	 *
+	 * @return True if initialize successfully. Otherwise one or more worker failed to creat.
+	 */
+	bool initialize();
+
+	/**
+	 * @brief Get the vector of the workers maintained by container.
+	 *        This vector can't be modified.
+	 *
+	 * @return The registered worker vector.
+	 */
+	const std::vector<BaseWorker*>& get_workers() const;
+
+	/**
+	 * @brief Get one worker by worker name.
+	 *
+	 * @return The pointer to worker or nullptr if no worker matched.
+	 */
+	BaseWorker* get_worker_by_name(std::string& worker_name);
 };
 
 }  // namespace worker

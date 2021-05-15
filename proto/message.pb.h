@@ -1685,6 +1685,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
 
   enum : int {
     kRequestArrFieldNumber = 1,
+    kParamArrFieldNumber = 2,
   };
   // repeated string request_arr = 1;
   int request_arr_size() const;
@@ -1710,6 +1711,30 @@ class FetchRequestMessage PROTOBUF_FINAL :
   std::string* _internal_add_request_arr();
   public:
 
+  // repeated string param_arr = 2;
+  int param_arr_size() const;
+  private:
+  int _internal_param_arr_size() const;
+  public:
+  void clear_param_arr();
+  const std::string& param_arr(int index) const;
+  std::string* mutable_param_arr(int index);
+  void set_param_arr(int index, const std::string& value);
+  void set_param_arr(int index, std::string&& value);
+  void set_param_arr(int index, const char* value);
+  void set_param_arr(int index, const char* value, size_t size);
+  std::string* add_param_arr();
+  void add_param_arr(const std::string& value);
+  void add_param_arr(std::string&& value);
+  void add_param_arr(const char* value);
+  void add_param_arr(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& param_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_param_arr();
+  private:
+  const std::string& _internal_param_arr(int index) const;
+  std::string* _internal_add_param_arr();
+  public:
+
   // @@protoc_insertion_point(class_scope:FetchRequestMessage)
  private:
   class _Internal;
@@ -1718,6 +1743,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> request_arr_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> param_arr_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -1836,9 +1862,34 @@ class FetchReplyMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kInfosFieldNumber = 15,
     kCpuMessageFieldNumber = 1,
     kMemUsageMessageFieldNumber = 2,
   };
+  // repeated string infos = 15;
+  int infos_size() const;
+  private:
+  int _internal_infos_size() const;
+  public:
+  void clear_infos();
+  const std::string& infos(int index) const;
+  std::string* mutable_infos(int index);
+  void set_infos(int index, const std::string& value);
+  void set_infos(int index, std::string&& value);
+  void set_infos(int index, const char* value);
+  void set_infos(int index, const char* value, size_t size);
+  std::string* add_infos();
+  void add_infos(const std::string& value);
+  void add_infos(std::string&& value);
+  void add_infos(const char* value);
+  void add_infos(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& infos() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_infos();
+  private:
+  const std::string& _internal_infos(int index) const;
+  std::string* _internal_add_infos();
+  public:
+
   // .CpuMessage cpu_message = 1;
   bool has_cpu_message() const;
   private:
@@ -1882,6 +1933,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> infos_;
   ::CpuMessage* cpu_message_;
   ::MemUsageMessage* mem_usage_message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -3044,6 +3096,80 @@ FetchRequestMessage::mutable_request_arr() {
   return &request_arr_;
 }
 
+// repeated string param_arr = 2;
+inline int FetchRequestMessage::_internal_param_arr_size() const {
+  return param_arr_.size();
+}
+inline int FetchRequestMessage::param_arr_size() const {
+  return _internal_param_arr_size();
+}
+inline void FetchRequestMessage::clear_param_arr() {
+  param_arr_.Clear();
+}
+inline std::string* FetchRequestMessage::add_param_arr() {
+  // @@protoc_insertion_point(field_add_mutable:FetchRequestMessage.param_arr)
+  return _internal_add_param_arr();
+}
+inline const std::string& FetchRequestMessage::_internal_param_arr(int index) const {
+  return param_arr_.Get(index);
+}
+inline const std::string& FetchRequestMessage::param_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchRequestMessage.param_arr)
+  return _internal_param_arr(index);
+}
+inline std::string* FetchRequestMessage::mutable_param_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchRequestMessage.param_arr)
+  return param_arr_.Mutable(index);
+}
+inline void FetchRequestMessage::set_param_arr(int index, const std::string& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.param_arr)
+  param_arr_.Mutable(index)->assign(value);
+}
+inline void FetchRequestMessage::set_param_arr(int index, std::string&& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.param_arr)
+  param_arr_.Mutable(index)->assign(std::move(value));
+}
+inline void FetchRequestMessage::set_param_arr(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  param_arr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:FetchRequestMessage.param_arr)
+}
+inline void FetchRequestMessage::set_param_arr(int index, const char* value, size_t size) {
+  param_arr_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:FetchRequestMessage.param_arr)
+}
+inline std::string* FetchRequestMessage::_internal_add_param_arr() {
+  return param_arr_.Add();
+}
+inline void FetchRequestMessage::add_param_arr(const std::string& value) {
+  param_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.param_arr)
+}
+inline void FetchRequestMessage::add_param_arr(std::string&& value) {
+  param_arr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.param_arr)
+}
+inline void FetchRequestMessage::add_param_arr(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  param_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:FetchRequestMessage.param_arr)
+}
+inline void FetchRequestMessage::add_param_arr(const char* value, size_t size) {
+  param_arr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:FetchRequestMessage.param_arr)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+FetchRequestMessage::param_arr() const {
+  // @@protoc_insertion_point(field_list:FetchRequestMessage.param_arr)
+  return param_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+FetchRequestMessage::mutable_param_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchRequestMessage.param_arr)
+  return &param_arr_;
+}
+
 // -------------------------------------------------------------------
 
 // FetchReplyMessage
@@ -3212,6 +3338,80 @@ inline void FetchReplyMessage::set_allocated_mem_usage_message(::MemUsageMessage
   }
   mem_usage_message_ = mem_usage_message;
   // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.mem_usage_message)
+}
+
+// repeated string infos = 15;
+inline int FetchReplyMessage::_internal_infos_size() const {
+  return infos_.size();
+}
+inline int FetchReplyMessage::infos_size() const {
+  return _internal_infos_size();
+}
+inline void FetchReplyMessage::clear_infos() {
+  infos_.Clear();
+}
+inline std::string* FetchReplyMessage::add_infos() {
+  // @@protoc_insertion_point(field_add_mutable:FetchReplyMessage.infos)
+  return _internal_add_infos();
+}
+inline const std::string& FetchReplyMessage::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const std::string& FetchReplyMessage::infos(int index) const {
+  // @@protoc_insertion_point(field_get:FetchReplyMessage.infos)
+  return _internal_infos(index);
+}
+inline std::string* FetchReplyMessage::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchReplyMessage.infos)
+  return infos_.Mutable(index);
+}
+inline void FetchReplyMessage::set_infos(int index, const std::string& value) {
+  // @@protoc_insertion_point(field_set:FetchReplyMessage.infos)
+  infos_.Mutable(index)->assign(value);
+}
+inline void FetchReplyMessage::set_infos(int index, std::string&& value) {
+  // @@protoc_insertion_point(field_set:FetchReplyMessage.infos)
+  infos_.Mutable(index)->assign(std::move(value));
+}
+inline void FetchReplyMessage::set_infos(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  infos_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:FetchReplyMessage.infos)
+}
+inline void FetchReplyMessage::set_infos(int index, const char* value, size_t size) {
+  infos_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:FetchReplyMessage.infos)
+}
+inline std::string* FetchReplyMessage::_internal_add_infos() {
+  return infos_.Add();
+}
+inline void FetchReplyMessage::add_infos(const std::string& value) {
+  infos_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:FetchReplyMessage.infos)
+}
+inline void FetchReplyMessage::add_infos(std::string&& value) {
+  infos_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:FetchReplyMessage.infos)
+}
+inline void FetchReplyMessage::add_infos(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  infos_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:FetchReplyMessage.infos)
+}
+inline void FetchReplyMessage::add_infos(const char* value, size_t size) {
+  infos_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:FetchReplyMessage.infos)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+FetchReplyMessage::infos() const {
+  // @@protoc_insertion_point(field_list:FetchReplyMessage.infos)
+  return infos_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+FetchReplyMessage::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:FetchReplyMessage.infos)
+  return &infos_;
 }
 
 // -------------------------------------------------------------------

@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <memory>
+#include <Manager.h>
 
 #include "ConcreteGRPCService.h"
 #include "ManagerMeta.h"
@@ -68,7 +69,7 @@ class Server {
   std::unique_ptr<grpc::Server> grpc_server;
 
  public:
-  worker::ManagerMeta manager_meta;
+  worker::Manager manager;
 
   /**
    * @brief Pointer to ServerProperty object.
@@ -117,6 +118,15 @@ class Server {
    * @return std::string The address string.
    */
   std::string get_addr() const;
+
+   /**
+    * @brief Process profile query from center server.
+    *
+    * @param request
+    * @param reply
+    * @return bool True if no error occurs.
+    */
+  bool profile(const FetchRequestMessage* request, FetchReplyMessage* reply);
 
   /**
    * @brief Init config according to config xml.

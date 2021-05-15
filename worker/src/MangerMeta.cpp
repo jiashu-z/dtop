@@ -1,31 +1,39 @@
-#include <MemUsageWorker.h>
-
 #include "ManagerMeta.h"
+#include "MemUsageWorker.h"
 
-typedef std::unordered_map<dtop::worker::WorkerType, dtop::worker::BaseWorker*>
-    WorkerMap;
-
-dtop::worker::ManagerMeta::ManagerMeta(WorkerConfig& config)
-    : worker_config(config) {
-  init_registered_worker_map();
+void dtop::worker::ManagerMeta::register_workers() {
+	workers.push_back(new MemUsageWorker());
 }
+
+dtop::worker::ManagerMeta::ManagerMeta() = default;
 
 dtop::worker::ManagerMeta::~ManagerMeta() {
-  //	for (auto& pair: this->registered_worker_map) {
-  //		delete pair.second;
-  //	}
+  	for (auto& worker: this->workers) {
+  		delete worker;
+  	}
 }
 
-void dtop::worker::ManagerMeta::init_registered_worker_map() {
-  this->registered_worker_map[MEM_USAGE_WORKER] =
-      new dtop::worker::MemUsageWorker(MEM_USAGE_WORKER, "Memory usage worker",
-                                       worker_config);
+bool dtop::worker::ManagerMeta::initialize() {
+	try {
+		register_workers();
+	} catch (std::exception& e) {
+		std::cout << "Error when initialize ManagerMeta: " << e.what() << std::endl;
+		return false;
+	}
+	return true;
 }
 
-dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker(
-    dtop::worker::WorkerType type) {
+const std::vector<dtop::worker::BaseWorker *>& dtop::worker::ManagerMeta::get_workers() const {
+	return this->workers;
+}
+
+dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker_by_name(std::string& worker_name) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  auto* base_ptr = (dtop::worker::BaseWorker*)this->registered_worker_map[type];
+  for (BaseWorker* worker_ptr : this->workers) {
+  	if (worker_ptr->worker_name == worker_name) {
+  		return worker_ptr;
+  	}
+  }
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  return base_ptr;
+  return nullptr;
 }

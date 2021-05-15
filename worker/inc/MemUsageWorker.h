@@ -10,19 +10,16 @@ namespace worker {
 
 class MemUsageWorker : public BaseWorker {
  private:
-  long long max_mem;
-  long long used_mem;
-  long long timestamp;
+  void init_futures() override;
+  bool setup_config(WorkerConfig& worker_config) override;
 
-  static long long compute_max_mem();
-  long long compute_used_mem();
+	bool handle_start() override;
+	bool handle_process(ProfileQuery* query, FetchReplyMessage* reply) override;
+	bool handle_pause() override;
+	bool handle_stop() override;
 
  public:
-  explicit MemUsageWorker(WorkerType type, std::string worker_name,
-                          const WorkerConfig& config);
-  bool setup() override;
-  bool act(ProfileQuery& query, FetchReplyMessage& reply) override;
-  bool shutdown() override;
+	MemUsageWorker();
 };
 
 }  // namespace worker

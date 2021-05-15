@@ -42,9 +42,12 @@ void dtop::server::Server::run() {
   this->grpc_server = builder.BuildAndStart();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->grpc_service->server = this;
-  this->test_virtualmeminfo();
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  this->grpc_server->Wait();
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
+	this->manager.initialize(*(new worker::WorkerConfig()));
+	this->manager.handle_auto_start();
+
+	this->grpc_server->Wait();
 }
 
 void dtop::server::Server::init_config() {
@@ -53,7 +56,11 @@ void dtop::server::Server::init_config() {
 }
 
 dtop::server::Server::Server(const std::string &config_file_path)
-    : manager_meta(*(new dtop::worker::WorkerConfig())) {
+			: manager(worker::Manager()) {
   this->config_file_path = config_file_path;
   this->init_config();
+}
+
+bool dtop::server::Server::profile(const FetchRequestMessage* request, FetchReplyMessage* reply) {
+	return this->manager.process_query(request, reply);
 }

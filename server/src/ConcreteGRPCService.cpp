@@ -4,7 +4,6 @@
 
 #include "ProfileQuery.h"
 #include "Server.h"
-#include "WorkerType.h"
 #include "grpcpp/impl/codegen/status.h"
 #include "ManagerMeta.h"
 
@@ -33,18 +32,20 @@
 ::grpc::Status dtop::server::ConcreteGRPCService::Profile(
     ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
     ::FetchReplyMessage *response) {
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  dtop::worker::ProfileQuery q;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  auto s = this->server;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  auto meta = server->manager_meta;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  auto worker = meta.get_worker(dtop::worker::WorkerType::MEM_USAGE_WORKER);
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  assert(worker != nullptr);
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  worker->act(q, *response);
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  dtop::worker::ProfileQuery q;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  auto s = this->server;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  auto meta = server->manager_meta;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  auto worker = meta.get_worker(dtop::worker::WorkerType::MEM_USAGE_WORKER);
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  assert(worker != nullptr);
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  worker->handle_process(q, *response);
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
+	this->server->profile(request, response);
   return ::grpc::Status::OK;
 }

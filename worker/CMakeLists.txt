@@ -7,8 +7,10 @@ src/ProfileQuery.cpp
 src/Manager.cpp
 src/MemUsageWorker.cpp
 src/MangerMeta.cpp
+src/Future.cpp
 src/common.cpp
-src/pslib_linux.cpp)
+src/pslib_linux.cpp
+)
 
 target_include_directories(worker
 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc

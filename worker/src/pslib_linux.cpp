@@ -168,7 +168,7 @@ char **get_physical_devices(size_t *ndevices) {
       retval[*ndevices] = strdup(line);
       *ndevices += 1;
       check(*ndevices < 100,
-            "FIXME: Can't process more than 100 physical devices");
+            "FIXME: Can't handle_process more than 100 physical devices");
     }
   }
   fclose(fs);
@@ -192,11 +192,11 @@ static pid_t get_ppid(pid_t pid) {
 
   sprintf(procfile, "/proc/%d/status", pid);
   fp = fopen(procfile, "r");
-  check(fp, "Couldn't open process status file");
+  check(fp, "Couldn't open handle_process status file");
   tmp = grep_awk(fp, "PPid", 1, ":");
   ppid = tmp ? atoi(tmp) : -1;
 
-  check(ppid != -1, "Couldnt' find PPid in process status file");
+  check(ppid != -1, "Couldnt' find PPid in handle_process status file");
   fclose(fp);
   free(tmp);
 
@@ -215,8 +215,8 @@ static char *get_procname(pid_t pid) {
 
   sprintf(procfile, "/proc/%d/stat", pid);
   fp = fopen(procfile, "r");
-  check(fp, "Couldn't open process status file");
-  check(fgets(line, 300, fp), "Couldn't read from process status file");
+  check(fp, "Couldn't open handle_process status file");
+  check(fgets(line, 300, fp), "Couldn't read from handle_process status file");
   fclose(fp);
 
   tmp = strtok(line, " ");
@@ -244,11 +244,11 @@ static char *get_exe(pid_t pid) {
   ret = readlink(procfile, tmp, bufsize - 1);
   if (ret == -1 && errno == ENOENT) {
     if (lstat(procfile, &buf) == 0) {
-      debug("Probably a system process. No executable");
+      debug("Probably a system handle_process. No executable");
       strcpy(tmp, "");
       return tmp;
     } else {
-      sentinel("No such process");
+      sentinel("No such handle_process");
     }
   }
   check(ret != -1, "Couldn't expand symbolic link");
@@ -279,7 +279,7 @@ static char *get_cmdline(pid_t pid) {
   check_mem(contents);
   sprintf(procfile, "/proc/%d/cmdline", pid);
   fp = fopen(procfile, "r");
-  check(fp, "Couldn't open process cmdline file");
+  check(fp, "Couldn't open handle_process cmdline file");
   read = fread(contents, sizeof(char), bufsize, fp);
   clean_cmdline(contents, read);
   fclose(fp);
@@ -310,7 +310,7 @@ static double get_create_time(pid_t pid) {
   sprintf(s_pid, "%d", pid);
   sprintf(procfile, "/proc/%d/stat", pid);
   fp = fopen(procfile, "r");
-  check(fp, "Couldn't open process stat file");
+  check(fp, "Couldn't open handle_process stat file");
   tmp = grep_awk(fp, s_pid, 21, " ");
   ct_jiffies = atof(tmp);
   free(tmp);
@@ -334,7 +334,7 @@ static unsigned int *get_ids(pid_t pid, const char *field)
 
   sprintf(procfile, "/proc/%d/status", pid);
   fp = fopen(procfile, "r");
-  check(fp, "Couldn't open process status file");
+  check(fp, "Couldn't open handle_process status file");
   while (fgets(line, 399, fp) != NULL) {
     if (strncmp(line, field, 4) == 0) {
       retval = (unsigned int *)calloc(3, sizeof(unsigned int));
@@ -350,7 +350,7 @@ static unsigned int *get_ids(pid_t pid, const char *field)
     }
   }
 
-  check(retval != NULL, "Couldnt' find Uid in process status file");
+  check(retval != NULL, "Couldnt' find Uid in handle_process status file");
   fclose(fp);
 
   return retval;
@@ -1020,17 +1020,17 @@ uint32_t cpu_count(bool logical) {
   return ret;
 }
 
-/* Check whether pid exists in the current process table. */
+/* Check whether pid exists in the current handle_process table. */
 bool pid_exists(pid_t pid) {
   if (pid == 0) // see `man 2 kill` for pid zero
     return true;
 
   if (kill(pid, 0) == -1) {
     if (errno == ESRCH) {
-      log_err("No such process");
+      log_err("No such handle_process");
       return false;
     } else if (errno == EPERM) {
-      // permission denied, but process does exist
+      // permission denied, but handle_process does exist
       return true;
     } else {
       // log error with errno

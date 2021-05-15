@@ -18,7 +18,7 @@ class ConcreteGRPCService final : public GRPCService::Service {
 	* @brief Pointer to the Server object, for calling guards.
 	*
 	*/
-	const Server* server = nullptr;
+	Server* server = nullptr;
 
 
   /**

@@ -1,12 +1,26 @@
 #ifndef DTOP_RPC_PROFILEQUERY_H
 #define DTOP_RPC_PROFILEQUERY_H
 
+#include <message.grpc.pb.h>
+
 namespace dtop {
 namespace worker {
 
-enum ProfileType { CPU_USAGE, MEM_USAGE };
+	class ProfileQuery {
+	public:
+		std::unordered_map<std::string, std::string> req_map;
 
-class ProfileQuery {};
+		/**
+		 * @brief Decode request from protobuf
+		 *
+		 * @param request
+		 * @return
+		 */
+		bool decode(const FetchRequestMessage* request);
+
+		std::string to_string();
+	};
+
 }  // namespace worker
 }  // namespace dtop
 
