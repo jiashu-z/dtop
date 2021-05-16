@@ -54,7 +54,9 @@ bool dtop::worker::Manager::process_query(const FetchRequestMessage* request, Fe
 	bool success;
 
 	ProfileQuery query;
-	query.decode(request);
+	if (!query.decode(request)) {
+		PRINT_INFO("Request format error. Result may be incorrect.")
+	}
 
 	for (BaseWorker* worker_ptr : manager_meta->get_workers()) {
 		try {
@@ -67,4 +69,20 @@ bool dtop::worker::Manager::process_query(const FetchRequestMessage* request, Fe
 		}
 	}
 	return success;
+}
+
+google::protobuf::RepeatedPtrField<WorkerStatusMessage>* dtop::worker::Manager::get_worker_status(
+				bool with_futures) {
+	auto rpf_ptr = new google::protobuf::RepeatedPtrField<WorkerStatusMessage>();
+	for (auto& worker_ptr : this->manager_meta->get_workers()) {
+		auto* wsm_ptr = rpf_ptr->Add();
+		wsm_ptr->set_worker_name(worker_ptr->worker_name);
+		wsm_ptr->set_status(BaseWorker::get_status_str(worker_ptr->get_status()));
+		if (with_futures) {
+			for (auto& futures : worker_ptr->get_futures()) {
+				wsm_ptr->add_future_id((int) futures->id);
+			}
+		}
+	}
+	return rpf_ptr;
 }

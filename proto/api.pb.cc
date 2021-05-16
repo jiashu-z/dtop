@@ -16,19 +16,46 @@
 #include <google/protobuf/port_def.inc>
 
 PROTOBUF_PRAGMA_INIT_SEG
-static constexpr ::PROTOBUF_NAMESPACE_ID::Metadata* file_level_metadata_api_2eproto = nullptr;
+constexpr ServerStatusArrMessage::ServerStatusArrMessage(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : server_status_(){}
+struct ServerStatusArrMessageDefaultTypeInternal {
+  constexpr ServerStatusArrMessageDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~ServerStatusArrMessageDefaultTypeInternal() {}
+  union {
+    ServerStatusArrMessage _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerStatusArrMessageDefaultTypeInternal _ServerStatusArrMessage_default_instance_;
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_api_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_api_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_api_2eproto = nullptr;
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_api_2eproto::offsets[1] = {};
-static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
-static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_api_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ServerStatusArrMessage, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::ServerStatusArrMessage, server_status_),
+};
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, sizeof(::ServerStatusArrMessage)},
+};
+
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ServerStatusArrMessage_default_instance_),
+};
 
 const char descriptor_table_protodef_api_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tapi.proto\032\rmessage.proto\032\033google/proto"
-  "buf/empty.proto2J\n\nAPIService\022<\n\016GetAllM"
-  "achines\022\026.google.protobuf.Empty\032\022.Machin"
-  "eArrMessageB\031\n\027grp.dtop.dtopjava.protob\006"
-  "proto3"
+  "buf/empty.proto\"E\n\026ServerStatusArrMessag"
+  "e\022+\n\rserver_status\030\001 \003(\0132\024.ServerStatusM"
+  "essage2P\n\nAPIService\022B\n\017GetServerStatus\022"
+  "\026.google.protobuf.Empty\032\027.ServerStatusAr"
+  "rMessageB\031\n\027grp.dtop.dtopjava.protob\006pro"
+  "to3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_api_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -36,8 +63,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_api_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_api_2eproto = {
-  false, false, 166, descriptor_table_protodef_api_2eproto, "api.proto", 
-  &descriptor_table_api_2eproto_once, descriptor_table_api_2eproto_deps, 2, 0,
+  false, false, 243, descriptor_table_protodef_api_2eproto, "api.proto", 
+  &descriptor_table_api_2eproto_once, descriptor_table_api_2eproto_deps, 2, 1,
   schemas, file_default_instances, TableStruct_api_2eproto::offsets,
   file_level_metadata_api_2eproto, file_level_enum_descriptors_api_2eproto, file_level_service_descriptors_api_2eproto,
 };
@@ -50,8 +77,208 @@ descriptor_table_api_2eproto_metadata_getter(int index) {
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_api_2eproto(&descriptor_table_api_2eproto);
 
+// ===================================================================
+
+class ServerStatusArrMessage::_Internal {
+ public:
+};
+
+void ServerStatusArrMessage::clear_server_status() {
+  server_status_.Clear();
+}
+ServerStatusArrMessage::ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  server_status_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ServerStatusArrMessage)
+}
+ServerStatusArrMessage::ServerStatusArrMessage(const ServerStatusArrMessage& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      server_status_(from.server_status_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:ServerStatusArrMessage)
+}
+
+void ServerStatusArrMessage::SharedCtor() {
+}
+
+ServerStatusArrMessage::~ServerStatusArrMessage() {
+  // @@protoc_insertion_point(destructor:ServerStatusArrMessage)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ServerStatusArrMessage::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void ServerStatusArrMessage::ArenaDtor(void* object) {
+  ServerStatusArrMessage* _this = reinterpret_cast< ServerStatusArrMessage* >(object);
+  (void)_this;
+}
+void ServerStatusArrMessage::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ServerStatusArrMessage::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void ServerStatusArrMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:ServerStatusArrMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  server_status_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ServerStatusArrMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .ServerStatusMessage server_status = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_server_status(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ServerStatusArrMessage::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ServerStatusArrMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .ServerStatusMessage server_status = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_server_status_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_server_status(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ServerStatusArrMessage)
+  return target;
+}
+
+size_t ServerStatusArrMessage::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ServerStatusArrMessage)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .ServerStatusMessage server_status = 1;
+  total_size += 1UL * this->_internal_server_status_size();
+  for (const auto& msg : this->server_status_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ServerStatusArrMessage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ServerStatusArrMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ServerStatusArrMessage* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ServerStatusArrMessage>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ServerStatusArrMessage)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ServerStatusArrMessage)
+    MergeFrom(*source);
+  }
+}
+
+void ServerStatusArrMessage::MergeFrom(const ServerStatusArrMessage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ServerStatusArrMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  server_status_.MergeFrom(from.server_status_);
+}
+
+void ServerStatusArrMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ServerStatusArrMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ServerStatusArrMessage::CopyFrom(const ServerStatusArrMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ServerStatusArrMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ServerStatusArrMessage::IsInitialized() const {
+  return true;
+}
+
+void ServerStatusArrMessage::InternalSwap(ServerStatusArrMessage* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  server_status_.InternalSwap(&other->server_status_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ServerStatusArrMessage::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::ServerStatusArrMessage* Arena::CreateMaybeMessage< ::ServerStatusArrMessage >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ServerStatusArrMessage >(arena);
+}
 PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

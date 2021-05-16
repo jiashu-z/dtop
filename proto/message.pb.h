@@ -87,21 +87,21 @@ extern LongArrayMessageDefaultTypeInternal _LongArrayMessage_default_instance_;
 class LongMessage;
 struct LongMessageDefaultTypeInternal;
 extern LongMessageDefaultTypeInternal _LongMessage_default_instance_;
-class MachineArrMessage;
-struct MachineArrMessageDefaultTypeInternal;
-extern MachineArrMessageDefaultTypeInternal _MachineArrMessage_default_instance_;
-class MachineMessage;
-struct MachineMessageDefaultTypeInternal;
-extern MachineMessageDefaultTypeInternal _MachineMessage_default_instance_;
 class MemUsageMessage;
 struct MemUsageMessageDefaultTypeInternal;
 extern MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
+class ServerStatusMessage;
+struct ServerStatusMessageDefaultTypeInternal;
+extern ServerStatusMessageDefaultTypeInternal _ServerStatusMessage_default_instance_;
 class StringArrayMessage;
 struct StringArrayMessageDefaultTypeInternal;
 extern StringArrayMessageDefaultTypeInternal _StringArrayMessage_default_instance_;
 class StringMessage;
 struct StringMessageDefaultTypeInternal;
 extern StringMessageDefaultTypeInternal _StringMessage_default_instance_;
+class WorkerStatusMessage;
+struct WorkerStatusMessageDefaultTypeInternal;
+extern WorkerStatusMessageDefaultTypeInternal _WorkerStatusMessage_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::CpuMessage* Arena::CreateMaybeMessage<::CpuMessage>(Arena*);
 template<> ::DoubleArrayMessage* Arena::CreateMaybeMessage<::DoubleArrayMessage>(Arena*);
@@ -114,11 +114,11 @@ template<> ::IntegerArrayMessage* Arena::CreateMaybeMessage<::IntegerArrayMessag
 template<> ::IntegerMessage* Arena::CreateMaybeMessage<::IntegerMessage>(Arena*);
 template<> ::LongArrayMessage* Arena::CreateMaybeMessage<::LongArrayMessage>(Arena*);
 template<> ::LongMessage* Arena::CreateMaybeMessage<::LongMessage>(Arena*);
-template<> ::MachineArrMessage* Arena::CreateMaybeMessage<::MachineArrMessage>(Arena*);
-template<> ::MachineMessage* Arena::CreateMaybeMessage<::MachineMessage>(Arena*);
 template<> ::MemUsageMessage* Arena::CreateMaybeMessage<::MemUsageMessage>(Arena*);
+template<> ::ServerStatusMessage* Arena::CreateMaybeMessage<::ServerStatusMessage>(Arena*);
 template<> ::StringArrayMessage* Arena::CreateMaybeMessage<::StringArrayMessage>(Arena*);
 template<> ::StringMessage* Arena::CreateMaybeMessage<::StringMessage>(Arena*);
+template<> ::WorkerStatusMessage* Arena::CreateMaybeMessage<::WorkerStatusMessage>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
@@ -1571,6 +1571,375 @@ class DoubleArrayMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ServerStatusMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusMessage) */ {
+ public:
+  inline ServerStatusMessage() : ServerStatusMessage(nullptr) {}
+  virtual ~ServerStatusMessage();
+  explicit constexpr ServerStatusMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ServerStatusMessage(const ServerStatusMessage& from);
+  ServerStatusMessage(ServerStatusMessage&& from) noexcept
+    : ServerStatusMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline ServerStatusMessage& operator=(const ServerStatusMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ServerStatusMessage& operator=(ServerStatusMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ServerStatusMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ServerStatusMessage* internal_default_instance() {
+    return reinterpret_cast<const ServerStatusMessage*>(
+               &_ServerStatusMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(ServerStatusMessage& a, ServerStatusMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ServerStatusMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ServerStatusMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ServerStatusMessage* New() const final {
+    return CreateMaybeMessage<ServerStatusMessage>(nullptr);
+  }
+
+  ServerStatusMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ServerStatusMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ServerStatusMessage& from);
+  void MergeFrom(const ServerStatusMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ServerStatusMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ServerStatusMessage";
+  }
+  protected:
+  explicit ServerStatusMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kWorkerStatusFieldNumber = 2,
+    kAddrFieldNumber = 1,
+    kStatusFieldNumber = 3,
+  };
+  // repeated .WorkerStatusMessage worker_status = 2;
+  int worker_status_size() const;
+  private:
+  int _internal_worker_status_size() const;
+  public:
+  void clear_worker_status();
+  ::WorkerStatusMessage* mutable_worker_status(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >*
+      mutable_worker_status();
+  private:
+  const ::WorkerStatusMessage& _internal_worker_status(int index) const;
+  ::WorkerStatusMessage* _internal_add_worker_status();
+  public:
+  const ::WorkerStatusMessage& worker_status(int index) const;
+  ::WorkerStatusMessage* add_worker_status();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >&
+      worker_status() const;
+
+  // string addr = 1;
+  void clear_addr();
+  const std::string& addr() const;
+  void set_addr(const std::string& value);
+  void set_addr(std::string&& value);
+  void set_addr(const char* value);
+  void set_addr(const char* value, size_t size);
+  std::string* mutable_addr();
+  std::string* release_addr();
+  void set_allocated_addr(std::string* addr);
+  private:
+  const std::string& _internal_addr() const;
+  void _internal_set_addr(const std::string& value);
+  std::string* _internal_mutable_addr();
+  public:
+
+  // string status = 3;
+  void clear_status();
+  const std::string& status() const;
+  void set_status(const std::string& value);
+  void set_status(std::string&& value);
+  void set_status(const char* value);
+  void set_status(const char* value, size_t size);
+  std::string* mutable_status();
+  std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
+  public:
+
+  // @@protoc_insertion_point(class_scope:ServerStatusMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage > worker_status_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addr_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class WorkerStatusMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:WorkerStatusMessage) */ {
+ public:
+  inline WorkerStatusMessage() : WorkerStatusMessage(nullptr) {}
+  virtual ~WorkerStatusMessage();
+  explicit constexpr WorkerStatusMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  WorkerStatusMessage(const WorkerStatusMessage& from);
+  WorkerStatusMessage(WorkerStatusMessage&& from) noexcept
+    : WorkerStatusMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline WorkerStatusMessage& operator=(const WorkerStatusMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline WorkerStatusMessage& operator=(WorkerStatusMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const WorkerStatusMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const WorkerStatusMessage* internal_default_instance() {
+    return reinterpret_cast<const WorkerStatusMessage*>(
+               &_WorkerStatusMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(WorkerStatusMessage& a, WorkerStatusMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(WorkerStatusMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(WorkerStatusMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline WorkerStatusMessage* New() const final {
+    return CreateMaybeMessage<WorkerStatusMessage>(nullptr);
+  }
+
+  WorkerStatusMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<WorkerStatusMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const WorkerStatusMessage& from);
+  void MergeFrom(const WorkerStatusMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(WorkerStatusMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "WorkerStatusMessage";
+  }
+  protected:
+  explicit WorkerStatusMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFutureIdFieldNumber = 3,
+    kWorkerNameFieldNumber = 1,
+    kStatusFieldNumber = 2,
+  };
+  // repeated int32 future_id = 3;
+  int future_id_size() const;
+  private:
+  int _internal_future_id_size() const;
+  public:
+  void clear_future_id();
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_future_id(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      _internal_future_id() const;
+  void _internal_add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      _internal_mutable_future_id();
+  public:
+  ::PROTOBUF_NAMESPACE_ID::int32 future_id(int index) const;
+  void set_future_id(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
+  void add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      future_id() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      mutable_future_id();
+
+  // string worker_name = 1;
+  void clear_worker_name();
+  const std::string& worker_name() const;
+  void set_worker_name(const std::string& value);
+  void set_worker_name(std::string&& value);
+  void set_worker_name(const char* value);
+  void set_worker_name(const char* value, size_t size);
+  std::string* mutable_worker_name();
+  std::string* release_worker_name();
+  void set_allocated_worker_name(std::string* worker_name);
+  private:
+  const std::string& _internal_worker_name() const;
+  void _internal_set_worker_name(const std::string& value);
+  std::string* _internal_mutable_worker_name();
+  public:
+
+  // string status = 2;
+  void clear_status();
+  const std::string& status() const;
+  void set_status(const std::string& value);
+  void set_status(std::string&& value);
+  void set_status(const char* value);
+  void set_status(const char* value, size_t size);
+  std::string* mutable_status();
+  std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
+  public:
+
+  // @@protoc_insertion_point(class_scope:WorkerStatusMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > future_id_;
+  mutable std::atomic<int> _future_id_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr worker_name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
 class FetchRequestMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchRequestMessage) */ {
  public:
@@ -1614,7 +1983,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
                &_FetchRequestMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    12;
 
   friend void swap(FetchRequestMessage& a, FetchRequestMessage& b) {
     a.Swap(&b);
@@ -1792,7 +2161,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
                &_FetchReplyMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    13;
 
   friend void swap(FetchReplyMessage& a, FetchReplyMessage& b) {
     a.Swap(&b);
@@ -1862,11 +2231,11 @@ class FetchReplyMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfosFieldNumber = 15,
+    kInfosFieldNumber = 3,
     kCpuMessageFieldNumber = 1,
     kMemUsageMessageFieldNumber = 2,
   };
-  // repeated string infos = 15;
+  // repeated string infos = 3;
   int infos_size() const;
   private:
   int _internal_infos_size() const;
@@ -1936,325 +2305,6 @@ class FetchReplyMessage PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> infos_;
   ::CpuMessage* cpu_message_;
   ::MemUsageMessage* mem_usage_message_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_message_2eproto;
-};
-// -------------------------------------------------------------------
-
-class MachineMessage PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MachineMessage) */ {
- public:
-  inline MachineMessage() : MachineMessage(nullptr) {}
-  virtual ~MachineMessage();
-  explicit constexpr MachineMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  MachineMessage(const MachineMessage& from);
-  MachineMessage(MachineMessage&& from) noexcept
-    : MachineMessage() {
-    *this = ::std::move(from);
-  }
-
-  inline MachineMessage& operator=(const MachineMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline MachineMessage& operator=(MachineMessage&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const MachineMessage& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const MachineMessage* internal_default_instance() {
-    return reinterpret_cast<const MachineMessage*>(
-               &_MachineMessage_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    12;
-
-  friend void swap(MachineMessage& a, MachineMessage& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(MachineMessage* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(MachineMessage* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline MachineMessage* New() const final {
-    return CreateMaybeMessage<MachineMessage>(nullptr);
-  }
-
-  MachineMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<MachineMessage>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const MachineMessage& from);
-  void MergeFrom(const MachineMessage& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(MachineMessage* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "MachineMessage";
-  }
-  protected:
-  explicit MachineMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kIpFieldNumber = 1,
-    kAddrFieldNumber = 3,
-    kPortFieldNumber = 2,
-  };
-  // string ip = 1;
-  void clear_ip();
-  const std::string& ip() const;
-  void set_ip(const std::string& value);
-  void set_ip(std::string&& value);
-  void set_ip(const char* value);
-  void set_ip(const char* value, size_t size);
-  std::string* mutable_ip();
-  std::string* release_ip();
-  void set_allocated_ip(std::string* ip);
-  private:
-  const std::string& _internal_ip() const;
-  void _internal_set_ip(const std::string& value);
-  std::string* _internal_mutable_ip();
-  public:
-
-  // string addr = 3;
-  void clear_addr();
-  const std::string& addr() const;
-  void set_addr(const std::string& value);
-  void set_addr(std::string&& value);
-  void set_addr(const char* value);
-  void set_addr(const char* value, size_t size);
-  std::string* mutable_addr();
-  std::string* release_addr();
-  void set_allocated_addr(std::string* addr);
-  private:
-  const std::string& _internal_addr() const;
-  void _internal_set_addr(const std::string& value);
-  std::string* _internal_mutable_addr();
-  public:
-
-  // int32 port = 2;
-  void clear_port();
-  ::PROTOBUF_NAMESPACE_ID::int32 port() const;
-  void set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_port() const;
-  void _internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:MachineMessage)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addr_;
-  ::PROTOBUF_NAMESPACE_ID::int32 port_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_message_2eproto;
-};
-// -------------------------------------------------------------------
-
-class MachineArrMessage PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MachineArrMessage) */ {
- public:
-  inline MachineArrMessage() : MachineArrMessage(nullptr) {}
-  virtual ~MachineArrMessage();
-  explicit constexpr MachineArrMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  MachineArrMessage(const MachineArrMessage& from);
-  MachineArrMessage(MachineArrMessage&& from) noexcept
-    : MachineArrMessage() {
-    *this = ::std::move(from);
-  }
-
-  inline MachineArrMessage& operator=(const MachineArrMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline MachineArrMessage& operator=(MachineArrMessage&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const MachineArrMessage& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const MachineArrMessage* internal_default_instance() {
-    return reinterpret_cast<const MachineArrMessage*>(
-               &_MachineArrMessage_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    13;
-
-  friend void swap(MachineArrMessage& a, MachineArrMessage& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(MachineArrMessage* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(MachineArrMessage* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline MachineArrMessage* New() const final {
-    return CreateMaybeMessage<MachineArrMessage>(nullptr);
-  }
-
-  MachineArrMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<MachineArrMessage>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const MachineArrMessage& from);
-  void MergeFrom(const MachineArrMessage& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(MachineArrMessage* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "MachineArrMessage";
-  }
-  protected:
-  explicit MachineArrMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kMachineArrFieldNumber = 1,
-  };
-  // repeated .MachineMessage machine_arr = 1;
-  int machine_arr_size() const;
-  private:
-  int _internal_machine_arr_size() const;
-  public:
-  void clear_machine_arr();
-  ::MachineMessage* mutable_machine_arr(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MachineMessage >*
-      mutable_machine_arr();
-  private:
-  const ::MachineMessage& _internal_machine_arr(int index) const;
-  ::MachineMessage* _internal_add_machine_arr();
-  public:
-  const ::MachineMessage& machine_arr(int index) const;
-  ::MachineMessage* add_machine_arr();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MachineMessage >&
-      machine_arr() const;
-
-  // @@protoc_insertion_point(class_scope:MachineArrMessage)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MachineMessage > machine_arr_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -3020,6 +3070,344 @@ DoubleArrayMessage::mutable_arr() {
 
 // -------------------------------------------------------------------
 
+// ServerStatusMessage
+
+// string addr = 1;
+inline void ServerStatusMessage::clear_addr() {
+  addr_.ClearToEmpty();
+}
+inline const std::string& ServerStatusMessage::addr() const {
+  // @@protoc_insertion_point(field_get:ServerStatusMessage.addr)
+  return _internal_addr();
+}
+inline void ServerStatusMessage::set_addr(const std::string& value) {
+  _internal_set_addr(value);
+  // @@protoc_insertion_point(field_set:ServerStatusMessage.addr)
+}
+inline std::string* ServerStatusMessage::mutable_addr() {
+  // @@protoc_insertion_point(field_mutable:ServerStatusMessage.addr)
+  return _internal_mutable_addr();
+}
+inline const std::string& ServerStatusMessage::_internal_addr() const {
+  return addr_.Get();
+}
+inline void ServerStatusMessage::_internal_set_addr(const std::string& value) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ServerStatusMessage::set_addr(std::string&& value) {
+  
+  addr_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:ServerStatusMessage.addr)
+}
+inline void ServerStatusMessage::set_addr(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:ServerStatusMessage.addr)
+}
+inline void ServerStatusMessage::set_addr(const char* value,
+    size_t size) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:ServerStatusMessage.addr)
+}
+inline std::string* ServerStatusMessage::_internal_mutable_addr() {
+  
+  return addr_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ServerStatusMessage::release_addr() {
+  // @@protoc_insertion_point(field_release:ServerStatusMessage.addr)
+  return addr_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ServerStatusMessage::set_allocated_addr(std::string* addr) {
+  if (addr != nullptr) {
+    
+  } else {
+    
+  }
+  addr_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), addr,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:ServerStatusMessage.addr)
+}
+
+// repeated .WorkerStatusMessage worker_status = 2;
+inline int ServerStatusMessage::_internal_worker_status_size() const {
+  return worker_status_.size();
+}
+inline int ServerStatusMessage::worker_status_size() const {
+  return _internal_worker_status_size();
+}
+inline void ServerStatusMessage::clear_worker_status() {
+  worker_status_.Clear();
+}
+inline ::WorkerStatusMessage* ServerStatusMessage::mutable_worker_status(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerStatusMessage.worker_status)
+  return worker_status_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >*
+ServerStatusMessage::mutable_worker_status() {
+  // @@protoc_insertion_point(field_mutable_list:ServerStatusMessage.worker_status)
+  return &worker_status_;
+}
+inline const ::WorkerStatusMessage& ServerStatusMessage::_internal_worker_status(int index) const {
+  return worker_status_.Get(index);
+}
+inline const ::WorkerStatusMessage& ServerStatusMessage::worker_status(int index) const {
+  // @@protoc_insertion_point(field_get:ServerStatusMessage.worker_status)
+  return _internal_worker_status(index);
+}
+inline ::WorkerStatusMessage* ServerStatusMessage::_internal_add_worker_status() {
+  return worker_status_.Add();
+}
+inline ::WorkerStatusMessage* ServerStatusMessage::add_worker_status() {
+  // @@protoc_insertion_point(field_add:ServerStatusMessage.worker_status)
+  return _internal_add_worker_status();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >&
+ServerStatusMessage::worker_status() const {
+  // @@protoc_insertion_point(field_list:ServerStatusMessage.worker_status)
+  return worker_status_;
+}
+
+// string status = 3;
+inline void ServerStatusMessage::clear_status() {
+  status_.ClearToEmpty();
+}
+inline const std::string& ServerStatusMessage::status() const {
+  // @@protoc_insertion_point(field_get:ServerStatusMessage.status)
+  return _internal_status();
+}
+inline void ServerStatusMessage::set_status(const std::string& value) {
+  _internal_set_status(value);
+  // @@protoc_insertion_point(field_set:ServerStatusMessage.status)
+}
+inline std::string* ServerStatusMessage::mutable_status() {
+  // @@protoc_insertion_point(field_mutable:ServerStatusMessage.status)
+  return _internal_mutable_status();
+}
+inline const std::string& ServerStatusMessage::_internal_status() const {
+  return status_.Get();
+}
+inline void ServerStatusMessage::_internal_set_status(const std::string& value) {
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ServerStatusMessage::set_status(std::string&& value) {
+  
+  status_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:ServerStatusMessage.status)
+}
+inline void ServerStatusMessage::set_status(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:ServerStatusMessage.status)
+}
+inline void ServerStatusMessage::set_status(const char* value,
+    size_t size) {
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:ServerStatusMessage.status)
+}
+inline std::string* ServerStatusMessage::_internal_mutable_status() {
+  
+  return status_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ServerStatusMessage::release_status() {
+  // @@protoc_insertion_point(field_release:ServerStatusMessage.status)
+  return status_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ServerStatusMessage::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  status_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), status,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:ServerStatusMessage.status)
+}
+
+// -------------------------------------------------------------------
+
+// WorkerStatusMessage
+
+// string worker_name = 1;
+inline void WorkerStatusMessage::clear_worker_name() {
+  worker_name_.ClearToEmpty();
+}
+inline const std::string& WorkerStatusMessage::worker_name() const {
+  // @@protoc_insertion_point(field_get:WorkerStatusMessage.worker_name)
+  return _internal_worker_name();
+}
+inline void WorkerStatusMessage::set_worker_name(const std::string& value) {
+  _internal_set_worker_name(value);
+  // @@protoc_insertion_point(field_set:WorkerStatusMessage.worker_name)
+}
+inline std::string* WorkerStatusMessage::mutable_worker_name() {
+  // @@protoc_insertion_point(field_mutable:WorkerStatusMessage.worker_name)
+  return _internal_mutable_worker_name();
+}
+inline const std::string& WorkerStatusMessage::_internal_worker_name() const {
+  return worker_name_.Get();
+}
+inline void WorkerStatusMessage::_internal_set_worker_name(const std::string& value) {
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void WorkerStatusMessage::set_worker_name(std::string&& value) {
+  
+  worker_name_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:WorkerStatusMessage.worker_name)
+}
+inline void WorkerStatusMessage::set_worker_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:WorkerStatusMessage.worker_name)
+}
+inline void WorkerStatusMessage::set_worker_name(const char* value,
+    size_t size) {
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:WorkerStatusMessage.worker_name)
+}
+inline std::string* WorkerStatusMessage::_internal_mutable_worker_name() {
+  
+  return worker_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* WorkerStatusMessage::release_worker_name() {
+  // @@protoc_insertion_point(field_release:WorkerStatusMessage.worker_name)
+  return worker_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void WorkerStatusMessage::set_allocated_worker_name(std::string* worker_name) {
+  if (worker_name != nullptr) {
+    
+  } else {
+    
+  }
+  worker_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), worker_name,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:WorkerStatusMessage.worker_name)
+}
+
+// string status = 2;
+inline void WorkerStatusMessage::clear_status() {
+  status_.ClearToEmpty();
+}
+inline const std::string& WorkerStatusMessage::status() const {
+  // @@protoc_insertion_point(field_get:WorkerStatusMessage.status)
+  return _internal_status();
+}
+inline void WorkerStatusMessage::set_status(const std::string& value) {
+  _internal_set_status(value);
+  // @@protoc_insertion_point(field_set:WorkerStatusMessage.status)
+}
+inline std::string* WorkerStatusMessage::mutable_status() {
+  // @@protoc_insertion_point(field_mutable:WorkerStatusMessage.status)
+  return _internal_mutable_status();
+}
+inline const std::string& WorkerStatusMessage::_internal_status() const {
+  return status_.Get();
+}
+inline void WorkerStatusMessage::_internal_set_status(const std::string& value) {
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void WorkerStatusMessage::set_status(std::string&& value) {
+  
+  status_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:WorkerStatusMessage.status)
+}
+inline void WorkerStatusMessage::set_status(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:WorkerStatusMessage.status)
+}
+inline void WorkerStatusMessage::set_status(const char* value,
+    size_t size) {
+  
+  status_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:WorkerStatusMessage.status)
+}
+inline std::string* WorkerStatusMessage::_internal_mutable_status() {
+  
+  return status_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* WorkerStatusMessage::release_status() {
+  // @@protoc_insertion_point(field_release:WorkerStatusMessage.status)
+  return status_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void WorkerStatusMessage::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  status_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), status,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:WorkerStatusMessage.status)
+}
+
+// repeated int32 future_id = 3;
+inline int WorkerStatusMessage::_internal_future_id_size() const {
+  return future_id_.size();
+}
+inline int WorkerStatusMessage::future_id_size() const {
+  return _internal_future_id_size();
+}
+inline void WorkerStatusMessage::clear_future_id() {
+  future_id_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 WorkerStatusMessage::_internal_future_id(int index) const {
+  return future_id_.Get(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 WorkerStatusMessage::future_id(int index) const {
+  // @@protoc_insertion_point(field_get:WorkerStatusMessage.future_id)
+  return _internal_future_id(index);
+}
+inline void WorkerStatusMessage::set_future_id(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
+  future_id_.Set(index, value);
+  // @@protoc_insertion_point(field_set:WorkerStatusMessage.future_id)
+}
+inline void WorkerStatusMessage::_internal_add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  future_id_.Add(value);
+}
+inline void WorkerStatusMessage::add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_add_future_id(value);
+  // @@protoc_insertion_point(field_add:WorkerStatusMessage.future_id)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+WorkerStatusMessage::_internal_future_id() const {
+  return future_id_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+WorkerStatusMessage::future_id() const {
+  // @@protoc_insertion_point(field_list:WorkerStatusMessage.future_id)
+  return _internal_future_id();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+WorkerStatusMessage::_internal_mutable_future_id() {
+  return &future_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+WorkerStatusMessage::mutable_future_id() {
+  // @@protoc_insertion_point(field_mutable_list:WorkerStatusMessage.future_id)
+  return _internal_mutable_future_id();
+}
+
+// -------------------------------------------------------------------
+
 // FetchRequestMessage
 
 // repeated string request_arr = 1;
@@ -3340,7 +3728,7 @@ inline void FetchReplyMessage::set_allocated_mem_usage_message(::MemUsageMessage
   // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.mem_usage_message)
 }
 
-// repeated string infos = 15;
+// repeated string infos = 3;
 inline int FetchReplyMessage::_internal_infos_size() const {
   return infos_.size();
 }
@@ -3412,195 +3800,6 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
 FetchReplyMessage::mutable_infos() {
   // @@protoc_insertion_point(field_mutable_list:FetchReplyMessage.infos)
   return &infos_;
-}
-
-// -------------------------------------------------------------------
-
-// MachineMessage
-
-// string ip = 1;
-inline void MachineMessage::clear_ip() {
-  ip_.ClearToEmpty();
-}
-inline const std::string& MachineMessage::ip() const {
-  // @@protoc_insertion_point(field_get:MachineMessage.ip)
-  return _internal_ip();
-}
-inline void MachineMessage::set_ip(const std::string& value) {
-  _internal_set_ip(value);
-  // @@protoc_insertion_point(field_set:MachineMessage.ip)
-}
-inline std::string* MachineMessage::mutable_ip() {
-  // @@protoc_insertion_point(field_mutable:MachineMessage.ip)
-  return _internal_mutable_ip();
-}
-inline const std::string& MachineMessage::_internal_ip() const {
-  return ip_.Get();
-}
-inline void MachineMessage::_internal_set_ip(const std::string& value) {
-  
-  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void MachineMessage::set_ip(std::string&& value) {
-  
-  ip_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:MachineMessage.ip)
-}
-inline void MachineMessage::set_ip(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:MachineMessage.ip)
-}
-inline void MachineMessage::set_ip(const char* value,
-    size_t size) {
-  
-  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:MachineMessage.ip)
-}
-inline std::string* MachineMessage::_internal_mutable_ip() {
-  
-  return ip_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* MachineMessage::release_ip() {
-  // @@protoc_insertion_point(field_release:MachineMessage.ip)
-  return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void MachineMessage::set_allocated_ip(std::string* ip) {
-  if (ip != nullptr) {
-    
-  } else {
-    
-  }
-  ip_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ip,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:MachineMessage.ip)
-}
-
-// int32 port = 2;
-inline void MachineMessage::clear_port() {
-  port_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 MachineMessage::_internal_port() const {
-  return port_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 MachineMessage::port() const {
-  // @@protoc_insertion_point(field_get:MachineMessage.port)
-  return _internal_port();
-}
-inline void MachineMessage::_internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  port_ = value;
-}
-inline void MachineMessage::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_port(value);
-  // @@protoc_insertion_point(field_set:MachineMessage.port)
-}
-
-// string addr = 3;
-inline void MachineMessage::clear_addr() {
-  addr_.ClearToEmpty();
-}
-inline const std::string& MachineMessage::addr() const {
-  // @@protoc_insertion_point(field_get:MachineMessage.addr)
-  return _internal_addr();
-}
-inline void MachineMessage::set_addr(const std::string& value) {
-  _internal_set_addr(value);
-  // @@protoc_insertion_point(field_set:MachineMessage.addr)
-}
-inline std::string* MachineMessage::mutable_addr() {
-  // @@protoc_insertion_point(field_mutable:MachineMessage.addr)
-  return _internal_mutable_addr();
-}
-inline const std::string& MachineMessage::_internal_addr() const {
-  return addr_.Get();
-}
-inline void MachineMessage::_internal_set_addr(const std::string& value) {
-  
-  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void MachineMessage::set_addr(std::string&& value) {
-  
-  addr_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:MachineMessage.addr)
-}
-inline void MachineMessage::set_addr(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:MachineMessage.addr)
-}
-inline void MachineMessage::set_addr(const char* value,
-    size_t size) {
-  
-  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:MachineMessage.addr)
-}
-inline std::string* MachineMessage::_internal_mutable_addr() {
-  
-  return addr_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* MachineMessage::release_addr() {
-  // @@protoc_insertion_point(field_release:MachineMessage.addr)
-  return addr_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void MachineMessage::set_allocated_addr(std::string* addr) {
-  if (addr != nullptr) {
-    
-  } else {
-    
-  }
-  addr_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), addr,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:MachineMessage.addr)
-}
-
-// -------------------------------------------------------------------
-
-// MachineArrMessage
-
-// repeated .MachineMessage machine_arr = 1;
-inline int MachineArrMessage::_internal_machine_arr_size() const {
-  return machine_arr_.size();
-}
-inline int MachineArrMessage::machine_arr_size() const {
-  return _internal_machine_arr_size();
-}
-inline void MachineArrMessage::clear_machine_arr() {
-  machine_arr_.Clear();
-}
-inline ::MachineMessage* MachineArrMessage::mutable_machine_arr(int index) {
-  // @@protoc_insertion_point(field_mutable:MachineArrMessage.machine_arr)
-  return machine_arr_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MachineMessage >*
-MachineArrMessage::mutable_machine_arr() {
-  // @@protoc_insertion_point(field_mutable_list:MachineArrMessage.machine_arr)
-  return &machine_arr_;
-}
-inline const ::MachineMessage& MachineArrMessage::_internal_machine_arr(int index) const {
-  return machine_arr_.Get(index);
-}
-inline const ::MachineMessage& MachineArrMessage::machine_arr(int index) const {
-  // @@protoc_insertion_point(field_get:MachineArrMessage.machine_arr)
-  return _internal_machine_arr(index);
-}
-inline ::MachineMessage* MachineArrMessage::_internal_add_machine_arr() {
-  return machine_arr_.Add();
-}
-inline ::MachineMessage* MachineArrMessage::add_machine_arr() {
-  // @@protoc_insertion_point(field_add:MachineArrMessage.machine_arr)
-  return _internal_add_machine_arr();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MachineMessage >&
-MachineArrMessage::machine_arr() const {
-  // @@protoc_insertion_point(field_list:MachineArrMessage.machine_arr)
-  return machine_arr_;
 }
 
 // -------------------------------------------------------------------

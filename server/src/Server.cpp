@@ -64,3 +64,10 @@ dtop::server::Server::Server(const std::string &config_file_path)
 bool dtop::server::Server::profile(const FetchRequestMessage* request, FetchReplyMessage* reply) {
 	return this->manager.process_query(request, reply);
 }
+
+void dtop::server::Server::get_server_status(const StringArrayMessage* request, ServerStatusMessage* reply) {
+	bool with_futures = request->arr_size() != 0 && request->arr(0) == "-wf";
+	reply->set_addr(this->get_addr());
+	reply->mutable_worker_status()->Swap(this->manager.get_worker_status(with_futures));
+	reply->set_status("Indirect");
+}

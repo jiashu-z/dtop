@@ -121,6 +121,8 @@ class BaseWorker {
 	const std::vector<const Future*>& get_futures() const;
 	WorkerStatus get_status() const;
   std::string to_string() const;
+
+	static std::string get_status_str(WorkerStatus status);
 };
 
 }  // namespace worker

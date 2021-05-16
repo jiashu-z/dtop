@@ -25,6 +25,7 @@ static const char* GRPCService_method_names[] = {
   "/GRPCService/GetPort",
   "/GRPCService/GetAddr",
   "/GRPCService/Profile",
+  "/GRPCService/GetServerStatus",
 };
 
 std::unique_ptr< GRPCService::Stub> GRPCService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -38,6 +39,7 @@ GRPCService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   , rpcmethod_GetPort_(GRPCService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetAddr_(GRPCService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Profile_(GRPCService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetServerStatus_(GRPCService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status GRPCService::Stub::GetIP(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::StringMessage* response) {
@@ -132,6 +134,29 @@ void GRPCService::Stub::experimental_async::Profile(::grpc::ClientContext* conte
   return result;
 }
 
+::grpc::Status GRPCService::Stub::GetServerStatus(::grpc::ClientContext* context, const ::StringArrayMessage& request, ::ServerStatusMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::StringArrayMessage, ::ServerStatusMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetServerStatus_, context, request, response);
+}
+
+void GRPCService::Stub::experimental_async::GetServerStatus(::grpc::ClientContext* context, const ::StringArrayMessage* request, ::ServerStatusMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::StringArrayMessage, ::ServerStatusMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerStatus_, context, request, response, std::move(f));
+}
+
+void GRPCService::Stub::experimental_async::GetServerStatus(::grpc::ClientContext* context, const ::StringArrayMessage* request, ::ServerStatusMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerStatus_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::ServerStatusMessage>* GRPCService::Stub::PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::StringArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::ServerStatusMessage, ::StringArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetServerStatus_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::ServerStatusMessage>* GRPCService::Stub::AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::StringArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetServerStatusRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 GRPCService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GRPCService_method_names[0],
@@ -173,6 +198,16 @@ GRPCService::Service::Service() {
              ::FetchReplyMessage* resp) {
                return service->Profile(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      GRPCService_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< GRPCService::Service, ::StringArrayMessage, ::ServerStatusMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](GRPCService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::StringArrayMessage* req,
+             ::ServerStatusMessage* resp) {
+               return service->GetServerStatus(ctx, req, resp);
+             }, this)));
 }
 
 GRPCService::Service::~Service() {
@@ -200,6 +235,13 @@ GRPCService::Service::~Service() {
 }
 
 ::grpc::Status GRPCService::Service::Profile(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status GRPCService::Service::GetServerStatus(::grpc::ServerContext* context, const ::StringArrayMessage* request, ::ServerStatusMessage* response) {
   (void) context;
   (void) request;
   (void) response;

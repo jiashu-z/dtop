@@ -71,6 +71,18 @@ class ConcreteGRPCService final : public GRPCService::Service {
                          ::FetchReplyMessage* response) override;
 
   /**
+   * @brief Get the running status of current server
+   *
+   * @param context
+   * @param request
+   * @param response
+   * @return ::grpc::Status
+   */
+	::grpc::Status GetServerStatus(::grpc::ServerContext* context,
+					                       const ::StringArrayMessage* request,
+					                       ::ServerStatusMessage* response) override;
+
+  /**
    * @brief Run the grpc server.
    *
    */

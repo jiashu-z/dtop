@@ -21,7 +21,7 @@
 #include <grpcpp/impl/codegen/sync_stream.h>
 
 static const char* APIService_method_names[] = {
-  "/APIService/GetAllMachines",
+  "/APIService/GetServerStatus",
 };
 
 std::unique_ptr< APIService::Stub> APIService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -31,28 +31,28 @@ std::unique_ptr< APIService::Stub> APIService::NewStub(const std::shared_ptr< ::
 }
 
 APIService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_GetAllMachines_(APIService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_GetServerStatus_(APIService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status APIService::Stub::GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::MachineArrMessage* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::google::protobuf::Empty, ::MachineArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetAllMachines_, context, request, response);
+::grpc::Status APIService::Stub::GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::ServerStatusArrMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::google::protobuf::Empty, ::ServerStatusArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetServerStatus_, context, request, response);
 }
 
-void APIService::Stub::experimental_async::GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::google::protobuf::Empty, ::MachineArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetAllMachines_, context, request, response, std::move(f));
+void APIService::Stub::experimental_async::GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::google::protobuf::Empty, ::ServerStatusArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerStatus_, context, request, response, std::move(f));
 }
 
-void APIService::Stub::experimental_async::GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetAllMachines_, context, request, response, reactor);
+void APIService::Stub::experimental_async::GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerStatus_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::MachineArrMessage>* APIService::Stub::PrepareAsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::MachineArrMessage, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetAllMachines_, context, request);
+::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>* APIService::Stub::PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::ServerStatusArrMessage, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetServerStatus_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::MachineArrMessage>* APIService::Stub::AsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>* APIService::Stub::AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
-    this->PrepareAsyncGetAllMachinesRaw(context, request, cq);
+    this->PrepareAsyncGetServerStatusRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -61,19 +61,19 @@ APIService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       APIService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::google::protobuf::Empty, ::MachineArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::google::protobuf::Empty, ::ServerStatusArrMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](APIService::Service* service,
              ::grpc::ServerContext* ctx,
              const ::google::protobuf::Empty* req,
-             ::MachineArrMessage* resp) {
-               return service->GetAllMachines(ctx, req, resp);
+             ::ServerStatusArrMessage* resp) {
+               return service->GetServerStatus(ctx, req, resp);
              }, this)));
 }
 
 APIService::Service::~Service() {
 }
 
-::grpc::Status APIService::Service::GetAllMachines(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response) {
+::grpc::Status APIService::Service::GetServerStatus(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response) {
   (void) context;
   (void) request;
   (void) response;

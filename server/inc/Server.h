@@ -128,6 +128,15 @@ class Server {
     */
   bool profile(const FetchRequestMessage* request, FetchReplyMessage* reply);
 
+
+  /**
+   * @brief Get the server status.
+   *
+   * @param request
+   * @param reply
+   */
+	void get_server_status(const StringArrayMessage* request, ServerStatusMessage* reply);
+
   /**
    * @brief Init config according to config xml.
    *

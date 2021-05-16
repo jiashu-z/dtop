@@ -6,6 +6,7 @@
 
 #include "BaseWorker.h"
 #include "ManagerMeta.h"
+#include "api.grpc.pb.h"
 
 namespace dtop {
 namespace worker {
@@ -39,6 +40,13 @@ namespace worker {
 		 * @return True if no error occurs.
 		 */
 		bool process_query(const FetchRequestMessage* request, FetchReplyMessage* reply);
+
+		/**
+		 *
+		 * @param with_futures
+		 * @return
+		 */
+		google::protobuf::RepeatedPtrField<WorkerStatusMessage>* get_worker_status(bool with_futures=false);
 	};
 
 }  // namespace worker

@@ -49,3 +49,10 @@
 	this->server->profile(request, response);
   return ::grpc::Status::OK;
 }
+
+::grpc::Status dtop::server::ConcreteGRPCService::GetServerStatus(
+		::grpc::ServerContext *context, const ::StringArrayMessage *request,
+    ::ServerStatusMessage *response) {
+	this->server->get_server_status(request, response);
+	return grpc::Status::OK;
+}

@@ -34,21 +34,21 @@ class APIService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::MachineArrMessage* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>> AsyncGetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>>(AsyncGetAllMachinesRaw(context, request, cq));
+    virtual ::grpc::Status GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::ServerStatusArrMessage* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>> AsyncGetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>>(AsyncGetServerStatusRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>> PrepareAsyncGetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>>(PrepareAsyncGetAllMachinesRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>> PrepareAsyncGetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>>(PrepareAsyncGetServerStatusRaw(context, request, cq));
     }
     class experimental_async_interface {
      public:
       virtual ~experimental_async_interface() {}
-      virtual void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, std::function<void(::grpc::Status)>) = 0;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       #else
-      virtual void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      virtual void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
     };
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -59,27 +59,27 @@ class APIService final {
     #endif
     virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>* AsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::MachineArrMessage>* PrepareAsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>* AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>* PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::MachineArrMessage* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>> AsyncGetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>>(AsyncGetAllMachinesRaw(context, request, cq));
+    ::grpc::Status GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::ServerStatusArrMessage* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>> AsyncGetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>>(AsyncGetServerStatusRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>> PrepareAsyncGetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>>(PrepareAsyncGetAllMachinesRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>> PrepareAsyncGetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>>(PrepareAsyncGetServerStatusRaw(context, request, cq));
     }
     class experimental_async final :
       public StubInterface::experimental_async_interface {
      public:
-      void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, std::function<void(::grpc::Status)>) override;
+      void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, std::function<void(::grpc::Status)>) override;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
       #else
-      void GetAllMachines(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void GetServerStatus(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
      private:
       friend class Stub;
@@ -92,9 +92,9 @@ class APIService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class experimental_async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>* AsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::MachineArrMessage>* PrepareAsyncGetAllMachinesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_GetAllMachines_;
+    ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>* AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>* PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_GetServerStatus_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -102,124 +102,124 @@ class APIService final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status GetAllMachines(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response);
+    virtual ::grpc::Status GetServerStatus(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response);
   };
   template <class BaseClass>
-  class WithAsyncMethod_GetAllMachines : public BaseClass {
+  class WithAsyncMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_GetAllMachines() {
+    WithAsyncMethod_GetServerStatus() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_GetAllMachines() override {
+    ~WithAsyncMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetAllMachines(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::MachineArrMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetServerStatus(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::ServerStatusArrMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetAllMachines<Service > AsyncService;
+  typedef WithAsyncMethod_GetServerStatus<Service > AsyncService;
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_GetAllMachines : public BaseClass {
+  class ExperimentalWithCallbackMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    ExperimentalWithCallbackMethod_GetAllMachines() {
+    ExperimentalWithCallbackMethod_GetServerStatus() {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::Service::
     #else
       ::grpc::Service::experimental().
     #endif
         MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::MachineArrMessage>(
+          new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::ServerStatusArrMessage>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
                    ::grpc::CallbackServerContext*
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context, const ::google::protobuf::Empty* request, ::MachineArrMessage* response) { return this->GetAllMachines(context, request, response); }));}
-    void SetMessageAllocatorFor_GetAllMachines(
-        ::grpc::experimental::MessageAllocator< ::google::protobuf::Empty, ::MachineArrMessage>* allocator) {
+                     context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response) { return this->GetServerStatus(context, request, response); }));}
+    void SetMessageAllocatorFor_GetServerStatus(
+        ::grpc::experimental::MessageAllocator< ::google::protobuf::Empty, ::ServerStatusArrMessage>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
     #else
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
     #endif
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::MachineArrMessage>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::ServerStatusArrMessage>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~ExperimentalWithCallbackMethod_GetAllMachines() override {
+    ~ExperimentalWithCallbackMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* GetAllMachines(
-      ::grpc::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/)
+    virtual ::grpc::ServerUnaryReactor* GetServerStatus(
+      ::grpc::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/)
     #else
-    virtual ::grpc::experimental::ServerUnaryReactor* GetAllMachines(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/)
+    virtual ::grpc::experimental::ServerUnaryReactor* GetServerStatus(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/)
     #endif
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_GetAllMachines<Service > CallbackService;
+  typedef ExperimentalWithCallbackMethod_GetServerStatus<Service > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_GetAllMachines<Service > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_GetServerStatus<Service > ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_GetAllMachines : public BaseClass {
+  class WithGenericMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_GetAllMachines() {
+    WithGenericMethod_GetServerStatus() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_GetAllMachines() override {
+    ~WithGenericMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_GetAllMachines : public BaseClass {
+  class WithRawMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_GetAllMachines() {
+    WithRawMethod_GetServerStatus() {
       ::grpc::Service::MarkMethodRaw(0);
     }
-    ~WithRawMethod_GetAllMachines() override {
+    ~WithRawMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetAllMachines(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetServerStatus(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_GetAllMachines : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    ExperimentalWithRawCallbackMethod_GetAllMachines() {
+    ExperimentalWithRawCallbackMethod_GetServerStatus() {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::Service::
     #else
@@ -233,55 +233,55 @@ class APIService final {
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetAllMachines(context, request, response); }));
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetServerStatus(context, request, response); }));
     }
-    ~ExperimentalWithRawCallbackMethod_GetAllMachines() override {
+    ~ExperimentalWithRawCallbackMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* GetAllMachines(
+    virtual ::grpc::ServerUnaryReactor* GetServerStatus(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
     #else
-    virtual ::grpc::experimental::ServerUnaryReactor* GetAllMachines(
+    virtual ::grpc::experimental::ServerUnaryReactor* GetServerStatus(
       ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
     #endif
       { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_GetAllMachines : public BaseClass {
+  class WithStreamedUnaryMethod_GetServerStatus : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_GetAllMachines() {
+    WithStreamedUnaryMethod_GetServerStatus() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::google::protobuf::Empty, ::MachineArrMessage>(
+          ::google::protobuf::Empty, ::ServerStatusArrMessage>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::google::protobuf::Empty, ::MachineArrMessage>* streamer) {
-                       return this->StreamedGetAllMachines(context,
+                     ::google::protobuf::Empty, ::ServerStatusArrMessage>* streamer) {
+                       return this->StreamedGetServerStatus(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_GetAllMachines() override {
+    ~WithStreamedUnaryMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetAllMachines(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::MachineArrMessage* /*response*/) override {
+    ::grpc::Status GetServerStatus(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::ServerStatusArrMessage* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetAllMachines(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::MachineArrMessage>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGetServerStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::ServerStatusArrMessage>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetAllMachines<Service > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_GetServerStatus<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetAllMachines<Service > StreamedService;
+  typedef WithStreamedUnaryMethod_GetServerStatus<Service > StreamedService;
 };
 
 

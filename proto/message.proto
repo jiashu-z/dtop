@@ -42,6 +42,20 @@ message DoubleArrayMessage {
   repeated double arr = 1;
 }
 
+
+message ServerStatusMessage {
+  string addr = 1;
+  repeated WorkerStatusMessage worker_status = 2;
+  string status = 3;
+}
+
+message WorkerStatusMessage {
+  string worker_name = 1;
+  string status = 2;
+  repeated int32 future_id = 3;
+}
+
+
 message FetchRequestMessage {
   repeated string request_arr = 1;
   repeated string param_arr = 2;
@@ -50,20 +64,8 @@ message FetchRequestMessage {
 message FetchReplyMessage {
   CpuMessage cpu_message = 1;
   MemUsageMessage mem_usage_message = 2;
-
-  repeated string infos = 15;
+  repeated string infos = 3;
 }
-
-message MachineMessage {
-  string ip = 1;
-  int32 port = 2;
-  string addr = 3;
-}
-
-message MachineArrMessage {
-  repeated MachineMessage machine_arr = 1;
-}
-
 message CpuMessage {
   int32 core_num = 1;
   repeated float usage_arr = 2;

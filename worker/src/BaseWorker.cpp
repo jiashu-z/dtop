@@ -103,3 +103,13 @@ dtop::worker::WorkerStatus dtop::worker::BaseWorker::get_status() const {
 std::string dtop::worker::BaseWorker::to_string() const {
 	return this->worker_name;
 }
+
+std::string dtop::worker::BaseWorker::get_status_str(dtop::worker::WorkerStatus status)  {
+	switch (status) {
+		case NEW: return "NEW";
+		case READY: return "READY";
+		case RUNNING: return "RUNNING";
+		case SHUTDOWN: return "SHUTDOWN";
+	}
+	return "UNKNOWN";
+}
