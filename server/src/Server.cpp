@@ -66,8 +66,12 @@ bool dtop::server::Server::profile(const FetchRequestMessage* request, FetchRepl
 }
 
 void dtop::server::Server::get_server_status(const StringArrayMessage* request, ServerStatusMessage* reply) {
-	bool with_futures = request->arr_size() != 0 && request->arr(0) == "-wf";
+	bool with_futures = false, with_future_desc = false;
+	for (auto& flag : request->arr()) {
+		if (flag == "-wf") with_futures = true;
+		if (flag == "-wfd") with_future_desc = true;
+	}
 	reply->set_addr(this->get_addr());
-	reply->mutable_worker_status()->Swap(this->manager.get_worker_status(with_futures));
+	reply->mutable_worker_status()->Swap(this->manager.get_worker_status(with_futures, with_future_desc));
 	reply->set_status("Indirect");
 }

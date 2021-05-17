@@ -156,8 +156,7 @@ struct ServerStatusMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerStatusMessageDefaultTypeInternal _ServerStatusMessage_default_instance_;
 constexpr WorkerStatusMessage::WorkerStatusMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : future_id_()
-  , _future_id_cached_byte_size_()
+  : future_()
   , worker_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , status_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct WorkerStatusMessageDefaultTypeInternal {
@@ -169,6 +168,19 @@ struct WorkerStatusMessageDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT WorkerStatusMessageDefaultTypeInternal _WorkerStatusMessage_default_instance_;
+constexpr WorkerFutureMessage::WorkerFutureMessage(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : label_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , desc_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+struct WorkerFutureMessageDefaultTypeInternal {
+  constexpr WorkerFutureMessageDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~WorkerFutureMessageDefaultTypeInternal() {}
+  union {
+    WorkerFutureMessage _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT WorkerFutureMessageDefaultTypeInternal _WorkerFutureMessage_default_instance_;
 constexpr FetchRequestMessage::FetchRequestMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : request_arr_()
@@ -223,7 +235,7 @@ struct MemUsageMessageDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_message_2eproto[16];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_message_2eproto[17];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_message_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_message_2eproto = nullptr;
 
@@ -303,7 +315,14 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, worker_name_),
   PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, status_),
-  PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, future_id_),
+  PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, future_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::WorkerFutureMessage, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::WorkerFutureMessage, label_),
+  PROTOBUF_FIELD_OFFSET(::WorkerFutureMessage, desc_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::FetchRequestMessage, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -347,10 +366,11 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 54, -1, sizeof(::DoubleArrayMessage)},
   { 60, -1, sizeof(::ServerStatusMessage)},
   { 68, -1, sizeof(::WorkerStatusMessage)},
-  { 76, -1, sizeof(::FetchRequestMessage)},
-  { 83, -1, sizeof(::FetchReplyMessage)},
-  { 91, -1, sizeof(::CpuMessage)},
-  { 98, -1, sizeof(::MemUsageMessage)},
+  { 76, -1, sizeof(::WorkerFutureMessage)},
+  { 83, -1, sizeof(::FetchRequestMessage)},
+  { 90, -1, sizeof(::FetchReplyMessage)},
+  { 98, -1, sizeof(::CpuMessage)},
+  { 105, -1, sizeof(::MemUsageMessage)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -366,6 +386,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_DoubleArrayMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ServerStatusMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_WorkerStatusMessage_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_WorkerFutureMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_FetchRequestMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_FetchReplyMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_CpuMessage_default_instance_),
@@ -383,22 +404,24 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "yMessage\022\013\n\003arr\030\001 \003(\002\"!\n\022DoubleArrayMess"
   "age\022\013\n\003arr\030\001 \003(\001\"`\n\023ServerStatusMessage\022"
   "\014\n\004addr\030\001 \001(\t\022+\n\rworker_status\030\002 \003(\0132\024.W"
-  "orkerStatusMessage\022\016\n\006status\030\003 \001(\t\"M\n\023Wo"
+  "orkerStatusMessage\022\016\n\006status\030\003 \001(\t\"`\n\023Wo"
   "rkerStatusMessage\022\023\n\013worker_name\030\001 \001(\t\022\016"
-  "\n\006status\030\002 \001(\t\022\021\n\tfuture_id\030\003 \003(\005\"=\n\023Fet"
-  "chRequestMessage\022\023\n\013request_arr\030\001 \003(\t\022\021\n"
-  "\tparam_arr\030\002 \003(\t\"q\n\021FetchReplyMessage\022 \n"
-  "\013cpu_message\030\001 \001(\0132\013.CpuMessage\022+\n\021mem_u"
-  "sage_message\030\002 \001(\0132\020.MemUsageMessage\022\r\n\005"
-  "infos\030\003 \003(\t\"1\n\nCpuMessage\022\020\n\010core_num\030\001 "
-  "\001(\005\022\021\n\tusage_arr\030\002 \003(\002\"4\n\017MemUsageMessag"
-  "e\022\017\n\007max_mem\030\001 \001(\003\022\020\n\010used_mem\030\002 \001(\003B\031\n\027"
-  "grp.dtop.dtopjava.protob\006proto3"
+  "\n\006status\030\002 \001(\t\022$\n\006future\030\003 \003(\0132\024.WorkerF"
+  "utureMessage\"2\n\023WorkerFutureMessage\022\r\n\005l"
+  "abel\030\001 \001(\t\022\014\n\004desc\030\002 \001(\t\"=\n\023FetchRequest"
+  "Message\022\023\n\013request_arr\030\001 \003(\t\022\021\n\tparam_ar"
+  "r\030\002 \003(\t\"q\n\021FetchReplyMessage\022 \n\013cpu_mess"
+  "age\030\001 \001(\0132\013.CpuMessage\022+\n\021mem_usage_mess"
+  "age\030\002 \001(\0132\020.MemUsageMessage\022\r\n\005infos\030\003 \003"
+  "(\t\"1\n\nCpuMessage\022\020\n\010core_num\030\001 \001(\005\022\021\n\tus"
+  "age_arr\030\002 \003(\002\"4\n\017MemUsageMessage\022\017\n\007max_"
+  "mem\030\001 \001(\003\022\020\n\010used_mem\030\002 \001(\003B\031\n\027grp.dtop."
+  "dtopjava.protob\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 831, descriptor_table_protodef_message_2eproto, "message.proto", 
-  &descriptor_table_message_2eproto_once, nullptr, 0, 16,
+  false, false, 902, descriptor_table_protodef_message_2eproto, "message.proto", 
+  &descriptor_table_message_2eproto_once, nullptr, 0, 17,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
 };
@@ -2636,14 +2659,14 @@ class WorkerStatusMessage::_Internal {
 
 WorkerStatusMessage::WorkerStatusMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  future_id_(arena) {
+  future_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:WorkerStatusMessage)
 }
 WorkerStatusMessage::WorkerStatusMessage(const WorkerStatusMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      future_id_(from.future_id_) {
+      future_(from.future_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   worker_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_worker_name().empty()) {
@@ -2691,7 +2714,7 @@ void WorkerStatusMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  future_id_.Clear();
+  future_.Clear();
   worker_name_.ClearToEmpty();
   status_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -2722,14 +2745,16 @@ const char* WorkerStatusMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated int32 future_id = 3;
+      // repeated .WorkerFutureMessage future = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_future_id(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24) {
-          _internal_add_future_id(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
-          CHK_(ptr);
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_future(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2780,13 +2805,12 @@ failure:
         2, this->_internal_status(), target);
   }
 
-  // repeated int32 future_id = 3;
-  {
-    int byte_size = _future_id_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteInt32Packed(
-          3, _internal_future_id(), byte_size, target);
-    }
+  // repeated .WorkerFutureMessage future = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_future_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, this->_internal_future(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2805,19 +2829,11 @@ size_t WorkerStatusMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated int32 future_id = 3;
-  {
-    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      Int32Size(this->future_id_);
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _future_id_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
+  // repeated .WorkerFutureMessage future = 3;
+  total_size += 1UL * this->_internal_future_size();
+  for (const auto& msg : this->future_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // string worker_name = 1;
@@ -2865,7 +2881,7 @@ void WorkerStatusMessage::MergeFrom(const WorkerStatusMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  future_id_.MergeFrom(from.future_id_);
+  future_.MergeFrom(from.future_);
   if (from.worker_name().size() > 0) {
     _internal_set_worker_name(from._internal_worker_name());
   }
@@ -2895,12 +2911,250 @@ bool WorkerStatusMessage::IsInitialized() const {
 void WorkerStatusMessage::InternalSwap(WorkerStatusMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  future_id_.InternalSwap(&other->future_id_);
+  future_.InternalSwap(&other->future_);
   worker_name_.Swap(&other->worker_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   status_.Swap(&other->status_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata WorkerStatusMessage::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class WorkerFutureMessage::_Internal {
+ public:
+};
+
+WorkerFutureMessage::WorkerFutureMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:WorkerFutureMessage)
+}
+WorkerFutureMessage::WorkerFutureMessage(const WorkerFutureMessage& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  label_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_label().empty()) {
+    label_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_label(), 
+      GetArena());
+  }
+  desc_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_desc().empty()) {
+    desc_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_desc(), 
+      GetArena());
+  }
+  // @@protoc_insertion_point(copy_constructor:WorkerFutureMessage)
+}
+
+void WorkerFutureMessage::SharedCtor() {
+label_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+desc_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+WorkerFutureMessage::~WorkerFutureMessage() {
+  // @@protoc_insertion_point(destructor:WorkerFutureMessage)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void WorkerFutureMessage::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  label_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  desc_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void WorkerFutureMessage::ArenaDtor(void* object) {
+  WorkerFutureMessage* _this = reinterpret_cast< WorkerFutureMessage* >(object);
+  (void)_this;
+}
+void WorkerFutureMessage::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void WorkerFutureMessage::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void WorkerFutureMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:WorkerFutureMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  label_.ClearToEmpty();
+  desc_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* WorkerFutureMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string label = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_label();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "WorkerFutureMessage.label"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string desc = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_desc();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "WorkerFutureMessage.desc"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* WorkerFutureMessage::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:WorkerFutureMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string label = 1;
+  if (this->label().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_label().data(), static_cast<int>(this->_internal_label().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "WorkerFutureMessage.label");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_label(), target);
+  }
+
+  // string desc = 2;
+  if (this->desc().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_desc().data(), static_cast<int>(this->_internal_desc().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "WorkerFutureMessage.desc");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_desc(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:WorkerFutureMessage)
+  return target;
+}
+
+size_t WorkerFutureMessage::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:WorkerFutureMessage)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string label = 1;
+  if (this->label().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_label());
+  }
+
+  // string desc = 2;
+  if (this->desc().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_desc());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void WorkerFutureMessage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:WorkerFutureMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  const WorkerFutureMessage* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<WorkerFutureMessage>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:WorkerFutureMessage)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:WorkerFutureMessage)
+    MergeFrom(*source);
+  }
+}
+
+void WorkerFutureMessage::MergeFrom(const WorkerFutureMessage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:WorkerFutureMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.label().size() > 0) {
+    _internal_set_label(from._internal_label());
+  }
+  if (from.desc().size() > 0) {
+    _internal_set_desc(from._internal_desc());
+  }
+}
+
+void WorkerFutureMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:WorkerFutureMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void WorkerFutureMessage::CopyFrom(const WorkerFutureMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:WorkerFutureMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool WorkerFutureMessage::IsInitialized() const {
+  return true;
+}
+
+void WorkerFutureMessage::InternalSwap(WorkerFutureMessage* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  label_.Swap(&other->label_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  desc_.Swap(&other->desc_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata WorkerFutureMessage::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -3915,6 +4169,9 @@ template<> PROTOBUF_NOINLINE ::ServerStatusMessage* Arena::CreateMaybeMessage< :
 }
 template<> PROTOBUF_NOINLINE ::WorkerStatusMessage* Arena::CreateMaybeMessage< ::WorkerStatusMessage >(Arena* arena) {
   return Arena::CreateMessageInternal< ::WorkerStatusMessage >(arena);
+}
+template<> PROTOBUF_NOINLINE ::WorkerFutureMessage* Arena::CreateMaybeMessage< ::WorkerFutureMessage >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::WorkerFutureMessage >(arena);
 }
 template<> PROTOBUF_NOINLINE ::FetchRequestMessage* Arena::CreateMaybeMessage< ::FetchRequestMessage >(Arena* arena) {
   return Arena::CreateMessageInternal< ::FetchRequestMessage >(arena);

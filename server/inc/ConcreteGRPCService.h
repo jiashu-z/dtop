@@ -74,7 +74,7 @@ class ConcreteGRPCService final : public GRPCService::Service {
    * @brief Get the running status of current server
    *
    * @param context
-   * @param request
+   * @param request flags: -wf with futures; -wfd with future description
    * @param response
    * @return ::grpc::Status
    */

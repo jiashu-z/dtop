@@ -42,7 +42,7 @@ Some data field is shared across all instances of a class, but will be allocate 
 
 - 4.leaked global memory
 
-Similar to the last type of memory leak, some global variables are allocated memory for many times without deallocate previous memory.
+Similar to the last future_type of memory leak, some global variables are allocated memory for many times without deallocate previous memory.
 
 - 5.Incorrect array delete
 

@@ -42,11 +42,15 @@ namespace worker {
 		bool process_query(const FetchRequestMessage* request, FetchReplyMessage* reply);
 
 		/**
+		 * @brief Get the worker status maintained by current manager.
 		 *
-		 * @param with_futures
-		 * @return
+		 * @param with_futures Require name of supported futures
+		 * @param with_future_desc Require name and description of supported futures
+		 *
+		 * @return The repeated pointer field rof worker status message.
 		 */
-		google::protobuf::RepeatedPtrField<WorkerStatusMessage>* get_worker_status(bool with_futures=false);
+		google::protobuf::RepeatedPtrField<WorkerStatusMessage>* get_worker_status(
+						bool with_futures=false, bool with_future_desc=false);
 	};
 
 }  // namespace worker

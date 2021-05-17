@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[16]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[17]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -99,6 +99,9 @@ extern StringArrayMessageDefaultTypeInternal _StringArrayMessage_default_instanc
 class StringMessage;
 struct StringMessageDefaultTypeInternal;
 extern StringMessageDefaultTypeInternal _StringMessage_default_instance_;
+class WorkerFutureMessage;
+struct WorkerFutureMessageDefaultTypeInternal;
+extern WorkerFutureMessageDefaultTypeInternal _WorkerFutureMessage_default_instance_;
 class WorkerStatusMessage;
 struct WorkerStatusMessageDefaultTypeInternal;
 extern WorkerStatusMessageDefaultTypeInternal _WorkerStatusMessage_default_instance_;
@@ -118,6 +121,7 @@ template<> ::MemUsageMessage* Arena::CreateMaybeMessage<::MemUsageMessage>(Arena
 template<> ::ServerStatusMessage* Arena::CreateMaybeMessage<::ServerStatusMessage>(Arena*);
 template<> ::StringArrayMessage* Arena::CreateMaybeMessage<::StringArrayMessage>(Arena*);
 template<> ::StringMessage* Arena::CreateMaybeMessage<::StringMessage>(Arena*);
+template<> ::WorkerFutureMessage* Arena::CreateMaybeMessage<::WorkerFutureMessage>(Arena*);
 template<> ::WorkerStatusMessage* Arena::CreateMaybeMessage<::WorkerStatusMessage>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
@@ -1866,31 +1870,27 @@ class WorkerStatusMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFutureIdFieldNumber = 3,
+    kFutureFieldNumber = 3,
     kWorkerNameFieldNumber = 1,
     kStatusFieldNumber = 2,
   };
-  // repeated int32 future_id = 3;
-  int future_id_size() const;
+  // repeated .WorkerFutureMessage future = 3;
+  int future_size() const;
   private:
-  int _internal_future_id_size() const;
+  int _internal_future_size() const;
   public:
-  void clear_future_id();
+  void clear_future();
+  ::WorkerFutureMessage* mutable_future(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >*
+      mutable_future();
   private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_future_id(int index) const;
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-      _internal_future_id() const;
-  void _internal_add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-      _internal_mutable_future_id();
+  const ::WorkerFutureMessage& _internal_future(int index) const;
+  ::WorkerFutureMessage* _internal_add_future();
   public:
-  ::PROTOBUF_NAMESPACE_ID::int32 future_id(int index) const;
-  void set_future_id(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
-  void add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-      future_id() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-      mutable_future_id();
+  const ::WorkerFutureMessage& future(int index) const;
+  ::WorkerFutureMessage* add_future();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >&
+      future() const;
 
   // string worker_name = 1;
   void clear_worker_name();
@@ -1931,10 +1931,171 @@ class WorkerStatusMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > future_id_;
-  mutable std::atomic<int> _future_id_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage > future_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr worker_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class WorkerFutureMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:WorkerFutureMessage) */ {
+ public:
+  inline WorkerFutureMessage() : WorkerFutureMessage(nullptr) {}
+  virtual ~WorkerFutureMessage();
+  explicit constexpr WorkerFutureMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  WorkerFutureMessage(const WorkerFutureMessage& from);
+  WorkerFutureMessage(WorkerFutureMessage&& from) noexcept
+    : WorkerFutureMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline WorkerFutureMessage& operator=(const WorkerFutureMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline WorkerFutureMessage& operator=(WorkerFutureMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const WorkerFutureMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const WorkerFutureMessage* internal_default_instance() {
+    return reinterpret_cast<const WorkerFutureMessage*>(
+               &_WorkerFutureMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(WorkerFutureMessage& a, WorkerFutureMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(WorkerFutureMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(WorkerFutureMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline WorkerFutureMessage* New() const final {
+    return CreateMaybeMessage<WorkerFutureMessage>(nullptr);
+  }
+
+  WorkerFutureMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<WorkerFutureMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const WorkerFutureMessage& from);
+  void MergeFrom(const WorkerFutureMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(WorkerFutureMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "WorkerFutureMessage";
+  }
+  protected:
+  explicit WorkerFutureMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kLabelFieldNumber = 1,
+    kDescFieldNumber = 2,
+  };
+  // string label = 1;
+  void clear_label();
+  const std::string& label() const;
+  void set_label(const std::string& value);
+  void set_label(std::string&& value);
+  void set_label(const char* value);
+  void set_label(const char* value, size_t size);
+  std::string* mutable_label();
+  std::string* release_label();
+  void set_allocated_label(std::string* label);
+  private:
+  const std::string& _internal_label() const;
+  void _internal_set_label(const std::string& value);
+  std::string* _internal_mutable_label();
+  public:
+
+  // string desc = 2;
+  void clear_desc();
+  const std::string& desc() const;
+  void set_desc(const std::string& value);
+  void set_desc(std::string&& value);
+  void set_desc(const char* value);
+  void set_desc(const char* value, size_t size);
+  std::string* mutable_desc();
+  std::string* release_desc();
+  void set_allocated_desc(std::string* desc);
+  private:
+  const std::string& _internal_desc() const;
+  void _internal_set_desc(const std::string& value);
+  std::string* _internal_mutable_desc();
+  public:
+
+  // @@protoc_insertion_point(class_scope:WorkerFutureMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr label_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr desc_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -1983,7 +2144,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
                &_FetchRequestMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(FetchRequestMessage& a, FetchRequestMessage& b) {
     a.Swap(&b);
@@ -2161,7 +2322,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
                &_FetchReplyMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(FetchReplyMessage& a, FetchReplyMessage& b) {
     a.Swap(&b);
@@ -2353,7 +2514,7 @@ class CpuMessage PROTOBUF_FINAL :
                &_CpuMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(CpuMessage& a, CpuMessage& b) {
     a.Swap(&b);
@@ -2515,7 +2676,7 @@ class MemUsageMessage PROTOBUF_FINAL :
                &_MemUsageMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(MemUsageMessage& a, MemUsageMessage& b) {
     a.Swap(&b);
@@ -3359,51 +3520,169 @@ inline void WorkerStatusMessage::set_allocated_status(std::string* status) {
   // @@protoc_insertion_point(field_set_allocated:WorkerStatusMessage.status)
 }
 
-// repeated int32 future_id = 3;
-inline int WorkerStatusMessage::_internal_future_id_size() const {
-  return future_id_.size();
+// repeated .WorkerFutureMessage future = 3;
+inline int WorkerStatusMessage::_internal_future_size() const {
+  return future_.size();
 }
-inline int WorkerStatusMessage::future_id_size() const {
-  return _internal_future_id_size();
+inline int WorkerStatusMessage::future_size() const {
+  return _internal_future_size();
 }
-inline void WorkerStatusMessage::clear_future_id() {
-  future_id_.Clear();
+inline void WorkerStatusMessage::clear_future() {
+  future_.Clear();
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 WorkerStatusMessage::_internal_future_id(int index) const {
-  return future_id_.Get(index);
+inline ::WorkerFutureMessage* WorkerStatusMessage::mutable_future(int index) {
+  // @@protoc_insertion_point(field_mutable:WorkerStatusMessage.future)
+  return future_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 WorkerStatusMessage::future_id(int index) const {
-  // @@protoc_insertion_point(field_get:WorkerStatusMessage.future_id)
-  return _internal_future_id(index);
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >*
+WorkerStatusMessage::mutable_future() {
+  // @@protoc_insertion_point(field_mutable_list:WorkerStatusMessage.future)
+  return &future_;
 }
-inline void WorkerStatusMessage::set_future_id(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
-  future_id_.Set(index, value);
-  // @@protoc_insertion_point(field_set:WorkerStatusMessage.future_id)
+inline const ::WorkerFutureMessage& WorkerStatusMessage::_internal_future(int index) const {
+  return future_.Get(index);
 }
-inline void WorkerStatusMessage::_internal_add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  future_id_.Add(value);
+inline const ::WorkerFutureMessage& WorkerStatusMessage::future(int index) const {
+  // @@protoc_insertion_point(field_get:WorkerStatusMessage.future)
+  return _internal_future(index);
 }
-inline void WorkerStatusMessage::add_future_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_add_future_id(value);
-  // @@protoc_insertion_point(field_add:WorkerStatusMessage.future_id)
+inline ::WorkerFutureMessage* WorkerStatusMessage::_internal_add_future() {
+  return future_.Add();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-WorkerStatusMessage::_internal_future_id() const {
-  return future_id_;
+inline ::WorkerFutureMessage* WorkerStatusMessage::add_future() {
+  // @@protoc_insertion_point(field_add:WorkerStatusMessage.future)
+  return _internal_add_future();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-WorkerStatusMessage::future_id() const {
-  // @@protoc_insertion_point(field_list:WorkerStatusMessage.future_id)
-  return _internal_future_id();
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >&
+WorkerStatusMessage::future() const {
+  // @@protoc_insertion_point(field_list:WorkerStatusMessage.future)
+  return future_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-WorkerStatusMessage::_internal_mutable_future_id() {
-  return &future_id_;
+
+// -------------------------------------------------------------------
+
+// WorkerFutureMessage
+
+// string label = 1;
+inline void WorkerFutureMessage::clear_label() {
+  label_.ClearToEmpty();
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-WorkerStatusMessage::mutable_future_id() {
-  // @@protoc_insertion_point(field_mutable_list:WorkerStatusMessage.future_id)
-  return _internal_mutable_future_id();
+inline const std::string& WorkerFutureMessage::label() const {
+  // @@protoc_insertion_point(field_get:WorkerFutureMessage.label)
+  return _internal_label();
+}
+inline void WorkerFutureMessage::set_label(const std::string& value) {
+  _internal_set_label(value);
+  // @@protoc_insertion_point(field_set:WorkerFutureMessage.label)
+}
+inline std::string* WorkerFutureMessage::mutable_label() {
+  // @@protoc_insertion_point(field_mutable:WorkerFutureMessage.label)
+  return _internal_mutable_label();
+}
+inline const std::string& WorkerFutureMessage::_internal_label() const {
+  return label_.Get();
+}
+inline void WorkerFutureMessage::_internal_set_label(const std::string& value) {
+  
+  label_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void WorkerFutureMessage::set_label(std::string&& value) {
+  
+  label_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:WorkerFutureMessage.label)
+}
+inline void WorkerFutureMessage::set_label(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  label_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:WorkerFutureMessage.label)
+}
+inline void WorkerFutureMessage::set_label(const char* value,
+    size_t size) {
+  
+  label_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:WorkerFutureMessage.label)
+}
+inline std::string* WorkerFutureMessage::_internal_mutable_label() {
+  
+  return label_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* WorkerFutureMessage::release_label() {
+  // @@protoc_insertion_point(field_release:WorkerFutureMessage.label)
+  return label_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void WorkerFutureMessage::set_allocated_label(std::string* label) {
+  if (label != nullptr) {
+    
+  } else {
+    
+  }
+  label_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), label,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:WorkerFutureMessage.label)
+}
+
+// string desc = 2;
+inline void WorkerFutureMessage::clear_desc() {
+  desc_.ClearToEmpty();
+}
+inline const std::string& WorkerFutureMessage::desc() const {
+  // @@protoc_insertion_point(field_get:WorkerFutureMessage.desc)
+  return _internal_desc();
+}
+inline void WorkerFutureMessage::set_desc(const std::string& value) {
+  _internal_set_desc(value);
+  // @@protoc_insertion_point(field_set:WorkerFutureMessage.desc)
+}
+inline std::string* WorkerFutureMessage::mutable_desc() {
+  // @@protoc_insertion_point(field_mutable:WorkerFutureMessage.desc)
+  return _internal_mutable_desc();
+}
+inline const std::string& WorkerFutureMessage::_internal_desc() const {
+  return desc_.Get();
+}
+inline void WorkerFutureMessage::_internal_set_desc(const std::string& value) {
+  
+  desc_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void WorkerFutureMessage::set_desc(std::string&& value) {
+  
+  desc_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:WorkerFutureMessage.desc)
+}
+inline void WorkerFutureMessage::set_desc(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  desc_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:WorkerFutureMessage.desc)
+}
+inline void WorkerFutureMessage::set_desc(const char* value,
+    size_t size) {
+  
+  desc_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:WorkerFutureMessage.desc)
+}
+inline std::string* WorkerFutureMessage::_internal_mutable_desc() {
+  
+  return desc_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* WorkerFutureMessage::release_desc() {
+  // @@protoc_insertion_point(field_release:WorkerFutureMessage.desc)
+  return desc_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void WorkerFutureMessage::set_allocated_desc(std::string* desc) {
+  if (desc != nullptr) {
+    
+  } else {
+    
+  }
+  desc_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), desc,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:WorkerFutureMessage.desc)
 }
 
 // -------------------------------------------------------------------
@@ -3920,6 +4199,8 @@ inline void MemUsageMessage::set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

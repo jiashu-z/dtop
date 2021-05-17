@@ -6,22 +6,13 @@
 namespace dtop {
 namespace worker {
 
-enum FutureType {
-		MEM_USAGE, MEM_PER_PROC
-};
-
 class Future {
  public:
-	explicit Future(FutureType id, std::string label, std::string description);
+	explicit Future(std::string label, std::string description);
 
 	/**
-	 * @brief The future id, used for query process.
-	 *        Duplication is NOT allowed.
-	 */
-	const FutureType id;
-
-	/**
-	 * @brief The label that declare this future
+	 * @brief The label that declare this future.
+	 *        Duplication is NOT allowed, otherwise the result may be incorrect
 	 */
 	const std::string label;
 

@@ -19,7 +19,7 @@ bool is_valid_int(const std::string& str);
 /**
  * @brief Check if left < mid && mid < right.
  *
- * @tparam T The type name.
+ * @tparam T The future_type name.
  * @param left smaller bond.
  * @param right greater bond.
  * @param mid The input number to check.
@@ -34,7 +34,7 @@ bool between_strict(const T& left, const T& right, const T& mid) {
 /**
  * @brief Check if left <= mid && mid <= right.
  *
- * @tparam T The type name.
+ * @tparam T The future_type name.
  * @param left smaller bond.
  * @param right greater bond.
  * @param mid The input number to check.

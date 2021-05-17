@@ -5,8 +5,8 @@
 dtop::worker::MemUsageWorker::MemUsageWorker() : BaseWorker("Memory usage worker") {}
 
 void dtop::worker::MemUsageWorker::init_futures() {
-	futures.push_back(new Future(MEM_USAGE, "MEM_USAGE", "The overall memory usage"));
-	futures.push_back(new Future(MEM_PER_PROC, "MEM_PER_PROC", "The detail memory info of processes"));
+	futures.push_back(new Future("MEM_USAGE", "The overall memory usage"));
+	futures.push_back(new Future("MEM_PER_PROC", "The detail memory info of processes"));
 }
 
 bool dtop::worker::MemUsageWorker::setup_config(dtop::worker::WorkerConfig& worker_config) {
