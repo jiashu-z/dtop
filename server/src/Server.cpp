@@ -53,6 +53,7 @@ void dtop::server::Server::run() {
 void dtop::server::Server::init_config() {
   this->server_property =
       std::make_unique<ServerProperty>(this->config_file_path);
+  this->client_add_target();
 }
 
 dtop::server::Server::Server(const std::string &config_file_path)
@@ -74,4 +75,10 @@ void dtop::server::Server::get_server_status(const StringArrayMessage* request, 
 	reply->set_addr(this->get_addr());
 	reply->mutable_worker_status()->Swap(this->manager.get_worker_status(with_futures, with_future_desc));
 	reply->set_status("Indirect");
+}
+
+void dtop::server::Server::client_add_target() {
+  for (auto& iter : this->server_property->other_server_addr_list) {
+    this->client.add_grpc_target(iter);
+  }
 }

@@ -2,10 +2,10 @@
 #define DTOP_SERVER_SERVER_H
 
 #include <grpcpp/server.h>
-#include <inttypes.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cinttypes>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <unistd.h>
 
 #include <iostream>
@@ -16,6 +16,8 @@
 #include "ManagerMeta.h"
 #include "ServerProperty.h"
 #include "pslib.h"
+#include "Client.h"
+#include "ConcreteAPIService.h"
 
 namespace dtop {
 namespace server {
@@ -28,7 +30,7 @@ class ConcreteGRPCService;
  */
 class Server {
  private:
-  void test_virtualmeminfo() {
+  static void test_virtual_mem_info() {
     VmemInfo r;
     // Empty out to prevent garbage in platform-specific fields
     memset(&r, 0, sizeof(VmemInfo));
@@ -62,11 +64,17 @@ class Server {
    */
   std::unique_ptr<ConcreteGRPCService> grpc_service;
 
+  std::unique_ptr<ConcreteAPIService> api_service;
+
   /**
    * @brief Pointer to the grpc server.
    *
    */
   std::unique_ptr<grpc::Server> grpc_server;
+
+  dtop::client::Client client;
+
+  void client_add_target();
 
  public:
   worker::Manager manager;
@@ -90,7 +98,7 @@ class Server {
    */
   explicit Server(const std::string &config_file_path);
 
-  ~Server() {}
+  ~Server() = default;
 
   /**
    * @brief Run this server.

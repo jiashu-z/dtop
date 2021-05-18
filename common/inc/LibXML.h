@@ -2,6 +2,7 @@
 #define DTOP_COMMON_LIBXML_H
 
 #include "pugixml.hpp"
+#include <list>
 
 namespace dtop {
 namespace common {
@@ -15,6 +16,8 @@ namespace common {
  */
 pugi::xml_node check_and_fetch_xml_node(const pugi::xml_node &node,
                                         const std::string &name);
+
+std::list<pugi::xml_node> fetch_child_list(const pugi::xml_node &node);
 
 }  // namespace common
 }  // namespace dtop

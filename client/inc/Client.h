@@ -1,5 +1,5 @@
-#ifndef CLIENT_CLIENT_H
-#define CLIENT_CLIENT_H
+#ifndef DTOP_CLIENT_CLIENT_H
+#define DTOP_CLIENT_CLIENT_H
 
 #include <grpcpp/grpcpp.h>
 
@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "ConcreteGRPCServiceClient.h"
+#include "ConcreteAPIServiceClient.h"
 #include "server.grpc.pb.h"
 
 namespace dtop {
@@ -15,18 +16,36 @@ namespace client {
 
 class Client {
  private:
-  std::map<std::string, std::shared_ptr<ConcreteGRPCServiceClient>> client_map;
+
+  template <typename T>
+  static void add_target_to_map(std::map<const std::string, std::shared_ptr<T>> &map,
+                                const std::string& addr,
+                                std::shared_ptr<T> ptr) {
+    if (map.template find(addr) != map.end()) {
+      map[addr] = ptr;
+    }
+    else {
+      map.insert(std::pair<const std::string, std::shared_ptr<T>>(addr, ptr));
+    }
+  }
 
  public:
+  std::map<const std::string, std::shared_ptr<ConcreteGRPCServiceClient>> grpc_client_map;
+
+  std::map<const std::string, std::shared_ptr<ConcreteAPIServiceClient>> api_client_map;
+
   explicit Client();
 
   std::string to_string();
 
-  void add_target(const std::string& addr);
+  void add_grpc_target(const std::string& addr);
+
+  void add_api_target(const std::string& addr);
 
   void remove_target(const std::string& addr);
 
   std::vector<std::string> get_all_targets_addr();
+
 };
 
 }  // namespace client

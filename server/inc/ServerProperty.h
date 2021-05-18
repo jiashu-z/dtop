@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <pugixml.hpp>
+#include <list>
 
 namespace dtop {
 namespace server {
@@ -12,9 +13,12 @@ class ServerProperty {
   std::string config_file_path;
   pugi::xml_document config_file;
   std::string ip;
-  int port;
-  int thread_num;
+  int port{};
+  int thread_num{};
+
  public:
+
+  std::list<const std::string> other_server_addr_list{};
 
   /**
    * @brief Construct a new Server Property object
@@ -27,7 +31,7 @@ class ServerProperty {
    * @brief Config according to xml file path.
    * 
    */
-  void config();
+  inline void config();
 
   /**
    * @brief Get ip:port address.
@@ -36,7 +40,7 @@ class ServerProperty {
    */
   std::string get_addr();
 
-  int get_thread_num();
+  int get_thread_num() const;
 
   std::string get_ip() const;
 

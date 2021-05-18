@@ -98,7 +98,7 @@ else()
     # Find Protobuf installation
     # Looks for protobuf-config.cmake file installed by Protobuf's cmake installation.
     set(protobuf_MODULE_COMPATIBLE TRUE)
-    find_package(Protobuf CONFIG REQUIRED PATHS /home/zhangjiashu/.local/lib/cmake/protobuf)
+    find_package(Protobuf CONFIG REQUIRED PATHS /home/zjs/.local/lib/cmake/protobuf)
     find_package(Protobuf CONFIG REQUIRED PATHS /usr/lib/cmake/protobuf)
     message(STATUS "Using protobuf ${Protobuf_VERSION}")
 
@@ -112,7 +112,7 @@ else()
 
     # Find gRPC installation
     # Looks for gRPCConfig.cmake file installed by gRPC's cmake installation.
-    find_package(gRPC CONFIG REQUIRED PATHS /home/zhangjiashu/.local/lib/cmake/grpc)
+    find_package(gRPC CONFIG REQUIRED PATHS /home/zjs/.local/lib/cmake/grpc)
     find_package(gRPC CONFIG REQUIRED PATHS /usr/lib/cmake/grpc)
     message(STATUS "Using gRPC ${gRPC_VERSION}")
 

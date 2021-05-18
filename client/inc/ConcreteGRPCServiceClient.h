@@ -21,7 +21,9 @@ class ConcreteGRPCServiceClient {
  public:
   explicit ConcreteGRPCServiceClient(
       const std::shared_ptr<grpc::Channel> &channel)
-      : stub(GRPCService::NewStub(channel)){};
+      : stub(GRPCService::NewStub(channel)){
+    this->client = nullptr;
+  };
 
   std::string get_addr();
 };

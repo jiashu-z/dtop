@@ -15,10 +15,12 @@ PUBLIC "/home/zhangjiashu/.local/include"
 PUBLIC ${CMAKE_SOURCE_DIR}/common/inc
 PUBLIC "/include"
 PUBLIC ${CMAKE_SOURCE_DIR}/worker/inc
+PUBLIC ${CMAKE_SOURCE_DIR}/client/inc
 )
 target_link_directories(server
 PUBLIC ${CMAKE_SOURCE_DIR}/cmake-build-debug/proto
 PUBLIC ${CMAKE_SOURCE_DIR}/cmake-build-debug/worker
+PUBLIC ${CMAKE_SOURCE_DIR}/cmake-build-debug/client
 )
 target_link_libraries(server
 ${_REFLECTION}
@@ -28,5 +30,6 @@ proto
 worker
 common
 pugixml
+client
 )
 

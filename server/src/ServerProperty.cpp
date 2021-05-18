@@ -12,7 +12,7 @@ dtop::server::ServerProperty::ServerProperty(
   this->config();
 }
 
-void dtop::server::ServerProperty::config() {
+inline void dtop::server::ServerProperty::config() {
   // Load config file.
   if (!this->config_file.load_file(this->config_file_path.c_str())) {
     throw "Config file does not exist!";
@@ -40,13 +40,26 @@ void dtop::server::ServerProperty::config() {
       dtop::common::check_and_fetch_xml_node(properties, "thread-num");
   this->thread_num = std::stoi(thread_num_node.child_value());
   assert(this->thread_num > 0);
+
+  // TODO: Simplify here. Plenty of useless work.
+  auto other_servers_node = dtop::common::check_and_fetch_xml_node(properties, "other-servers");
+  std::list<pugi::xml_node> child_list = dtop::common::fetch_child_list(other_servers_node);
+  for (auto iter: child_list) {
+    std::string str;
+    str += iter.child_value("addr");
+    str += ":";
+    str += iter.child_value("port");
+    this->other_server_addr_list.push_back(str);
+  }
+
+  std::cout << "END" << std::endl;
 }
 
 std::string dtop::server::ServerProperty::get_addr() {
   return this->ip + ":" + std::to_string(this->port);
 }
 
-int dtop::server::ServerProperty::get_thread_num() {
+int dtop::server::ServerProperty::get_thread_num() const {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   std::cout << "thread_num: " << this->thread_num << std::endl;
   return this->thread_num;
