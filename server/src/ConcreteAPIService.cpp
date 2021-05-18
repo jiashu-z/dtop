@@ -4,3 +4,5 @@
 ::grpc::Status dtop::server::ConcreteAPIService::GetServerStatus(::grpc::ServerContext *context, const ::google::protobuf::Empty *request, ::ServerStatusArrMessage *response) {
   return ::grpc::Status::OK;
 }
+
+dtop::server::ConcreteAPIService::~ConcreteAPIService() = default;

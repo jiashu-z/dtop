@@ -7,7 +7,8 @@ set(PROTO_FILES
 hello.proto 
 message.proto
 server.proto
-echo.proto)
+echo.proto
+api.proto)
 
 add_library(proto SHARED
 ${PROTO_FILES})

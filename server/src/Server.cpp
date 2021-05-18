@@ -33,15 +33,36 @@ void dtop::server::Server::run() {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  this->grpc_service->server = this;
+
+  // grpc::ServerBuilder builder;
+  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  // builder.AddListeningPort(this->get_addr(), grpc::InsecureServerCredentials());
+  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  // builder.RegisterService(this->grpc_service.get());
+  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  // this->grpc_server = builder.BuildAndStart();
+  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	// std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  this->api_service = std::make_unique<ConcreteAPIService>();
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  grpc::EnableDefaultHealthCheckService(true);
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
   grpc::ServerBuilder builder;
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   builder.AddListeningPort(this->get_addr(), grpc::InsecureServerCredentials());
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   builder.RegisterService(this->grpc_service.get());
+  builder.RegisterService(this->api_service.get());
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->grpc_server = builder.BuildAndStart();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  this->grpc_service->server = this;
+  this->api_service->server = this;
 	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
 	this->manager.initialize(*(new worker::WorkerConfig()));
