@@ -25,13 +25,15 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances
 
 const char descriptor_table_protodef_api_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tapi.proto\032\rmessage.proto\032\033google/proto"
-  "buf/empty.proto2\316\001\n\nAPIService\022B\n\017GetSer"
+  "buf/empty.proto2\234\002\n\nAPIService\022B\n\017GetSer"
   "verStatus\022\026.google.protobuf.Empty\032\027.Serv"
   "erStatusArrMessage\022A\n\022GetServerAddresses"
   "\022\026.google.protobuf.Empty\032\023.StringArrayMe"
   "ssage\0229\n\010GetStats\022\024.FetchRequestMessage\032"
-  "\027.FetchReplyArrayMessageB\031\n\027grp.dtop.dto"
-  "pjava.protob\006proto3"
+  "\027.FetchReplyArrayMessage\022L\n\033GetAggregate"
+  "dVirtualMemInfo\022\024.FetchRequestMessage\032\027."
+  "FetchReplyArrayMessageB\031\n\027grp.dtop.dtopj"
+  "ava.protob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_api_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -39,7 +41,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_api_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_api_2eproto = {
-  false, false, 299, descriptor_table_protodef_api_2eproto, "api.proto", 
+  false, false, 377, descriptor_table_protodef_api_2eproto, "api.proto", 
   &descriptor_table_api_2eproto_once, descriptor_table_api_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_api_2eproto::offsets,
   file_level_metadata_api_2eproto, file_level_enum_descriptors_api_2eproto, file_level_service_descriptors_api_2eproto,

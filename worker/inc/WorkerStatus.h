@@ -4,11 +4,9 @@
 namespace dtop {
 namespace worker {
 
-	enum WorkerStatus {
-			NEW, READY, RUNNING, SHUTDOWN
-	};
+enum WorkerStatus { NEW, READY, RUNNING, SHUTDOWN };
 
 }
-}
+}  // namespace dtop
 
-#endif //DTOP_RPC_WORKERSTATUS_H
+#endif  // DTOP_RPC_WORKERSTATUS_H

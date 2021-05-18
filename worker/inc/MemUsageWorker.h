@@ -13,13 +13,13 @@ class MemUsageWorker : public BaseWorker {
   void init_futures() override;
   bool setup_config(WorkerConfig& worker_config) override;
 
-	bool handle_start() override;
-	bool handle_process(ProfileQuery* query, FetchReplyMessage* reply) override;
-	bool handle_pause() override;
-	bool handle_stop() override;
+  bool handle_start() override;
+  bool handle_process(ProfileQuery* query, FetchReplyMessage* reply) override;
+  bool handle_pause() override;
+  bool handle_stop() override;
 
  public:
-	MemUsageWorker();
+  MemUsageWorker();
 };
 
 }  // namespace worker

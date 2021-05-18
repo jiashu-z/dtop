@@ -13,11 +13,11 @@
 #include <unistd.h>
 #include <utmp.h>
 
-#include "pslib.h"
 #include "common.h"
+#include "pslib.h"
 
 extern "C" {
-	void __gcov_flush(void);
+void __gcov_flush(void);
 }
 
 static int clean_cmdline(char *ip, int len)
@@ -123,8 +123,9 @@ static int physical_cpu_count() {
   while (fgets(line, 90, fp) != NULL) {
     if (strncasecmp(line, "physical future_type", 11) == 0) {
       strtok(line, ":");
-      id = strtol(strtok(NULL, " "), NULL,
-                  10); /* TODO: Assuming that physical future_type is a number */
+      id =
+          strtol(strtok(NULL, " "), NULL,
+                 10); /* TODO: Assuming that physical future_type is a number */
       if (!lfind(&id, ids, &s, sizeof(int),
                  int_comp)) { /* TODO: Replace this with lsearch */
         *cid = id;
@@ -140,8 +141,7 @@ static int physical_cpu_count() {
   free(line);
   return nprocs;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   return -1;
 }
@@ -175,12 +175,10 @@ char **get_physical_devices(size_t *ndevices) {
   free(line);
   return retval;
 error:
-  if (fs)
-    fclose(fs);
+  if (fs) fclose(fs);
   free(line);
   if (*ndevices != 0)
-    for (i = 0; i < *ndevices; i++)
-      free(retval[i]);
+    for (i = 0; i < *ndevices; i++) free(retval[i]);
   return NULL;
 }
 
@@ -202,8 +200,7 @@ static pid_t get_ppid(pid_t pid) {
 
   return ppid;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   return -1;
 }
 
@@ -225,8 +222,7 @@ static char *get_procname(pid_t pid) {
 
   return strdup(tmp);
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   return NULL;
 }
 
@@ -252,7 +248,7 @@ static char *get_exe(pid_t pid) {
     }
   }
   check(ret != -1, "Couldn't expand symbolic link");
-  while ((size_t) ret == bufsize - 1) {
+  while ((size_t)ret == bufsize - 1) {
     /* Buffer filled. Might be incomplete. Increase size and try again. */
     bufsize *= 2;
     tmp = (char *)realloc(tmp, bufsize);
@@ -262,8 +258,7 @@ static char *get_exe(pid_t pid) {
   tmp[ret] = '\0';
   return tmp;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(tmp);
   return NULL;
 }
@@ -291,8 +286,7 @@ static char *get_cmdline(pid_t pid) {
     return contents;
   }
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(contents);
   return NULL;
 }
@@ -318,8 +312,7 @@ static double get_create_time(pid_t pid) {
   ct_seconds = boot_time + (ct_jiffies / clock_ticks);
   return ct_seconds;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   return -1;
 }
 
@@ -355,8 +348,7 @@ static unsigned int *get_ids(pid_t pid, const char *field)
 
   return retval;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   return NULL;
 }
 
@@ -384,7 +376,7 @@ static char *get_terminal(pid_t pid) {
   check_mem(tmp);
   ret = readlink(procfile, tmp, bufsize - 1);
   check(ret != -1, "Couldn't expand symbolic link");
-  while ((size_t) ret == bufsize - 1) {
+  while ((size_t)ret == bufsize - 1) {
     /* Buffer filled. Might be incomplete. Increase size and try again. */
     bufsize *= 2;
     tmp = (char *)realloc(tmp, bufsize);
@@ -394,8 +386,7 @@ static char *get_terminal(pid_t pid) {
   tmp[ret] = '\0';
   return tmp;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(tmp);
   return NULL;
 }
@@ -406,7 +397,7 @@ int parse_cpu_times(char *line, CpuTimes *ret) {
   int i;
   char *pos = strtok(line, " ");
 
-  pos = strtok(NULL, " "); // skip cpu
+  pos = strtok(NULL, " ");  // skip cpu
   for (i = 0; i < 10 && pos != NULL; i++) {
     values[i] = strtoul(pos, NULL, 10);
     pos = strtok(NULL, " ");
@@ -472,9 +463,8 @@ DiskPartitionInfo *disk_partitions(bool physical) {
   phys_devices = get_physical_devices(&nphys_devices);
 
   while ((entry = getmntent(file))) {
-    if (physical &&
-        !lfind(&entry->mnt_type, phys_devices, &nphys_devices, sizeof(char *),
-               str_comp)) {
+    if (physical && !lfind(&entry->mnt_type, phys_devices, &nphys_devices,
+                           sizeof(char *), str_comp)) {
       /* Skip this partition since we only need physical partitions */
       continue;
     }
@@ -507,8 +497,7 @@ DiskPartitionInfo *disk_partitions(bool physical) {
   return ret;
 
 error:
-  if (file)
-    endmntent(file);
+  if (file) endmntent(file);
   free_disk_partition_info(ret);
   return NULL;
 }
@@ -619,8 +608,7 @@ DiskIOCounterInfo *disk_io_counters() {
   return ret;
 
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   if (partitions) {
     for (i = 0; i < nparts; i++) {
@@ -628,8 +616,7 @@ error:
     }
     free(partitions);
   }
-  if(ret)
-    free_disk_iocounter_info(ret);
+  if (ret) free_disk_iocounter_info(ret);
 
   return NULL;
 }
@@ -664,8 +651,7 @@ NetIOCounterInfo *net_io_counters() {
   check(fp, "Couldn't open /proc/net/dev");
 
   while (fgets(line, 150, fp) != NULL) {
-    if (i++ < 2)
-      continue;
+    if (i++ < 2) continue;
 
     ninterfaces++;
 
@@ -684,8 +670,7 @@ NetIOCounterInfo *net_io_counters() {
     tmp = strtok(NULL, " \n"); /* Drops in 3 */
     nc->dropin = strtoul(tmp, NULL, 10);
 
-    for (i = 0; i < 4; i++)
-      tmp = strtok(NULL, " \n"); /* Skip  4, 5, 6 and 7*/
+    for (i = 0; i < 4; i++) tmp = strtok(NULL, " \n"); /* Skip  4, 5, 6 and 7*/
 
     tmp = strtok(NULL, " \n"); /* Bytes sent 8*/
     nc->bytes_sent = strtoul(tmp, NULL, 10);
@@ -709,8 +694,7 @@ NetIOCounterInfo *net_io_counters() {
 
 error:
   /* TODO: ret not freed here */
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   free(counters);
   free(ret);
@@ -738,8 +722,7 @@ UsersInfo *get_users() {
   ret->users = users;
 
   while (NULL != (ut = getutent())) {
-    if (ut->ut_type != USER_PROCESS)
-      continue;
+    if (ut->ut_type != USER_PROCESS) continue;
     u->username = strdup(ut->ut_user);
     check_mem(u->username);
 
@@ -812,8 +795,7 @@ uint32_t get_boot_time() {
   return ret;
 
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   free(tmp);
   return -1;
@@ -847,8 +829,9 @@ bool virtual_memory(VmemInfo *ret) {
     }
   }
   if (cached == ULLONG_MAX || active == ULLONG_MAX || inactive == ULLONG_MAX) {
-    log_warn("Couldn't determine 'cached', 'active' and 'inactive' memory "
-             "stats. Setting them to 0");
+    log_warn(
+        "Couldn't determine 'cached', 'active' and 'inactive' memory "
+        "stats. Setting them to 0");
     cached = active = inactive = 0;
   }
   fclose(fp);
@@ -866,8 +849,7 @@ bool virtual_memory(VmemInfo *ret) {
 
   return true;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   return false;
 }
@@ -916,8 +898,7 @@ bool swap_memory(SwapMemInfo *ret) {
 
   return true;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   return false;
 }
@@ -962,8 +943,7 @@ CpuTimes *cpu_times(bool percpu) {
   free(line);
   return ret;
 error:
-  if (fp)
-    fclose(fp);
+  if (fp) fclose(fp);
   free(line);
   free(ret);
   return NULL;
@@ -1022,7 +1002,7 @@ uint32_t cpu_count(bool logical) {
 
 /* Check whether pid exists in the current handle_process table. */
 bool pid_exists(pid_t pid) {
-  if (pid == 0) // see `man 2 kill` for pid zero
+  if (pid == 0)  // see `man 2 kill` for pid zero
     return true;
 
   if (kill(pid, 0) == -1) {

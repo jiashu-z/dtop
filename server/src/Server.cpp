@@ -37,13 +37,13 @@ void dtop::server::Server::run() {
 
   // grpc::ServerBuilder builder;
   // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  // builder.AddListeningPort(this->get_addr(), grpc::InsecureServerCredentials());
-  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  // builder.RegisterService(this->grpc_service.get());
+  // builder.AddListeningPort(this->get_addr(),
+  // grpc::InsecureServerCredentials()); std::cout << __FILE__ << ": " <<
+  // __LINE__ << std::endl; builder.RegisterService(this->grpc_service.get());
   // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   // this->grpc_server = builder.BuildAndStart();
   // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	// std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  // std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->api_service = std::make_unique<ConcreteAPIService>();
@@ -63,12 +63,12 @@ void dtop::server::Server::run() {
   this->grpc_server = builder.BuildAndStart();
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->api_service->server = this;
-	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
-	this->manager.initialize(*(new worker::WorkerConfig()));
-	this->manager.handle_auto_start();
+  this->manager.initialize(*(new worker::WorkerConfig()));
+  this->manager.handle_auto_start();
 
-	this->grpc_server->Wait();
+  this->grpc_server->Wait();
 }
 
 void dtop::server::Server::init_config() {
@@ -77,26 +77,29 @@ void dtop::server::Server::init_config() {
   this->client_add_target();
 }
 
-dtop::server::Server::Server(const std::string &config_file_path)
-			: manager(worker::Manager()) {
+dtop::server::Server::Server(const std::string& config_file_path)
+    : manager(worker::Manager()) {
   this->config_file_path = config_file_path;
   this->init_config();
 }
 
-bool dtop::server::Server::profile(const FetchRequestMessage* request, FetchReplyMessage* reply) {
-	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	return this->manager.process_query(request, reply);
+bool dtop::server::Server::profile(const FetchRequestMessage* request,
+                                   FetchReplyMessage* reply) {
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  return this->manager.process_query(request, reply);
 }
 
-void dtop::server::Server::get_server_status(const StringArrayMessage* request, ServerStatusMessage* reply) {
-	bool with_futures = false, with_future_desc = false;
-	for (auto& flag : request->arr()) {
-		if (flag == "-wf") with_futures = true;
-		if (flag == "-wfd") with_future_desc = true;
-	}
-	reply->set_addr(this->get_addr());
-	reply->mutable_worker_status()->Swap(this->manager.get_worker_status(with_futures, with_future_desc));
-	reply->set_status("Indirect");
+void dtop::server::Server::get_server_status(const StringArrayMessage* request,
+                                             ServerStatusMessage* reply) {
+  bool with_futures = false, with_future_desc = false;
+  for (auto& flag : request->arr()) {
+    if (flag == "-wf") with_futures = true;
+    if (flag == "-wfd") with_future_desc = true;
+  }
+  reply->set_addr(this->get_addr());
+  reply->mutable_worker_status()->Swap(
+      this->manager.get_worker_status(with_futures, with_future_desc));
+  reply->set_status("Indirect");
 }
 
 void dtop::server::Server::client_add_target() {

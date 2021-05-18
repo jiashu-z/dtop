@@ -1,8 +1,9 @@
 #ifndef DTOP_COMMON_LIBXML_H
 #define DTOP_COMMON_LIBXML_H
 
-#include "pugixml.hpp"
 #include <list>
+
+#include "pugixml.hpp"
 
 namespace dtop {
 namespace common {

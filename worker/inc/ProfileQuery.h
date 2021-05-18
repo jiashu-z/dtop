@@ -6,20 +6,20 @@
 namespace dtop {
 namespace worker {
 
-	class ProfileQuery {
-	public:
-		std::unordered_map<std::string, std::string> req_map;
+class ProfileQuery {
+ public:
+  std::unordered_map<std::string, std::string> req_map;
 
-		/**
-		 * @brief Decode request from protobuf
-		 *
-		 * @param request
-		 * @return
-		 */
-		bool decode(const FetchRequestMessage* request);
+  /**
+   * @brief Decode request from protobuf
+   *
+   * @param request
+   * @return
+   */
+  bool decode(const FetchRequestMessage* request);
 
-		std::string to_string();
-	};
+  std::string to_string();
+};
 
 }  // namespace worker
 }  // namespace dtop

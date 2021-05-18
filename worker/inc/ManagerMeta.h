@@ -19,31 +19,31 @@ class ManagerMeta final {
   void register_workers();
 
  public:
+  ManagerMeta();
+  ~ManagerMeta();
 
-	ManagerMeta();
-	~ManagerMeta();
+  /**
+   * @brief Creat all registered workers.
+   *
+   * @return True if initialize successfully. Otherwise one or more worker
+   * failed to creat.
+   */
+  bool initialize();
 
-	/**
-	 * @brief Creat all registered workers.
-	 *
-	 * @return True if initialize successfully. Otherwise one or more worker failed to creat.
-	 */
-	bool initialize();
+  /**
+   * @brief Get the vector of the workers maintained by container.
+   *        This vector can't be modified.
+   *
+   * @return The registered worker vector.
+   */
+  const std::vector<BaseWorker*>& get_workers() const;
 
-	/**
-	 * @brief Get the vector of the workers maintained by container.
-	 *        This vector can't be modified.
-	 *
-	 * @return The registered worker vector.
-	 */
-	const std::vector<BaseWorker*>& get_workers() const;
-
-	/**
-	 * @brief Get one worker by worker name.
-	 *
-	 * @return The pointer to worker or nullptr if no worker matched.
-	 */
-	BaseWorker* get_worker_by_name(std::string& worker_name);
+  /**
+   * @brief Get one worker by worker name.
+   *
+   * @return The pointer to worker or nullptr if no worker matched.
+   */
+  BaseWorker* get_worker_by_name(std::string& worker_name);
 };
 
 }  // namespace worker

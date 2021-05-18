@@ -2,8 +2,8 @@
 #define DTOP_SERVER_SERVERPROPERTY_H
 
 #include <iostream>
-#include <pugixml.hpp>
 #include <list>
+#include <pugixml.hpp>
 
 namespace dtop {
 namespace server {
@@ -17,19 +17,18 @@ class ServerProperty {
   int thread_num{};
 
  public:
-
   std::list<std::string> other_server_addr_list{};
 
   /**
    * @brief Construct a new Server Property object
-   * 
+   *
    * @param config_file_path The path to config xml file.
    */
   explicit ServerProperty(const std::string &config_file_path);
 
   /**
    * @brief Config according to xml file path.
-   * 
+   *
    */
   inline void config();
 
@@ -47,10 +46,9 @@ class ServerProperty {
   int get_port() const;
 
   std::string to_string() const;
-
 };
 
-}
-}
+}  // namespace server
+}  // namespace dtop
 
 #endif

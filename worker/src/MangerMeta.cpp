@@ -2,37 +2,39 @@
 #include "MemUsageWorker.h"
 
 void dtop::worker::ManagerMeta::register_workers() {
-	workers.push_back(new MemUsageWorker());
+  workers.push_back(new MemUsageWorker());
 }
 
 dtop::worker::ManagerMeta::ManagerMeta() = default;
 
 dtop::worker::ManagerMeta::~ManagerMeta() {
-  	for (auto& worker: this->workers) {
-  		delete worker;
-  	}
+  for (auto& worker : this->workers) {
+    delete worker;
+  }
 }
 
 bool dtop::worker::ManagerMeta::initialize() {
-	try {
-		register_workers();
-	} catch (std::exception& e) {
-		std::cout << "Error when initialize ManagerMeta: " << e.what() << std::endl;
-		return false;
-	}
-	return true;
+  try {
+    register_workers();
+  } catch (std::exception& e) {
+    std::cout << "Error when initialize ManagerMeta: " << e.what() << std::endl;
+    return false;
+  }
+  return true;
 }
 
-const std::vector<dtop::worker::BaseWorker *>& dtop::worker::ManagerMeta::get_workers() const {
-	return this->workers;
+const std::vector<dtop::worker::BaseWorker*>&
+dtop::worker::ManagerMeta::get_workers() const {
+  return this->workers;
 }
 
-dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker_by_name(std::string& worker_name) {
+dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker_by_name(
+    std::string& worker_name) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   for (BaseWorker* worker_ptr : this->workers) {
-  	if (worker_ptr->worker_name == worker_name) {
-  		return worker_ptr;
-  	}
+    if (worker_ptr->worker_name == worker_name) {
+      return worker_ptr;
+    }
   }
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   return nullptr;

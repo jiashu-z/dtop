@@ -8,18 +8,18 @@ namespace worker {
 
 class Future {
  public:
-	explicit Future(std::string label, std::string description);
+  explicit Future(std::string label, std::string description);
 
-	/**
-	 * @brief The label that declare this future.
-	 *        Duplication is NOT allowed, otherwise the result may be incorrect
-	 */
-	const std::string label;
+  /**
+   * @brief The label that declare this future.
+   *        Duplication is NOT allowed, otherwise the result may be incorrect
+   */
+  const std::string label;
 
-	/**
-	 * @brief The description of this future.
-	 */
-	const std::string desc;
+  /**
+   * @brief The description of this future.
+   */
+  const std::string desc;
 
   std::string to_string() const;
 };
@@ -27,4 +27,4 @@ class Future {
 }  // namespace worker
 }  // namespace dtop
 
-#endif //DTOP_RPC_FUTURE_H
+#endif  // DTOP_RPC_FUTURE_H

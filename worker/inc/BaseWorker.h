@@ -8,11 +8,11 @@
 #include <string>
 #include <utility>
 
+#include "Future.h"
 #include "ProfileQuery.h"
 #include "WorkerConfig.h"
-#include "message.grpc.pb.h"
-#include "Future.h"
 #include "WorkerStatus.h"
+#include "message.grpc.pb.h"
 
 namespace dtop {
 namespace worker {
@@ -23,60 +23,61 @@ class BaseWorker {
    * @brief All futures that this worker provides.
    *        Modification is not allowed except initialization function.
    */
-	std::vector<const Future*> futures;
+  std::vector<const Future*> futures;
 
-	/**
-	 * @brief Current lifecycle status of the worker.
-	 */
-	WorkerStatus status;
+  /**
+   * @brief Current lifecycle status of the worker.
+   */
+  WorkerStatus status;
 
   explicit BaseWorker(std::string worker_name);
 
-	/**
-	 * @brief Set futures provided by this worker.
-	 */
-	virtual void init_futures() = 0;
+  /**
+   * @brief Set futures provided by this worker.
+   */
+  virtual void init_futures() = 0;
 
-	/**
-	 * @brief Setup worker by config.
-	 *
-	 * @param worker_config
-	 * @return True if no error occurs.
-	 */
-	virtual bool setup_config(WorkerConfig& worker_config) = 0;
+  /**
+   * @brief Setup worker by config.
+   *
+   * @param worker_config
+   * @return True if no error occurs.
+   */
+  virtual bool setup_config(WorkerConfig& worker_config) = 0;
 
-	/**
-	 * @brief Start the worker.
-	 *
-	 * @return True if it starts successfully.
-	 */
-	virtual bool handle_start() = 0;
+  /**
+   * @brief Start the worker.
+   *
+   * @return True if it starts successfully.
+   */
+  virtual bool handle_start() = 0;
 
-	/**
-	 * @brief Process the profiling query
-	 *
-	 * @param query
-	 * @param reply
-	 * @return True if no error occurs.
-	 */
-	virtual bool handle_process(ProfileQuery* query, FetchReplyMessage* reply) = 0;
+  /**
+   * @brief Process the profiling query
+   *
+   * @param query
+   * @param reply
+   * @return True if no error occurs.
+   */
+  virtual bool handle_process(ProfileQuery* query,
+                              FetchReplyMessage* reply) = 0;
 
-	/**
-	 * @brief Pause the worker.
-	 *
-	 * @return True if no error occurs.
-	 */
-	virtual bool handle_pause() = 0;
+  /**
+   * @brief Pause the worker.
+   *
+   * @return True if no error occurs.
+   */
+  virtual bool handle_pause() = 0;
 
-	/**
-	 * @brief Stop the worker.
-	 *
-	 * @return True if it stops successfully.
-	 */
-	virtual bool handle_stop() = 0;
+  /**
+   * @brief Stop the worker.
+   *
+   * @return True if it stops successfully.
+   */
+  virtual bool handle_stop() = 0;
 
  public:
-	virtual ~BaseWorker();
+  virtual ~BaseWorker();
 
   const std::string worker_name;
 
@@ -118,11 +119,11 @@ class BaseWorker {
    */
   bool stop();
 
-	const std::vector<const Future*>& get_futures() const;
-	WorkerStatus get_status() const;
+  const std::vector<const Future*>& get_futures() const;
+  WorkerStatus get_status() const;
   std::string to_string() const;
 
-	static std::string get_status_str(WorkerStatus status);
+  static std::string get_status_str(WorkerStatus status);
 };
 
 }  // namespace worker

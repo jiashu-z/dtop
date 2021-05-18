@@ -42,9 +42,11 @@ inline void dtop::server::ServerProperty::config() {
   assert(this->thread_num > 0);
 
   // TODO: Simplify here. Plenty of useless work.
-  auto other_servers_node = dtop::common::check_and_fetch_xml_node(properties, "other-servers");
-  std::list<pugi::xml_node> child_list = dtop::common::fetch_child_list(other_servers_node);
-  for (auto iter: child_list) {
+  auto other_servers_node =
+      dtop::common::check_and_fetch_xml_node(properties, "other-servers");
+  std::list<pugi::xml_node> child_list =
+      dtop::common::fetch_child_list(other_servers_node);
+  for (auto iter : child_list) {
     std::string str;
     str += iter.child_value("addr");
     str += ":";

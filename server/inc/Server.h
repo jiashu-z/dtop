@@ -1,23 +1,23 @@
 #ifndef DTOP_SERVER_SERVER_H
 #define DTOP_SERVER_SERVER_H
 
+#include <Manager.h>
 #include <grpcpp/server.h>
+#include <unistd.h>
+
 #include <cinttypes>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <unistd.h>
-
 #include <iostream>
 #include <memory>
-#include <Manager.h>
 
+#include "Client.h"
+#include "ConcreteAPIService.h"
 #include "ConcreteGRPCService.h"
 #include "ManagerMeta.h"
 #include "ServerProperty.h"
 #include "pslib.h"
-#include "Client.h"
-#include "ConcreteAPIService.h"
 
 namespace dtop {
 namespace server {
@@ -30,7 +30,6 @@ class ConcreteGRPCService;
  */
 class Server {
  private:
-
  public:
   static void test_virtual_mem_info() {
     VmemInfo r;
@@ -97,7 +96,7 @@ class Server {
    *
    * @param config_file_path path to config xml.
    */
-  explicit Server(const std::string &config_file_path);
+  explicit Server(const std::string& config_file_path);
 
   ~Server() = default;
 
@@ -128,15 +127,14 @@ class Server {
    */
   std::string get_addr() const;
 
-   /**
-    * @brief Process profile query from center server.
-    *
-    * @param request
-    * @param reply
-    * @return bool True if no error occurs.
-    */
+  /**
+   * @brief Process profile query from center server.
+   *
+   * @param request
+   * @param reply
+   * @return bool True if no error occurs.
+   */
   bool profile(const FetchRequestMessage* request, FetchReplyMessage* reply);
-
 
   /**
    * @brief Get the server status.
@@ -144,7 +142,8 @@ class Server {
    * @param request
    * @param reply
    */
-	void get_server_status(const StringArrayMessage* request, ServerStatusMessage* reply);
+  void get_server_status(const StringArrayMessage* request,
+                         ServerStatusMessage* reply);
 
   /**
    * @brief Init config according to config xml.

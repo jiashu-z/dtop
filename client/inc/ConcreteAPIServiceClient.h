@@ -1,9 +1,10 @@
 #ifndef DTOP_CLIENT_CONCRETEAPISERVICECLIENT_H
 #define DTOP_CLIENT_CONCRETEAPISERVICECLIENT_H
 
-
 #include <grpcpp/grpcpp.h>
+
 #include <memory>
+
 #include "api.grpc.pb.h"
 
 namespace dtop {
@@ -19,7 +20,8 @@ class ConcreteAPIServiceClient {
 
  public:
   explicit ConcreteAPIServiceClient(
-    const std::shared_ptr<grpc::Channel> &channel) : stub(APIService::NewStub(channel)) {
+      const std::shared_ptr<grpc::Channel> &channel)
+      : stub(APIService::NewStub(channel)) {
     this->client = nullptr;
   };
 
@@ -33,7 +35,7 @@ class ConcreteAPIServiceClient {
   void get_stats();
 };
 
-}
-}
+}  // namespace client
+}  // namespace dtop
 
 #endif
