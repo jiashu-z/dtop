@@ -46,6 +46,10 @@ class Client {
 
   std::vector<std::string> get_all_targets_addr();
 
+  std::string get_cluster_stats();
+
+  void get_cluster_stats(FetchReplyArrayMessage *response, const FetchRequestMessage *request);
+
 };
 
 }  // namespace client

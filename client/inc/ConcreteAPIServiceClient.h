@@ -29,6 +29,8 @@ class ConcreteAPIServiceClient {
    * TODO: Return what?
    */
   void get_status_arr();
+
+  void get_stats();
 };
 
 }

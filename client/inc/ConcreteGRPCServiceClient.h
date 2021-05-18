@@ -14,11 +14,10 @@ class Client;
 
 class ConcreteGRPCServiceClient {
  private:
+public:
   std::unique_ptr<GRPCService::Stub> stub;
 
   Client *client;
-
- public:
   explicit ConcreteGRPCServiceClient(
       const std::shared_ptr<grpc::Channel> &channel)
       : stub(GRPCService::NewStub(channel)){

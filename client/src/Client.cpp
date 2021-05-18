@@ -47,3 +47,21 @@ void dtop::client::Client::add_api_target(const std::string &addr) {
   dtop::client::Client::add_target_to_map<ConcreteAPIServiceClient>(this->api_client_map, addr, ptr);
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 }
+
+std::string dtop::client::Client::get_cluster_stats() {
+	throw "Not implemented!";
+}
+
+void dtop::client::Client::get_cluster_stats(FetchReplyArrayMessage *response, const FetchRequestMessage *request) {
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	for (const auto& iter : this->grpc_client_map) {
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+		std::cout << iter.first << std::endl;
+		::grpc::ClientContext context;
+		FetchReplyMessage local_response;
+		iter.second->stub->Profile(&context, *request, &local_response);
+		auto* reply_ptr = response->mutable_fetch_reply()->Add();
+		reply_ptr->CopyFrom(local_response);
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	}
+}
