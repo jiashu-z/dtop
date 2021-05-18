@@ -3,6 +3,7 @@
 
 #include "api.grpc.pb.h"
 #include "api.pb.h"
+#include <grpcpp/impl/codegen/server_context.h>
 
 namespace dtop {
 namespace server {
@@ -18,6 +19,8 @@ class ConcreteAPIService final : public APIService::Service {
   ~ConcreteAPIService();
 
   ::grpc::Status GetServerStatus(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response) override;
+
+  ::grpc::Status GetServerAddresses(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringArrayMessage* response) override;
 };
 
 }

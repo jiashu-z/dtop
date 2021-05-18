@@ -11,4 +11,6 @@ message ServerStatusArrMessage {
 
 service APIService {
   rpc GetServerStatus (google.protobuf.Empty) returns (ServerStatusArrMessage);
+  
+  rpc GetServerAddresses (google.protobuf.Empty) returns (StringArrayMessage);
 }

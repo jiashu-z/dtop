@@ -5,4 +5,9 @@
   return ::grpc::Status::OK;
 }
 
+::grpc::Status dtop::server::ConcreteAPIService::GetServerAddresses(::grpc::ServerContext *context, const ::google::protobuf::Empty *request, ::StringArrayMessage *response) {
+  // for (auto iter : this->server->)
+  return ::grpc::Status::OK;
+}
+
 dtop::server::ConcreteAPIService::~ConcreteAPIService() = default;
