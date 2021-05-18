@@ -3046,25 +3046,95 @@ class MemUsageMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMaxMemFieldNumber = 1,
-    kUsedMemFieldNumber = 2,
+    kTotalFieldNumber = 1,
+    kAvailableFieldNumber = 2,
+    kUsedFieldNumber = 3,
+    kFreeFieldNumber = 4,
+    kActiveFieldNumber = 5,
+    kInactiveFieldNumber = 6,
+    kBuffersFieldNumber = 7,
+    kCachedFieldNumber = 8,
+    kWiredFieldNumber = 9,
   };
-  // int64 max_mem = 1;
-  void clear_max_mem();
-  ::PROTOBUF_NAMESPACE_ID::int64 max_mem() const;
-  void set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  // int64 total = 1;
+  void clear_total();
+  ::PROTOBUF_NAMESPACE_ID::int64 total() const;
+  void set_total(::PROTOBUF_NAMESPACE_ID::int64 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_max_mem() const;
-  void _internal_set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_total() const;
+  void _internal_set_total(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int64 used_mem = 2;
-  void clear_used_mem();
-  ::PROTOBUF_NAMESPACE_ID::int64 used_mem() const;
-  void set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  // int64 available = 2;
+  void clear_available();
+  ::PROTOBUF_NAMESPACE_ID::int64 available() const;
+  void set_available(::PROTOBUF_NAMESPACE_ID::int64 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_used_mem() const;
-  void _internal_set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_available() const;
+  void _internal_set_available(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 used = 3;
+  void clear_used();
+  ::PROTOBUF_NAMESPACE_ID::int64 used() const;
+  void set_used(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_used() const;
+  void _internal_set_used(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 free = 4;
+  void clear_free();
+  ::PROTOBUF_NAMESPACE_ID::int64 free() const;
+  void set_free(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_free() const;
+  void _internal_set_free(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 active = 5;
+  void clear_active();
+  ::PROTOBUF_NAMESPACE_ID::int64 active() const;
+  void set_active(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_active() const;
+  void _internal_set_active(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 inactive = 6;
+  void clear_inactive();
+  ::PROTOBUF_NAMESPACE_ID::int64 inactive() const;
+  void set_inactive(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_inactive() const;
+  void _internal_set_inactive(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 buffers = 7;
+  void clear_buffers();
+  ::PROTOBUF_NAMESPACE_ID::int64 buffers() const;
+  void set_buffers(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_buffers() const;
+  void _internal_set_buffers(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 cached = 8;
+  void clear_cached();
+  ::PROTOBUF_NAMESPACE_ID::int64 cached() const;
+  void set_cached(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_cached() const;
+  void _internal_set_cached(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 wired = 9;
+  void clear_wired();
+  ::PROTOBUF_NAMESPACE_ID::int64 wired() const;
+  void set_wired(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_wired() const;
+  void _internal_set_wired(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
   // @@protoc_insertion_point(class_scope:MemUsageMessage)
@@ -3074,8 +3144,15 @@ class MemUsageMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::int64 max_mem_;
-  ::PROTOBUF_NAMESPACE_ID::int64 used_mem_;
+  ::PROTOBUF_NAMESPACE_ID::int64 total_;
+  ::PROTOBUF_NAMESPACE_ID::int64 available_;
+  ::PROTOBUF_NAMESPACE_ID::int64 used_;
+  ::PROTOBUF_NAMESPACE_ID::int64 free_;
+  ::PROTOBUF_NAMESPACE_ID::int64 active_;
+  ::PROTOBUF_NAMESPACE_ID::int64 inactive_;
+  ::PROTOBUF_NAMESPACE_ID::int64 buffers_;
+  ::PROTOBUF_NAMESPACE_ID::int64 cached_;
+  ::PROTOBUF_NAMESPACE_ID::int64 wired_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -4542,44 +4619,184 @@ CpuMessage::mutable_usage_arr() {
 
 // MemUsageMessage
 
-// int64 max_mem = 1;
-inline void MemUsageMessage::clear_max_mem() {
-  max_mem_ = PROTOBUF_LONGLONG(0);
+// int64 total = 1;
+inline void MemUsageMessage::clear_total() {
+  total_ = PROTOBUF_LONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_max_mem() const {
-  return max_mem_;
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_total() const {
+  return total_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::max_mem() const {
-  // @@protoc_insertion_point(field_get:MemUsageMessage.max_mem)
-  return _internal_max_mem();
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::total() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.total)
+  return _internal_total();
 }
-inline void MemUsageMessage::_internal_set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void MemUsageMessage::_internal_set_total(::PROTOBUF_NAMESPACE_ID::int64 value) {
   
-  max_mem_ = value;
+  total_ = value;
 }
-inline void MemUsageMessage::set_max_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_max_mem(value);
-  // @@protoc_insertion_point(field_set:MemUsageMessage.max_mem)
+inline void MemUsageMessage::set_total(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_total(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.total)
 }
 
-// int64 used_mem = 2;
-inline void MemUsageMessage::clear_used_mem() {
-  used_mem_ = PROTOBUF_LONGLONG(0);
+// int64 available = 2;
+inline void MemUsageMessage::clear_available() {
+  available_ = PROTOBUF_LONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_used_mem() const {
-  return used_mem_;
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_available() const {
+  return available_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::used_mem() const {
-  // @@protoc_insertion_point(field_get:MemUsageMessage.used_mem)
-  return _internal_used_mem();
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::available() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.available)
+  return _internal_available();
 }
-inline void MemUsageMessage::_internal_set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void MemUsageMessage::_internal_set_available(::PROTOBUF_NAMESPACE_ID::int64 value) {
   
-  used_mem_ = value;
+  available_ = value;
 }
-inline void MemUsageMessage::set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_used_mem(value);
-  // @@protoc_insertion_point(field_set:MemUsageMessage.used_mem)
+inline void MemUsageMessage::set_available(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_available(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.available)
+}
+
+// int64 used = 3;
+inline void MemUsageMessage::clear_used() {
+  used_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_used() const {
+  return used_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::used() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.used)
+  return _internal_used();
+}
+inline void MemUsageMessage::_internal_set_used(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  used_ = value;
+}
+inline void MemUsageMessage::set_used(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_used(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.used)
+}
+
+// int64 free = 4;
+inline void MemUsageMessage::clear_free() {
+  free_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_free() const {
+  return free_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::free() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.free)
+  return _internal_free();
+}
+inline void MemUsageMessage::_internal_set_free(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  free_ = value;
+}
+inline void MemUsageMessage::set_free(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_free(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.free)
+}
+
+// int64 active = 5;
+inline void MemUsageMessage::clear_active() {
+  active_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_active() const {
+  return active_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::active() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.active)
+  return _internal_active();
+}
+inline void MemUsageMessage::_internal_set_active(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  active_ = value;
+}
+inline void MemUsageMessage::set_active(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_active(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.active)
+}
+
+// int64 inactive = 6;
+inline void MemUsageMessage::clear_inactive() {
+  inactive_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_inactive() const {
+  return inactive_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::inactive() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.inactive)
+  return _internal_inactive();
+}
+inline void MemUsageMessage::_internal_set_inactive(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  inactive_ = value;
+}
+inline void MemUsageMessage::set_inactive(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_inactive(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.inactive)
+}
+
+// int64 buffers = 7;
+inline void MemUsageMessage::clear_buffers() {
+  buffers_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_buffers() const {
+  return buffers_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::buffers() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.buffers)
+  return _internal_buffers();
+}
+inline void MemUsageMessage::_internal_set_buffers(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  buffers_ = value;
+}
+inline void MemUsageMessage::set_buffers(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_buffers(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.buffers)
+}
+
+// int64 cached = 8;
+inline void MemUsageMessage::clear_cached() {
+  cached_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_cached() const {
+  return cached_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::cached() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.cached)
+  return _internal_cached();
+}
+inline void MemUsageMessage::_internal_set_cached(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  cached_ = value;
+}
+inline void MemUsageMessage::set_cached(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_cached(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.cached)
+}
+
+// int64 wired = 9;
+inline void MemUsageMessage::clear_wired() {
+  wired_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::_internal_wired() const {
+  return wired_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MemUsageMessage::wired() const {
+  // @@protoc_insertion_point(field_get:MemUsageMessage.wired)
+  return _internal_wired();
+}
+inline void MemUsageMessage::_internal_set_wired(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  wired_ = value;
+}
+inline void MemUsageMessage::set_wired(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_wired(value);
+  // @@protoc_insertion_point(field_set:MemUsageMessage.wired)
 }
 
 #ifdef __GNUC__

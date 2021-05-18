@@ -248,8 +248,15 @@ struct CpuMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT CpuMessageDefaultTypeInternal _CpuMessage_default_instance_;
 constexpr MemUsageMessage::MemUsageMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : max_mem_(PROTOBUF_LONGLONG(0))
-  , used_mem_(PROTOBUF_LONGLONG(0)){}
+  : total_(PROTOBUF_LONGLONG(0))
+  , available_(PROTOBUF_LONGLONG(0))
+  , used_(PROTOBUF_LONGLONG(0))
+  , free_(PROTOBUF_LONGLONG(0))
+  , active_(PROTOBUF_LONGLONG(0))
+  , inactive_(PROTOBUF_LONGLONG(0))
+  , buffers_(PROTOBUF_LONGLONG(0))
+  , cached_(PROTOBUF_LONGLONG(0))
+  , wired_(PROTOBUF_LONGLONG(0)){}
 struct MemUsageMessageDefaultTypeInternal {
   constexpr MemUsageMessageDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -386,8 +393,15 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, max_mem_),
-  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, used_mem_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, total_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, available_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, used_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, free_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, active_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, inactive_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, buffers_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, cached_),
+  PROTOBUF_FIELD_OFFSET(::MemUsageMessage, wired_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::StringMessage)},
@@ -457,13 +471,16 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "tatus\030\001 \003(\0132\024.ServerStatusMessage\"A\n\026Fet"
   "chReplyArrayMessage\022\'\n\013fetch_reply\030\001 \003(\013"
   "2\022.FetchReplyMessage\"1\n\nCpuMessage\022\020\n\010co"
-  "re_num\030\001 \001(\005\022\021\n\tusage_arr\030\002 \003(\002\"4\n\017MemUs"
-  "ageMessage\022\017\n\007max_mem\030\001 \001(\003\022\020\n\010used_mem\030"
-  "\002 \001(\003B\031\n\027grp.dtop.dtopjava.protob\006proto3"
+  "re_num\030\001 \001(\005\022\021\n\tusage_arr\030\002 \003(\002\"\241\001\n\017MemU"
+  "sageMessage\022\r\n\005total\030\001 \001(\003\022\021\n\tavailable\030"
+  "\002 \001(\003\022\014\n\004used\030\003 \001(\003\022\014\n\004free\030\004 \001(\003\022\016\n\006act"
+  "ive\030\005 \001(\003\022\020\n\010inactive\030\006 \001(\003\022\017\n\007buffers\030\007"
+  " \001(\003\022\016\n\006cached\030\010 \001(\003\022\r\n\005wired\030\t \001(\003B\031\n\027g"
+  "rp.dtop.dtopjava.protob\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 1040, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 1150, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 19,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -4354,17 +4371,17 @@ MemUsageMessage::MemUsageMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 MemUsageMessage::MemUsageMessage(const MemUsageMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&max_mem_, &from.max_mem_,
-    static_cast<size_t>(reinterpret_cast<char*>(&used_mem_) -
-    reinterpret_cast<char*>(&max_mem_)) + sizeof(used_mem_));
+  ::memcpy(&total_, &from.total_,
+    static_cast<size_t>(reinterpret_cast<char*>(&wired_) -
+    reinterpret_cast<char*>(&total_)) + sizeof(wired_));
   // @@protoc_insertion_point(copy_constructor:MemUsageMessage)
 }
 
 void MemUsageMessage::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&max_mem_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&used_mem_) -
-    reinterpret_cast<char*>(&max_mem_)) + sizeof(used_mem_));
+    reinterpret_cast<char*>(&total_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&wired_) -
+    reinterpret_cast<char*>(&total_)) + sizeof(wired_));
 }
 
 MemUsageMessage::~MemUsageMessage() {
@@ -4393,9 +4410,9 @@ void MemUsageMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&max_mem_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&used_mem_) -
-      reinterpret_cast<char*>(&max_mem_)) + sizeof(used_mem_));
+  ::memset(&total_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&wired_) -
+      reinterpret_cast<char*>(&total_)) + sizeof(wired_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4406,17 +4423,66 @@ const char* MemUsageMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPAC
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // int64 max_mem = 1;
+      // int64 total = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          max_mem_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          total_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int64 used_mem = 2;
+      // int64 available = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          used_mem_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          available_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 used = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          used_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 free = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          free_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 active = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          active_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 inactive = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          inactive_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 buffers = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          buffers_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 cached = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          cached_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 wired = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
+          wired_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4448,16 +4514,58 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 max_mem = 1;
-  if (this->max_mem() != 0) {
+  // int64 total = 1;
+  if (this->total() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_max_mem(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_total(), target);
   }
 
-  // int64 used_mem = 2;
-  if (this->used_mem() != 0) {
+  // int64 available = 2;
+  if (this->available() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_used_mem(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_available(), target);
+  }
+
+  // int64 used = 3;
+  if (this->used() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_used(), target);
+  }
+
+  // int64 free = 4;
+  if (this->free() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_free(), target);
+  }
+
+  // int64 active = 5;
+  if (this->active() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_active(), target);
+  }
+
+  // int64 inactive = 6;
+  if (this->inactive() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(6, this->_internal_inactive(), target);
+  }
+
+  // int64 buffers = 7;
+  if (this->buffers() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(7, this->_internal_buffers(), target);
+  }
+
+  // int64 cached = 8;
+  if (this->cached() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(8, this->_internal_cached(), target);
+  }
+
+  // int64 wired = 9;
+  if (this->wired() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(9, this->_internal_wired(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4476,18 +4584,67 @@ size_t MemUsageMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int64 max_mem = 1;
-  if (this->max_mem() != 0) {
+  // int64 total = 1;
+  if (this->total() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_max_mem());
+        this->_internal_total());
   }
 
-  // int64 used_mem = 2;
-  if (this->used_mem() != 0) {
+  // int64 available = 2;
+  if (this->available() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_used_mem());
+        this->_internal_available());
+  }
+
+  // int64 used = 3;
+  if (this->used() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_used());
+  }
+
+  // int64 free = 4;
+  if (this->free() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_free());
+  }
+
+  // int64 active = 5;
+  if (this->active() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_active());
+  }
+
+  // int64 inactive = 6;
+  if (this->inactive() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_inactive());
+  }
+
+  // int64 buffers = 7;
+  if (this->buffers() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_buffers());
+  }
+
+  // int64 cached = 8;
+  if (this->cached() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_cached());
+  }
+
+  // int64 wired = 9;
+  if (this->wired() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_wired());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4521,11 +4678,32 @@ void MemUsageMessage::MergeFrom(const MemUsageMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.max_mem() != 0) {
-    _internal_set_max_mem(from._internal_max_mem());
+  if (from.total() != 0) {
+    _internal_set_total(from._internal_total());
   }
-  if (from.used_mem() != 0) {
-    _internal_set_used_mem(from._internal_used_mem());
+  if (from.available() != 0) {
+    _internal_set_available(from._internal_available());
+  }
+  if (from.used() != 0) {
+    _internal_set_used(from._internal_used());
+  }
+  if (from.free() != 0) {
+    _internal_set_free(from._internal_free());
+  }
+  if (from.active() != 0) {
+    _internal_set_active(from._internal_active());
+  }
+  if (from.inactive() != 0) {
+    _internal_set_inactive(from._internal_inactive());
+  }
+  if (from.buffers() != 0) {
+    _internal_set_buffers(from._internal_buffers());
+  }
+  if (from.cached() != 0) {
+    _internal_set_cached(from._internal_cached());
+  }
+  if (from.wired() != 0) {
+    _internal_set_wired(from._internal_wired());
   }
 }
 
@@ -4551,11 +4729,11 @@ void MemUsageMessage::InternalSwap(MemUsageMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MemUsageMessage, used_mem_)
-      + sizeof(MemUsageMessage::used_mem_)
-      - PROTOBUF_FIELD_OFFSET(MemUsageMessage, max_mem_)>(
-          reinterpret_cast<char*>(&max_mem_),
-          reinterpret_cast<char*>(&other->max_mem_));
+      PROTOBUF_FIELD_OFFSET(MemUsageMessage, wired_)
+      + sizeof(MemUsageMessage::wired_)
+      - PROTOBUF_FIELD_OFFSET(MemUsageMessage, total_)>(
+          reinterpret_cast<char*>(&total_),
+          reinterpret_cast<char*>(&other->total_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MemUsageMessage::GetMetadata() const {
