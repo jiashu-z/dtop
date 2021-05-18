@@ -84,6 +84,7 @@ dtop::server::Server::Server(const std::string &config_file_path)
 }
 
 bool dtop::server::Server::profile(const FetchRequestMessage* request, FetchReplyMessage* reply) {
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 	return this->manager.process_query(request, reply);
 }
 

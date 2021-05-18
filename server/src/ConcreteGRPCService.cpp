@@ -47,7 +47,11 @@
 //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
 	this->server->profile(request, response);
-  return ::grpc::Status::OK;
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	std::cout << request->SerializeAsString() << std::endl;
+	std::cout << response->SerializeAsString() << std::endl;
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	return ::grpc::Status::OK;
 }
 
 ::grpc::Status dtop::server::ConcreteGRPCService::GetServerStatus(

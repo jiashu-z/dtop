@@ -5,12 +5,10 @@ option java_package = "grp.dtop.dtopjava.proto";
 import "message.proto";
 import "google/protobuf/empty.proto";
 
-message ServerStatusArrMessage {
-  repeated ServerStatusMessage server_status = 1;
-}
-
 service APIService {
   rpc GetServerStatus (google.protobuf.Empty) returns (ServerStatusArrMessage);
   
   rpc GetServerAddresses (google.protobuf.Empty) returns (StringArrayMessage);
+
+  rpc GetStats (FetchRequestMessage) returns (FetchReplyArrayMessage);
 }

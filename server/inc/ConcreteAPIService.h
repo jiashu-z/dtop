@@ -21,6 +21,8 @@ class ConcreteAPIService final : public APIService::Service {
   ::grpc::Status GetServerStatus(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response) override;
 
   ::grpc::Status GetServerAddresses(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringArrayMessage* response) override;
+
+  ::grpc::Status GetStats(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response) override;
 };
 
 }

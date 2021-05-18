@@ -18,7 +18,7 @@ class ServerProperty {
 
  public:
 
-  std::list<const std::string> other_server_addr_list{};
+  std::list<std::string> other_server_addr_list{};
 
   /**
    * @brief Construct a new Server Property object

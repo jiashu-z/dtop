@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[17]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[19]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -63,6 +63,9 @@ extern DoubleArrayMessageDefaultTypeInternal _DoubleArrayMessage_default_instanc
 class DoubleMessage;
 struct DoubleMessageDefaultTypeInternal;
 extern DoubleMessageDefaultTypeInternal _DoubleMessage_default_instance_;
+class FetchReplyArrayMessage;
+struct FetchReplyArrayMessageDefaultTypeInternal;
+extern FetchReplyArrayMessageDefaultTypeInternal _FetchReplyArrayMessage_default_instance_;
 class FetchReplyMessage;
 struct FetchReplyMessageDefaultTypeInternal;
 extern FetchReplyMessageDefaultTypeInternal _FetchReplyMessage_default_instance_;
@@ -90,6 +93,9 @@ extern LongMessageDefaultTypeInternal _LongMessage_default_instance_;
 class MemUsageMessage;
 struct MemUsageMessageDefaultTypeInternal;
 extern MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
+class ServerStatusArrMessage;
+struct ServerStatusArrMessageDefaultTypeInternal;
+extern ServerStatusArrMessageDefaultTypeInternal _ServerStatusArrMessage_default_instance_;
 class ServerStatusMessage;
 struct ServerStatusMessageDefaultTypeInternal;
 extern ServerStatusMessageDefaultTypeInternal _ServerStatusMessage_default_instance_;
@@ -109,6 +115,7 @@ PROTOBUF_NAMESPACE_OPEN
 template<> ::CpuMessage* Arena::CreateMaybeMessage<::CpuMessage>(Arena*);
 template<> ::DoubleArrayMessage* Arena::CreateMaybeMessage<::DoubleArrayMessage>(Arena*);
 template<> ::DoubleMessage* Arena::CreateMaybeMessage<::DoubleMessage>(Arena*);
+template<> ::FetchReplyArrayMessage* Arena::CreateMaybeMessage<::FetchReplyArrayMessage>(Arena*);
 template<> ::FetchReplyMessage* Arena::CreateMaybeMessage<::FetchReplyMessage>(Arena*);
 template<> ::FetchRequestMessage* Arena::CreateMaybeMessage<::FetchRequestMessage>(Arena*);
 template<> ::FloatArrayMessage* Arena::CreateMaybeMessage<::FloatArrayMessage>(Arena*);
@@ -118,6 +125,7 @@ template<> ::IntegerMessage* Arena::CreateMaybeMessage<::IntegerMessage>(Arena*)
 template<> ::LongArrayMessage* Arena::CreateMaybeMessage<::LongArrayMessage>(Arena*);
 template<> ::LongMessage* Arena::CreateMaybeMessage<::LongMessage>(Arena*);
 template<> ::MemUsageMessage* Arena::CreateMaybeMessage<::MemUsageMessage>(Arena*);
+template<> ::ServerStatusArrMessage* Arena::CreateMaybeMessage<::ServerStatusArrMessage>(Arena*);
 template<> ::ServerStatusMessage* Arena::CreateMaybeMessage<::ServerStatusMessage>(Arena*);
 template<> ::StringArrayMessage* Arena::CreateMaybeMessage<::StringArrayMessage>(Arena*);
 template<> ::StringMessage* Arena::CreateMaybeMessage<::StringMessage>(Arena*);
@@ -2471,6 +2479,298 @@ class FetchReplyMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ServerStatusArrMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusArrMessage) */ {
+ public:
+  inline ServerStatusArrMessage() : ServerStatusArrMessage(nullptr) {}
+  virtual ~ServerStatusArrMessage();
+  explicit constexpr ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ServerStatusArrMessage(const ServerStatusArrMessage& from);
+  ServerStatusArrMessage(ServerStatusArrMessage&& from) noexcept
+    : ServerStatusArrMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline ServerStatusArrMessage& operator=(const ServerStatusArrMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ServerStatusArrMessage& operator=(ServerStatusArrMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ServerStatusArrMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ServerStatusArrMessage* internal_default_instance() {
+    return reinterpret_cast<const ServerStatusArrMessage*>(
+               &_ServerStatusArrMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  friend void swap(ServerStatusArrMessage& a, ServerStatusArrMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ServerStatusArrMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ServerStatusArrMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ServerStatusArrMessage* New() const final {
+    return CreateMaybeMessage<ServerStatusArrMessage>(nullptr);
+  }
+
+  ServerStatusArrMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ServerStatusArrMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ServerStatusArrMessage& from);
+  void MergeFrom(const ServerStatusArrMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ServerStatusArrMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ServerStatusArrMessage";
+  }
+  protected:
+  explicit ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kServerStatusFieldNumber = 1,
+  };
+  // repeated .ServerStatusMessage server_status = 1;
+  int server_status_size() const;
+  private:
+  int _internal_server_status_size() const;
+  public:
+  void clear_server_status();
+  ::ServerStatusMessage* mutable_server_status(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
+      mutable_server_status();
+  private:
+  const ::ServerStatusMessage& _internal_server_status(int index) const;
+  ::ServerStatusMessage* _internal_add_server_status();
+  public:
+  const ::ServerStatusMessage& server_status(int index) const;
+  ::ServerStatusMessage* add_server_status();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
+      server_status() const;
+
+  // @@protoc_insertion_point(class_scope:ServerStatusArrMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FetchReplyArrayMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchReplyArrayMessage) */ {
+ public:
+  inline FetchReplyArrayMessage() : FetchReplyArrayMessage(nullptr) {}
+  virtual ~FetchReplyArrayMessage();
+  explicit constexpr FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  FetchReplyArrayMessage(const FetchReplyArrayMessage& from);
+  FetchReplyArrayMessage(FetchReplyArrayMessage&& from) noexcept
+    : FetchReplyArrayMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline FetchReplyArrayMessage& operator=(const FetchReplyArrayMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FetchReplyArrayMessage& operator=(FetchReplyArrayMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FetchReplyArrayMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const FetchReplyArrayMessage* internal_default_instance() {
+    return reinterpret_cast<const FetchReplyArrayMessage*>(
+               &_FetchReplyArrayMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(FetchReplyArrayMessage& a, FetchReplyArrayMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FetchReplyArrayMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(FetchReplyArrayMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FetchReplyArrayMessage* New() const final {
+    return CreateMaybeMessage<FetchReplyArrayMessage>(nullptr);
+  }
+
+  FetchReplyArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FetchReplyArrayMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FetchReplyArrayMessage& from);
+  void MergeFrom(const FetchReplyArrayMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FetchReplyArrayMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "FetchReplyArrayMessage";
+  }
+  protected:
+  explicit FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFetchReplyFieldNumber = 1,
+  };
+  // repeated .FetchReplyMessage fetch_reply = 1;
+  int fetch_reply_size() const;
+  private:
+  int _internal_fetch_reply_size() const;
+  public:
+  void clear_fetch_reply();
+  ::FetchReplyMessage* mutable_fetch_reply(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
+      mutable_fetch_reply();
+  private:
+  const ::FetchReplyMessage& _internal_fetch_reply(int index) const;
+  ::FetchReplyMessage* _internal_add_fetch_reply();
+  public:
+  const ::FetchReplyMessage& fetch_reply(int index) const;
+  ::FetchReplyMessage* add_fetch_reply();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
+      fetch_reply() const;
+
+  // @@protoc_insertion_point(class_scope:FetchReplyArrayMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage > fetch_reply_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
 class CpuMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CpuMessage) */ {
  public:
@@ -2514,7 +2814,7 @@ class CpuMessage PROTOBUF_FINAL :
                &_CpuMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    17;
 
   friend void swap(CpuMessage& a, CpuMessage& b) {
     a.Swap(&b);
@@ -2676,7 +2976,7 @@ class MemUsageMessage PROTOBUF_FINAL :
                &_MemUsageMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    18;
 
   friend void swap(MemUsageMessage& a, MemUsageMessage& b) {
     a.Swap(&b);
@@ -4083,6 +4383,92 @@ FetchReplyMessage::mutable_infos() {
 
 // -------------------------------------------------------------------
 
+// ServerStatusArrMessage
+
+// repeated .ServerStatusMessage server_status = 1;
+inline int ServerStatusArrMessage::_internal_server_status_size() const {
+  return server_status_.size();
+}
+inline int ServerStatusArrMessage::server_status_size() const {
+  return _internal_server_status_size();
+}
+inline void ServerStatusArrMessage::clear_server_status() {
+  server_status_.Clear();
+}
+inline ::ServerStatusMessage* ServerStatusArrMessage::mutable_server_status(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerStatusArrMessage.server_status)
+  return server_status_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
+ServerStatusArrMessage::mutable_server_status() {
+  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrMessage.server_status)
+  return &server_status_;
+}
+inline const ::ServerStatusMessage& ServerStatusArrMessage::_internal_server_status(int index) const {
+  return server_status_.Get(index);
+}
+inline const ::ServerStatusMessage& ServerStatusArrMessage::server_status(int index) const {
+  // @@protoc_insertion_point(field_get:ServerStatusArrMessage.server_status)
+  return _internal_server_status(index);
+}
+inline ::ServerStatusMessage* ServerStatusArrMessage::_internal_add_server_status() {
+  return server_status_.Add();
+}
+inline ::ServerStatusMessage* ServerStatusArrMessage::add_server_status() {
+  // @@protoc_insertion_point(field_add:ServerStatusArrMessage.server_status)
+  return _internal_add_server_status();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
+ServerStatusArrMessage::server_status() const {
+  // @@protoc_insertion_point(field_list:ServerStatusArrMessage.server_status)
+  return server_status_;
+}
+
+// -------------------------------------------------------------------
+
+// FetchReplyArrayMessage
+
+// repeated .FetchReplyMessage fetch_reply = 1;
+inline int FetchReplyArrayMessage::_internal_fetch_reply_size() const {
+  return fetch_reply_.size();
+}
+inline int FetchReplyArrayMessage::fetch_reply_size() const {
+  return _internal_fetch_reply_size();
+}
+inline void FetchReplyArrayMessage::clear_fetch_reply() {
+  fetch_reply_.Clear();
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::mutable_fetch_reply(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchReplyArrayMessage.fetch_reply)
+  return fetch_reply_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
+FetchReplyArrayMessage::mutable_fetch_reply() {
+  // @@protoc_insertion_point(field_mutable_list:FetchReplyArrayMessage.fetch_reply)
+  return &fetch_reply_;
+}
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::_internal_fetch_reply(int index) const {
+  return fetch_reply_.Get(index);
+}
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::fetch_reply(int index) const {
+  // @@protoc_insertion_point(field_get:FetchReplyArrayMessage.fetch_reply)
+  return _internal_fetch_reply(index);
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::_internal_add_fetch_reply() {
+  return fetch_reply_.Add();
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::add_fetch_reply() {
+  // @@protoc_insertion_point(field_add:FetchReplyArrayMessage.fetch_reply)
+  return _internal_add_fetch_reply();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
+FetchReplyArrayMessage::fetch_reply() const {
+  // @@protoc_insertion_point(field_list:FetchReplyArrayMessage.fetch_reply)
+  return fetch_reply_;
+}
+
+// -------------------------------------------------------------------
+
 // CpuMessage
 
 // int32 core_num = 1;
@@ -4199,6 +4585,10 @@ inline void MemUsageMessage::set_used_mem(::PROTOBUF_NAMESPACE_ID::int64 value) 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

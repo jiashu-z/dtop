@@ -30,6 +30,8 @@ class ConcreteGRPCService;
  */
 class Server {
  private:
+
+ public:
   static void test_virtual_mem_info() {
     VmemInfo r;
     // Empty out to prevent garbage in platform-specific fields
@@ -76,7 +78,6 @@ class Server {
 
   void client_add_target();
 
- public:
   worker::Manager manager;
 
   /**

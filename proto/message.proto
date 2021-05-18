@@ -71,6 +71,15 @@ message FetchReplyMessage {
   MemUsageMessage mem_usage_message = 2;
   repeated string infos = 3;
 }
+
+message ServerStatusArrMessage {
+  repeated ServerStatusMessage server_status = 1;
+}
+
+message FetchReplyArrayMessage {
+  repeated FetchReplyMessage fetch_reply = 1;
+}
+
 message CpuMessage {
   int32 core_num = 1;
   repeated float usage_arr = 2;

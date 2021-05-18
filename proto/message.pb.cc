@@ -208,6 +208,30 @@ struct FetchReplyMessageDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT FetchReplyMessageDefaultTypeInternal _FetchReplyMessage_default_instance_;
+constexpr ServerStatusArrMessage::ServerStatusArrMessage(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : server_status_(){}
+struct ServerStatusArrMessageDefaultTypeInternal {
+  constexpr ServerStatusArrMessageDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~ServerStatusArrMessageDefaultTypeInternal() {}
+  union {
+    ServerStatusArrMessage _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerStatusArrMessageDefaultTypeInternal _ServerStatusArrMessage_default_instance_;
+constexpr FetchReplyArrayMessage::FetchReplyArrayMessage(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : fetch_reply_(){}
+struct FetchReplyArrayMessageDefaultTypeInternal {
+  constexpr FetchReplyArrayMessageDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~FetchReplyArrayMessageDefaultTypeInternal() {}
+  union {
+    FetchReplyArrayMessage _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT FetchReplyArrayMessageDefaultTypeInternal _FetchReplyArrayMessage_default_instance_;
 constexpr CpuMessage::CpuMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : usage_arr_()
@@ -235,7 +259,7 @@ struct MemUsageMessageDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_message_2eproto[17];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_message_2eproto[19];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_message_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_message_2eproto = nullptr;
 
@@ -339,6 +363,18 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   PROTOBUF_FIELD_OFFSET(::FetchReplyMessage, mem_usage_message_),
   PROTOBUF_FIELD_OFFSET(::FetchReplyMessage, infos_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ServerStatusArrMessage, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::ServerStatusArrMessage, server_status_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::FetchReplyArrayMessage, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::FetchReplyArrayMessage, fetch_reply_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::CpuMessage, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -369,8 +405,10 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 76, -1, sizeof(::WorkerFutureMessage)},
   { 83, -1, sizeof(::FetchRequestMessage)},
   { 90, -1, sizeof(::FetchReplyMessage)},
-  { 98, -1, sizeof(::CpuMessage)},
-  { 105, -1, sizeof(::MemUsageMessage)},
+  { 98, -1, sizeof(::ServerStatusArrMessage)},
+  { 104, -1, sizeof(::FetchReplyArrayMessage)},
+  { 110, -1, sizeof(::CpuMessage)},
+  { 117, -1, sizeof(::MemUsageMessage)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -389,6 +427,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_WorkerFutureMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_FetchRequestMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_FetchReplyMessage_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ServerStatusArrMessage_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_FetchReplyArrayMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_CpuMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_MemUsageMessage_default_instance_),
 };
@@ -413,15 +453,18 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "r\030\002 \003(\t\"q\n\021FetchReplyMessage\022 \n\013cpu_mess"
   "age\030\001 \001(\0132\013.CpuMessage\022+\n\021mem_usage_mess"
   "age\030\002 \001(\0132\020.MemUsageMessage\022\r\n\005infos\030\003 \003"
-  "(\t\"1\n\nCpuMessage\022\020\n\010core_num\030\001 \001(\005\022\021\n\tus"
-  "age_arr\030\002 \003(\002\"4\n\017MemUsageMessage\022\017\n\007max_"
-  "mem\030\001 \001(\003\022\020\n\010used_mem\030\002 \001(\003B\031\n\027grp.dtop."
-  "dtopjava.protob\006proto3"
+  "(\t\"E\n\026ServerStatusArrMessage\022+\n\rserver_s"
+  "tatus\030\001 \003(\0132\024.ServerStatusMessage\"A\n\026Fet"
+  "chReplyArrayMessage\022\'\n\013fetch_reply\030\001 \003(\013"
+  "2\022.FetchReplyMessage\"1\n\nCpuMessage\022\020\n\010co"
+  "re_num\030\001 \001(\005\022\021\n\tusage_arr\030\002 \003(\002\"4\n\017MemUs"
+  "ageMessage\022\017\n\007max_mem\030\001 \001(\003\022\020\n\010used_mem\030"
+  "\002 \001(\003B\031\n\027grp.dtop.dtopjava.protob\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 902, descriptor_table_protodef_message_2eproto, "message.proto", 
-  &descriptor_table_message_2eproto_once, nullptr, 0, 17,
+  false, false, 1040, descriptor_table_protodef_message_2eproto, "message.proto", 
+  &descriptor_table_message_2eproto_once, nullptr, 0, 19,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
 };
@@ -3686,6 +3729,394 @@ void FetchReplyMessage::InternalSwap(FetchReplyMessage* other) {
 
 // ===================================================================
 
+class ServerStatusArrMessage::_Internal {
+ public:
+};
+
+ServerStatusArrMessage::ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  server_status_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ServerStatusArrMessage)
+}
+ServerStatusArrMessage::ServerStatusArrMessage(const ServerStatusArrMessage& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      server_status_(from.server_status_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:ServerStatusArrMessage)
+}
+
+void ServerStatusArrMessage::SharedCtor() {
+}
+
+ServerStatusArrMessage::~ServerStatusArrMessage() {
+  // @@protoc_insertion_point(destructor:ServerStatusArrMessage)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ServerStatusArrMessage::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void ServerStatusArrMessage::ArenaDtor(void* object) {
+  ServerStatusArrMessage* _this = reinterpret_cast< ServerStatusArrMessage* >(object);
+  (void)_this;
+}
+void ServerStatusArrMessage::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ServerStatusArrMessage::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void ServerStatusArrMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:ServerStatusArrMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  server_status_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ServerStatusArrMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .ServerStatusMessage server_status = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_server_status(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ServerStatusArrMessage::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ServerStatusArrMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .ServerStatusMessage server_status = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_server_status_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_server_status(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ServerStatusArrMessage)
+  return target;
+}
+
+size_t ServerStatusArrMessage::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ServerStatusArrMessage)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .ServerStatusMessage server_status = 1;
+  total_size += 1UL * this->_internal_server_status_size();
+  for (const auto& msg : this->server_status_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ServerStatusArrMessage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ServerStatusArrMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ServerStatusArrMessage* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ServerStatusArrMessage>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ServerStatusArrMessage)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ServerStatusArrMessage)
+    MergeFrom(*source);
+  }
+}
+
+void ServerStatusArrMessage::MergeFrom(const ServerStatusArrMessage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ServerStatusArrMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  server_status_.MergeFrom(from.server_status_);
+}
+
+void ServerStatusArrMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ServerStatusArrMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ServerStatusArrMessage::CopyFrom(const ServerStatusArrMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ServerStatusArrMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ServerStatusArrMessage::IsInitialized() const {
+  return true;
+}
+
+void ServerStatusArrMessage::InternalSwap(ServerStatusArrMessage* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  server_status_.InternalSwap(&other->server_status_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ServerStatusArrMessage::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class FetchReplyArrayMessage::_Internal {
+ public:
+};
+
+FetchReplyArrayMessage::FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  fetch_reply_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FetchReplyArrayMessage)
+}
+FetchReplyArrayMessage::FetchReplyArrayMessage(const FetchReplyArrayMessage& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      fetch_reply_(from.fetch_reply_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:FetchReplyArrayMessage)
+}
+
+void FetchReplyArrayMessage::SharedCtor() {
+}
+
+FetchReplyArrayMessage::~FetchReplyArrayMessage() {
+  // @@protoc_insertion_point(destructor:FetchReplyArrayMessage)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void FetchReplyArrayMessage::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void FetchReplyArrayMessage::ArenaDtor(void* object) {
+  FetchReplyArrayMessage* _this = reinterpret_cast< FetchReplyArrayMessage* >(object);
+  (void)_this;
+}
+void FetchReplyArrayMessage::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void FetchReplyArrayMessage::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void FetchReplyArrayMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:FetchReplyArrayMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  fetch_reply_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* FetchReplyArrayMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .FetchReplyMessage fetch_reply = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_fetch_reply(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* FetchReplyArrayMessage::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:FetchReplyArrayMessage)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .FetchReplyMessage fetch_reply = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_fetch_reply_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_fetch_reply(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:FetchReplyArrayMessage)
+  return target;
+}
+
+size_t FetchReplyArrayMessage::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:FetchReplyArrayMessage)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .FetchReplyMessage fetch_reply = 1;
+  total_size += 1UL * this->_internal_fetch_reply_size();
+  for (const auto& msg : this->fetch_reply_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void FetchReplyArrayMessage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:FetchReplyArrayMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FetchReplyArrayMessage* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FetchReplyArrayMessage>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FetchReplyArrayMessage)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:FetchReplyArrayMessage)
+    MergeFrom(*source);
+  }
+}
+
+void FetchReplyArrayMessage::MergeFrom(const FetchReplyArrayMessage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:FetchReplyArrayMessage)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  fetch_reply_.MergeFrom(from.fetch_reply_);
+}
+
+void FetchReplyArrayMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:FetchReplyArrayMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FetchReplyArrayMessage::CopyFrom(const FetchReplyArrayMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:FetchReplyArrayMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FetchReplyArrayMessage::IsInitialized() const {
+  return true;
+}
+
+void FetchReplyArrayMessage::InternalSwap(FetchReplyArrayMessage* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  fetch_reply_.InternalSwap(&other->fetch_reply_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata FetchReplyArrayMessage::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 class CpuMessage::_Internal {
  public:
 };
@@ -4178,6 +4609,12 @@ template<> PROTOBUF_NOINLINE ::FetchRequestMessage* Arena::CreateMaybeMessage< :
 }
 template<> PROTOBUF_NOINLINE ::FetchReplyMessage* Arena::CreateMaybeMessage< ::FetchReplyMessage >(Arena* arena) {
   return Arena::CreateMessageInternal< ::FetchReplyMessage >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ServerStatusArrMessage* Arena::CreateMaybeMessage< ::ServerStatusArrMessage >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ServerStatusArrMessage >(arena);
+}
+template<> PROTOBUF_NOINLINE ::FetchReplyArrayMessage* Arena::CreateMaybeMessage< ::FetchReplyArrayMessage >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::FetchReplyArrayMessage >(arena);
 }
 template<> PROTOBUF_NOINLINE ::CpuMessage* Arena::CreateMaybeMessage< ::CpuMessage >(Arena* arena) {
   return Arena::CreateMessageInternal< ::CpuMessage >(arena);

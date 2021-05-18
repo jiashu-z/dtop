@@ -27,10 +27,8 @@
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata_lite.h>
 #include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/unknown_field_set.h>
 #include "message.pb.h"
 #include <google/protobuf/empty.pb.h>
 // @@protoc_insertion_point(includes)
@@ -56,159 +54,12 @@ struct TableStruct_api_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_api_2eproto;
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_api_2eproto_metadata_getter(int index);
-class ServerStatusArrMessage;
-struct ServerStatusArrMessageDefaultTypeInternal;
-extern ServerStatusArrMessageDefaultTypeInternal _ServerStatusArrMessage_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
-template<> ::ServerStatusArrMessage* Arena::CreateMaybeMessage<::ServerStatusArrMessage>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
 
-class ServerStatusArrMessage PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusArrMessage) */ {
- public:
-  inline ServerStatusArrMessage() : ServerStatusArrMessage(nullptr) {}
-  virtual ~ServerStatusArrMessage();
-  explicit constexpr ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ServerStatusArrMessage(const ServerStatusArrMessage& from);
-  ServerStatusArrMessage(ServerStatusArrMessage&& from) noexcept
-    : ServerStatusArrMessage() {
-    *this = ::std::move(from);
-  }
-
-  inline ServerStatusArrMessage& operator=(const ServerStatusArrMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ServerStatusArrMessage& operator=(ServerStatusArrMessage&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const ServerStatusArrMessage& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ServerStatusArrMessage* internal_default_instance() {
-    return reinterpret_cast<const ServerStatusArrMessage*>(
-               &_ServerStatusArrMessage_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
-
-  friend void swap(ServerStatusArrMessage& a, ServerStatusArrMessage& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ServerStatusArrMessage* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ServerStatusArrMessage* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ServerStatusArrMessage* New() const final {
-    return CreateMaybeMessage<ServerStatusArrMessage>(nullptr);
-  }
-
-  ServerStatusArrMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ServerStatusArrMessage>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ServerStatusArrMessage& from);
-  void MergeFrom(const ServerStatusArrMessage& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ServerStatusArrMessage* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ServerStatusArrMessage";
-  }
-  protected:
-  explicit ServerStatusArrMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_api_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kServerStatusFieldNumber = 1,
-  };
-  // repeated .ServerStatusMessage server_status = 1;
-  int server_status_size() const;
-  private:
-  int _internal_server_status_size() const;
-  public:
-  void clear_server_status();
-  ::ServerStatusMessage* mutable_server_status(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-      mutable_server_status();
-  private:
-  const ::ServerStatusMessage& _internal_server_status(int index) const;
-  ::ServerStatusMessage* _internal_add_server_status();
-  public:
-  const ::ServerStatusMessage& server_status(int index) const;
-  ::ServerStatusMessage* add_server_status();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-      server_status() const;
-
-  // @@protoc_insertion_point(class_scope:ServerStatusArrMessage)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_api_2eproto;
-};
 // ===================================================================
 
 
@@ -218,44 +69,6 @@ class ServerStatusArrMessage PROTOBUF_FINAL :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// ServerStatusArrMessage
-
-// repeated .ServerStatusMessage server_status = 1;
-inline int ServerStatusArrMessage::_internal_server_status_size() const {
-  return server_status_.size();
-}
-inline int ServerStatusArrMessage::server_status_size() const {
-  return _internal_server_status_size();
-}
-inline ::ServerStatusMessage* ServerStatusArrMessage::mutable_server_status(int index) {
-  // @@protoc_insertion_point(field_mutable:ServerStatusArrMessage.server_status)
-  return server_status_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-ServerStatusArrMessage::mutable_server_status() {
-  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrMessage.server_status)
-  return &server_status_;
-}
-inline const ::ServerStatusMessage& ServerStatusArrMessage::_internal_server_status(int index) const {
-  return server_status_.Get(index);
-}
-inline const ::ServerStatusMessage& ServerStatusArrMessage::server_status(int index) const {
-  // @@protoc_insertion_point(field_get:ServerStatusArrMessage.server_status)
-  return _internal_server_status(index);
-}
-inline ::ServerStatusMessage* ServerStatusArrMessage::_internal_add_server_status() {
-  return server_status_.Add();
-}
-inline ::ServerStatusMessage* ServerStatusArrMessage::add_server_status() {
-  // @@protoc_insertion_point(field_add:ServerStatusArrMessage.server_status)
-  return _internal_add_server_status();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-ServerStatusArrMessage::server_status() const {
-  // @@protoc_insertion_point(field_list:ServerStatusArrMessage.server_status)
-  return server_status_;
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__

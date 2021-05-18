@@ -1,16 +1,16 @@
 <properties>
-    <server-addr>10.16.3.199</server-addr>
+    <server-addr>127.0.0.1</server-addr>
     <server-port>8080</server-port>
     <master>true</master>
     <thread-num>8</thread-num>
     <other-servers>
         <server>
             <addr>127.0.0.1</addr>
-            <port>8081</port>
+            <port>8080</port>
         </server>
         <server>
             <addr>localhost</addr>
-            <port>8082</port>
+            <port>8080</port>
         </server>
     </other-servers>
 </properties>
