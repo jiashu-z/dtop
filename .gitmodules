@@ -1,3 +1,6 @@
 [submodule "third-party/dtop-java"]
 	path = third-party/dtop-java
 	url = https://github.com/Carl-Rabbit/dtop-java.git
+[submodule "third-party/libleak"]
+	path = third-party/libleak
+	url = https://github.com/wateryloo/libleak.git
