@@ -6,9 +6,11 @@
 /* Prototypes for our hooks */
 static void my_init_hook(void);
 static void *my_malloc_hook(size_t, const void *);
+static void my_free_hook(void *ptr, const void *);
 
 /* Variables to save original hooks */
 static void *(*old_malloc_hook)(size_t, const void *);
+static void (*old_free_hook)(void *ptr, const void *);
 
 /* Override initializing hook from the C library */
 void (*__malloc_initialize_hook)(void) = my_init_hook;
@@ -18,6 +20,8 @@ my_init_hook(void)
 {
   old_malloc_hook = __malloc_hook;
   __malloc_hook = my_malloc_hook;
+  old_free_hook = __free_hook;
+  __free_hook = my_free_hook;
 }
 
 static void *
@@ -44,4 +48,23 @@ my_malloc_hook(size_t size, const void *caller)
   __malloc_hook = my_malloc_hook;
 
   return result;
+}
+
+static void 
+my_free_hook(void *ptr, const void *caller)
+{
+  void *result;
+
+  /* Restore all old hooks */
+  __free_hook = old_free_hook;
+
+  /* Call recursively */
+
+  /* Save underlying hooks */
+  old_free_hook = __free_hook;
+
+  /* printf() might call malloc(), so protect it too */
+
+  /* Restore our own hooks */
+  __free_hook = my_free_hook;
 }
