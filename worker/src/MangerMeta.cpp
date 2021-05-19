@@ -30,13 +30,11 @@ dtop::worker::ManagerMeta::get_workers() const {
 }
 
 dtop::worker::BaseWorker* dtop::worker::ManagerMeta::get_worker_by_name(
-    std::string& worker_name) {
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    const std::string& worker_name) {
   for (BaseWorker* worker_ptr : this->workers) {
     if (worker_ptr->worker_name == worker_name) {
       return worker_ptr;
     }
   }
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   return nullptr;
 }

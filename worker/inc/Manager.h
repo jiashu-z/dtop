@@ -54,7 +54,14 @@ class Manager {
   google::protobuf::RepeatedPtrField<WorkerStatusMessage>* get_worker_status(
       bool with_futures = false, bool with_future_desc = false);
 
-  bool switch_worker_status(std::string& worker_name, WorkerCmdType cmd_type);
+  /**
+   * @brief Switch the worker status on current server
+   *
+   * @param worker_name
+   * @param cmd_type
+   * @return
+   */
+  bool switch_worker_status(const std::string& worker_name, WorkerCmdType cmd_type);
 };
 
 }  // namespace worker

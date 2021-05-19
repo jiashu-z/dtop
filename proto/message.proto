@@ -43,6 +43,16 @@ message DoubleArrayMessage {
 }
 
 
+message CommandArrayMessage {
+  repeated CommandMessage command_arr = 1;
+}
+
+message CommandMessage {
+  string worker_name = 1;
+  string cmd_type = 2;
+}
+
+
 message ServerStatusMessage {
   string addr = 1;
   repeated WorkerStatusMessage worker_status = 2;

@@ -83,6 +83,17 @@ dtop::server::Server::Server(const std::string& config_file_path)
   this->init_config();
 }
 
+bool dtop::server::Server::control(const CommandArrayMessage* request,
+                                   StringArrayMessage* reply) {
+  for (auto& command : request->command_arr()) {
+  	const std::string& worker_name = command.worker_name();
+  	worker::WorkerCmdType cmd_type = worker::get_cmd_type(command.cmd_type());
+  	bool success = this->manager.switch_worker_status(worker_name, cmd_type);
+  	reply->mutable_arr()->Add(success ? "success" : "fail");
+  }
+  return true;
+}
+
 bool dtop::server::Server::profile(const FetchRequestMessage* request,
                                    FetchReplyMessage* reply) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;

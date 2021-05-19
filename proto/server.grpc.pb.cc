@@ -24,6 +24,7 @@ static const char* GRPCService_method_names[] = {
   "/GRPCService/GetIP",
   "/GRPCService/GetPort",
   "/GRPCService/GetAddr",
+  "/GRPCService/Control",
   "/GRPCService/Profile",
   "/GRPCService/GetServerStatus",
 };
@@ -38,8 +39,9 @@ GRPCService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   : channel_(channel), rpcmethod_GetIP_(GRPCService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetPort_(GRPCService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetAddr_(GRPCService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Profile_(GRPCService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetServerStatus_(GRPCService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Control_(GRPCService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Profile_(GRPCService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetServerStatus_(GRPCService_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status GRPCService::Stub::GetIP(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::StringMessage* response) {
@@ -107,6 +109,29 @@ void GRPCService::Stub::experimental_async::GetAddr(::grpc::ClientContext* conte
 ::grpc::ClientAsyncResponseReader< ::StringMessage>* GRPCService::Stub::AsyncGetAddrRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetAddrRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status GRPCService::Stub::Control(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::StringArrayMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::CommandArrayMessage, ::StringArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Control_, context, request, response);
+}
+
+void GRPCService::Stub::experimental_async::Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::CommandArrayMessage, ::StringArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Control_, context, request, response, std::move(f));
+}
+
+void GRPCService::Stub::experimental_async::Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Control_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* GRPCService::Stub::PrepareAsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::StringArrayMessage, ::CommandArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Control_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* GRPCService::Stub::AsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncControlRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -191,6 +216,16 @@ GRPCService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GRPCService_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< GRPCService::Service, ::CommandArrayMessage, ::StringArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](GRPCService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::CommandArrayMessage* req,
+             ::StringArrayMessage* resp) {
+               return service->Control(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      GRPCService_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< GRPCService::Service, ::FetchRequestMessage, ::FetchReplyMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](GRPCService::Service* service,
              ::grpc::ServerContext* ctx,
@@ -199,7 +234,7 @@ GRPCService::Service::Service() {
                return service->Profile(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      GRPCService_method_names[4],
+      GRPCService_method_names[5],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< GRPCService::Service, ::StringArrayMessage, ::ServerStatusMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](GRPCService::Service* service,
@@ -228,6 +263,13 @@ GRPCService::Service::~Service() {
 }
 
 ::grpc::Status GRPCService::Service::GetAddr(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringMessage* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status GRPCService::Service::Control(::grpc::ServerContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response) {
   (void) context;
   (void) request;
   (void) response;

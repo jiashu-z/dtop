@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[19]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[21]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -54,6 +54,12 @@ struct TableStruct_message_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto;
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_message_2eproto_metadata_getter(int index);
+class CommandArrayMessage;
+struct CommandArrayMessageDefaultTypeInternal;
+extern CommandArrayMessageDefaultTypeInternal _CommandArrayMessage_default_instance_;
+class CommandMessage;
+struct CommandMessageDefaultTypeInternal;
+extern CommandMessageDefaultTypeInternal _CommandMessage_default_instance_;
 class CpuMessage;
 struct CpuMessageDefaultTypeInternal;
 extern CpuMessageDefaultTypeInternal _CpuMessage_default_instance_;
@@ -112,6 +118,8 @@ class WorkerStatusMessage;
 struct WorkerStatusMessageDefaultTypeInternal;
 extern WorkerStatusMessageDefaultTypeInternal _WorkerStatusMessage_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::CommandArrayMessage* Arena::CreateMaybeMessage<::CommandArrayMessage>(Arena*);
+template<> ::CommandMessage* Arena::CreateMaybeMessage<::CommandMessage>(Arena*);
 template<> ::CpuMessage* Arena::CreateMaybeMessage<::CpuMessage>(Arena*);
 template<> ::DoubleArrayMessage* Arena::CreateMaybeMessage<::DoubleArrayMessage>(Arena*);
 template<> ::DoubleMessage* Arena::CreateMaybeMessage<::DoubleMessage>(Arena*);
@@ -1583,6 +1591,314 @@ class DoubleArrayMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class CommandArrayMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CommandArrayMessage) */ {
+ public:
+  inline CommandArrayMessage() : CommandArrayMessage(nullptr) {}
+  virtual ~CommandArrayMessage();
+  explicit constexpr CommandArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CommandArrayMessage(const CommandArrayMessage& from);
+  CommandArrayMessage(CommandArrayMessage&& from) noexcept
+    : CommandArrayMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline CommandArrayMessage& operator=(const CommandArrayMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CommandArrayMessage& operator=(CommandArrayMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const CommandArrayMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CommandArrayMessage* internal_default_instance() {
+    return reinterpret_cast<const CommandArrayMessage*>(
+               &_CommandArrayMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(CommandArrayMessage& a, CommandArrayMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CommandArrayMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CommandArrayMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CommandArrayMessage* New() const final {
+    return CreateMaybeMessage<CommandArrayMessage>(nullptr);
+  }
+
+  CommandArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<CommandArrayMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const CommandArrayMessage& from);
+  void MergeFrom(const CommandArrayMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CommandArrayMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "CommandArrayMessage";
+  }
+  protected:
+  explicit CommandArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCommandArrFieldNumber = 1,
+  };
+  // repeated .CommandMessage command_arr = 1;
+  int command_arr_size() const;
+  private:
+  int _internal_command_arr_size() const;
+  public:
+  void clear_command_arr();
+  ::CommandMessage* mutable_command_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CommandMessage >*
+      mutable_command_arr();
+  private:
+  const ::CommandMessage& _internal_command_arr(int index) const;
+  ::CommandMessage* _internal_add_command_arr();
+  public:
+  const ::CommandMessage& command_arr(int index) const;
+  ::CommandMessage* add_command_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CommandMessage >&
+      command_arr() const;
+
+  // @@protoc_insertion_point(class_scope:CommandArrayMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CommandMessage > command_arr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CommandMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CommandMessage) */ {
+ public:
+  inline CommandMessage() : CommandMessage(nullptr) {}
+  virtual ~CommandMessage();
+  explicit constexpr CommandMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CommandMessage(const CommandMessage& from);
+  CommandMessage(CommandMessage&& from) noexcept
+    : CommandMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline CommandMessage& operator=(const CommandMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CommandMessage& operator=(CommandMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const CommandMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CommandMessage* internal_default_instance() {
+    return reinterpret_cast<const CommandMessage*>(
+               &_CommandMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(CommandMessage& a, CommandMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CommandMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CommandMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CommandMessage* New() const final {
+    return CreateMaybeMessage<CommandMessage>(nullptr);
+  }
+
+  CommandMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<CommandMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const CommandMessage& from);
+  void MergeFrom(const CommandMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CommandMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "CommandMessage";
+  }
+  protected:
+  explicit CommandMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kWorkerNameFieldNumber = 1,
+    kCmdTypeFieldNumber = 2,
+  };
+  // string worker_name = 1;
+  void clear_worker_name();
+  const std::string& worker_name() const;
+  void set_worker_name(const std::string& value);
+  void set_worker_name(std::string&& value);
+  void set_worker_name(const char* value);
+  void set_worker_name(const char* value, size_t size);
+  std::string* mutable_worker_name();
+  std::string* release_worker_name();
+  void set_allocated_worker_name(std::string* worker_name);
+  private:
+  const std::string& _internal_worker_name() const;
+  void _internal_set_worker_name(const std::string& value);
+  std::string* _internal_mutable_worker_name();
+  public:
+
+  // string cmd_type = 2;
+  void clear_cmd_type();
+  const std::string& cmd_type() const;
+  void set_cmd_type(const std::string& value);
+  void set_cmd_type(std::string&& value);
+  void set_cmd_type(const char* value);
+  void set_cmd_type(const char* value, size_t size);
+  std::string* mutable_cmd_type();
+  std::string* release_cmd_type();
+  void set_allocated_cmd_type(std::string* cmd_type);
+  private:
+  const std::string& _internal_cmd_type() const;
+  void _internal_set_cmd_type(const std::string& value);
+  std::string* _internal_mutable_cmd_type();
+  public:
+
+  // @@protoc_insertion_point(class_scope:CommandMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr worker_name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cmd_type_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ServerStatusMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusMessage) */ {
  public:
@@ -1626,7 +1942,7 @@ class ServerStatusMessage PROTOBUF_FINAL :
                &_ServerStatusMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    12;
 
   friend void swap(ServerStatusMessage& a, ServerStatusMessage& b) {
     a.Swap(&b);
@@ -1808,7 +2124,7 @@ class WorkerStatusMessage PROTOBUF_FINAL :
                &_WorkerStatusMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    13;
 
   friend void swap(WorkerStatusMessage& a, WorkerStatusMessage& b) {
     a.Swap(&b);
@@ -1990,7 +2306,7 @@ class WorkerFutureMessage PROTOBUF_FINAL :
                &_WorkerFutureMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    14;
 
   friend void swap(WorkerFutureMessage& a, WorkerFutureMessage& b) {
     a.Swap(&b);
@@ -2152,7 +2468,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
                &_FetchRequestMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    15;
 
   friend void swap(FetchRequestMessage& a, FetchRequestMessage& b) {
     a.Swap(&b);
@@ -2330,7 +2646,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
                &_FetchReplyMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    16;
 
   friend void swap(FetchReplyMessage& a, FetchReplyMessage& b) {
     a.Swap(&b);
@@ -2522,7 +2838,7 @@ class ServerStatusArrMessage PROTOBUF_FINAL :
                &_ServerStatusArrMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    17;
 
   friend void swap(ServerStatusArrMessage& a, ServerStatusArrMessage& b) {
     a.Swap(&b);
@@ -2668,7 +2984,7 @@ class FetchReplyArrayMessage PROTOBUF_FINAL :
                &_FetchReplyArrayMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    18;
 
   friend void swap(FetchReplyArrayMessage& a, FetchReplyArrayMessage& b) {
     a.Swap(&b);
@@ -2814,7 +3130,7 @@ class CpuMessage PROTOBUF_FINAL :
                &_CpuMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    19;
 
   friend void swap(CpuMessage& a, CpuMessage& b) {
     a.Swap(&b);
@@ -2976,7 +3292,7 @@ class MemUsageMessage PROTOBUF_FINAL :
                &_MemUsageMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    20;
 
   friend void swap(MemUsageMessage& a, MemUsageMessage& b) {
     a.Swap(&b);
@@ -3604,6 +3920,175 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< double >*
 DoubleArrayMessage::mutable_arr() {
   // @@protoc_insertion_point(field_mutable_list:DoubleArrayMessage.arr)
   return _internal_mutable_arr();
+}
+
+// -------------------------------------------------------------------
+
+// CommandArrayMessage
+
+// repeated .CommandMessage command_arr = 1;
+inline int CommandArrayMessage::_internal_command_arr_size() const {
+  return command_arr_.size();
+}
+inline int CommandArrayMessage::command_arr_size() const {
+  return _internal_command_arr_size();
+}
+inline void CommandArrayMessage::clear_command_arr() {
+  command_arr_.Clear();
+}
+inline ::CommandMessage* CommandArrayMessage::mutable_command_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:CommandArrayMessage.command_arr)
+  return command_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CommandMessage >*
+CommandArrayMessage::mutable_command_arr() {
+  // @@protoc_insertion_point(field_mutable_list:CommandArrayMessage.command_arr)
+  return &command_arr_;
+}
+inline const ::CommandMessage& CommandArrayMessage::_internal_command_arr(int index) const {
+  return command_arr_.Get(index);
+}
+inline const ::CommandMessage& CommandArrayMessage::command_arr(int index) const {
+  // @@protoc_insertion_point(field_get:CommandArrayMessage.command_arr)
+  return _internal_command_arr(index);
+}
+inline ::CommandMessage* CommandArrayMessage::_internal_add_command_arr() {
+  return command_arr_.Add();
+}
+inline ::CommandMessage* CommandArrayMessage::add_command_arr() {
+  // @@protoc_insertion_point(field_add:CommandArrayMessage.command_arr)
+  return _internal_add_command_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CommandMessage >&
+CommandArrayMessage::command_arr() const {
+  // @@protoc_insertion_point(field_list:CommandArrayMessage.command_arr)
+  return command_arr_;
+}
+
+// -------------------------------------------------------------------
+
+// CommandMessage
+
+// string worker_name = 1;
+inline void CommandMessage::clear_worker_name() {
+  worker_name_.ClearToEmpty();
+}
+inline const std::string& CommandMessage::worker_name() const {
+  // @@protoc_insertion_point(field_get:CommandMessage.worker_name)
+  return _internal_worker_name();
+}
+inline void CommandMessage::set_worker_name(const std::string& value) {
+  _internal_set_worker_name(value);
+  // @@protoc_insertion_point(field_set:CommandMessage.worker_name)
+}
+inline std::string* CommandMessage::mutable_worker_name() {
+  // @@protoc_insertion_point(field_mutable:CommandMessage.worker_name)
+  return _internal_mutable_worker_name();
+}
+inline const std::string& CommandMessage::_internal_worker_name() const {
+  return worker_name_.Get();
+}
+inline void CommandMessage::_internal_set_worker_name(const std::string& value) {
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void CommandMessage::set_worker_name(std::string&& value) {
+  
+  worker_name_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:CommandMessage.worker_name)
+}
+inline void CommandMessage::set_worker_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:CommandMessage.worker_name)
+}
+inline void CommandMessage::set_worker_name(const char* value,
+    size_t size) {
+  
+  worker_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:CommandMessage.worker_name)
+}
+inline std::string* CommandMessage::_internal_mutable_worker_name() {
+  
+  return worker_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* CommandMessage::release_worker_name() {
+  // @@protoc_insertion_point(field_release:CommandMessage.worker_name)
+  return worker_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void CommandMessage::set_allocated_worker_name(std::string* worker_name) {
+  if (worker_name != nullptr) {
+    
+  } else {
+    
+  }
+  worker_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), worker_name,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:CommandMessage.worker_name)
+}
+
+// string cmd_type = 2;
+inline void CommandMessage::clear_cmd_type() {
+  cmd_type_.ClearToEmpty();
+}
+inline const std::string& CommandMessage::cmd_type() const {
+  // @@protoc_insertion_point(field_get:CommandMessage.cmd_type)
+  return _internal_cmd_type();
+}
+inline void CommandMessage::set_cmd_type(const std::string& value) {
+  _internal_set_cmd_type(value);
+  // @@protoc_insertion_point(field_set:CommandMessage.cmd_type)
+}
+inline std::string* CommandMessage::mutable_cmd_type() {
+  // @@protoc_insertion_point(field_mutable:CommandMessage.cmd_type)
+  return _internal_mutable_cmd_type();
+}
+inline const std::string& CommandMessage::_internal_cmd_type() const {
+  return cmd_type_.Get();
+}
+inline void CommandMessage::_internal_set_cmd_type(const std::string& value) {
+  
+  cmd_type_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void CommandMessage::set_cmd_type(std::string&& value) {
+  
+  cmd_type_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:CommandMessage.cmd_type)
+}
+inline void CommandMessage::set_cmd_type(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cmd_type_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:CommandMessage.cmd_type)
+}
+inline void CommandMessage::set_cmd_type(const char* value,
+    size_t size) {
+  
+  cmd_type_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:CommandMessage.cmd_type)
+}
+inline std::string* CommandMessage::_internal_mutable_cmd_type() {
+  
+  return cmd_type_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* CommandMessage::release_cmd_type() {
+  // @@protoc_insertion_point(field_release:CommandMessage.cmd_type)
+  return cmd_type_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void CommandMessage::set_allocated_cmd_type(std::string* cmd_type) {
+  if (cmd_type != nullptr) {
+    
+  } else {
+    
+  }
+  cmd_type_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cmd_type,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:CommandMessage.cmd_type)
 }
 
 // -------------------------------------------------------------------
@@ -4802,6 +5287,10 @@ inline void MemUsageMessage::set_wired(::PROTOBUF_NAMESPACE_ID::int64 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

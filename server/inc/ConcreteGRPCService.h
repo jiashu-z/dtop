@@ -81,6 +81,18 @@ class ConcreteGRPCService final : public GRPCService::Service {
                                  ::ServerStatusMessage* response) override;
 
   /**
+   * @brief Process a control message from cluster center
+   *
+   * @param context
+   * @param request
+   * @param response
+   * @return ::grpc::Status
+   */
+  ::grpc::Status Control(::grpc::ServerContext *context,
+												 const ::CommandArrayMessage *request,
+												 ::StringArrayMessage *response) override;
+
+  /**
    * @brief Run the grpc server.
    *
    */

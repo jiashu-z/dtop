@@ -43,7 +43,7 @@ class ManagerMeta final {
    *
    * @return The pointer to worker or nullptr if no worker matched.
    */
-  BaseWorker* get_worker_by_name(std::string& worker_name);
+  BaseWorker* get_worker_by_name(const std::string& worker_name);
 };
 
 }  // namespace worker

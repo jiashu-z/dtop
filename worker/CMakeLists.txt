@@ -12,7 +12,7 @@ src/common.cpp
 src/pslib_linux.cpp
 src/MemLeakWorker.cpp
 src/hook.cpp
-)
+		src/WorkerCmdType.cpp)
 
 target_include_directories(worker
 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc

@@ -55,6 +55,13 @@ class GRPCService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringMessage>> PrepareAsyncGetAddr(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringMessage>>(PrepareAsyncGetAddrRaw(context, request, cq));
     }
+    virtual ::grpc::Status Control(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::StringArrayMessage* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>> AsyncControl(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>>(AsyncControlRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>> PrepareAsyncControl(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>>(PrepareAsyncControlRaw(context, request, cq));
+    }
     virtual ::grpc::Status Profile(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyMessage* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyMessage>> AsyncProfile(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyMessage>>(AsyncProfileRaw(context, request, cq));
@@ -90,6 +97,12 @@ class GRPCService final {
       #else
       virtual void GetAddr(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::StringMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
+      virtual void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
       virtual void Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, std::function<void(::grpc::Status)>) = 0;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       virtual void Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -117,6 +130,8 @@ class GRPCService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::IntegerMessage>* PrepareAsyncGetPortRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringMessage>* AsyncGetAddrRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringMessage>* PrepareAsyncGetAddrRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* AsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* PrepareAsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyMessage>* AsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyMessage>* PrepareAsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusMessage>* AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::StringArrayMessage& request, ::grpc::CompletionQueue* cq) = 0;
@@ -145,6 +160,13 @@ class GRPCService final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringMessage>> PrepareAsyncGetAddr(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringMessage>>(PrepareAsyncGetAddrRaw(context, request, cq));
+    }
+    ::grpc::Status Control(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::StringArrayMessage* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>> AsyncControl(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>>(AsyncControlRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>> PrepareAsyncControl(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>>(PrepareAsyncControlRaw(context, request, cq));
     }
     ::grpc::Status Profile(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyMessage* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>> AsyncProfile(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
@@ -181,6 +203,12 @@ class GRPCService final {
       #else
       void GetAddr(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::StringMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
+      void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void Control(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
       void Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, std::function<void(::grpc::Status)>) override;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       void Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
@@ -210,6 +238,8 @@ class GRPCService final {
     ::grpc::ClientAsyncResponseReader< ::IntegerMessage>* PrepareAsyncGetPortRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::StringMessage>* AsyncGetAddrRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::StringMessage>* PrepareAsyncGetAddrRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* AsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* PrepareAsyncControlRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* AsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* PrepareAsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::ServerStatusMessage>* AsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::StringArrayMessage& request, ::grpc::CompletionQueue* cq) override;
@@ -217,6 +247,7 @@ class GRPCService final {
     const ::grpc::internal::RpcMethod rpcmethod_GetIP_;
     const ::grpc::internal::RpcMethod rpcmethod_GetPort_;
     const ::grpc::internal::RpcMethod rpcmethod_GetAddr_;
+    const ::grpc::internal::RpcMethod rpcmethod_Control_;
     const ::grpc::internal::RpcMethod rpcmethod_Profile_;
     const ::grpc::internal::RpcMethod rpcmethod_GetServerStatus_;
   };
@@ -229,6 +260,7 @@ class GRPCService final {
     virtual ::grpc::Status GetIP(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringMessage* response);
     virtual ::grpc::Status GetPort(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::IntegerMessage* response);
     virtual ::grpc::Status GetAddr(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringMessage* response);
+    virtual ::grpc::Status Control(::grpc::ServerContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response);
     virtual ::grpc::Status Profile(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response);
     virtual ::grpc::Status GetServerStatus(::grpc::ServerContext* context, const ::StringArrayMessage* request, ::ServerStatusMessage* response);
   };
@@ -293,12 +325,32 @@ class GRPCService final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_Control() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestControl(::grpc::ServerContext* context, ::CommandArrayMessage* request, ::grpc::ServerAsyncResponseWriter< ::StringArrayMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_Profile() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_Profile() override {
       BaseClassMustBeDerivedFromService(this);
@@ -309,7 +361,7 @@ class GRPCService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestProfile(::grpc::ServerContext* context, ::FetchRequestMessage* request, ::grpc::ServerAsyncResponseWriter< ::FetchReplyMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -318,7 +370,7 @@ class GRPCService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetServerStatus() {
-      ::grpc::Service::MarkMethodAsync(4);
+      ::grpc::Service::MarkMethodAsync(5);
     }
     ~WithAsyncMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
@@ -329,10 +381,10 @@ class GRPCService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetServerStatus(::grpc::ServerContext* context, ::StringArrayMessage* request, ::grpc::ServerAsyncResponseWriter< ::ServerStatusMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetIP<WithAsyncMethod_GetPort<WithAsyncMethod_GetAddr<WithAsyncMethod_Profile<WithAsyncMethod_GetServerStatus<Service > > > > > AsyncService;
+  typedef WithAsyncMethod_GetIP<WithAsyncMethod_GetPort<WithAsyncMethod_GetAddr<WithAsyncMethod_Control<WithAsyncMethod_Profile<WithAsyncMethod_GetServerStatus<Service > > > > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetIP : public BaseClass {
    private:
@@ -475,6 +527,53 @@ class GRPCService final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_Control() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::CommandArrayMessage, ::StringArrayMessage>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::CommandArrayMessage* request, ::StringArrayMessage* response) { return this->Control(context, request, response); }));}
+    void SetMessageAllocatorFor_Control(
+        ::grpc::experimental::MessageAllocator< ::CommandArrayMessage, ::StringArrayMessage>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(3);
+    #endif
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::CommandArrayMessage, ::StringArrayMessage>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* Control(
+      ::grpc::CallbackServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* Control(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -485,7 +584,7 @@ class GRPCService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(3,
+        MarkMethodCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyMessage>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -497,9 +596,9 @@ class GRPCService final {
     void SetMessageAllocatorFor_Profile(
         ::grpc::experimental::MessageAllocator< ::FetchRequestMessage, ::FetchReplyMessage>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
     #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(3);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(4);
     #endif
       static_cast<::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyMessage>*>(handler)
               ->SetMessageAllocator(allocator);
@@ -532,7 +631,7 @@ class GRPCService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(4,
+        MarkMethodCallback(5,
           new ::grpc::internal::CallbackUnaryHandler< ::StringArrayMessage, ::ServerStatusMessage>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -544,9 +643,9 @@ class GRPCService final {
     void SetMessageAllocatorFor_GetServerStatus(
         ::grpc::experimental::MessageAllocator< ::StringArrayMessage, ::ServerStatusMessage>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
     #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(4);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(5);
     #endif
       static_cast<::grpc::internal::CallbackUnaryHandler< ::StringArrayMessage, ::ServerStatusMessage>*>(handler)
               ->SetMessageAllocator(allocator);
@@ -569,10 +668,10 @@ class GRPCService final {
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_GetIP<ExperimentalWithCallbackMethod_GetPort<ExperimentalWithCallbackMethod_GetAddr<ExperimentalWithCallbackMethod_Profile<ExperimentalWithCallbackMethod_GetServerStatus<Service > > > > > CallbackService;
+  typedef ExperimentalWithCallbackMethod_GetIP<ExperimentalWithCallbackMethod_GetPort<ExperimentalWithCallbackMethod_GetAddr<ExperimentalWithCallbackMethod_Control<ExperimentalWithCallbackMethod_Profile<ExperimentalWithCallbackMethod_GetServerStatus<Service > > > > > > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_GetIP<ExperimentalWithCallbackMethod_GetPort<ExperimentalWithCallbackMethod_GetAddr<ExperimentalWithCallbackMethod_Profile<ExperimentalWithCallbackMethod_GetServerStatus<Service > > > > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_GetIP<ExperimentalWithCallbackMethod_GetPort<ExperimentalWithCallbackMethod_GetAddr<ExperimentalWithCallbackMethod_Control<ExperimentalWithCallbackMethod_Profile<ExperimentalWithCallbackMethod_GetServerStatus<Service > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_GetIP : public BaseClass {
    private:
@@ -625,12 +724,29 @@ class GRPCService final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_Control() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_Profile() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_Profile() override {
       BaseClassMustBeDerivedFromService(this);
@@ -647,7 +763,7 @@ class GRPCService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetServerStatus() {
-      ::grpc::Service::MarkMethodGeneric(4);
+      ::grpc::Service::MarkMethodGeneric(5);
     }
     ~WithGenericMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
@@ -719,12 +835,32 @@ class GRPCService final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_Control() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestControl(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_Profile() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_Profile() override {
       BaseClassMustBeDerivedFromService(this);
@@ -735,7 +871,7 @@ class GRPCService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestProfile(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -744,7 +880,7 @@ class GRPCService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetServerStatus() {
-      ::grpc::Service::MarkMethodRaw(4);
+      ::grpc::Service::MarkMethodRaw(5);
     }
     ~WithRawMethod_GetServerStatus() override {
       BaseClassMustBeDerivedFromService(this);
@@ -755,7 +891,7 @@ class GRPCService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetServerStatus(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -873,6 +1009,44 @@ class GRPCService final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_Control() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Control(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* Control(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* Control(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -883,7 +1057,7 @@ class GRPCService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(3,
+        MarkMethodRawCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -921,7 +1095,7 @@ class GRPCService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(4,
+        MarkMethodRawCallback(5,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -1030,12 +1204,39 @@ class GRPCService final {
     virtual ::grpc::Status StreamedGetAddr(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::StringMessage>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_Control : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_Control() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::CommandArrayMessage, ::StringArrayMessage>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::CommandArrayMessage, ::StringArrayMessage>* streamer) {
+                       return this->StreamedControl(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_Control() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status Control(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedControl(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::CommandArrayMessage,::StringArrayMessage>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_Profile : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_Profile() {
-      ::grpc::Service::MarkMethodStreamed(3,
+      ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler<
           ::FetchRequestMessage, ::FetchReplyMessage>(
             [this](::grpc::ServerContext* context,
@@ -1062,7 +1263,7 @@ class GRPCService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetServerStatus() {
-      ::grpc::Service::MarkMethodStreamed(4,
+      ::grpc::Service::MarkMethodStreamed(5,
         new ::grpc::internal::StreamedUnaryHandler<
           ::StringArrayMessage, ::ServerStatusMessage>(
             [this](::grpc::ServerContext* context,
@@ -1083,9 +1284,9 @@ class GRPCService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedGetServerStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::StringArrayMessage,::ServerStatusMessage>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetIP<WithStreamedUnaryMethod_GetPort<WithStreamedUnaryMethod_GetAddr<WithStreamedUnaryMethod_Profile<WithStreamedUnaryMethod_GetServerStatus<Service > > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_GetIP<WithStreamedUnaryMethod_GetPort<WithStreamedUnaryMethod_GetAddr<WithStreamedUnaryMethod_Control<WithStreamedUnaryMethod_Profile<WithStreamedUnaryMethod_GetServerStatus<Service > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetIP<WithStreamedUnaryMethod_GetPort<WithStreamedUnaryMethod_GetAddr<WithStreamedUnaryMethod_Profile<WithStreamedUnaryMethod_GetServerStatus<Service > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_GetIP<WithStreamedUnaryMethod_GetPort<WithStreamedUnaryMethod_GetAddr<WithStreamedUnaryMethod_Control<WithStreamedUnaryMethod_Profile<WithStreamedUnaryMethod_GetServerStatus<Service > > > > > > StreamedService;
 };
 
 

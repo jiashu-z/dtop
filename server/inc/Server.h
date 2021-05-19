@@ -127,6 +127,15 @@ class Server {
    */
   std::string get_addr() const;
 
+	/**
+	 * @brief Process control message from center server.
+	 *
+	 * @param request
+	 * @param reply
+	 * @return bool True if no error occurs.
+	 */
+	bool control(const CommandArrayMessage* request, StringArrayMessage* reply);
+
   /**
    * @brief Process profile query from center server.
    *

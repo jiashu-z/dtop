@@ -29,6 +29,14 @@
   return ::grpc::Status::OK;
 }
 
+::grpc::Status dtop::server::ConcreteGRPCService::Control(::grpc::ServerContext *context,
+																													const ::CommandArrayMessage *request,
+                                           ::StringArrayMessage *response) {
+	this->server->control(request, response);
+	return grpc::Status::OK;
+}
+
+
 ::grpc::Status dtop::server::ConcreteGRPCService::Profile(
     ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
     ::FetchReplyMessage *response) {
@@ -47,10 +55,10 @@
   //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
   this->server->profile(request, response);
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  std::cout << request->SerializeAsString() << std::endl;
-  std::cout << response->SerializeAsString() << std::endl;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+//  std::cout << request->SerializeAsString() << std::endl;
+//  std::cout << response->SerializeAsString() << std::endl;
+//  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   return ::grpc::Status::OK;
 }
 
