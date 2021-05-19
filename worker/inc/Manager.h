@@ -7,6 +7,7 @@
 #include "BaseWorker.h"
 #include "ManagerMeta.h"
 #include "api.grpc.pb.h"
+#include "WorkerCmdType.h"
 
 namespace dtop {
 namespace worker {
@@ -52,6 +53,8 @@ class Manager {
    */
   google::protobuf::RepeatedPtrField<WorkerStatusMessage>* get_worker_status(
       bool with_futures = false, bool with_future_desc = false);
+
+  bool switch_worker_status(std::string& worker_name, WorkerCmdType cmd_type);
 };
 
 }  // namespace worker

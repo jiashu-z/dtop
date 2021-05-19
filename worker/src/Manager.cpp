@@ -91,3 +91,16 @@ dtop::worker::Manager::get_worker_status(bool with_futures,
   }
   return rpf_ptr;
 }
+
+bool dtop::worker::Manager::switch_worker_status(std::string& worker_name, dtop::worker::WorkerCmdType cmd_type) {
+	BaseWorker* worker_ptr = this->manager_meta->get_worker_by_name(worker_name);
+	switch (cmd_type) {
+		case START:
+			break;
+		case PAUSE:
+			break;
+		case STOP:
+			break;
+	}
+	return false;
+}

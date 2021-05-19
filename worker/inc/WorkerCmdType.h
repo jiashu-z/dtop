@@ -1,8 +1,12 @@
-//
-// Created by carl on 5/19/21.
-//
+#ifndef DTOP_RPC_WORKERCMDTYPE_H
+#define DTOP_RPC_WORKERCMDTYPE_H
 
-#ifndef DTOP_RPC_WORKERCMD_H
-#define DTOP_RPC_WORKERCMD_H
+namespace dtop {
+namespace worker {
 
-#endif //DTOP_RPC_WORKERCMD_H
+enum WorkerCmdType { START, PAUSE, STOP };
+
+}
+}  // namespace dtop
+
+#endif //DTOP_RPC_WORKERCMDTYPE_H
