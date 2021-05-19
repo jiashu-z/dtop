@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <map>
 
+#include "MemLeakWorker.h"
+
 /* Prototypes for our hooks */
 static void my_init_hook(void);
 static void *my_malloc_hook(size_t, const void *);
@@ -34,7 +36,8 @@ my_malloc_hook(size_t size, const void *caller)
 
   /* Call recursively */
   result = malloc(size);
-  int pid = getpid();
+	int pid = getpid();
+  dtop::worker::MemLeakWorker::record_malloc(pid, (int64_t)result, (int64_t)size);
   printf("%d: %p\n", pid, result);
 
   /* Save underlying hooks */
@@ -59,6 +62,9 @@ my_free_hook(void *ptr, const void *caller)
   __free_hook = old_free_hook;
 
   /* Call recursively */
+	free(ptr);
+	int pid = getpid();
+	dtop::worker::MemLeakWorker::record_free(pid, (int64_t)ptr);
 
   /* Save underlying hooks */
   old_free_hook = __free_hook;

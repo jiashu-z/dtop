@@ -10,6 +10,8 @@ src/MangerMeta.cpp
 src/Future.cpp
 src/common.cpp
 src/pslib_linux.cpp
+src/MemLeakWorker.cpp
+src/hook.cpp
 )
 
 target_include_directories(worker
