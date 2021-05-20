@@ -56,6 +56,18 @@ class ConcreteGRPCService final : public GRPCService::Service {
                          ::StringMessage* response) override;
 
   /**
+   * @brief Execute the command on target server
+   *
+   * @param context
+   * @param request
+   * @param response
+   * @return ::grpc::Status
+   */
+  ::grpc::Status ExecCommand(::grpc::ServerContext *context,
+														 const ::CommandArrayMessage *request,
+														 ::StringArrayMessage *response) override;
+
+  /**
    * @brief Collect profiling data of current machine.
    *        Called by another server.
    *
@@ -79,18 +91,6 @@ class ConcreteGRPCService final : public GRPCService::Service {
   ::grpc::Status GetServerStatus(::grpc::ServerContext* context,
                                  const ::StringArrayMessage* request,
                                  ::ServerStatusMessage* response) override;
-
-  /**
-   * @brief Process a control message from cluster center
-   *
-   * @param context
-   * @param request
-   * @param response
-   * @return ::grpc::Status
-   */
-  ::grpc::Status Control(::grpc::ServerContext *context,
-												 const ::CommandArrayMessage *request,
-												 ::StringArrayMessage *response) override;
 
   /**
    * @brief Run the grpc server.

@@ -48,6 +48,13 @@ class APIService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>> PrepareAsyncGetServerAddresses(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>>(PrepareAsyncGetServerAddressesRaw(context, request, cq));
     }
+    virtual ::grpc::Status ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::StringArrayMessage* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>> AsyncExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>>(AsyncExecClusterCommandRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>> PrepareAsyncExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>>(PrepareAsyncExecClusterCommandRaw(context, request, cq));
+    }
     virtual ::grpc::Status GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyArrayMessage* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyArrayMessage>> AsyncGetStats(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyArrayMessage>>(AsyncGetStatsRaw(context, request, cq));
@@ -77,6 +84,12 @@ class APIService final {
       #else
       virtual void GetServerAddresses(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
+      virtual void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
       virtual void GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)>) = 0;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       virtual void GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -102,6 +115,8 @@ class APIService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ServerStatusArrMessage>* PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* AsyncGetServerAddressesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* PrepareAsyncGetServerAddressesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* AsyncExecClusterCommandRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::StringArrayMessage>* PrepareAsyncExecClusterCommandRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyArrayMessage>* AsyncGetStatsRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyArrayMessage>* PrepareAsyncGetStatsRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::FetchReplyArrayMessage>* AsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) = 0;
@@ -123,6 +138,13 @@ class APIService final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>> PrepareAsyncGetServerAddresses(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>>(PrepareAsyncGetServerAddressesRaw(context, request, cq));
+    }
+    ::grpc::Status ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::StringArrayMessage* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>> AsyncExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>>(AsyncExecClusterCommandRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>> PrepareAsyncExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>>(PrepareAsyncExecClusterCommandRaw(context, request, cq));
     }
     ::grpc::Status GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyArrayMessage* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>> AsyncGetStats(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
@@ -153,6 +175,12 @@ class APIService final {
       #else
       void GetServerAddresses(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
+      void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void ExecClusterCommand(::grpc::ClientContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
       void GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)>) override;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       void GetStats(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, ::grpc::ClientUnaryReactor* reactor) override;
@@ -180,12 +208,15 @@ class APIService final {
     ::grpc::ClientAsyncResponseReader< ::ServerStatusArrMessage>* PrepareAsyncGetServerStatusRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* AsyncGetServerAddressesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* PrepareAsyncGetServerAddressesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* AsyncExecClusterCommandRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::StringArrayMessage>* PrepareAsyncExecClusterCommandRaw(::grpc::ClientContext* context, const ::CommandArrayMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* AsyncGetStatsRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* PrepareAsyncGetStatsRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* AsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* PrepareAsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetServerStatus_;
     const ::grpc::internal::RpcMethod rpcmethod_GetServerAddresses_;
+    const ::grpc::internal::RpcMethod rpcmethod_ExecClusterCommand_;
     const ::grpc::internal::RpcMethod rpcmethod_GetStats_;
     const ::grpc::internal::RpcMethod rpcmethod_GetAggregatedVirtualMemInfo_;
   };
@@ -197,6 +228,7 @@ class APIService final {
     virtual ~Service();
     virtual ::grpc::Status GetServerStatus(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::ServerStatusArrMessage* response);
     virtual ::grpc::Status GetServerAddresses(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::StringArrayMessage* response);
+    virtual ::grpc::Status ExecClusterCommand(::grpc::ServerContext* context, const ::CommandArrayMessage* request, ::StringArrayMessage* response);
     virtual ::grpc::Status GetStats(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response);
     virtual ::grpc::Status GetAggregatedVirtualMemInfo(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response);
   };
@@ -241,12 +273,32 @@ class APIService final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_ExecClusterCommand() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestExecClusterCommand(::grpc::ServerContext* context, ::CommandArrayMessage* request, ::grpc::ServerAsyncResponseWriter< ::StringArrayMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetStats() {
-      ::grpc::Service::MarkMethodAsync(2);
+      ::grpc::Service::MarkMethodAsync(3);
     }
     ~WithAsyncMethod_GetStats() override {
       BaseClassMustBeDerivedFromService(this);
@@ -257,7 +309,7 @@ class APIService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetStats(::grpc::ServerContext* context, ::FetchRequestMessage* request, ::grpc::ServerAsyncResponseWriter< ::FetchReplyArrayMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -266,7 +318,7 @@ class APIService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetAggregatedVirtualMemInfo() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_GetAggregatedVirtualMemInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -277,10 +329,10 @@ class APIService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetAggregatedVirtualMemInfo(::grpc::ServerContext* context, ::FetchRequestMessage* request, ::grpc::ServerAsyncResponseWriter< ::FetchReplyArrayMessage>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetServerStatus<WithAsyncMethod_GetServerAddresses<WithAsyncMethod_GetStats<WithAsyncMethod_GetAggregatedVirtualMemInfo<Service > > > > AsyncService;
+  typedef WithAsyncMethod_GetServerStatus<WithAsyncMethod_GetServerAddresses<WithAsyncMethod_ExecClusterCommand<WithAsyncMethod_GetStats<WithAsyncMethod_GetAggregatedVirtualMemInfo<Service > > > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetServerStatus : public BaseClass {
    private:
@@ -376,6 +428,53 @@ class APIService final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_ExecClusterCommand() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::CommandArrayMessage, ::StringArrayMessage>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::CommandArrayMessage* request, ::StringArrayMessage* response) { return this->ExecClusterCommand(context, request, response); }));}
+    void SetMessageAllocatorFor_ExecClusterCommand(
+        ::grpc::experimental::MessageAllocator< ::CommandArrayMessage, ::StringArrayMessage>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
+    #endif
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::CommandArrayMessage, ::StringArrayMessage>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* ExecClusterCommand(
+      ::grpc::CallbackServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* ExecClusterCommand(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -386,7 +485,7 @@ class APIService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(2,
+        MarkMethodCallback(3,
           new ::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyArrayMessage>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -398,9 +497,9 @@ class APIService final {
     void SetMessageAllocatorFor_GetStats(
         ::grpc::experimental::MessageAllocator< ::FetchRequestMessage, ::FetchReplyArrayMessage>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
     #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(3);
     #endif
       static_cast<::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyArrayMessage>*>(handler)
               ->SetMessageAllocator(allocator);
@@ -433,7 +532,7 @@ class APIService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(3,
+        MarkMethodCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyArrayMessage>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -445,9 +544,9 @@ class APIService final {
     void SetMessageAllocatorFor_GetAggregatedVirtualMemInfo(
         ::grpc::experimental::MessageAllocator< ::FetchRequestMessage, ::FetchReplyArrayMessage>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
     #else
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(3);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(4);
     #endif
       static_cast<::grpc::internal::CallbackUnaryHandler< ::FetchRequestMessage, ::FetchReplyArrayMessage>*>(handler)
               ->SetMessageAllocator(allocator);
@@ -470,10 +569,10 @@ class APIService final {
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_GetServerStatus<ExperimentalWithCallbackMethod_GetServerAddresses<ExperimentalWithCallbackMethod_GetStats<ExperimentalWithCallbackMethod_GetAggregatedVirtualMemInfo<Service > > > > CallbackService;
+  typedef ExperimentalWithCallbackMethod_GetServerStatus<ExperimentalWithCallbackMethod_GetServerAddresses<ExperimentalWithCallbackMethod_ExecClusterCommand<ExperimentalWithCallbackMethod_GetStats<ExperimentalWithCallbackMethod_GetAggregatedVirtualMemInfo<Service > > > > > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_GetServerStatus<ExperimentalWithCallbackMethod_GetServerAddresses<ExperimentalWithCallbackMethod_GetStats<ExperimentalWithCallbackMethod_GetAggregatedVirtualMemInfo<Service > > > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_GetServerStatus<ExperimentalWithCallbackMethod_GetServerAddresses<ExperimentalWithCallbackMethod_ExecClusterCommand<ExperimentalWithCallbackMethod_GetStats<ExperimentalWithCallbackMethod_GetAggregatedVirtualMemInfo<Service > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_GetServerStatus : public BaseClass {
    private:
@@ -509,12 +608,29 @@ class APIService final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_ExecClusterCommand() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetStats() {
-      ::grpc::Service::MarkMethodGeneric(2);
+      ::grpc::Service::MarkMethodGeneric(3);
     }
     ~WithGenericMethod_GetStats() override {
       BaseClassMustBeDerivedFromService(this);
@@ -531,7 +647,7 @@ class APIService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetAggregatedVirtualMemInfo() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_GetAggregatedVirtualMemInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -583,12 +699,32 @@ class APIService final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_ExecClusterCommand() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestExecClusterCommand(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetStats() {
-      ::grpc::Service::MarkMethodRaw(2);
+      ::grpc::Service::MarkMethodRaw(3);
     }
     ~WithRawMethod_GetStats() override {
       BaseClassMustBeDerivedFromService(this);
@@ -599,7 +735,7 @@ class APIService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetStats(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -608,7 +744,7 @@ class APIService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetAggregatedVirtualMemInfo() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_GetAggregatedVirtualMemInfo() override {
       BaseClassMustBeDerivedFromService(this);
@@ -619,7 +755,7 @@ class APIService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetAggregatedVirtualMemInfo(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -699,6 +835,44 @@ class APIService final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_ExecClusterCommand() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->ExecClusterCommand(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* ExecClusterCommand(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* ExecClusterCommand(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -709,7 +883,7 @@ class APIService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(2,
+        MarkMethodRawCallback(3,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -747,7 +921,7 @@ class APIService final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(3,
+        MarkMethodRawCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -829,12 +1003,39 @@ class APIService final {
     virtual ::grpc::Status StreamedGetServerAddresses(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::StringArrayMessage>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_ExecClusterCommand : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_ExecClusterCommand() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::CommandArrayMessage, ::StringArrayMessage>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::CommandArrayMessage, ::StringArrayMessage>* streamer) {
+                       return this->StreamedExecClusterCommand(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_ExecClusterCommand() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status ExecClusterCommand(::grpc::ServerContext* /*context*/, const ::CommandArrayMessage* /*request*/, ::StringArrayMessage* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedExecClusterCommand(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::CommandArrayMessage,::StringArrayMessage>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_GetStats : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetStats() {
-      ::grpc::Service::MarkMethodStreamed(2,
+      ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler<
           ::FetchRequestMessage, ::FetchReplyArrayMessage>(
             [this](::grpc::ServerContext* context,
@@ -861,7 +1062,7 @@ class APIService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetAggregatedVirtualMemInfo() {
-      ::grpc::Service::MarkMethodStreamed(3,
+      ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler<
           ::FetchRequestMessage, ::FetchReplyArrayMessage>(
             [this](::grpc::ServerContext* context,
@@ -882,9 +1083,9 @@ class APIService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedGetAggregatedVirtualMemInfo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::FetchRequestMessage,::FetchReplyArrayMessage>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetServerStatus<WithStreamedUnaryMethod_GetServerAddresses<WithStreamedUnaryMethod_GetStats<WithStreamedUnaryMethod_GetAggregatedVirtualMemInfo<Service > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_GetServerStatus<WithStreamedUnaryMethod_GetServerAddresses<WithStreamedUnaryMethod_ExecClusterCommand<WithStreamedUnaryMethod_GetStats<WithStreamedUnaryMethod_GetAggregatedVirtualMemInfo<Service > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetServerStatus<WithStreamedUnaryMethod_GetServerAddresses<WithStreamedUnaryMethod_GetStats<WithStreamedUnaryMethod_GetAggregatedVirtualMemInfo<Service > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_GetServerStatus<WithStreamedUnaryMethod_GetServerAddresses<WithStreamedUnaryMethod_ExecClusterCommand<WithStreamedUnaryMethod_GetStats<WithStreamedUnaryMethod_GetAggregatedVirtualMemInfo<Service > > > > > StreamedService;
 };
 
 

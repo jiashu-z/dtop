@@ -134,7 +134,7 @@ class Server {
 	 * @param reply
 	 * @return bool True if no error occurs.
 	 */
-	bool control(const CommandArrayMessage* request, StringArrayMessage* reply);
+	bool exec_command(const CommandArrayMessage* request, StringArrayMessage* reply);
 
   /**
    * @brief Process profile query from center server.

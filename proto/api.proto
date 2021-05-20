@@ -10,6 +10,8 @@ service APIService {
   
   rpc GetServerAddresses (google.protobuf.Empty) returns (StringArrayMessage);
 
+  rpc ExecClusterCommand (CommandArrayMessage) returns (StringArrayMessage);
+
   rpc GetStats (FetchRequestMessage) returns (FetchReplyArrayMessage);
 
   rpc GetAggregatedVirtualMemInfo (FetchRequestMessage) returns (FetchReplyArrayMessage);

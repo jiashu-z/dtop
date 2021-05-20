@@ -29,10 +29,10 @@
   return ::grpc::Status::OK;
 }
 
-::grpc::Status dtop::server::ConcreteGRPCService::Control(::grpc::ServerContext *context,
-																													const ::CommandArrayMessage *request,
-                                           ::StringArrayMessage *response) {
-	this->server->control(request, response);
+::grpc::Status dtop::server::ConcreteGRPCService::ExecCommand(
+				::grpc::ServerContext *context, const ::CommandArrayMessage *request,
+        ::StringArrayMessage *response) {
+	this->server->exec_command(request, response);
 	return grpc::Status::OK;
 }
 

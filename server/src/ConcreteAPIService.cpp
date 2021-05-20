@@ -17,6 +17,14 @@
   return ::grpc::Status::OK;
 }
 
+
+::grpc::Status dtop::server::ConcreteAPIService::ExecClusterCommand(
+		::grpc::ServerContext *context, const ::CommandArrayMessage *request,
+    ::StringArrayMessage *response) {
+	this->server->client.exec_cluster_command(response, request);
+	return ::grpc::Status::OK;
+}
+
 ::grpc::Status dtop::server::ConcreteAPIService::GetStats(
     ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
     ::FetchReplyArrayMessage *response) {

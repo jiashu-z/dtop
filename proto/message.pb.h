@@ -1850,10 +1850,27 @@ class CommandMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kWorkerNameFieldNumber = 1,
-    kCmdTypeFieldNumber = 2,
+    kAddrFieldNumber = 1,
+    kWorkerNameFieldNumber = 2,
+    kCmdTypeFieldNumber = 3,
   };
-  // string worker_name = 1;
+  // string addr = 1;
+  void clear_addr();
+  const std::string& addr() const;
+  void set_addr(const std::string& value);
+  void set_addr(std::string&& value);
+  void set_addr(const char* value);
+  void set_addr(const char* value, size_t size);
+  std::string* mutable_addr();
+  std::string* release_addr();
+  void set_allocated_addr(std::string* addr);
+  private:
+  const std::string& _internal_addr() const;
+  void _internal_set_addr(const std::string& value);
+  std::string* _internal_mutable_addr();
+  public:
+
+  // string worker_name = 2;
   void clear_worker_name();
   const std::string& worker_name() const;
   void set_worker_name(const std::string& value);
@@ -1869,7 +1886,7 @@ class CommandMessage PROTOBUF_FINAL :
   std::string* _internal_mutable_worker_name();
   public:
 
-  // string cmd_type = 2;
+  // string cmd_type = 3;
   void clear_cmd_type();
   const std::string& cmd_type() const;
   void set_cmd_type(const std::string& value);
@@ -1892,6 +1909,7 @@ class CommandMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addr_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr worker_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cmd_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -3969,7 +3987,68 @@ CommandArrayMessage::command_arr() const {
 
 // CommandMessage
 
-// string worker_name = 1;
+// string addr = 1;
+inline void CommandMessage::clear_addr() {
+  addr_.ClearToEmpty();
+}
+inline const std::string& CommandMessage::addr() const {
+  // @@protoc_insertion_point(field_get:CommandMessage.addr)
+  return _internal_addr();
+}
+inline void CommandMessage::set_addr(const std::string& value) {
+  _internal_set_addr(value);
+  // @@protoc_insertion_point(field_set:CommandMessage.addr)
+}
+inline std::string* CommandMessage::mutable_addr() {
+  // @@protoc_insertion_point(field_mutable:CommandMessage.addr)
+  return _internal_mutable_addr();
+}
+inline const std::string& CommandMessage::_internal_addr() const {
+  return addr_.Get();
+}
+inline void CommandMessage::_internal_set_addr(const std::string& value) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void CommandMessage::set_addr(std::string&& value) {
+  
+  addr_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:CommandMessage.addr)
+}
+inline void CommandMessage::set_addr(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:CommandMessage.addr)
+}
+inline void CommandMessage::set_addr(const char* value,
+    size_t size) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:CommandMessage.addr)
+}
+inline std::string* CommandMessage::_internal_mutable_addr() {
+  
+  return addr_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* CommandMessage::release_addr() {
+  // @@protoc_insertion_point(field_release:CommandMessage.addr)
+  return addr_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void CommandMessage::set_allocated_addr(std::string* addr) {
+  if (addr != nullptr) {
+    
+  } else {
+    
+  }
+  addr_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), addr,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:CommandMessage.addr)
+}
+
+// string worker_name = 2;
 inline void CommandMessage::clear_worker_name() {
   worker_name_.ClearToEmpty();
 }
@@ -4030,7 +4109,7 @@ inline void CommandMessage::set_allocated_worker_name(std::string* worker_name) 
   // @@protoc_insertion_point(field_set_allocated:CommandMessage.worker_name)
 }
 
-// string cmd_type = 2;
+// string cmd_type = 3;
 inline void CommandMessage::clear_cmd_type() {
   cmd_type_.ClearToEmpty();
 }

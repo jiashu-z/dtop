@@ -48,8 +48,9 @@ message CommandArrayMessage {
 }
 
 message CommandMessage {
-  string worker_name = 1;
-  string cmd_type = 2;
+  string addr = 1;
+  string worker_name = 2;
+  string cmd_type = 3;
 }
 
 

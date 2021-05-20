@@ -26,6 +26,10 @@ class ConcreteAPIService final : public APIService::Service {
                                     const ::google::protobuf::Empty* request,
                                     ::StringArrayMessage* response) override;
 
+	::grpc::Status ExecClusterCommand(::grpc::ServerContext* context,
+	                                  const ::CommandArrayMessage* request,
+	                                  ::StringArrayMessage* response) override;
+
   ::grpc::Status GetStats(::grpc::ServerContext* context,
                           const ::FetchRequestMessage* request,
                           ::FetchReplyArrayMessage* response) override;

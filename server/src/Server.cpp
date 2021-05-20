@@ -83,8 +83,8 @@ dtop::server::Server::Server(const std::string& config_file_path)
   this->init_config();
 }
 
-bool dtop::server::Server::control(const CommandArrayMessage* request,
-                                   StringArrayMessage* reply) {
+bool dtop::server::Server::exec_command(const CommandArrayMessage* request,
+                                        StringArrayMessage* reply) {
   for (auto& command : request->command_arr()) {
   	const std::string& worker_name = command.worker_name();
   	worker::WorkerCmdType cmd_type = worker::get_cmd_type(command.cmd_type());

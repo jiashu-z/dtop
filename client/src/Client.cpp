@@ -56,6 +56,45 @@ std::string dtop::client::Client::get_cluster_stats() {
   throw "Not implemented!";
 }
 
+void dtop::client::Client::exec_cluster_command(StringArrayMessage *response,
+																								const CommandArrayMessage *request) {
+	std::unordered_map<std::string, CommandArrayMessage> cmd_arr_map;
+	// init map
+	for (const auto& iter : this->grpc_client_map) {
+		cmd_arr_map.insert(std::make_pair<std::string, CommandArrayMessage>(
+						std::string(iter.first), CommandArrayMessage()));
+	}
+	// set command array for each client
+	for (const auto& command : request->command_arr()) {
+		if (command.addr().empty()) {
+			// broadcast
+			for (auto& iter : cmd_arr_map) {
+				iter.second.mutable_command_arr()->Add()->CopyFrom(command);
+			}
+		} else {
+			auto iter = cmd_arr_map.find(command.addr());
+			if (iter != cmd_arr_map.end()) {
+				auto* command_ptr = iter->second.mutable_command_arr()->Add();
+				command_ptr->set_worker_name(command.worker_name());    // no addr field
+				command_ptr->set_cmd_type(command.cmd_type());
+			} else {
+				std::cout << "Unknown host " << iter->first << std::endl;
+			}
+		}
+	}
+	// send command to target host
+	for (const auto& iter : this->grpc_client_map) {
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+		std::cout << iter.first << std::endl;
+		::grpc::ClientContext context;
+		const CommandArrayMessage* local_request = &cmd_arr_map[iter.first];   // must contain
+		StringArrayMessage local_response;
+		iter.second->stub->ExecCommand(&context, *local_request, &local_response);
+		response->MergeFrom(local_response);
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	}
+}
+
 void dtop::client::Client::get_cluster_stats(
     FetchReplyArrayMessage* response, const FetchRequestMessage* request) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;

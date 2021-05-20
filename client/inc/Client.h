@@ -48,6 +48,9 @@ class Client {
 
   std::string get_cluster_stats();
 
+  void exec_cluster_command(StringArrayMessage* response,
+														const CommandArrayMessage* request);
+
   void get_cluster_stats(FetchReplyArrayMessage* response,
                          const FetchRequestMessage* request);
 };
