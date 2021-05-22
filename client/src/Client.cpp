@@ -52,8 +52,19 @@ void dtop::client::Client::add_api_target(const std::string& addr) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 }
 
-std::string dtop::client::Client::get_cluster_stats() {
-  throw "Not implemented!";
+void dtop::client::Client::get_cluster_status(::ServerStatusArrayMessage *response,
+                                             const ::StringArrayMessage* request) {
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	for (const auto& iter : this->grpc_client_map) {
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+		std::cout << iter.first << std::endl;
+		::grpc::ClientContext context;
+		ServerStatusMessage local_response;
+		iter.second->stub->GetServerStatus(&context, *request, &local_response);
+		auto* reply_ptr = response->add_server_status();
+		reply_ptr->CopyFrom(local_response);
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	}
 }
 
 void dtop::client::Client::exec_cluster_command(StringArrayMessage *response,
@@ -95,7 +106,7 @@ void dtop::client::Client::exec_cluster_command(StringArrayMessage *response,
 	}
 }
 
-void dtop::client::Client::get_cluster_stats(
+void dtop::client::Client::get_cluster_metric(
     FetchReplyArrayMessage* response, const FetchRequestMessage* request) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   for (const auto& iter : this->grpc_client_map) {
@@ -103,7 +114,7 @@ void dtop::client::Client::get_cluster_stats(
     std::cout << iter.first << std::endl;
     ::grpc::ClientContext context;
     FetchReplyMessage local_response;
-    iter.second->stub->Profile(&context, *request, &local_response);
+    iter.second->stub->GetServerMetric(&context, *request, &local_response);
     auto* reply_ptr = response->mutable_fetch_reply()->Add();
     reply_ptr->CopyFrom(local_response);
     std::cout << __FILE__ << ": " << __LINE__ << std::endl;

@@ -46,13 +46,14 @@ class Client {
 
   std::vector<std::string> get_all_targets_addr();
 
-  std::string get_cluster_stats();
+  void get_cluster_status(ServerStatusArrayMessage *response,
+												  const StringArrayMessage* request);
 
   void exec_cluster_command(StringArrayMessage* response,
 														const CommandArrayMessage* request);
 
-  void get_cluster_stats(FetchReplyArrayMessage* response,
-                         const FetchRequestMessage* request);
+  void get_cluster_metric(FetchReplyArrayMessage* response,
+                          const FetchRequestMessage* request);
 };
 
 }  // namespace client

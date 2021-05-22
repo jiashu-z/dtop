@@ -94,9 +94,10 @@ bool dtop::server::Server::exec_command(const CommandArrayMessage* request,
   return true;
 }
 
-bool dtop::server::Server::profile(const FetchRequestMessage* request,
-                                   FetchReplyMessage* reply) {
+bool dtop::server::Server::get_server_metric(const FetchRequestMessage* request,
+                                             FetchReplyMessage* reply) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  reply->set_addr(this->get_addr());
   return this->manager.process_query(request, reply);
 }
 

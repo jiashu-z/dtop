@@ -25,17 +25,17 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances
 
 const char descriptor_table_protodef_api_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tapi.proto\032\rmessage.proto\032\033google/proto"
-  "buf/empty.proto2\335\002\n\nAPIService\022B\n\017GetSer"
-  "verStatus\022\026.google.protobuf.Empty\032\027.Serv"
-  "erStatusArrMessage\022A\n\022GetServerAddresses"
+  "buf/empty.proto2\345\002\n\nAPIService\022B\n\020GetClu"
+  "sterStatus\022\023.StringArrayMessage\032\031.Server"
+  "StatusArrayMessage\022A\n\022GetServerAddresses"
   "\022\026.google.protobuf.Empty\032\023.StringArrayMe"
   "ssage\022\?\n\022ExecClusterCommand\022\024.CommandArr"
-  "ayMessage\032\023.StringArrayMessage\0229\n\010GetSta"
-  "ts\022\024.FetchRequestMessage\032\027.FetchReplyArr"
-  "ayMessage\022L\n\033GetAggregatedVirtualMemInfo"
-  "\022\024.FetchRequestMessage\032\027.FetchReplyArray"
-  "MessageB\031\n\027grp.dtop.dtopjava.protob\006prot"
-  "o3"
+  "ayMessage\032\023.StringArrayMessage\022A\n\020GetClu"
+  "sterMetric\022\024.FetchRequestMessage\032\027.Fetch"
+  "ReplyArrayMessage\022L\n\033GetAggregatedVirtua"
+  "lMemInfo\022\024.FetchRequestMessage\032\027.FetchRe"
+  "plyArrayMessageB\031\n\027grp.dtop.dtopjava.pro"
+  "tob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_api_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
@@ -43,7 +43,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_api_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_api_2eproto = {
-  false, false, 442, descriptor_table_protodef_api_2eproto, "api.proto", 
+  false, false, 450, descriptor_table_protodef_api_2eproto, "api.proto", 
   &descriptor_table_api_2eproto_once, descriptor_table_api_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_api_2eproto::offsets,
   file_level_metadata_api_2eproto, file_level_enum_descriptors_api_2eproto, file_level_service_descriptors_api_2eproto,

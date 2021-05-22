@@ -25,7 +25,7 @@ static const char* GRPCService_method_names[] = {
   "/GRPCService/GetPort",
   "/GRPCService/GetAddr",
   "/GRPCService/ExecCommand",
-  "/GRPCService/Profile",
+  "/GRPCService/GetServerMetric",
   "/GRPCService/GetServerStatus",
 };
 
@@ -40,7 +40,7 @@ GRPCService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   , rpcmethod_GetPort_(GRPCService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetAddr_(GRPCService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_ExecCommand_(GRPCService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Profile_(GRPCService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetServerMetric_(GRPCService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetServerStatus_(GRPCService_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
@@ -136,25 +136,25 @@ void GRPCService::Stub::experimental_async::ExecCommand(::grpc::ClientContext* c
   return result;
 }
 
-::grpc::Status GRPCService::Stub::Profile(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyMessage* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestMessage, ::FetchReplyMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Profile_, context, request, response);
+::grpc::Status GRPCService::Stub::GetServerMetric(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestMessage, ::FetchReplyMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetServerMetric_, context, request, response);
 }
 
-void GRPCService::Stub::experimental_async::Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::FetchRequestMessage, ::FetchReplyMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Profile_, context, request, response, std::move(f));
+void GRPCService::Stub::experimental_async::GetServerMetric(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::FetchRequestMessage, ::FetchReplyMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerMetric_, context, request, response, std::move(f));
 }
 
-void GRPCService::Stub::experimental_async::Profile(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Profile_, context, request, response, reactor);
+void GRPCService::Stub::experimental_async::GetServerMetric(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetServerMetric_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* GRPCService::Stub::PrepareAsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyMessage, ::FetchRequestMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Profile_, context, request);
+::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* GRPCService::Stub::PrepareAsyncGetServerMetricRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyMessage, ::FetchRequestMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetServerMetric_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* GRPCService::Stub::AsyncProfileRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::FetchReplyMessage>* GRPCService::Stub::AsyncGetServerMetricRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
   auto* result =
-    this->PrepareAsyncProfileRaw(context, request, cq);
+    this->PrepareAsyncGetServerMetricRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -231,7 +231,7 @@ GRPCService::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::FetchRequestMessage* req,
              ::FetchReplyMessage* resp) {
-               return service->Profile(ctx, req, resp);
+               return service->GetServerMetric(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GRPCService_method_names[5],
@@ -276,7 +276,7 @@ GRPCService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status GRPCService::Service::Profile(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response) {
+::grpc::Status GRPCService::Service::GetServerMetric(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyMessage* response) {
   (void) context;
   (void) request;
   (void) response;

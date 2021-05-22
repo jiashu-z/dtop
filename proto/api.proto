@@ -6,13 +6,9 @@ import "message.proto";
 import "google/protobuf/empty.proto";
 
 service APIService {
-  rpc GetServerStatus (google.protobuf.Empty) returns (ServerStatusArrMessage);
-  
+  rpc GetClusterStatus (StringArrayMessage) returns (ServerStatusArrayMessage);
   rpc GetServerAddresses (google.protobuf.Empty) returns (StringArrayMessage);
-
   rpc ExecClusterCommand (CommandArrayMessage) returns (StringArrayMessage);
-
-  rpc GetStats (FetchRequestMessage) returns (FetchReplyArrayMessage);
-
+  rpc GetClusterMetric (FetchRequestMessage) returns (FetchReplyArrayMessage);
   rpc GetAggregatedVirtualMemInfo (FetchRequestMessage) returns (FetchReplyArrayMessage);
 }

@@ -78,12 +78,13 @@ message FetchRequestMessage {
 }
 
 message FetchReplyMessage {
-  CpuMessage cpu_message = 1;
-  MemUsageMessage mem_usage_message = 2;
-  repeated string infos = 3;
+  string addr = 1;
+  CpuMessage cpu_message = 2;
+  MemUsageMessage mem_usage_message = 3;
+  repeated string infos = 4;
 }
 
-message ServerStatusArrMessage {
+message ServerStatusArrayMessage {
   repeated ServerStatusMessage server_status = 1;
 }
 

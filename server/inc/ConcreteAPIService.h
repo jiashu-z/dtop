@@ -18,9 +18,9 @@ class ConcreteAPIService final : public APIService::Service {
 
   ~ConcreteAPIService();
 
-  ::grpc::Status GetServerStatus(::grpc::ServerContext* context,
-                                 const ::google::protobuf::Empty* request,
-                                 ::ServerStatusArrMessage* response) override;
+  ::grpc::Status GetClusterStatus(::grpc::ServerContext* context,
+                                  const ::StringArrayMessage* request,
+                                  ::ServerStatusArrayMessage* response) override;
 
   ::grpc::Status GetServerAddresses(::grpc::ServerContext* context,
                                     const ::google::protobuf::Empty* request,
@@ -30,9 +30,9 @@ class ConcreteAPIService final : public APIService::Service {
 	                                  const ::CommandArrayMessage* request,
 	                                  ::StringArrayMessage* response) override;
 
-  ::grpc::Status GetStats(::grpc::ServerContext* context,
-                          const ::FetchRequestMessage* request,
-                          ::FetchReplyArrayMessage* response) override;
+  ::grpc::Status GetClusterMetric(::grpc::ServerContext* context,
+                                  const ::FetchRequestMessage* request,
+                                  ::FetchReplyArrayMessage* response) override;
 
   ::grpc::Status GetAggregatedVirtualMemInfo(
       ::grpc::ServerContext* context, const ::FetchRequestMessage* request,

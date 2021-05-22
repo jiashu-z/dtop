@@ -37,7 +37,7 @@
 }
 
 
-::grpc::Status dtop::server::ConcreteGRPCService::Profile(
+::grpc::Status dtop::server::ConcreteGRPCService::GetServerMetric(
     ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
     ::FetchReplyMessage *response) {
   //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
@@ -53,8 +53,7 @@
   //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   //  worker->handle_process(q, *response);
   //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-
-  this->server->profile(request, response);
+	this->server->get_server_metric(request, response);
 //  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 //  std::cout << request->SerializeAsString() << std::endl;
 //  std::cout << response->SerializeAsString() << std::endl;

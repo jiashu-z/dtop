@@ -137,13 +137,13 @@ class Server {
 	bool exec_command(const CommandArrayMessage* request, StringArrayMessage* reply);
 
   /**
-   * @brief Process profile query from center server.
+   * @brief Process get_server_metric query from center server.
    *
    * @param request
    * @param reply
    * @return bool True if no error occurs.
    */
-  bool profile(const FetchRequestMessage* request, FetchReplyMessage* reply);
+  bool get_server_metric(const FetchRequestMessage* request, FetchReplyMessage* reply);
 
   /**
    * @brief Get the server status.

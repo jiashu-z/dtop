@@ -4,9 +4,10 @@
 
 #include "Server.h"
 
-::grpc::Status dtop::server::ConcreteAPIService::GetServerStatus(
-    ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
-    ::ServerStatusArrMessage *response) {
+::grpc::Status dtop::server::ConcreteAPIService::GetClusterStatus(
+    ::grpc::ServerContext *context, const ::StringArrayMessage* request,
+    ::ServerStatusArrayMessage *response) {
+	this->server->client.get_cluster_status(response, request);
   return ::grpc::Status::OK;
 }
 
@@ -25,11 +26,11 @@
 	return ::grpc::Status::OK;
 }
 
-::grpc::Status dtop::server::ConcreteAPIService::GetStats(
+::grpc::Status dtop::server::ConcreteAPIService::GetClusterMetric(
     ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
     ::FetchReplyArrayMessage *response) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  this->server->client.get_cluster_stats(response, request);
+	this->server->client.get_cluster_metric(response, request);
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   return ::grpc::Status::OK;
 }
@@ -54,7 +55,7 @@ inline void sum_mem_usage(MemUsageMessage& aggregated, const MemUsageMessage& si
                                                                              const ::FetchRequestMessage *request,
                                                                              ::FetchReplyArrayMessage *response) {
 	auto *local_response = new ::FetchReplyArrayMessage();
-	this->server->client.get_cluster_stats(local_response, request);
+	this->server->client.get_cluster_metric(local_response, request);
 	int size = local_response->fetch_reply_size();
 	MemUsageMessage aggregated_mem_usage;
 	set_all_int64_to_value(aggregated_mem_usage, 0);
