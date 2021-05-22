@@ -56,14 +56,14 @@ message CommandMessage {
 
 message ServerStatusMessage {
   string addr = 1;
-  repeated WorkerStatusMessage worker_status = 2;
+  repeated WorkerStatusMessage worker_status_arr = 2;
   string status = 3;
 }
 
 message WorkerStatusMessage {
   string worker_name = 1;
   string status = 2;
-  repeated WorkerFutureMessage future = 3;
+  repeated WorkerFutureMessage futures = 3;
 }
 
 message WorkerFutureMessage {
@@ -85,11 +85,11 @@ message FetchReplyMessage {
 }
 
 message ServerStatusArrayMessage {
-  repeated ServerStatusMessage server_status = 1;
+  repeated ServerStatusMessage server_status_arr = 1;
 }
 
 message FetchReplyArrayMessage {
-  repeated FetchReplyMessage fetch_reply = 1;
+  repeated FetchReplyMessage fetch_reply_arr = 1;
 }
 
 message CpuMessage {

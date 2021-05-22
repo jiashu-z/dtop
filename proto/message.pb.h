@@ -2030,27 +2030,27 @@ class ServerStatusMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kWorkerStatusFieldNumber = 2,
+    kWorkerStatusArrFieldNumber = 2,
     kAddrFieldNumber = 1,
     kStatusFieldNumber = 3,
   };
-  // repeated .WorkerStatusMessage worker_status = 2;
-  int worker_status_size() const;
+  // repeated .WorkerStatusMessage worker_status_arr = 2;
+  int worker_status_arr_size() const;
   private:
-  int _internal_worker_status_size() const;
+  int _internal_worker_status_arr_size() const;
   public:
-  void clear_worker_status();
-  ::WorkerStatusMessage* mutable_worker_status(int index);
+  void clear_worker_status_arr();
+  ::WorkerStatusMessage* mutable_worker_status_arr(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >*
-      mutable_worker_status();
+      mutable_worker_status_arr();
   private:
-  const ::WorkerStatusMessage& _internal_worker_status(int index) const;
-  ::WorkerStatusMessage* _internal_add_worker_status();
+  const ::WorkerStatusMessage& _internal_worker_status_arr(int index) const;
+  ::WorkerStatusMessage* _internal_add_worker_status_arr();
   public:
-  const ::WorkerStatusMessage& worker_status(int index) const;
-  ::WorkerStatusMessage* add_worker_status();
+  const ::WorkerStatusMessage& worker_status_arr(int index) const;
+  ::WorkerStatusMessage* add_worker_status_arr();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >&
-      worker_status() const;
+      worker_status_arr() const;
 
   // string addr = 1;
   void clear_addr();
@@ -2091,7 +2091,7 @@ class ServerStatusMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage > worker_status_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage > worker_status_arr_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addr_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -2212,27 +2212,27 @@ class WorkerStatusMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFutureFieldNumber = 3,
+    kFuturesFieldNumber = 3,
     kWorkerNameFieldNumber = 1,
     kStatusFieldNumber = 2,
   };
-  // repeated .WorkerFutureMessage future = 3;
-  int future_size() const;
+  // repeated .WorkerFutureMessage futures = 3;
+  int futures_size() const;
   private:
-  int _internal_future_size() const;
+  int _internal_futures_size() const;
   public:
-  void clear_future();
-  ::WorkerFutureMessage* mutable_future(int index);
+  void clear_futures();
+  ::WorkerFutureMessage* mutable_futures(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >*
-      mutable_future();
+      mutable_futures();
   private:
-  const ::WorkerFutureMessage& _internal_future(int index) const;
-  ::WorkerFutureMessage* _internal_add_future();
+  const ::WorkerFutureMessage& _internal_futures(int index) const;
+  ::WorkerFutureMessage* _internal_add_futures();
   public:
-  const ::WorkerFutureMessage& future(int index) const;
-  ::WorkerFutureMessage* add_future();
+  const ::WorkerFutureMessage& futures(int index) const;
+  ::WorkerFutureMessage* add_futures();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >&
-      future() const;
+      futures() const;
 
   // string worker_name = 1;
   void clear_worker_name();
@@ -2273,7 +2273,7 @@ class WorkerStatusMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage > future_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage > futures_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr worker_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -2944,25 +2944,25 @@ class ServerStatusArrayMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kServerStatusFieldNumber = 1,
+    kServerStatusArrFieldNumber = 1,
   };
-  // repeated .ServerStatusMessage server_status = 1;
-  int server_status_size() const;
+  // repeated .ServerStatusMessage server_status_arr = 1;
+  int server_status_arr_size() const;
   private:
-  int _internal_server_status_size() const;
+  int _internal_server_status_arr_size() const;
   public:
-  void clear_server_status();
-  ::ServerStatusMessage* mutable_server_status(int index);
+  void clear_server_status_arr();
+  ::ServerStatusMessage* mutable_server_status_arr(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-      mutable_server_status();
+      mutable_server_status_arr();
   private:
-  const ::ServerStatusMessage& _internal_server_status(int index) const;
-  ::ServerStatusMessage* _internal_add_server_status();
+  const ::ServerStatusMessage& _internal_server_status_arr(int index) const;
+  ::ServerStatusMessage* _internal_add_server_status_arr();
   public:
-  const ::ServerStatusMessage& server_status(int index) const;
-  ::ServerStatusMessage* add_server_status();
+  const ::ServerStatusMessage& server_status_arr(int index) const;
+  ::ServerStatusMessage* add_server_status_arr();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-      server_status() const;
+      server_status_arr() const;
 
   // @@protoc_insertion_point(class_scope:ServerStatusArrayMessage)
  private:
@@ -2971,7 +2971,7 @@ class ServerStatusArrayMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_arr_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -3090,25 +3090,25 @@ class FetchReplyArrayMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFetchReplyFieldNumber = 1,
+    kFetchReplyArrFieldNumber = 1,
   };
-  // repeated .FetchReplyMessage fetch_reply = 1;
-  int fetch_reply_size() const;
+  // repeated .FetchReplyMessage fetch_reply_arr = 1;
+  int fetch_reply_arr_size() const;
   private:
-  int _internal_fetch_reply_size() const;
+  int _internal_fetch_reply_arr_size() const;
   public:
-  void clear_fetch_reply();
-  ::FetchReplyMessage* mutable_fetch_reply(int index);
+  void clear_fetch_reply_arr();
+  ::FetchReplyMessage* mutable_fetch_reply_arr(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
-      mutable_fetch_reply();
+      mutable_fetch_reply_arr();
   private:
-  const ::FetchReplyMessage& _internal_fetch_reply(int index) const;
-  ::FetchReplyMessage* _internal_add_fetch_reply();
+  const ::FetchReplyMessage& _internal_fetch_reply_arr(int index) const;
+  ::FetchReplyMessage* _internal_add_fetch_reply_arr();
   public:
-  const ::FetchReplyMessage& fetch_reply(int index) const;
-  ::FetchReplyMessage* add_fetch_reply();
+  const ::FetchReplyMessage& fetch_reply_arr(int index) const;
+  ::FetchReplyMessage* add_fetch_reply_arr();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
-      fetch_reply() const;
+      fetch_reply_arr() const;
 
   // @@protoc_insertion_point(class_scope:FetchReplyArrayMessage)
  private:
@@ -3117,7 +3117,7 @@ class FetchReplyArrayMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage > fetch_reply_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage > fetch_reply_arr_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -4253,43 +4253,43 @@ inline void ServerStatusMessage::set_allocated_addr(std::string* addr) {
   // @@protoc_insertion_point(field_set_allocated:ServerStatusMessage.addr)
 }
 
-// repeated .WorkerStatusMessage worker_status = 2;
-inline int ServerStatusMessage::_internal_worker_status_size() const {
-  return worker_status_.size();
+// repeated .WorkerStatusMessage worker_status_arr = 2;
+inline int ServerStatusMessage::_internal_worker_status_arr_size() const {
+  return worker_status_arr_.size();
 }
-inline int ServerStatusMessage::worker_status_size() const {
-  return _internal_worker_status_size();
+inline int ServerStatusMessage::worker_status_arr_size() const {
+  return _internal_worker_status_arr_size();
 }
-inline void ServerStatusMessage::clear_worker_status() {
-  worker_status_.Clear();
+inline void ServerStatusMessage::clear_worker_status_arr() {
+  worker_status_arr_.Clear();
 }
-inline ::WorkerStatusMessage* ServerStatusMessage::mutable_worker_status(int index) {
-  // @@protoc_insertion_point(field_mutable:ServerStatusMessage.worker_status)
-  return worker_status_.Mutable(index);
+inline ::WorkerStatusMessage* ServerStatusMessage::mutable_worker_status_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerStatusMessage.worker_status_arr)
+  return worker_status_arr_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >*
-ServerStatusMessage::mutable_worker_status() {
-  // @@protoc_insertion_point(field_mutable_list:ServerStatusMessage.worker_status)
-  return &worker_status_;
+ServerStatusMessage::mutable_worker_status_arr() {
+  // @@protoc_insertion_point(field_mutable_list:ServerStatusMessage.worker_status_arr)
+  return &worker_status_arr_;
 }
-inline const ::WorkerStatusMessage& ServerStatusMessage::_internal_worker_status(int index) const {
-  return worker_status_.Get(index);
+inline const ::WorkerStatusMessage& ServerStatusMessage::_internal_worker_status_arr(int index) const {
+  return worker_status_arr_.Get(index);
 }
-inline const ::WorkerStatusMessage& ServerStatusMessage::worker_status(int index) const {
-  // @@protoc_insertion_point(field_get:ServerStatusMessage.worker_status)
-  return _internal_worker_status(index);
+inline const ::WorkerStatusMessage& ServerStatusMessage::worker_status_arr(int index) const {
+  // @@protoc_insertion_point(field_get:ServerStatusMessage.worker_status_arr)
+  return _internal_worker_status_arr(index);
 }
-inline ::WorkerStatusMessage* ServerStatusMessage::_internal_add_worker_status() {
-  return worker_status_.Add();
+inline ::WorkerStatusMessage* ServerStatusMessage::_internal_add_worker_status_arr() {
+  return worker_status_arr_.Add();
 }
-inline ::WorkerStatusMessage* ServerStatusMessage::add_worker_status() {
-  // @@protoc_insertion_point(field_add:ServerStatusMessage.worker_status)
-  return _internal_add_worker_status();
+inline ::WorkerStatusMessage* ServerStatusMessage::add_worker_status_arr() {
+  // @@protoc_insertion_point(field_add:ServerStatusMessage.worker_status_arr)
+  return _internal_add_worker_status_arr();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerStatusMessage >&
-ServerStatusMessage::worker_status() const {
-  // @@protoc_insertion_point(field_list:ServerStatusMessage.worker_status)
-  return worker_status_;
+ServerStatusMessage::worker_status_arr() const {
+  // @@protoc_insertion_point(field_list:ServerStatusMessage.worker_status_arr)
+  return worker_status_arr_;
 }
 
 // string status = 3;
@@ -4479,43 +4479,43 @@ inline void WorkerStatusMessage::set_allocated_status(std::string* status) {
   // @@protoc_insertion_point(field_set_allocated:WorkerStatusMessage.status)
 }
 
-// repeated .WorkerFutureMessage future = 3;
-inline int WorkerStatusMessage::_internal_future_size() const {
-  return future_.size();
+// repeated .WorkerFutureMessage futures = 3;
+inline int WorkerStatusMessage::_internal_futures_size() const {
+  return futures_.size();
 }
-inline int WorkerStatusMessage::future_size() const {
-  return _internal_future_size();
+inline int WorkerStatusMessage::futures_size() const {
+  return _internal_futures_size();
 }
-inline void WorkerStatusMessage::clear_future() {
-  future_.Clear();
+inline void WorkerStatusMessage::clear_futures() {
+  futures_.Clear();
 }
-inline ::WorkerFutureMessage* WorkerStatusMessage::mutable_future(int index) {
-  // @@protoc_insertion_point(field_mutable:WorkerStatusMessage.future)
-  return future_.Mutable(index);
+inline ::WorkerFutureMessage* WorkerStatusMessage::mutable_futures(int index) {
+  // @@protoc_insertion_point(field_mutable:WorkerStatusMessage.futures)
+  return futures_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >*
-WorkerStatusMessage::mutable_future() {
-  // @@protoc_insertion_point(field_mutable_list:WorkerStatusMessage.future)
-  return &future_;
+WorkerStatusMessage::mutable_futures() {
+  // @@protoc_insertion_point(field_mutable_list:WorkerStatusMessage.futures)
+  return &futures_;
 }
-inline const ::WorkerFutureMessage& WorkerStatusMessage::_internal_future(int index) const {
-  return future_.Get(index);
+inline const ::WorkerFutureMessage& WorkerStatusMessage::_internal_futures(int index) const {
+  return futures_.Get(index);
 }
-inline const ::WorkerFutureMessage& WorkerStatusMessage::future(int index) const {
-  // @@protoc_insertion_point(field_get:WorkerStatusMessage.future)
-  return _internal_future(index);
+inline const ::WorkerFutureMessage& WorkerStatusMessage::futures(int index) const {
+  // @@protoc_insertion_point(field_get:WorkerStatusMessage.futures)
+  return _internal_futures(index);
 }
-inline ::WorkerFutureMessage* WorkerStatusMessage::_internal_add_future() {
-  return future_.Add();
+inline ::WorkerFutureMessage* WorkerStatusMessage::_internal_add_futures() {
+  return futures_.Add();
 }
-inline ::WorkerFutureMessage* WorkerStatusMessage::add_future() {
-  // @@protoc_insertion_point(field_add:WorkerStatusMessage.future)
-  return _internal_add_future();
+inline ::WorkerFutureMessage* WorkerStatusMessage::add_futures() {
+  // @@protoc_insertion_point(field_add:WorkerStatusMessage.futures)
+  return _internal_add_futures();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::WorkerFutureMessage >&
-WorkerStatusMessage::future() const {
-  // @@protoc_insertion_point(field_list:WorkerStatusMessage.future)
-  return future_;
+WorkerStatusMessage::futures() const {
+  // @@protoc_insertion_point(field_list:WorkerStatusMessage.futures)
+  return futures_;
 }
 
 // -------------------------------------------------------------------
@@ -5105,86 +5105,86 @@ FetchReplyMessage::mutable_infos() {
 
 // ServerStatusArrayMessage
 
-// repeated .ServerStatusMessage server_status = 1;
-inline int ServerStatusArrayMessage::_internal_server_status_size() const {
-  return server_status_.size();
+// repeated .ServerStatusMessage server_status_arr = 1;
+inline int ServerStatusArrayMessage::_internal_server_status_arr_size() const {
+  return server_status_arr_.size();
 }
-inline int ServerStatusArrayMessage::server_status_size() const {
-  return _internal_server_status_size();
+inline int ServerStatusArrayMessage::server_status_arr_size() const {
+  return _internal_server_status_arr_size();
 }
-inline void ServerStatusArrayMessage::clear_server_status() {
-  server_status_.Clear();
+inline void ServerStatusArrayMessage::clear_server_status_arr() {
+  server_status_arr_.Clear();
 }
-inline ::ServerStatusMessage* ServerStatusArrayMessage::mutable_server_status(int index) {
-  // @@protoc_insertion_point(field_mutable:ServerStatusArrayMessage.server_status)
-  return server_status_.Mutable(index);
+inline ::ServerStatusMessage* ServerStatusArrayMessage::mutable_server_status_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerStatusArrayMessage.server_status_arr)
+  return server_status_arr_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-ServerStatusArrayMessage::mutable_server_status() {
-  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrayMessage.server_status)
-  return &server_status_;
+ServerStatusArrayMessage::mutable_server_status_arr() {
+  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrayMessage.server_status_arr)
+  return &server_status_arr_;
 }
-inline const ::ServerStatusMessage& ServerStatusArrayMessage::_internal_server_status(int index) const {
-  return server_status_.Get(index);
+inline const ::ServerStatusMessage& ServerStatusArrayMessage::_internal_server_status_arr(int index) const {
+  return server_status_arr_.Get(index);
 }
-inline const ::ServerStatusMessage& ServerStatusArrayMessage::server_status(int index) const {
-  // @@protoc_insertion_point(field_get:ServerStatusArrayMessage.server_status)
-  return _internal_server_status(index);
+inline const ::ServerStatusMessage& ServerStatusArrayMessage::server_status_arr(int index) const {
+  // @@protoc_insertion_point(field_get:ServerStatusArrayMessage.server_status_arr)
+  return _internal_server_status_arr(index);
 }
-inline ::ServerStatusMessage* ServerStatusArrayMessage::_internal_add_server_status() {
-  return server_status_.Add();
+inline ::ServerStatusMessage* ServerStatusArrayMessage::_internal_add_server_status_arr() {
+  return server_status_arr_.Add();
 }
-inline ::ServerStatusMessage* ServerStatusArrayMessage::add_server_status() {
-  // @@protoc_insertion_point(field_add:ServerStatusArrayMessage.server_status)
-  return _internal_add_server_status();
+inline ::ServerStatusMessage* ServerStatusArrayMessage::add_server_status_arr() {
+  // @@protoc_insertion_point(field_add:ServerStatusArrayMessage.server_status_arr)
+  return _internal_add_server_status_arr();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-ServerStatusArrayMessage::server_status() const {
-  // @@protoc_insertion_point(field_list:ServerStatusArrayMessage.server_status)
-  return server_status_;
+ServerStatusArrayMessage::server_status_arr() const {
+  // @@protoc_insertion_point(field_list:ServerStatusArrayMessage.server_status_arr)
+  return server_status_arr_;
 }
 
 // -------------------------------------------------------------------
 
 // FetchReplyArrayMessage
 
-// repeated .FetchReplyMessage fetch_reply = 1;
-inline int FetchReplyArrayMessage::_internal_fetch_reply_size() const {
-  return fetch_reply_.size();
+// repeated .FetchReplyMessage fetch_reply_arr = 1;
+inline int FetchReplyArrayMessage::_internal_fetch_reply_arr_size() const {
+  return fetch_reply_arr_.size();
 }
-inline int FetchReplyArrayMessage::fetch_reply_size() const {
-  return _internal_fetch_reply_size();
+inline int FetchReplyArrayMessage::fetch_reply_arr_size() const {
+  return _internal_fetch_reply_arr_size();
 }
-inline void FetchReplyArrayMessage::clear_fetch_reply() {
-  fetch_reply_.Clear();
+inline void FetchReplyArrayMessage::clear_fetch_reply_arr() {
+  fetch_reply_arr_.Clear();
 }
-inline ::FetchReplyMessage* FetchReplyArrayMessage::mutable_fetch_reply(int index) {
-  // @@protoc_insertion_point(field_mutable:FetchReplyArrayMessage.fetch_reply)
-  return fetch_reply_.Mutable(index);
+inline ::FetchReplyMessage* FetchReplyArrayMessage::mutable_fetch_reply_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchReplyArrayMessage.fetch_reply_arr)
+  return fetch_reply_arr_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
-FetchReplyArrayMessage::mutable_fetch_reply() {
-  // @@protoc_insertion_point(field_mutable_list:FetchReplyArrayMessage.fetch_reply)
-  return &fetch_reply_;
+FetchReplyArrayMessage::mutable_fetch_reply_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchReplyArrayMessage.fetch_reply_arr)
+  return &fetch_reply_arr_;
 }
-inline const ::FetchReplyMessage& FetchReplyArrayMessage::_internal_fetch_reply(int index) const {
-  return fetch_reply_.Get(index);
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::_internal_fetch_reply_arr(int index) const {
+  return fetch_reply_arr_.Get(index);
 }
-inline const ::FetchReplyMessage& FetchReplyArrayMessage::fetch_reply(int index) const {
-  // @@protoc_insertion_point(field_get:FetchReplyArrayMessage.fetch_reply)
-  return _internal_fetch_reply(index);
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::fetch_reply_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchReplyArrayMessage.fetch_reply_arr)
+  return _internal_fetch_reply_arr(index);
 }
-inline ::FetchReplyMessage* FetchReplyArrayMessage::_internal_add_fetch_reply() {
-  return fetch_reply_.Add();
+inline ::FetchReplyMessage* FetchReplyArrayMessage::_internal_add_fetch_reply_arr() {
+  return fetch_reply_arr_.Add();
 }
-inline ::FetchReplyMessage* FetchReplyArrayMessage::add_fetch_reply() {
-  // @@protoc_insertion_point(field_add:FetchReplyArrayMessage.fetch_reply)
-  return _internal_add_fetch_reply();
+inline ::FetchReplyMessage* FetchReplyArrayMessage::add_fetch_reply_arr() {
+  // @@protoc_insertion_point(field_add:FetchReplyArrayMessage.fetch_reply_arr)
+  return _internal_add_fetch_reply_arr();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
-FetchReplyArrayMessage::fetch_reply() const {
-  // @@protoc_insertion_point(field_list:FetchReplyArrayMessage.fetch_reply)
-  return fetch_reply_;
+FetchReplyArrayMessage::fetch_reply_arr() const {
+  // @@protoc_insertion_point(field_list:FetchReplyArrayMessage.fetch_reply_arr)
+  return fetch_reply_arr_;
 }
 
 // -------------------------------------------------------------------

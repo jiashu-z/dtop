@@ -168,7 +168,7 @@ struct CommandMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT CommandMessageDefaultTypeInternal _CommandMessage_default_instance_;
 constexpr ServerStatusMessage::ServerStatusMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : worker_status_()
+  : worker_status_arr_()
   , addr_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , status_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct ServerStatusMessageDefaultTypeInternal {
@@ -182,7 +182,7 @@ struct ServerStatusMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerStatusMessageDefaultTypeInternal _ServerStatusMessage_default_instance_;
 constexpr WorkerStatusMessage::WorkerStatusMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : future_()
+  : futures_()
   , worker_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , status_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct WorkerStatusMessageDefaultTypeInternal {
@@ -237,7 +237,7 @@ struct FetchReplyMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT FetchReplyMessageDefaultTypeInternal _FetchReplyMessage_default_instance_;
 constexpr ServerStatusArrayMessage::ServerStatusArrayMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : server_status_(){}
+  : server_status_arr_(){}
 struct ServerStatusArrayMessageDefaultTypeInternal {
   constexpr ServerStatusArrayMessageDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -249,7 +249,7 @@ struct ServerStatusArrayMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerStatusArrayMessageDefaultTypeInternal _ServerStatusArrayMessage_default_instance_;
 constexpr FetchReplyArrayMessage::FetchReplyArrayMessage(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : fetch_reply_(){}
+  : fetch_reply_arr_(){}
 struct FetchReplyArrayMessageDefaultTypeInternal {
   constexpr FetchReplyArrayMessageDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -378,7 +378,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::ServerStatusMessage, addr_),
-  PROTOBUF_FIELD_OFFSET(::ServerStatusMessage, worker_status_),
+  PROTOBUF_FIELD_OFFSET(::ServerStatusMessage, worker_status_arr_),
   PROTOBUF_FIELD_OFFSET(::ServerStatusMessage, status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, _internal_metadata_),
@@ -387,7 +387,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, worker_name_),
   PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, status_),
-  PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, future_),
+  PROTOBUF_FIELD_OFFSET(::WorkerStatusMessage, futures_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::WorkerFutureMessage, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -416,13 +416,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_message_2eproto::offsets[] PRO
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::ServerStatusArrayMessage, server_status_),
+  PROTOBUF_FIELD_OFFSET(::ServerStatusArrayMessage, server_status_arr_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::FetchReplyArrayMessage, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::FetchReplyArrayMessage, fetch_reply_),
+  PROTOBUF_FIELD_OFFSET(::FetchReplyArrayMessage, fetch_reply_arr_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::CpuMessage, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -505,32 +505,32 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "age\022\013\n\003arr\030\001 \003(\001\";\n\023CommandArrayMessage\022"
   "$\n\013command_arr\030\001 \003(\0132\017.CommandMessage\"E\n"
   "\016CommandMessage\022\014\n\004addr\030\001 \001(\t\022\023\n\013worker_"
-  "name\030\002 \001(\t\022\020\n\010cmd_type\030\003 \001(\t\"`\n\023ServerSt"
-  "atusMessage\022\014\n\004addr\030\001 \001(\t\022+\n\rworker_stat"
-  "us\030\002 \003(\0132\024.WorkerStatusMessage\022\016\n\006status"
-  "\030\003 \001(\t\"`\n\023WorkerStatusMessage\022\023\n\013worker_"
-  "name\030\001 \001(\t\022\016\n\006status\030\002 \001(\t\022$\n\006future\030\003 \003"
-  "(\0132\024.WorkerFutureMessage\"2\n\023WorkerFuture"
-  "Message\022\r\n\005label\030\001 \001(\t\022\014\n\004desc\030\002 \001(\t\"=\n\023"
-  "FetchRequestMessage\022\023\n\013request_arr\030\001 \003(\t"
-  "\022\021\n\tparam_arr\030\002 \003(\t\"\177\n\021FetchReplyMessage"
-  "\022\014\n\004addr\030\001 \001(\t\022 \n\013cpu_message\030\002 \001(\0132\013.Cp"
-  "uMessage\022+\n\021mem_usage_message\030\003 \001(\0132\020.Me"
-  "mUsageMessage\022\r\n\005infos\030\004 \003(\t\"G\n\030ServerSt"
-  "atusArrayMessage\022+\n\rserver_status\030\001 \003(\0132"
-  "\024.ServerStatusMessage\"A\n\026FetchReplyArray"
-  "Message\022\'\n\013fetch_reply\030\001 \003(\0132\022.FetchRepl"
-  "yMessage\"1\n\nCpuMessage\022\020\n\010core_num\030\001 \001(\005"
-  "\022\021\n\tusage_arr\030\002 \003(\002\"\241\001\n\017MemUsageMessage\022"
-  "\r\n\005total\030\001 \001(\003\022\021\n\tavailable\030\002 \001(\003\022\014\n\004use"
-  "d\030\003 \001(\003\022\014\n\004free\030\004 \001(\003\022\016\n\006active\030\005 \001(\003\022\020\n"
-  "\010inactive\030\006 \001(\003\022\017\n\007buffers\030\007 \001(\003\022\016\n\006cach"
-  "ed\030\010 \001(\003\022\r\n\005wired\030\t \001(\003B\031\n\027grp.dtop.dtop"
-  "java.protob\006proto3"
+  "name\030\002 \001(\t\022\020\n\010cmd_type\030\003 \001(\t\"d\n\023ServerSt"
+  "atusMessage\022\014\n\004addr\030\001 \001(\t\022/\n\021worker_stat"
+  "us_arr\030\002 \003(\0132\024.WorkerStatusMessage\022\016\n\006st"
+  "atus\030\003 \001(\t\"a\n\023WorkerStatusMessage\022\023\n\013wor"
+  "ker_name\030\001 \001(\t\022\016\n\006status\030\002 \001(\t\022%\n\007future"
+  "s\030\003 \003(\0132\024.WorkerFutureMessage\"2\n\023WorkerF"
+  "utureMessage\022\r\n\005label\030\001 \001(\t\022\014\n\004desc\030\002 \001("
+  "\t\"=\n\023FetchRequestMessage\022\023\n\013request_arr\030"
+  "\001 \003(\t\022\021\n\tparam_arr\030\002 \003(\t\"\177\n\021FetchReplyMe"
+  "ssage\022\014\n\004addr\030\001 \001(\t\022 \n\013cpu_message\030\002 \001(\013"
+  "2\013.CpuMessage\022+\n\021mem_usage_message\030\003 \001(\013"
+  "2\020.MemUsageMessage\022\r\n\005infos\030\004 \003(\t\"K\n\030Ser"
+  "verStatusArrayMessage\022/\n\021server_status_a"
+  "rr\030\001 \003(\0132\024.ServerStatusMessage\"E\n\026FetchR"
+  "eplyArrayMessage\022+\n\017fetch_reply_arr\030\001 \003("
+  "\0132\022.FetchReplyMessage\"1\n\nCpuMessage\022\020\n\010c"
+  "ore_num\030\001 \001(\005\022\021\n\tusage_arr\030\002 \003(\002\"\241\001\n\017Mem"
+  "UsageMessage\022\r\n\005total\030\001 \001(\003\022\021\n\tavailable"
+  "\030\002 \001(\003\022\014\n\004used\030\003 \001(\003\022\014\n\004free\030\004 \001(\003\022\016\n\006ac"
+  "tive\030\005 \001(\003\022\020\n\010inactive\030\006 \001(\003\022\017\n\007buffers\030"
+  "\007 \001(\003\022\016\n\006cached\030\010 \001(\003\022\r\n\005wired\030\t \001(\003B\031\n\027"
+  "grp.dtop.dtopjava.protob\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 1298, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 1311, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 21,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -2969,14 +2969,14 @@ class ServerStatusMessage::_Internal {
 
 ServerStatusMessage::ServerStatusMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  worker_status_(arena) {
+  worker_status_arr_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:ServerStatusMessage)
 }
 ServerStatusMessage::ServerStatusMessage(const ServerStatusMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      worker_status_(from.worker_status_) {
+      worker_status_arr_(from.worker_status_arr_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   addr_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_addr().empty()) {
@@ -3024,7 +3024,7 @@ void ServerStatusMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  worker_status_.Clear();
+  worker_status_arr_.Clear();
   addr_.ClearToEmpty();
   status_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -3046,13 +3046,13 @@ const char* ServerStatusMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .WorkerStatusMessage worker_status = 2;
+      // repeated .WorkerStatusMessage worker_status_arr = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_worker_status(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_worker_status_arr(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
@@ -3105,12 +3105,12 @@ failure:
         1, this->_internal_addr(), target);
   }
 
-  // repeated .WorkerStatusMessage worker_status = 2;
+  // repeated .WorkerStatusMessage worker_status_arr = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_worker_status_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_worker_status_arr_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, this->_internal_worker_status(i), target, stream);
+      InternalWriteMessage(2, this->_internal_worker_status_arr(i), target, stream);
   }
 
   // string status = 3;
@@ -3139,9 +3139,9 @@ size_t ServerStatusMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .WorkerStatusMessage worker_status = 2;
-  total_size += 1UL * this->_internal_worker_status_size();
-  for (const auto& msg : this->worker_status_) {
+  // repeated .WorkerStatusMessage worker_status_arr = 2;
+  total_size += 1UL * this->_internal_worker_status_arr_size();
+  for (const auto& msg : this->worker_status_arr_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -3191,7 +3191,7 @@ void ServerStatusMessage::MergeFrom(const ServerStatusMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  worker_status_.MergeFrom(from.worker_status_);
+  worker_status_arr_.MergeFrom(from.worker_status_arr_);
   if (from.addr().size() > 0) {
     _internal_set_addr(from._internal_addr());
   }
@@ -3221,7 +3221,7 @@ bool ServerStatusMessage::IsInitialized() const {
 void ServerStatusMessage::InternalSwap(ServerStatusMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  worker_status_.InternalSwap(&other->worker_status_);
+  worker_status_arr_.InternalSwap(&other->worker_status_arr_);
   addr_.Swap(&other->addr_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   status_.Swap(&other->status_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3239,14 +3239,14 @@ class WorkerStatusMessage::_Internal {
 
 WorkerStatusMessage::WorkerStatusMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  future_(arena) {
+  futures_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:WorkerStatusMessage)
 }
 WorkerStatusMessage::WorkerStatusMessage(const WorkerStatusMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      future_(from.future_) {
+      futures_(from.futures_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   worker_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_worker_name().empty()) {
@@ -3294,7 +3294,7 @@ void WorkerStatusMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  future_.Clear();
+  futures_.Clear();
   worker_name_.ClearToEmpty();
   status_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -3325,13 +3325,13 @@ const char* WorkerStatusMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .WorkerFutureMessage future = 3;
+      // repeated .WorkerFutureMessage futures = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_future(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_futures(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
@@ -3385,12 +3385,12 @@ failure:
         2, this->_internal_status(), target);
   }
 
-  // repeated .WorkerFutureMessage future = 3;
+  // repeated .WorkerFutureMessage futures = 3;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_future_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_futures_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, this->_internal_future(i), target, stream);
+      InternalWriteMessage(3, this->_internal_futures(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3409,9 +3409,9 @@ size_t WorkerStatusMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .WorkerFutureMessage future = 3;
-  total_size += 1UL * this->_internal_future_size();
-  for (const auto& msg : this->future_) {
+  // repeated .WorkerFutureMessage futures = 3;
+  total_size += 1UL * this->_internal_futures_size();
+  for (const auto& msg : this->futures_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -3461,7 +3461,7 @@ void WorkerStatusMessage::MergeFrom(const WorkerStatusMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  future_.MergeFrom(from.future_);
+  futures_.MergeFrom(from.futures_);
   if (from.worker_name().size() > 0) {
     _internal_set_worker_name(from._internal_worker_name());
   }
@@ -3491,7 +3491,7 @@ bool WorkerStatusMessage::IsInitialized() const {
 void WorkerStatusMessage::InternalSwap(WorkerStatusMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  future_.InternalSwap(&other->future_);
+  futures_.InternalSwap(&other->futures_);
   worker_name_.Swap(&other->worker_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   status_.Swap(&other->status_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4310,14 +4310,14 @@ class ServerStatusArrayMessage::_Internal {
 
 ServerStatusArrayMessage::ServerStatusArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  server_status_(arena) {
+  server_status_arr_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:ServerStatusArrayMessage)
 }
 ServerStatusArrayMessage::ServerStatusArrayMessage(const ServerStatusArrayMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      server_status_(from.server_status_) {
+      server_status_arr_(from.server_status_arr_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:ServerStatusArrayMessage)
 }
@@ -4351,7 +4351,7 @@ void ServerStatusArrayMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  server_status_.Clear();
+  server_status_arr_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4362,13 +4362,13 @@ const char* ServerStatusArrayMessage::_InternalParse(const char* ptr, ::PROTOBUF
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // repeated .ServerStatusMessage server_status = 1;
+      // repeated .ServerStatusMessage server_status_arr = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_server_status(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_server_status_arr(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
@@ -4402,12 +4402,12 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .ServerStatusMessage server_status = 1;
+  // repeated .ServerStatusMessage server_status_arr = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_server_status_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_server_status_arr_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, this->_internal_server_status(i), target, stream);
+      InternalWriteMessage(1, this->_internal_server_status_arr(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4426,9 +4426,9 @@ size_t ServerStatusArrayMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .ServerStatusMessage server_status = 1;
-  total_size += 1UL * this->_internal_server_status_size();
-  for (const auto& msg : this->server_status_) {
+  // repeated .ServerStatusMessage server_status_arr = 1;
+  total_size += 1UL * this->_internal_server_status_arr_size();
+  for (const auto& msg : this->server_status_arr_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -4464,7 +4464,7 @@ void ServerStatusArrayMessage::MergeFrom(const ServerStatusArrayMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  server_status_.MergeFrom(from.server_status_);
+  server_status_arr_.MergeFrom(from.server_status_arr_);
 }
 
 void ServerStatusArrayMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -4488,7 +4488,7 @@ bool ServerStatusArrayMessage::IsInitialized() const {
 void ServerStatusArrayMessage::InternalSwap(ServerStatusArrayMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  server_status_.InternalSwap(&other->server_status_);
+  server_status_arr_.InternalSwap(&other->server_status_arr_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServerStatusArrayMessage::GetMetadata() const {
@@ -4504,14 +4504,14 @@ class FetchReplyArrayMessage::_Internal {
 
 FetchReplyArrayMessage::FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  fetch_reply_(arena) {
+  fetch_reply_arr_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:FetchReplyArrayMessage)
 }
 FetchReplyArrayMessage::FetchReplyArrayMessage(const FetchReplyArrayMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      fetch_reply_(from.fetch_reply_) {
+      fetch_reply_arr_(from.fetch_reply_arr_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:FetchReplyArrayMessage)
 }
@@ -4545,7 +4545,7 @@ void FetchReplyArrayMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  fetch_reply_.Clear();
+  fetch_reply_arr_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4556,13 +4556,13 @@ const char* FetchReplyArrayMessage::_InternalParse(const char* ptr, ::PROTOBUF_N
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // repeated .FetchReplyMessage fetch_reply = 1;
+      // repeated .FetchReplyMessage fetch_reply_arr = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_fetch_reply(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_fetch_reply_arr(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
@@ -4596,12 +4596,12 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .FetchReplyMessage fetch_reply = 1;
+  // repeated .FetchReplyMessage fetch_reply_arr = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_fetch_reply_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_fetch_reply_arr_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, this->_internal_fetch_reply(i), target, stream);
+      InternalWriteMessage(1, this->_internal_fetch_reply_arr(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4620,9 +4620,9 @@ size_t FetchReplyArrayMessage::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .FetchReplyMessage fetch_reply = 1;
-  total_size += 1UL * this->_internal_fetch_reply_size();
-  for (const auto& msg : this->fetch_reply_) {
+  // repeated .FetchReplyMessage fetch_reply_arr = 1;
+  total_size += 1UL * this->_internal_fetch_reply_arr_size();
+  for (const auto& msg : this->fetch_reply_arr_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -4658,7 +4658,7 @@ void FetchReplyArrayMessage::MergeFrom(const FetchReplyArrayMessage& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  fetch_reply_.MergeFrom(from.fetch_reply_);
+  fetch_reply_arr_.MergeFrom(from.fetch_reply_arr_);
 }
 
 void FetchReplyArrayMessage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -4682,7 +4682,7 @@ bool FetchReplyArrayMessage::IsInitialized() const {
 void FetchReplyArrayMessage::InternalSwap(FetchReplyArrayMessage* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  fetch_reply_.InternalSwap(&other->fetch_reply_);
+  fetch_reply_arr_.InternalSwap(&other->fetch_reply_arr_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata FetchReplyArrayMessage::GetMetadata() const {

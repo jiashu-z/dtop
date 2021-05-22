@@ -109,7 +109,7 @@ void dtop::server::Server::get_server_status(const StringArrayMessage* request,
     if (flag == "-wfd") with_future_desc = true;
   }
   reply->set_addr(this->get_addr());
-  reply->mutable_worker_status()->Swap(
+  reply->mutable_worker_status_arr()->Swap(
       this->manager.get_worker_status(with_futures, with_future_desc));
   reply->set_status("Indirect");
 }

@@ -81,7 +81,7 @@ dtop::worker::Manager::get_worker_status(bool with_futures,
     wsm_ptr->set_status(BaseWorker::get_status_str(worker_ptr->get_status()));
     if (with_futures || with_future_desc) {
       for (auto& future : worker_ptr->get_futures()) {
-        auto* future_ptr = wsm_ptr->add_future();
+        auto* future_ptr = wsm_ptr->add_futures();
         future_ptr->set_label(future->label);
         if (with_future_desc) {
           future_ptr->set_desc(future->desc);

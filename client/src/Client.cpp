@@ -61,7 +61,7 @@ void dtop::client::Client::get_cluster_status(::ServerStatusArrayMessage *respon
 		::grpc::ClientContext context;
 		ServerStatusMessage local_response;
 		iter.second->stub->GetServerStatus(&context, *request, &local_response);
-		auto* reply_ptr = response->add_server_status();
+		auto* reply_ptr = response->add_server_status_arr();
 		reply_ptr->CopyFrom(local_response);
 		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 	}
@@ -115,7 +115,7 @@ void dtop::client::Client::get_cluster_metric(
     ::grpc::ClientContext context;
     FetchReplyMessage local_response;
     iter.second->stub->GetServerMetric(&context, *request, &local_response);
-    auto* reply_ptr = response->mutable_fetch_reply()->Add();
+    auto* reply_ptr = response->mutable_fetch_reply_arr()->Add();
     reply_ptr->CopyFrom(local_response);
     std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   }

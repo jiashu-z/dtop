@@ -56,14 +56,14 @@ inline void sum_mem_usage(MemUsageMessage& aggregated, const MemUsageMessage& si
                                                                              ::FetchReplyArrayMessage *response) {
 	auto *local_response = new ::FetchReplyArrayMessage();
 	this->server->client.get_cluster_metric(local_response, request);
-	int size = local_response->fetch_reply_size();
+	int size = local_response->fetch_reply_arr_size();
 	MemUsageMessage aggregated_mem_usage;
 	set_all_int64_to_value(aggregated_mem_usage, 0);
 	for (int i = 0; i < size; ++i) {
-		auto mem_usage_from_one_server = local_response->fetch_reply(i).mem_usage_message();
+		auto mem_usage_from_one_server = local_response->fetch_reply_arr(i).mem_usage_message();
 		sum_mem_usage(aggregated_mem_usage, mem_usage_from_one_server);
 	}
-	auto fetch_reply = response->add_fetch_reply();
+	auto fetch_reply = response->add_fetch_reply_arr();
 	fetch_reply->mutable_mem_usage_message()->CopyFrom(aggregated_mem_usage);
 	return ::grpc::Status::OK;
 }
