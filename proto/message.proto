@@ -81,7 +81,8 @@ message FetchReplyMessage {
   string addr = 1;
   CpuMessage cpu_message = 2;
   MemUsageMessage mem_usage_message = 3;
-  repeated string infos = 4;
+  MemoryMonitorMessage memory_monitor_message = 4;
+  repeated string infos = 5;
 }
 
 message ServerStatusArrayMessage {
@@ -107,4 +108,32 @@ message MemUsageMessage {
   int64 buffers = 7;
   int64 cached = 8;
   int64 wired = 9;
+}
+
+message MemoryMonitorMessage {
+  repeated ProcessMessage process_arr = 1;
+}
+
+message ProcessMessage {
+  uint32 pid = 1;
+  uint32 ppid = 2;
+  string name = 3;
+  string cmdline = 4;
+  double create_time = 5;
+  uint32 uid = 6;
+  uint32 gid = 7;
+  string username = 8;
+  repeated ThreadMessage threads = 9;
+}
+
+message ThreadMessage {
+    int64 tid = 1;
+
+    int64 rss = 2;
+    int64 vms = 3;
+    int64 shared = 4;
+    int64 text = 5;
+    int64 lib = 6;
+    int64 data = 7;
+    int64 dirty = 8;
 }

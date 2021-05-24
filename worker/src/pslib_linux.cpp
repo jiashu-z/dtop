@@ -12,14 +12,85 @@
 #include <sys/sysinfo.h>
 #include <unistd.h>
 #include <utmp.h>
-
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include "boost/format.hpp"
 #include "common.h"
 #include "pslib.h"
-
+#include <dirent.h>
 extern "C" {
 void __gcov_flush(void);
 }
-
+static void read_directory(const std::string& name, std::vector<std::string>& v)
+{
+    DIR* dirp = opendir(name.c_str());
+    struct dirent * dp;
+    while ((dp = readdir(dirp)) != NULL) {
+        v.push_back(dp->d_name);
+    }
+    closedir(dirp);
+}
+std::vector<std::string> memory_info_full={"resident set size", "total program size", "shared pages", "text", "library", "data + stack", "dirty pages"};
+static void getMemInfo(MemoryInfo & memoryInfo,pid_t pid,pid_t tid){
+    std::vector<int> tmp_store;
+    std::ifstream ifs;
+    boost::format fmt("/proc/%d/task/%d/statm") ;
+    fmt % pid % tid;
+    ifs.open(fmt.str(), std::ios::in | std::ios::binary); //以读文件的方式打开
+    if(!ifs.is_open()) //判断文件是否为空
+    {
+        std::cout<<"文件打开失败"<<std::endl;
+        return;
+    }
+    char c[100];
+    int data=0;
+    for (int i =0; i<7; i++) {
+        ifs.getline(c,100,' ');
+        data=atoi(c);
+        tmp_store.push_back(data);
+    }
+    memoryInfo.rss=tmp_store[0];
+    memoryInfo.vms=tmp_store[1];
+    memoryInfo.shared=tmp_store[2];
+    memoryInfo.text=tmp_store[3];
+    memoryInfo.lib=tmp_store[4];
+    memoryInfo.data=tmp_store[5];
+    memoryInfo.dirty=tmp_store[6];
+    ifs.close();
+}
+bool isDegital(std::string str) {
+    for (char i : str) {
+        if (i > '9' || i < '0')
+            return false;
+    }
+    return true;
+}
+void get_threads_id(pid_t pid,std::vector<int>& thread_ids){
+    std::vector<std::string> raw_process_str;
+    boost::format fmt("/proc/%d/task/") ;
+    fmt % pid;
+    read_directory(fmt.str(), raw_process_str);
+    int tmp;
+    for (auto i = raw_process_str.begin(); i != raw_process_str.end(); ++i) {
+        if(isDegital(*i)){
+            tmp = atoi((*i).c_str());
+            thread_ids.push_back(tmp);
+        }
+    }
+}
+static void getThreds(std::vector<Thread> * threads, pid_t pid){
+    std::vector<int> thread_ids;
+    get_threads_id(pid,thread_ids);
+    for (auto it = thread_ids.begin(); it < thread_ids.end(); ++it) {
+        Thread thread;
+        MemoryInfo memoryInfo;
+        getMemInfo(memoryInfo,pid,*it);
+        thread.memoryInfo=memoryInfo;
+        thread.thread_id=*it;
+        threads->push_back(thread);
+    }
+}
 static int clean_cmdline(char *ip, int len)
 /* Replaces all '\0' with ' ' in the string ip (bounded by length len).
    and then adds a '\0' at the end. This is used to parse the cmdline file
@@ -259,15 +330,16 @@ static char *get_exe(pid_t pid) {
   return tmp;
 error:
   if (fp) fclose(fp);
-  free(tmp);
-  return NULL;
+  tmp="NULL";
+  //free(tmp);
+  return tmp;
 }
 
 static char *get_cmdline(pid_t pid) {
   FILE *fp = NULL;
   char procfile[50];
   char *contents = NULL;
-  int bufsize = 500;
+  int bufsize = 1000;
   ssize_t read;
 
   contents = (char *)calloc(bufsize, sizeof(char));
@@ -287,8 +359,9 @@ static char *get_cmdline(pid_t pid) {
   }
 error:
   if (fp) fclose(fp);
-  free(contents);
-  return NULL;
+  contents = "NULL";
+  //free(contents);
+  return contents;
 }
 
 static double get_create_time(pid_t pid) {
@@ -999,7 +1072,23 @@ uint32_t cpu_count(bool logical) {
   }
   return ret;
 }
-
+void get_processes_ids(std::vector<int>& process_ids){
+    std::vector<std::string> raw_process_str;
+    read_directory("/proc", raw_process_str);
+    for (auto i = raw_process_str.begin(); i != raw_process_str.end(); ++i) {
+        if(isDegital(*i)){
+            int tmp = atoi((*i).c_str());
+            process_ids.push_back(tmp);
+        }
+    }
+}
+void get_processes_info(std::vector<Process *>& processes_info,std::vector<int>& process_ids){
+    for (auto i = process_ids.begin(); i != process_ids.end(); ++i) {
+        Process *process = get_process(*i);
+        if(process){
+        processes_info.push_back(process);}
+    }
+}
 /* Check whether pid exists in the current handle_process table. */
 bool pid_exists(pid_t pid) {
   if (pid == 0)  // see `man 2 kill` for pid zero
@@ -1024,40 +1113,56 @@ bool pid_exists(pid_t pid) {
 Process *get_process(pid_t pid) {
   /* TODO: Add test for invalid pid. Right now, we get a lot of errors and some
    * structure.*/
-  Process *retval = (Process *)calloc(1, sizeof(Process));
-  unsigned int *uids = NULL;
-  unsigned int *gids = NULL;
-  retval->pid = pid;
-  retval->ppid = get_ppid(pid);
-  retval->name = get_procname(pid);
-  retval->exe = get_exe(pid);
-  retval->cmdline = get_cmdline(pid);
-  retval->create_time = get_create_time(pid);
-  uids = get_ids(pid, "Uid:");
-  if (uids) {
-    retval->uid = uids[0];
-    retval->euid = uids[1];
-    retval->suid = uids[2];
-    retval->username =
-        get_username(retval->uid); /* Uses real uid and not euid */
-  } else {
-    retval->uid = retval->euid = retval->suid = 0;
-    retval->username = NULL;
-  }
+    if(pid>0) {
+        Process *retval = (Process *) calloc(1, sizeof(Process));
+        unsigned int *uids = NULL;
+        unsigned int *gids = NULL;
+        retval->pid = pid;
 
-  gids = get_ids(pid, "Gid:");
-  if (uids) {
-    retval->gid = gids[0];
-    retval->egid = gids[1];
-    retval->sgid = gids[2];
-  } else {
-    retval->uid = retval->euid = retval->suid = 0;
-  }
+        retval->ppid = get_ppid(pid);
+        retval->name = get_procname(pid);
+        //retval->exe = get_exe(pid);
+        retval->cmdline = get_cmdline(pid);
+        retval->create_time = get_create_time(pid);
+        retval->threads = new std::vector<Thread>();
+        getThreds(retval->threads, pid);
+        uids = get_ids(pid, "Uid:");
 
-  retval->terminal = get_terminal(pid);
-  free(uids);
-  free(gids);
-  return retval;
+        if (uids) {
+            retval->uid = uids[0];
+            retval->euid = uids[1];
+            retval->suid = uids[2];
+            retval->username =
+                    get_username(retval->uid); /* Uses real uid and not euid */
+        } else {
+            retval->uid = retval->euid = retval->suid = 0;
+            retval->username = NULL;
+        }
+
+
+        gids = get_ids(pid, "Gid:");
+        if (uids) {
+            retval->gid = gids[0];
+            retval->egid = gids[1];
+            retval->sgid = gids[2];
+        } else {
+            retval->uid = retval->euid = retval->suid = 0;
+        }
+        struct passwd *pwd = getpwuid(getuid());
+        //retval->terminal = get_terminal(pid);
+        // printf("login account：%s\n", pwd->pw_name);
+        free(uids);
+        free(gids);
+
+        if (strcmp(retval->username, pwd->pw_name) == 0) {
+            return retval;
+        } else {
+            return NULL;
+        }
+    }
+    else{
+        return NULL;
+    }
 }
 
 void free_process(Process *p) {
@@ -1066,8 +1171,11 @@ void free_process(Process *p) {
   free(p->cmdline);
   free(p->username);
   free(p->terminal);
+  free(p->threads);
   free(p);
 }
+
+
 
 /*
   The following function is an ugly workaround to ensure that coverage
