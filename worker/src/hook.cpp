@@ -5,7 +5,6 @@
 #include <string>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <boost/interprocess/sync/named_mutex.hpp>
 
 /* Prototypes for our hooks */
 static void my_init_hook(void);
@@ -43,28 +42,32 @@ struct malloc_free_msg_t {
 static void *
 my_malloc_hook(size_t size, const void *caller)
 {
+  /* Restore all old hooks */
+  __malloc_hook = old_malloc_hook;
+  __free_hook = old_free_hook;
   void *result;
   
   struct malloc_free_msg_t malloc_msg{};
 
-  /* Restore all old hooks */
-  __malloc_hook = old_malloc_hook;
-  __free_hook = old_free_hook;
 
+  printf("Hello world!");
   /* Call recursively */
   result = malloc(size);
 	int pid = getpid();
 
   std::string myfifo = "/tmp/fifo" + std::to_string(pid);
   int fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
+  printf("fd: %d\n", fd);
   bool fifo_opened = true;
   while (fd == -1) {
     if (!fifo_opened) {
       break;
     }
     int err = errno;
+    printf("err: %d\n", err);
     fifo_opened = false;
-    if (err == EACCES) {
+    if (err == ENOENT) {
+      printf("handling\n");
       // The fifo does not exist.
       mkfifo(myfifo.c_str(), 0666);
       fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
@@ -75,6 +78,7 @@ my_malloc_hook(size_t size, const void *caller)
   }
 
   if (fifo_opened) {
+    printf("opened");
     malloc_msg.mode = mode_malloc;
     malloc_msg.pid = pid;
     malloc_msg.size = (int64_t)size;
@@ -84,6 +88,8 @@ my_malloc_hook(size_t size, const void *caller)
     write(fd, buf, malloc_msg_size);
     close(fd);
   }
+
+  printf("goodbye!");
 
   /* Save underlying hooks */
   old_malloc_hook = __malloc_hook;
@@ -99,11 +105,12 @@ my_malloc_hook(size_t size, const void *caller)
 static void 
 my_free_hook(void *ptr, const void *caller)
 {
-  struct malloc_free_msg_t malloc_msg{};
-
   /* Restore all old hooks */
   __malloc_hook = old_malloc_hook;
   __free_hook = old_free_hook;
+  struct malloc_free_msg_t malloc_msg{};
+
+
 
   /* Call recursively */
   free(ptr);
@@ -118,7 +125,7 @@ my_free_hook(void *ptr, const void *caller)
     }
     int err = errno;
     fifo_opened = false;
-    if (err == EACCES) {
+    if (err == ENOENT) {
       // The fifo does not exist.
       mkfifo(myfifo.c_str(), 0666);
       fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
