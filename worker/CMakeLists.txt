@@ -15,6 +15,9 @@ src/MemLeakWorker.cpp
 #src/hook.cpp
 src/WorkerCmdType.cpp)
 
+add_library(hook SHARED
+src/hook.cpp)
+
 target_include_directories(worker
 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 PUBLIC ${CMAKE_SOURCE_DIR}/proto
