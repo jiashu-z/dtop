@@ -48,7 +48,6 @@ static void *my_malloc_hook(size_t size, const void *caller) {
 
   struct malloc_free_msg_t malloc_msg {};
 
-  printf("Hello world!");
   /* Call recursively */
   result = malloc(size);
   int pid = getpid();
@@ -57,27 +56,26 @@ static void *my_malloc_hook(size_t size, const void *caller) {
   if (fd == -1) {
     fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
   }
-  printf("fd: %d\n", fd);
   bool fifo_opened = true;
   while (fd == -1) {
     if (!fifo_opened) {
       break;
     }
     int err = errno;
-    printf("err: %d\n", err);
     fifo_opened = false;
     if (err == ENOENT) {
-      printf("handling\n");
       // The fifo does not exist.
       mkfifo(myfifo.c_str(), 0666);
       fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
+      if (fd > 0) {
+        fifo_opened = true;
+      }
     } else {
       break;
     }
   }
 
   if (fifo_opened) {
-    printf("opened");
     malloc_msg.mode = mode_malloc;
     malloc_msg.pid = pid;
     malloc_msg.size = (int64_t)size;
@@ -87,7 +85,6 @@ static void *my_malloc_hook(size_t size, const void *caller) {
     write(fd, buf, malloc_msg_size);
   }
 
-  printf("goodbye!");
 
   /* Save underlying hooks */
   old_malloc_hook = __malloc_hook;
@@ -125,6 +122,9 @@ static void my_free_hook(void *ptr, const void *caller) {
       // The fifo does not exist.
       mkfifo(myfifo.c_str(), 0666);
       fd = open(myfifo.c_str(), O_RDWR | O_NONBLOCK);
+      if (fd > 0) {
+        fifo_opened = true;
+      }
     } else {
       break;
     }
