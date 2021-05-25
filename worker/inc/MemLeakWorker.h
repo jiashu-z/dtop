@@ -5,21 +5,28 @@
 #include <map>
 
 #include "BaseWorker.h"
+#include <mutex>
+#include <map>
+#include <thread>
+#include <memory>
+#include <fcntl.h>
+#include <cassert>
+#include <atomic>
 
 namespace dtop {
 namespace worker {
 
 class MemLeakWorker : public BaseWorker {
  private:
-	class MemTraceEntry {
-	private:
-	public:
-			int64_t addr;
-			int64_t time;
-			int64_t size;
-			MemTraceEntry() = default;
-			MemTraceEntry(int64_t addr, int64_t time, int64_t size) : addr(addr), time(time), size(size) {}
-	};
+  class MemTraceEntry {
+  private:
+  public:
+    int64_t addr;
+    int64_t time;
+    int64_t size;
+    MemTraceEntry() = default;
+    MemTraceEntry(int64_t addr, int64_t time, int64_t size) : addr(addr), time(time), size(size) {}
+  };
 
   void init_futures() override;
   bool setup_config(WorkerConfig& worker_config) override;
@@ -30,6 +37,67 @@ class MemLeakWorker : public BaseWorker {
   bool handle_stop() override;
 
   static std::map<int, std::map<int64_t, MemTraceEntry>> mem_map;
+
+  struct malloc_free_msg_t {
+    int64_t mode;
+    int64_t pid;
+    int64_t size;
+    int64_t addr;
+    int64_t caller;
+  };
+
+  #define malloc_msg_size sizeof(malloc_free_msg_t)
+  #define mode_malloc 0
+  #define mode_free 1
+
+  std::mutex mut;
+  
+  typedef std::pair<struct malloc_free_msg_t, int64_t> msg_ts_pair_t;
+  typedef std::map<int64_t, msg_ts_pair_t> addr_map_t;
+  typedef std::map<int64_t, addr_map_t> pid_map_t;
+
+  pid_map_t pid_map_;
+
+  std::unique_ptr<std::thread> map_thread_ptr;
+
+  std::atomic<bool> should_break;
+
+  static void update_map(MemLeakWorker *self) {
+    malloc_free_msg_t msg;
+    void *buf = (void *)&msg;
+
+    while (self->should_break) {
+      self->mut.lock();
+
+      for (auto iter : self->pid_map_) {
+        if (self->should_break) {
+          break;
+        }
+
+        auto& pid = iter.first;
+        const std::string fifo_path = "/tmp/fifo" + std::to_string(pid);
+        int fd = open(fifo_path.c_str(), O_RDONLY | O_NONBLOCK);
+        if (fd == -1) {
+          continue;
+        }
+
+        while (self->should_break) {
+          size_t ret = read(fd, buf, malloc_msg_size);
+          if (ret == 0 || ret == -1) {
+            break;
+          }
+          msg_ts_pair_t msg_ts_pair = std::pair<malloc_free_msg_t, int64_t>(msg, std::time(nullptr));
+          assert(iter.first == msg.pid);
+          self->pid_map_[iter.first].insert(std::pair<int64_t, msg_ts_pair_t>(msg.addr, msg_ts_pair));
+        }
+        
+        if (fd > 0) {
+          close(fd);
+        }
+      }
+      self->mut.unlock();
+    }
+  }
 
  public:
 
