@@ -121,18 +121,22 @@ void dtop::worker::MemLeakWorker::update_pids(const std::list<int64_t>& to_add, 
 }
 
 void dtop::worker::MemLeakWorker::add_pids(const std::list<int64_t>& to_add) {
+  this->mut.lock();
   for (const auto& iter : to_add) {
     if (pid_map_.find(iter) == pid_map_.end()) {
       addr_map_t m;
       pid_map_.insert(std::pair<int64_t, addr_map_t>(iter, m));
     }
   }
+  this->mut.unlock();
 }
 
 void dtop::worker::MemLeakWorker::rm_pids(const std::list<int64_t>& to_rm) {
+  this->mut.lock();
   for (const auto& iter : to_rm) {
     if (pid_map_.find(iter) != pid_map_.end()) {
       pid_map_.erase(iter);
     }
   }
+  this->mut.unlock();
 }
