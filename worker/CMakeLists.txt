@@ -11,6 +11,8 @@ src/Future.cpp
 src/common.cpp
 src/pslib_linux.cpp
 src/MemLeakWorker.cpp
+        src/MemoryMonitorWorker.cpp
+#src/hook.cpp
 src/WorkerCmdType.cpp)
 
 add_library(hook SHARED

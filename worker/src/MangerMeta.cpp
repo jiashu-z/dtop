@@ -1,9 +1,11 @@
 #include "ManagerMeta.h"
 #include "MemUsageWorker.h"
 #include "MemLeakWorker.h"
+#include "MemoryMonitorWorker.h"
 
 void dtop::worker::ManagerMeta::register_workers() {
   workers.push_back(new MemUsageWorker());
+  workers.push_back(new MemoryMonitorWorker());
 }
 
 dtop::worker::ManagerMeta::ManagerMeta() = default;

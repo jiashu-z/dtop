@@ -13,6 +13,7 @@ PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc
 PUBLIC ${CMAKE_SOURCE_DIR}/proto
 PUBLIC "/home/zjs/.local/include"
 PUBLIC "/home/zhangjiashu/.local/include"
+PUBLIC "/home/maozunyao/new_disk/.local/include"
 PUBLIC ${CMAKE_SOURCE_DIR}/common/inc
 PUBLIC "/include"
 PUBLIC ${CMAKE_SOURCE_DIR}/worker/inc
@@ -33,4 +34,6 @@ common
 pugixml
 client
 )
+
+
 

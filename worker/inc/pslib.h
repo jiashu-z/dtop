@@ -172,21 +172,38 @@ typedef struct {
 } CpuTimes;
 
 typedef struct {
-  pid_t pid;
-  pid_t ppid;
-  char *name;
-  char *exe;
-  char *cmdline;
-  double create_time;
-  uint32_t uid;
-  uint32_t euid;
-  uint32_t suid;
-  uint32_t gid;
-  uint32_t egid;
-  uint32_t sgid;
-  char *username;
-  char *terminal;
+    int rss;
+    int vms;
+    int shared;
+    int text;
+    int lib;
+    int data;
+    int dirty;
+} MemoryInfo;
+
+typedef struct {
+    int thread_id;
+    MemoryInfo memoryInfo;
+} Thread;
+
+typedef struct {
+    pid_t pid;
+    pid_t ppid;
+    char *name;
+    char *exe;
+    char *cmdline;
+    double create_time;
+    uint32_t uid;
+    uint32_t euid;
+    uint32_t suid;
+    uint32_t gid;
+    uint32_t egid;
+    uint32_t sgid;
+    char *username;
+    char *terminal;
+    std::vector<Thread> *threads;
 } Process;
+
 
 bool disk_usage(const char[], DiskUsage *);
 
@@ -222,6 +239,8 @@ void free_process(Process *);
 
 /* Required to avoid [-Wimplicit-function-declaration] for python bindings */
 void gcov_flush(void);
+void get_processes_ids(std::vector<int> &process_ids);
+void get_processes_info(std::vector<Process *>& processes_info,std::vector<int>& process_ids);
 
 // disk_io_counters_per_disk
 // net_io_counters_per_nic
