@@ -11,6 +11,7 @@ PUBLIC ${CMAKE_SOURCE_DIR}/proto
 PUBLIC "/home/zjs/.local/include"
 PUBLIC "/home/zhangjiashu/.local/include"
 PUBLIC "/home/maozunyao/new_disk/.local/include"
+PUBLIC "/include"
 )
 target_include_directories(client
 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
