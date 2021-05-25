@@ -68,3 +68,49 @@ bool dtop::worker::MemLeakWorker::handle_stop() {
   }
   return true; 
 }
+
+void dtop::worker::MemLeakWorker::update_map(dtop::worker::MemLeakWorker* self)  {
+  malloc_free_msg_t msg;
+  void *buf = (void *)&msg;
+
+  // Keeps the thread running until pause or stop.
+  while (self->should_break) {
+
+    // Iterate the map of all pids.
+    self->mut.lock();
+    for (auto iter : self->pid_map_) {
+      if (self->should_break) {
+        break;
+      }
+
+      auto& pid = iter.first;
+      const std::string fifo_path = "/tmp/fifo" + std::to_string(pid);
+      int fd = open(fifo_path.c_str(), O_RDONLY | O_NONBLOCK);
+      if (fd == -1) {
+        continue;
+      }
+
+      // Read until FIFO is empty or error, or until pause or stop.
+      while (self->should_break) {
+        size_t ret = read(fd, buf, malloc_msg_size);
+        if (ret == 0 || ret == -1) {
+          break;
+        }
+        assert(msg.mode == mode_malloc || msg.mode == mode_free);
+        if (msg.mode == mode_malloc) {
+          msg_ts_pair_t msg_ts_pair = std::pair<malloc_free_msg_t, int64_t>(msg, std::time(nullptr));
+          assert(iter.first == msg.pid);
+          self->pid_map_[iter.first].insert(std::pair<int64_t, msg_ts_pair_t>(msg.addr, msg_ts_pair));
+        }
+        else {
+          self->pid_map_[iter.first].erase(msg.addr);
+        }
+      }
+      
+      if (fd > 0) {
+        close(fd);
+      }
+    }
+    self->mut.unlock();
+  }
+}
