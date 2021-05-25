@@ -114,3 +114,25 @@ void dtop::worker::MemLeakWorker::update_map(dtop::worker::MemLeakWorker* self) 
     self->mut.unlock();
   }
 }
+
+void dtop::worker::MemLeakWorker::update_pids(const std::list<int64_t>& to_add, const std::list<int64_t>& to_rm) {
+  this->add_pids(to_add);
+  this->rm_pids(to_rm);
+}
+
+void dtop::worker::MemLeakWorker::add_pids(const std::list<int64_t>& to_add) {
+  for (const auto& iter : to_add) {
+    if (pid_map_.find(iter) == pid_map_.end()) {
+      addr_map_t m;
+      pid_map_.insert(std::pair<int64_t, addr_map_t>(iter, m));
+    }
+  }
+}
+
+void dtop::worker::MemLeakWorker::rm_pids(const std::list<int64_t>& to_rm) {
+  for (const auto& iter : to_rm) {
+    if (pid_map_.find(iter) != pid_map_.end()) {
+      pid_map_.erase(iter);
+    }
+  }
+}

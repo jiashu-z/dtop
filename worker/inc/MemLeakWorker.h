@@ -12,6 +12,7 @@
 #include <fcntl.h>
 #include <cassert>
 #include <atomic>
+#include <list>
 
 namespace dtop {
 namespace worker {
@@ -63,6 +64,18 @@ class MemLeakWorker : public BaseWorker {
   std::atomic<bool> should_break;
 
   static void update_map(MemLeakWorker *self);
+
+  /**
+   * @brief Please to not add and remove the same pid!
+   * 
+   * @param to_add 
+   * @param to_rm
+   */
+  void update_pids(const std::list<int64_t>& to_add, const std::list<int64_t>& to_rm);
+
+  void add_pids(const std::list<int64_t>& to_add);
+
+  void rm_pids(const std::list<int64_t>& to_rm);
 
  public:
 
