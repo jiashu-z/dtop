@@ -107,16 +107,44 @@ void dtop::client::Client::exec_cluster_command(StringArrayMessage *response,
 }
 
 void dtop::client::Client::get_cluster_metric(
-    FetchReplyArrayMessage* response, const FetchRequestMessage* request) {
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  for (const auto& iter : this->grpc_client_map) {
-    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-    std::cout << iter.first << std::endl;
-    ::grpc::ClientContext context;
-    FetchReplyMessage local_response;
-    iter.second->stub->GetServerMetric(&context, *request, &local_response);
-    auto* reply_ptr = response->mutable_fetch_reply_arr()->Add();
-    reply_ptr->CopyFrom(local_response);
-    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  }
+    FetchReplyArrayMessage* response, const FetchRequestArrayMessage* request) {
+
+	std::unordered_map<std::string, FetchRequestMessage> req_map;
+	// init map
+	for (const auto& iter : this->grpc_client_map) {
+		req_map.insert(std::make_pair<std::string, FetchRequestMessage>(
+						std::string(iter.first), FetchRequestMessage()));
+	}
+	// set broadcast request
+	for (const auto& fetch_req : request->fetch_request_arr()) {
+		if (fetch_req.addr().empty()) {
+			for (auto& iter : req_map) {
+				iter.second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
+				iter.second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
+			}
+		}
+	}
+	// set non-broadcast request, it will overwrite broadcast req if exits
+	for (const auto& fetch_req : request->fetch_request_arr()) {
+		if (!fetch_req.addr().empty()) {
+			auto iter = req_map.find(fetch_req.addr());
+			if (iter != req_map.end()) {    // overwrite request
+				iter->second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
+				iter->second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
+			} else {
+				std::cout << "Unknown host " << iter->first << std::endl;
+			}
+		}
+	}
+	// send command to target host
+	for (const auto& iter : this->grpc_client_map) {
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+		std::cout << iter.first << std::endl;
+		::grpc::ClientContext context;
+		const FetchRequestMessage* local_request = &req_map[iter.first];   // must contain
+		FetchReplyMessage local_response;
+		iter.second->stub->GetServerMetric(&context, *local_request, &local_response);
+		response->mutable_fetch_reply_arr()->Add()->CopyFrom(local_response);
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+	}
 }

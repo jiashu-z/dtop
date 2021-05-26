@@ -9,6 +9,6 @@ service APIService {
   rpc GetClusterStatus (StringArrayMessage) returns (ServerStatusArrayMessage);
   rpc GetServerAddresses (google.protobuf.Empty) returns (StringArrayMessage);
   rpc ExecClusterCommand (CommandArrayMessage) returns (StringArrayMessage);
-  rpc GetClusterMetric (FetchRequestMessage) returns (FetchReplyArrayMessage);
-  rpc GetAggregatedVirtualMemInfo (FetchRequestMessage) returns (FetchReplyArrayMessage);
+  rpc GetClusterMetric (FetchRequestArrayMessage) returns (FetchReplyArrayMessage);
+  rpc GetAggregatedVirtualMemInfo (FetchRequestArrayMessage) returns (FetchReplyArrayMessage);
 }

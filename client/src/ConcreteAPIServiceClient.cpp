@@ -12,7 +12,7 @@ void dtop::client::ConcreteAPIServiceClient::get_status_arr() {
 
 void dtop::client::ConcreteAPIServiceClient::get_stats() {
   grpc::ClientContext context;
-  ::FetchRequestMessage request;
+  ::FetchRequestArrayMessage request;
   ::FetchReplyArrayMessage response;
   this->stub->GetClusterMetric(&context, request, &response);
 }

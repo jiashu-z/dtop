@@ -54,6 +54,10 @@ message CommandMessage {
 }
 
 
+message ServerStatusArrayMessage {
+  repeated ServerStatusMessage server_status_arr = 1;
+}
+
 message ServerStatusMessage {
   string addr = 1;
   repeated WorkerStatusMessage worker_status_arr = 2;
@@ -72,9 +76,18 @@ message WorkerFutureMessage {
 }
 
 
+message FetchRequestArrayMessage {
+  repeated FetchRequestMessage fetch_request_arr = 1;
+}
+
 message FetchRequestMessage {
-  repeated string request_arr = 1;
-  repeated string param_arr = 2;
+  string addr = 1;
+  repeated string future_arr = 2;
+  repeated string param_arr = 3;
+}
+
+message FetchReplyArrayMessage {
+  repeated FetchReplyMessage fetch_reply_arr = 1;
 }
 
 message FetchReplyMessage {
@@ -85,13 +98,6 @@ message FetchReplyMessage {
   repeated string infos = 5;
 }
 
-message ServerStatusArrayMessage {
-  repeated ServerStatusMessage server_status_arr = 1;
-}
-
-message FetchReplyArrayMessage {
-  repeated FetchReplyMessage fetch_reply_arr = 1;
-}
 
 message CpuMessage {
   int32 core_num = 1;

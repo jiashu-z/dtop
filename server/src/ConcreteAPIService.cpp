@@ -27,7 +27,7 @@
 }
 
 ::grpc::Status dtop::server::ConcreteAPIService::GetClusterMetric(
-    ::grpc::ServerContext *context, const ::FetchRequestMessage *request,
+    ::grpc::ServerContext *context, const ::FetchRequestArrayMessage *request,
     ::FetchReplyArrayMessage *response) {
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 	this->server->client.get_cluster_metric(response, request);
@@ -52,7 +52,7 @@ inline void sum_mem_usage(MemUsageMessage& aggregated, const MemUsageMessage& si
 }
 
 ::grpc::Status dtop::server::ConcreteAPIService::GetAggregatedVirtualMemInfo(::grpc::ServerContext *context,
-                                                                             const ::FetchRequestMessage *request,
+                                                                             const ::FetchRequestArrayMessage *request,
                                                                              ::FetchReplyArrayMessage *response) {
 	auto *local_response = new ::FetchReplyArrayMessage();
 	this->server->client.get_cluster_metric(local_response, request);

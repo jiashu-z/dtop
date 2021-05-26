@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[24]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[25]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -75,6 +75,9 @@ extern FetchReplyArrayMessageDefaultTypeInternal _FetchReplyArrayMessage_default
 class FetchReplyMessage;
 struct FetchReplyMessageDefaultTypeInternal;
 extern FetchReplyMessageDefaultTypeInternal _FetchReplyMessage_default_instance_;
+class FetchRequestArrayMessage;
+struct FetchRequestArrayMessageDefaultTypeInternal;
+extern FetchRequestArrayMessageDefaultTypeInternal _FetchRequestArrayMessage_default_instance_;
 class FetchRequestMessage;
 struct FetchRequestMessageDefaultTypeInternal;
 extern FetchRequestMessageDefaultTypeInternal _FetchRequestMessage_default_instance_;
@@ -134,6 +137,7 @@ template<> ::DoubleArrayMessage* Arena::CreateMaybeMessage<::DoubleArrayMessage>
 template<> ::DoubleMessage* Arena::CreateMaybeMessage<::DoubleMessage>(Arena*);
 template<> ::FetchReplyArrayMessage* Arena::CreateMaybeMessage<::FetchReplyArrayMessage>(Arena*);
 template<> ::FetchReplyMessage* Arena::CreateMaybeMessage<::FetchReplyMessage>(Arena*);
+template<> ::FetchRequestArrayMessage* Arena::CreateMaybeMessage<::FetchRequestArrayMessage>(Arena*);
 template<> ::FetchRequestMessage* Arena::CreateMaybeMessage<::FetchRequestMessage>(Arena*);
 template<> ::FloatArrayMessage* Arena::CreateMaybeMessage<::FloatArrayMessage>(Arena*);
 template<> ::FloatMessage* Arena::CreateMaybeMessage<::FloatMessage>(Arena*);
@@ -1929,6 +1933,152 @@ class CommandMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ServerStatusArrayMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusArrayMessage) */ {
+ public:
+  inline ServerStatusArrayMessage() : ServerStatusArrayMessage(nullptr) {}
+  virtual ~ServerStatusArrayMessage();
+  explicit constexpr ServerStatusArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ServerStatusArrayMessage(const ServerStatusArrayMessage& from);
+  ServerStatusArrayMessage(ServerStatusArrayMessage&& from) noexcept
+    : ServerStatusArrayMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline ServerStatusArrayMessage& operator=(const ServerStatusArrayMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ServerStatusArrayMessage& operator=(ServerStatusArrayMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ServerStatusArrayMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ServerStatusArrayMessage* internal_default_instance() {
+    return reinterpret_cast<const ServerStatusArrayMessage*>(
+               &_ServerStatusArrayMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(ServerStatusArrayMessage& a, ServerStatusArrayMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ServerStatusArrayMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ServerStatusArrayMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ServerStatusArrayMessage* New() const final {
+    return CreateMaybeMessage<ServerStatusArrayMessage>(nullptr);
+  }
+
+  ServerStatusArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ServerStatusArrayMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ServerStatusArrayMessage& from);
+  void MergeFrom(const ServerStatusArrayMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ServerStatusArrayMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ServerStatusArrayMessage";
+  }
+  protected:
+  explicit ServerStatusArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kServerStatusArrFieldNumber = 1,
+  };
+  // repeated .ServerStatusMessage server_status_arr = 1;
+  int server_status_arr_size() const;
+  private:
+  int _internal_server_status_arr_size() const;
+  public:
+  void clear_server_status_arr();
+  ::ServerStatusMessage* mutable_server_status_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
+      mutable_server_status_arr();
+  private:
+  const ::ServerStatusMessage& _internal_server_status_arr(int index) const;
+  ::ServerStatusMessage* _internal_add_server_status_arr();
+  public:
+  const ::ServerStatusMessage& server_status_arr(int index) const;
+  ::ServerStatusMessage* add_server_status_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
+      server_status_arr() const;
+
+  // @@protoc_insertion_point(class_scope:ServerStatusArrayMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_arr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ServerStatusMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusMessage) */ {
  public:
@@ -1972,7 +2122,7 @@ class ServerStatusMessage PROTOBUF_FINAL :
                &_ServerStatusMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(ServerStatusMessage& a, ServerStatusMessage& b) {
     a.Swap(&b);
@@ -2154,7 +2304,7 @@ class WorkerStatusMessage PROTOBUF_FINAL :
                &_WorkerStatusMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(WorkerStatusMessage& a, WorkerStatusMessage& b) {
     a.Swap(&b);
@@ -2336,7 +2486,7 @@ class WorkerFutureMessage PROTOBUF_FINAL :
                &_WorkerFutureMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(WorkerFutureMessage& a, WorkerFutureMessage& b) {
     a.Swap(&b);
@@ -2455,6 +2605,152 @@ class WorkerFutureMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class FetchRequestArrayMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchRequestArrayMessage) */ {
+ public:
+  inline FetchRequestArrayMessage() : FetchRequestArrayMessage(nullptr) {}
+  virtual ~FetchRequestArrayMessage();
+  explicit constexpr FetchRequestArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  FetchRequestArrayMessage(const FetchRequestArrayMessage& from);
+  FetchRequestArrayMessage(FetchRequestArrayMessage&& from) noexcept
+    : FetchRequestArrayMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline FetchRequestArrayMessage& operator=(const FetchRequestArrayMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FetchRequestArrayMessage& operator=(FetchRequestArrayMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FetchRequestArrayMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const FetchRequestArrayMessage* internal_default_instance() {
+    return reinterpret_cast<const FetchRequestArrayMessage*>(
+               &_FetchRequestArrayMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(FetchRequestArrayMessage& a, FetchRequestArrayMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FetchRequestArrayMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(FetchRequestArrayMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FetchRequestArrayMessage* New() const final {
+    return CreateMaybeMessage<FetchRequestArrayMessage>(nullptr);
+  }
+
+  FetchRequestArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FetchRequestArrayMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FetchRequestArrayMessage& from);
+  void MergeFrom(const FetchRequestArrayMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FetchRequestArrayMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "FetchRequestArrayMessage";
+  }
+  protected:
+  explicit FetchRequestArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFetchRequestArrFieldNumber = 1,
+  };
+  // repeated .FetchRequestMessage fetch_request_arr = 1;
+  int fetch_request_arr_size() const;
+  private:
+  int _internal_fetch_request_arr_size() const;
+  public:
+  void clear_fetch_request_arr();
+  ::FetchRequestMessage* mutable_fetch_request_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchRequestMessage >*
+      mutable_fetch_request_arr();
+  private:
+  const ::FetchRequestMessage& _internal_fetch_request_arr(int index) const;
+  ::FetchRequestMessage* _internal_add_fetch_request_arr();
+  public:
+  const ::FetchRequestMessage& fetch_request_arr(int index) const;
+  ::FetchRequestMessage* add_fetch_request_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchRequestMessage >&
+      fetch_request_arr() const;
+
+  // @@protoc_insertion_point(class_scope:FetchRequestArrayMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchRequestMessage > fetch_request_arr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
 class FetchRequestMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchRequestMessage) */ {
  public:
@@ -2498,7 +2794,7 @@ class FetchRequestMessage PROTOBUF_FINAL :
                &_FetchRequestMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    17;
 
   friend void swap(FetchRequestMessage& a, FetchRequestMessage& b) {
     a.Swap(&b);
@@ -2568,34 +2864,35 @@ class FetchRequestMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRequestArrFieldNumber = 1,
-    kParamArrFieldNumber = 2,
+    kFutureArrFieldNumber = 2,
+    kParamArrFieldNumber = 3,
+    kAddrFieldNumber = 1,
   };
-  // repeated string request_arr = 1;
-  int request_arr_size() const;
+  // repeated string future_arr = 2;
+  int future_arr_size() const;
   private:
-  int _internal_request_arr_size() const;
+  int _internal_future_arr_size() const;
   public:
-  void clear_request_arr();
-  const std::string& request_arr(int index) const;
-  std::string* mutable_request_arr(int index);
-  void set_request_arr(int index, const std::string& value);
-  void set_request_arr(int index, std::string&& value);
-  void set_request_arr(int index, const char* value);
-  void set_request_arr(int index, const char* value, size_t size);
-  std::string* add_request_arr();
-  void add_request_arr(const std::string& value);
-  void add_request_arr(std::string&& value);
-  void add_request_arr(const char* value);
-  void add_request_arr(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& request_arr() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_request_arr();
+  void clear_future_arr();
+  const std::string& future_arr(int index) const;
+  std::string* mutable_future_arr(int index);
+  void set_future_arr(int index, const std::string& value);
+  void set_future_arr(int index, std::string&& value);
+  void set_future_arr(int index, const char* value);
+  void set_future_arr(int index, const char* value, size_t size);
+  std::string* add_future_arr();
+  void add_future_arr(const std::string& value);
+  void add_future_arr(std::string&& value);
+  void add_future_arr(const char* value);
+  void add_future_arr(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& future_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_future_arr();
   private:
-  const std::string& _internal_request_arr(int index) const;
-  std::string* _internal_add_request_arr();
+  const std::string& _internal_future_arr(int index) const;
+  std::string* _internal_add_future_arr();
   public:
 
-  // repeated string param_arr = 2;
+  // repeated string param_arr = 3;
   int param_arr_size() const;
   private:
   int _internal_param_arr_size() const;
@@ -2619,6 +2916,22 @@ class FetchRequestMessage PROTOBUF_FINAL :
   std::string* _internal_add_param_arr();
   public:
 
+  // string addr = 1;
+  void clear_addr();
+  const std::string& addr() const;
+  void set_addr(const std::string& value);
+  void set_addr(std::string&& value);
+  void set_addr(const char* value);
+  void set_addr(const char* value, size_t size);
+  std::string* mutable_addr();
+  std::string* release_addr();
+  void set_allocated_addr(std::string* addr);
+  private:
+  const std::string& _internal_addr() const;
+  void _internal_set_addr(const std::string& value);
+  std::string* _internal_mutable_addr();
+  public:
+
   // @@protoc_insertion_point(class_scope:FetchRequestMessage)
  private:
   class _Internal;
@@ -2626,8 +2939,155 @@ class FetchRequestMessage PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> request_arr_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> future_arr_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> param_arr_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FetchReplyArrayMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchReplyArrayMessage) */ {
+ public:
+  inline FetchReplyArrayMessage() : FetchReplyArrayMessage(nullptr) {}
+  virtual ~FetchReplyArrayMessage();
+  explicit constexpr FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  FetchReplyArrayMessage(const FetchReplyArrayMessage& from);
+  FetchReplyArrayMessage(FetchReplyArrayMessage&& from) noexcept
+    : FetchReplyArrayMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline FetchReplyArrayMessage& operator=(const FetchReplyArrayMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FetchReplyArrayMessage& operator=(FetchReplyArrayMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FetchReplyArrayMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const FetchReplyArrayMessage* internal_default_instance() {
+    return reinterpret_cast<const FetchReplyArrayMessage*>(
+               &_FetchReplyArrayMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(FetchReplyArrayMessage& a, FetchReplyArrayMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FetchReplyArrayMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(FetchReplyArrayMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FetchReplyArrayMessage* New() const final {
+    return CreateMaybeMessage<FetchReplyArrayMessage>(nullptr);
+  }
+
+  FetchReplyArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FetchReplyArrayMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FetchReplyArrayMessage& from);
+  void MergeFrom(const FetchReplyArrayMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FetchReplyArrayMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "FetchReplyArrayMessage";
+  }
+  protected:
+  explicit FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFetchReplyArrFieldNumber = 1,
+  };
+  // repeated .FetchReplyMessage fetch_reply_arr = 1;
+  int fetch_reply_arr_size() const;
+  private:
+  int _internal_fetch_reply_arr_size() const;
+  public:
+  void clear_fetch_reply_arr();
+  ::FetchReplyMessage* mutable_fetch_reply_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
+      mutable_fetch_reply_arr();
+  private:
+  const ::FetchReplyMessage& _internal_fetch_reply_arr(int index) const;
+  ::FetchReplyMessage* _internal_add_fetch_reply_arr();
+  public:
+  const ::FetchReplyMessage& fetch_reply_arr(int index) const;
+  ::FetchReplyMessage* add_fetch_reply_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
+      fetch_reply_arr() const;
+
+  // @@protoc_insertion_point(class_scope:FetchReplyArrayMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage > fetch_reply_arr_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -2676,7 +3136,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
                &_FetchReplyMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    19;
 
   friend void swap(FetchReplyMessage& a, FetchReplyMessage& b) {
     a.Swap(&b);
@@ -2863,298 +3323,6 @@ class FetchReplyMessage PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
-class ServerStatusArrayMessage PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerStatusArrayMessage) */ {
- public:
-  inline ServerStatusArrayMessage() : ServerStatusArrayMessage(nullptr) {}
-  virtual ~ServerStatusArrayMessage();
-  explicit constexpr ServerStatusArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  ServerStatusArrayMessage(const ServerStatusArrayMessage& from);
-  ServerStatusArrayMessage(ServerStatusArrayMessage&& from) noexcept
-    : ServerStatusArrayMessage() {
-    *this = ::std::move(from);
-  }
-
-  inline ServerStatusArrayMessage& operator=(const ServerStatusArrayMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ServerStatusArrayMessage& operator=(ServerStatusArrayMessage&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const ServerStatusArrayMessage& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ServerStatusArrayMessage* internal_default_instance() {
-    return reinterpret_cast<const ServerStatusArrayMessage*>(
-               &_ServerStatusArrayMessage_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    17;
-
-  friend void swap(ServerStatusArrayMessage& a, ServerStatusArrayMessage& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ServerStatusArrayMessage* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ServerStatusArrayMessage* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ServerStatusArrayMessage* New() const final {
-    return CreateMaybeMessage<ServerStatusArrayMessage>(nullptr);
-  }
-
-  ServerStatusArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ServerStatusArrayMessage>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ServerStatusArrayMessage& from);
-  void MergeFrom(const ServerStatusArrayMessage& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ServerStatusArrayMessage* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ServerStatusArrayMessage";
-  }
-  protected:
-  explicit ServerStatusArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kServerStatusArrFieldNumber = 1,
-  };
-  // repeated .ServerStatusMessage server_status_arr = 1;
-  int server_status_arr_size() const;
-  private:
-  int _internal_server_status_arr_size() const;
-  public:
-  void clear_server_status_arr();
-  ::ServerStatusMessage* mutable_server_status_arr(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-      mutable_server_status_arr();
-  private:
-  const ::ServerStatusMessage& _internal_server_status_arr(int index) const;
-  ::ServerStatusMessage* _internal_add_server_status_arr();
-  public:
-  const ::ServerStatusMessage& server_status_arr(int index) const;
-  ::ServerStatusMessage* add_server_status_arr();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-      server_status_arr() const;
-
-  // @@protoc_insertion_point(class_scope:ServerStatusArrayMessage)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage > server_status_arr_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_message_2eproto;
-};
-// -------------------------------------------------------------------
-
-class FetchReplyArrayMessage PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:FetchReplyArrayMessage) */ {
- public:
-  inline FetchReplyArrayMessage() : FetchReplyArrayMessage(nullptr) {}
-  virtual ~FetchReplyArrayMessage();
-  explicit constexpr FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  FetchReplyArrayMessage(const FetchReplyArrayMessage& from);
-  FetchReplyArrayMessage(FetchReplyArrayMessage&& from) noexcept
-    : FetchReplyArrayMessage() {
-    *this = ::std::move(from);
-  }
-
-  inline FetchReplyArrayMessage& operator=(const FetchReplyArrayMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline FetchReplyArrayMessage& operator=(FetchReplyArrayMessage&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const FetchReplyArrayMessage& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const FetchReplyArrayMessage* internal_default_instance() {
-    return reinterpret_cast<const FetchReplyArrayMessage*>(
-               &_FetchReplyArrayMessage_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    18;
-
-  friend void swap(FetchReplyArrayMessage& a, FetchReplyArrayMessage& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(FetchReplyArrayMessage* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(FetchReplyArrayMessage* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline FetchReplyArrayMessage* New() const final {
-    return CreateMaybeMessage<FetchReplyArrayMessage>(nullptr);
-  }
-
-  FetchReplyArrayMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<FetchReplyArrayMessage>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const FetchReplyArrayMessage& from);
-  void MergeFrom(const FetchReplyArrayMessage& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(FetchReplyArrayMessage* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "FetchReplyArrayMessage";
-  }
-  protected:
-  explicit FetchReplyArrayMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kFetchReplyArrFieldNumber = 1,
-  };
-  // repeated .FetchReplyMessage fetch_reply_arr = 1;
-  int fetch_reply_arr_size() const;
-  private:
-  int _internal_fetch_reply_arr_size() const;
-  public:
-  void clear_fetch_reply_arr();
-  ::FetchReplyMessage* mutable_fetch_reply_arr(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
-      mutable_fetch_reply_arr();
-  private:
-  const ::FetchReplyMessage& _internal_fetch_reply_arr(int index) const;
-  ::FetchReplyMessage* _internal_add_fetch_reply_arr();
-  public:
-  const ::FetchReplyMessage& fetch_reply_arr(int index) const;
-  ::FetchReplyMessage* add_fetch_reply_arr();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
-      fetch_reply_arr() const;
-
-  // @@protoc_insertion_point(class_scope:FetchReplyArrayMessage)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage > fetch_reply_arr_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_message_2eproto;
-};
-// -------------------------------------------------------------------
-
 class CpuMessage PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CpuMessage) */ {
  public:
@@ -3198,7 +3366,7 @@ class CpuMessage PROTOBUF_FINAL :
                &_CpuMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   friend void swap(CpuMessage& a, CpuMessage& b) {
     a.Swap(&b);
@@ -3360,7 +3528,7 @@ class MemUsageMessage PROTOBUF_FINAL :
                &_MemUsageMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   friend void swap(MemUsageMessage& a, MemUsageMessage& b) {
     a.Swap(&b);
@@ -3585,7 +3753,7 @@ class MemoryMonitorMessage PROTOBUF_FINAL :
                &_MemoryMonitorMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   friend void swap(MemoryMonitorMessage& a, MemoryMonitorMessage& b) {
     a.Swap(&b);
@@ -3731,7 +3899,7 @@ class ProcessMessage PROTOBUF_FINAL :
                &_ProcessMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    23;
 
   friend void swap(ProcessMessage& a, ProcessMessage& b) {
     a.Swap(&b);
@@ -3986,7 +4154,7 @@ class ThreadMessage PROTOBUF_FINAL :
                &_ThreadMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    24;
 
   friend void swap(ThreadMessage& a, ThreadMessage& b) {
     a.Swap(&b);
@@ -4837,6 +5005,49 @@ inline void CommandMessage::set_allocated_cmd_type(std::string* cmd_type) {
 
 // -------------------------------------------------------------------
 
+// ServerStatusArrayMessage
+
+// repeated .ServerStatusMessage server_status_arr = 1;
+inline int ServerStatusArrayMessage::_internal_server_status_arr_size() const {
+  return server_status_arr_.size();
+}
+inline int ServerStatusArrayMessage::server_status_arr_size() const {
+  return _internal_server_status_arr_size();
+}
+inline void ServerStatusArrayMessage::clear_server_status_arr() {
+  server_status_arr_.Clear();
+}
+inline ::ServerStatusMessage* ServerStatusArrayMessage::mutable_server_status_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerStatusArrayMessage.server_status_arr)
+  return server_status_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
+ServerStatusArrayMessage::mutable_server_status_arr() {
+  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrayMessage.server_status_arr)
+  return &server_status_arr_;
+}
+inline const ::ServerStatusMessage& ServerStatusArrayMessage::_internal_server_status_arr(int index) const {
+  return server_status_arr_.Get(index);
+}
+inline const ::ServerStatusMessage& ServerStatusArrayMessage::server_status_arr(int index) const {
+  // @@protoc_insertion_point(field_get:ServerStatusArrayMessage.server_status_arr)
+  return _internal_server_status_arr(index);
+}
+inline ::ServerStatusMessage* ServerStatusArrayMessage::_internal_add_server_status_arr() {
+  return server_status_arr_.Add();
+}
+inline ::ServerStatusMessage* ServerStatusArrayMessage::add_server_status_arr() {
+  // @@protoc_insertion_point(field_add:ServerStatusArrayMessage.server_status_arr)
+  return _internal_add_server_status_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
+ServerStatusArrayMessage::server_status_arr() const {
+  // @@protoc_insertion_point(field_list:ServerStatusArrayMessage.server_status_arr)
+  return server_status_arr_;
+}
+
+// -------------------------------------------------------------------
+
 // ServerStatusMessage
 
 // string addr = 1;
@@ -5293,83 +5504,187 @@ inline void WorkerFutureMessage::set_allocated_desc(std::string* desc) {
 
 // -------------------------------------------------------------------
 
+// FetchRequestArrayMessage
+
+// repeated .FetchRequestMessage fetch_request_arr = 1;
+inline int FetchRequestArrayMessage::_internal_fetch_request_arr_size() const {
+  return fetch_request_arr_.size();
+}
+inline int FetchRequestArrayMessage::fetch_request_arr_size() const {
+  return _internal_fetch_request_arr_size();
+}
+inline void FetchRequestArrayMessage::clear_fetch_request_arr() {
+  fetch_request_arr_.Clear();
+}
+inline ::FetchRequestMessage* FetchRequestArrayMessage::mutable_fetch_request_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchRequestArrayMessage.fetch_request_arr)
+  return fetch_request_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchRequestMessage >*
+FetchRequestArrayMessage::mutable_fetch_request_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchRequestArrayMessage.fetch_request_arr)
+  return &fetch_request_arr_;
+}
+inline const ::FetchRequestMessage& FetchRequestArrayMessage::_internal_fetch_request_arr(int index) const {
+  return fetch_request_arr_.Get(index);
+}
+inline const ::FetchRequestMessage& FetchRequestArrayMessage::fetch_request_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchRequestArrayMessage.fetch_request_arr)
+  return _internal_fetch_request_arr(index);
+}
+inline ::FetchRequestMessage* FetchRequestArrayMessage::_internal_add_fetch_request_arr() {
+  return fetch_request_arr_.Add();
+}
+inline ::FetchRequestMessage* FetchRequestArrayMessage::add_fetch_request_arr() {
+  // @@protoc_insertion_point(field_add:FetchRequestArrayMessage.fetch_request_arr)
+  return _internal_add_fetch_request_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchRequestMessage >&
+FetchRequestArrayMessage::fetch_request_arr() const {
+  // @@protoc_insertion_point(field_list:FetchRequestArrayMessage.fetch_request_arr)
+  return fetch_request_arr_;
+}
+
+// -------------------------------------------------------------------
+
 // FetchRequestMessage
 
-// repeated string request_arr = 1;
-inline int FetchRequestMessage::_internal_request_arr_size() const {
-  return request_arr_.size();
+// string addr = 1;
+inline void FetchRequestMessage::clear_addr() {
+  addr_.ClearToEmpty();
 }
-inline int FetchRequestMessage::request_arr_size() const {
-  return _internal_request_arr_size();
+inline const std::string& FetchRequestMessage::addr() const {
+  // @@protoc_insertion_point(field_get:FetchRequestMessage.addr)
+  return _internal_addr();
 }
-inline void FetchRequestMessage::clear_request_arr() {
-  request_arr_.Clear();
+inline void FetchRequestMessage::set_addr(const std::string& value) {
+  _internal_set_addr(value);
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.addr)
 }
-inline std::string* FetchRequestMessage::add_request_arr() {
-  // @@protoc_insertion_point(field_add_mutable:FetchRequestMessage.request_arr)
-  return _internal_add_request_arr();
+inline std::string* FetchRequestMessage::mutable_addr() {
+  // @@protoc_insertion_point(field_mutable:FetchRequestMessage.addr)
+  return _internal_mutable_addr();
 }
-inline const std::string& FetchRequestMessage::_internal_request_arr(int index) const {
-  return request_arr_.Get(index);
+inline const std::string& FetchRequestMessage::_internal_addr() const {
+  return addr_.Get();
 }
-inline const std::string& FetchRequestMessage::request_arr(int index) const {
-  // @@protoc_insertion_point(field_get:FetchRequestMessage.request_arr)
-  return _internal_request_arr(index);
+inline void FetchRequestMessage::_internal_set_addr(const std::string& value) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
 }
-inline std::string* FetchRequestMessage::mutable_request_arr(int index) {
-  // @@protoc_insertion_point(field_mutable:FetchRequestMessage.request_arr)
-  return request_arr_.Mutable(index);
+inline void FetchRequestMessage::set_addr(std::string&& value) {
+  
+  addr_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:FetchRequestMessage.addr)
 }
-inline void FetchRequestMessage::set_request_arr(int index, const std::string& value) {
-  // @@protoc_insertion_point(field_set:FetchRequestMessage.request_arr)
-  request_arr_.Mutable(index)->assign(value);
-}
-inline void FetchRequestMessage::set_request_arr(int index, std::string&& value) {
-  // @@protoc_insertion_point(field_set:FetchRequestMessage.request_arr)
-  request_arr_.Mutable(index)->assign(std::move(value));
-}
-inline void FetchRequestMessage::set_request_arr(int index, const char* value) {
+inline void FetchRequestMessage::set_addr(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
-  request_arr_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:FetchRequestMessage.request_arr)
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:FetchRequestMessage.addr)
 }
-inline void FetchRequestMessage::set_request_arr(int index, const char* value, size_t size) {
-  request_arr_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:FetchRequestMessage.request_arr)
+inline void FetchRequestMessage::set_addr(const char* value,
+    size_t size) {
+  
+  addr_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:FetchRequestMessage.addr)
 }
-inline std::string* FetchRequestMessage::_internal_add_request_arr() {
-  return request_arr_.Add();
+inline std::string* FetchRequestMessage::_internal_mutable_addr() {
+  
+  return addr_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
 }
-inline void FetchRequestMessage::add_request_arr(const std::string& value) {
-  request_arr_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:FetchRequestMessage.request_arr)
+inline std::string* FetchRequestMessage::release_addr() {
+  // @@protoc_insertion_point(field_release:FetchRequestMessage.addr)
+  return addr_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline void FetchRequestMessage::add_request_arr(std::string&& value) {
-  request_arr_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:FetchRequestMessage.request_arr)
-}
-inline void FetchRequestMessage::add_request_arr(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  request_arr_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:FetchRequestMessage.request_arr)
-}
-inline void FetchRequestMessage::add_request_arr(const char* value, size_t size) {
-  request_arr_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:FetchRequestMessage.request_arr)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-FetchRequestMessage::request_arr() const {
-  // @@protoc_insertion_point(field_list:FetchRequestMessage.request_arr)
-  return request_arr_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
-FetchRequestMessage::mutable_request_arr() {
-  // @@protoc_insertion_point(field_mutable_list:FetchRequestMessage.request_arr)
-  return &request_arr_;
+inline void FetchRequestMessage::set_allocated_addr(std::string* addr) {
+  if (addr != nullptr) {
+    
+  } else {
+    
+  }
+  addr_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), addr,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:FetchRequestMessage.addr)
 }
 
-// repeated string param_arr = 2;
+// repeated string future_arr = 2;
+inline int FetchRequestMessage::_internal_future_arr_size() const {
+  return future_arr_.size();
+}
+inline int FetchRequestMessage::future_arr_size() const {
+  return _internal_future_arr_size();
+}
+inline void FetchRequestMessage::clear_future_arr() {
+  future_arr_.Clear();
+}
+inline std::string* FetchRequestMessage::add_future_arr() {
+  // @@protoc_insertion_point(field_add_mutable:FetchRequestMessage.future_arr)
+  return _internal_add_future_arr();
+}
+inline const std::string& FetchRequestMessage::_internal_future_arr(int index) const {
+  return future_arr_.Get(index);
+}
+inline const std::string& FetchRequestMessage::future_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchRequestMessage.future_arr)
+  return _internal_future_arr(index);
+}
+inline std::string* FetchRequestMessage::mutable_future_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchRequestMessage.future_arr)
+  return future_arr_.Mutable(index);
+}
+inline void FetchRequestMessage::set_future_arr(int index, const std::string& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.future_arr)
+  future_arr_.Mutable(index)->assign(value);
+}
+inline void FetchRequestMessage::set_future_arr(int index, std::string&& value) {
+  // @@protoc_insertion_point(field_set:FetchRequestMessage.future_arr)
+  future_arr_.Mutable(index)->assign(std::move(value));
+}
+inline void FetchRequestMessage::set_future_arr(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  future_arr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:FetchRequestMessage.future_arr)
+}
+inline void FetchRequestMessage::set_future_arr(int index, const char* value, size_t size) {
+  future_arr_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:FetchRequestMessage.future_arr)
+}
+inline std::string* FetchRequestMessage::_internal_add_future_arr() {
+  return future_arr_.Add();
+}
+inline void FetchRequestMessage::add_future_arr(const std::string& value) {
+  future_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.future_arr)
+}
+inline void FetchRequestMessage::add_future_arr(std::string&& value) {
+  future_arr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:FetchRequestMessage.future_arr)
+}
+inline void FetchRequestMessage::add_future_arr(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  future_arr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:FetchRequestMessage.future_arr)
+}
+inline void FetchRequestMessage::add_future_arr(const char* value, size_t size) {
+  future_arr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:FetchRequestMessage.future_arr)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+FetchRequestMessage::future_arr() const {
+  // @@protoc_insertion_point(field_list:FetchRequestMessage.future_arr)
+  return future_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+FetchRequestMessage::mutable_future_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchRequestMessage.future_arr)
+  return &future_arr_;
+}
+
+// repeated string param_arr = 3;
 inline int FetchRequestMessage::_internal_param_arr_size() const {
   return param_arr_.size();
 }
@@ -5441,6 +5756,49 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
 FetchRequestMessage::mutable_param_arr() {
   // @@protoc_insertion_point(field_mutable_list:FetchRequestMessage.param_arr)
   return &param_arr_;
+}
+
+// -------------------------------------------------------------------
+
+// FetchReplyArrayMessage
+
+// repeated .FetchReplyMessage fetch_reply_arr = 1;
+inline int FetchReplyArrayMessage::_internal_fetch_reply_arr_size() const {
+  return fetch_reply_arr_.size();
+}
+inline int FetchReplyArrayMessage::fetch_reply_arr_size() const {
+  return _internal_fetch_reply_arr_size();
+}
+inline void FetchReplyArrayMessage::clear_fetch_reply_arr() {
+  fetch_reply_arr_.Clear();
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::mutable_fetch_reply_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:FetchReplyArrayMessage.fetch_reply_arr)
+  return fetch_reply_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
+FetchReplyArrayMessage::mutable_fetch_reply_arr() {
+  // @@protoc_insertion_point(field_mutable_list:FetchReplyArrayMessage.fetch_reply_arr)
+  return &fetch_reply_arr_;
+}
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::_internal_fetch_reply_arr(int index) const {
+  return fetch_reply_arr_.Get(index);
+}
+inline const ::FetchReplyMessage& FetchReplyArrayMessage::fetch_reply_arr(int index) const {
+  // @@protoc_insertion_point(field_get:FetchReplyArrayMessage.fetch_reply_arr)
+  return _internal_fetch_reply_arr(index);
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::_internal_add_fetch_reply_arr() {
+  return fetch_reply_arr_.Add();
+}
+inline ::FetchReplyMessage* FetchReplyArrayMessage::add_fetch_reply_arr() {
+  // @@protoc_insertion_point(field_add:FetchReplyArrayMessage.fetch_reply_arr)
+  return _internal_add_fetch_reply_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
+FetchReplyArrayMessage::fetch_reply_arr() const {
+  // @@protoc_insertion_point(field_list:FetchReplyArrayMessage.fetch_reply_arr)
+  return fetch_reply_arr_;
 }
 
 // -------------------------------------------------------------------
@@ -5829,92 +6187,6 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
 FetchReplyMessage::mutable_infos() {
   // @@protoc_insertion_point(field_mutable_list:FetchReplyMessage.infos)
   return &infos_;
-}
-
-// -------------------------------------------------------------------
-
-// ServerStatusArrayMessage
-
-// repeated .ServerStatusMessage server_status_arr = 1;
-inline int ServerStatusArrayMessage::_internal_server_status_arr_size() const {
-  return server_status_arr_.size();
-}
-inline int ServerStatusArrayMessage::server_status_arr_size() const {
-  return _internal_server_status_arr_size();
-}
-inline void ServerStatusArrayMessage::clear_server_status_arr() {
-  server_status_arr_.Clear();
-}
-inline ::ServerStatusMessage* ServerStatusArrayMessage::mutable_server_status_arr(int index) {
-  // @@protoc_insertion_point(field_mutable:ServerStatusArrayMessage.server_status_arr)
-  return server_status_arr_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >*
-ServerStatusArrayMessage::mutable_server_status_arr() {
-  // @@protoc_insertion_point(field_mutable_list:ServerStatusArrayMessage.server_status_arr)
-  return &server_status_arr_;
-}
-inline const ::ServerStatusMessage& ServerStatusArrayMessage::_internal_server_status_arr(int index) const {
-  return server_status_arr_.Get(index);
-}
-inline const ::ServerStatusMessage& ServerStatusArrayMessage::server_status_arr(int index) const {
-  // @@protoc_insertion_point(field_get:ServerStatusArrayMessage.server_status_arr)
-  return _internal_server_status_arr(index);
-}
-inline ::ServerStatusMessage* ServerStatusArrayMessage::_internal_add_server_status_arr() {
-  return server_status_arr_.Add();
-}
-inline ::ServerStatusMessage* ServerStatusArrayMessage::add_server_status_arr() {
-  // @@protoc_insertion_point(field_add:ServerStatusArrayMessage.server_status_arr)
-  return _internal_add_server_status_arr();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ServerStatusMessage >&
-ServerStatusArrayMessage::server_status_arr() const {
-  // @@protoc_insertion_point(field_list:ServerStatusArrayMessage.server_status_arr)
-  return server_status_arr_;
-}
-
-// -------------------------------------------------------------------
-
-// FetchReplyArrayMessage
-
-// repeated .FetchReplyMessage fetch_reply_arr = 1;
-inline int FetchReplyArrayMessage::_internal_fetch_reply_arr_size() const {
-  return fetch_reply_arr_.size();
-}
-inline int FetchReplyArrayMessage::fetch_reply_arr_size() const {
-  return _internal_fetch_reply_arr_size();
-}
-inline void FetchReplyArrayMessage::clear_fetch_reply_arr() {
-  fetch_reply_arr_.Clear();
-}
-inline ::FetchReplyMessage* FetchReplyArrayMessage::mutable_fetch_reply_arr(int index) {
-  // @@protoc_insertion_point(field_mutable:FetchReplyArrayMessage.fetch_reply_arr)
-  return fetch_reply_arr_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >*
-FetchReplyArrayMessage::mutable_fetch_reply_arr() {
-  // @@protoc_insertion_point(field_mutable_list:FetchReplyArrayMessage.fetch_reply_arr)
-  return &fetch_reply_arr_;
-}
-inline const ::FetchReplyMessage& FetchReplyArrayMessage::_internal_fetch_reply_arr(int index) const {
-  return fetch_reply_arr_.Get(index);
-}
-inline const ::FetchReplyMessage& FetchReplyArrayMessage::fetch_reply_arr(int index) const {
-  // @@protoc_insertion_point(field_get:FetchReplyArrayMessage.fetch_reply_arr)
-  return _internal_fetch_reply_arr(index);
-}
-inline ::FetchReplyMessage* FetchReplyArrayMessage::_internal_add_fetch_reply_arr() {
-  return fetch_reply_arr_.Add();
-}
-inline ::FetchReplyMessage* FetchReplyArrayMessage::add_fetch_reply_arr() {
-  // @@protoc_insertion_point(field_add:FetchReplyArrayMessage.fetch_reply_arr)
-  return _internal_add_fetch_reply_arr();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::FetchReplyMessage >&
-FetchReplyArrayMessage::fetch_reply_arr() const {
-  // @@protoc_insertion_point(field_list:FetchReplyArrayMessage.fetch_reply_arr)
-  return fetch_reply_arr_;
 }
 
 // -------------------------------------------------------------------
@@ -6708,6 +6980,8 @@ inline void ThreadMessage::set_dirty(::PROTOBUF_NAMESPACE_ID::int64 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

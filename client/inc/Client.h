@@ -53,7 +53,7 @@ class Client {
 														const CommandArrayMessage* request);
 
   void get_cluster_metric(FetchReplyArrayMessage* response,
-                          const FetchRequestMessage* request);
+                          const FetchRequestArrayMessage* request);
 };
 
 }  // namespace client

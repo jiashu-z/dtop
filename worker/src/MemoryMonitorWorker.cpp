@@ -6,7 +6,6 @@ dtop::worker::MemoryMonitorWorker::MemoryMonitorWorker()
         : BaseWorker("Memory monitor worker") {}
 
 void dtop::worker::MemoryMonitorWorker::init_futures() {
-    futures.push_back(new Future("MEM_USAGE", "The overall memory usage"));
     futures.push_back(
             new Future("MEM_PER_PROC", "The detail memory info of processes"));
 }

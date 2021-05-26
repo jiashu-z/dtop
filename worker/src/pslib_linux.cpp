@@ -339,7 +339,7 @@ static char *get_cmdline(pid_t pid) {
   FILE *fp = NULL;
   char procfile[50];
   char *contents = NULL;
-  int bufsize = 1000;
+  int bufsize = 10240;
   ssize_t read;
 
   contents = (char *)calloc(bufsize, sizeof(char));

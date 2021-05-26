@@ -111,46 +111,46 @@ void APIService::Stub::experimental_async::ExecClusterCommand(::grpc::ClientCont
   return result;
 }
 
-::grpc::Status APIService::Stub::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyArrayMessage* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetClusterMetric_, context, request, response);
+::grpc::Status APIService::Stub::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::FetchReplyArrayMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetClusterMetric_, context, request, response);
 }
 
-void APIService::Stub::experimental_async::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetClusterMetric_, context, request, response, std::move(f));
+void APIService::Stub::experimental_async::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetClusterMetric_, context, request, response, std::move(f));
 }
 
-void APIService::Stub::experimental_async::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+void APIService::Stub::experimental_async::GetClusterMetric(::grpc::ClientContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetClusterMetric_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::PrepareAsyncGetClusterMetricRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyArrayMessage, ::FetchRequestMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetClusterMetric_, context, request);
+::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::PrepareAsyncGetClusterMetricRaw(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyArrayMessage, ::FetchRequestArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetClusterMetric_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::AsyncGetClusterMetricRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::AsyncGetClusterMetricRaw(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetClusterMetricRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status APIService::Stub::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::FetchReplyArrayMessage* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetAggregatedVirtualMemInfo_, context, request, response);
+::grpc::Status APIService::Stub::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::FetchReplyArrayMessage* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetAggregatedVirtualMemInfo_, context, request, response);
 }
 
-void APIService::Stub::experimental_async::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetAggregatedVirtualMemInfo_, context, request, response, std::move(f));
+void APIService::Stub::experimental_async::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetAggregatedVirtualMemInfo_, context, request, response, std::move(f));
 }
 
-void APIService::Stub::experimental_async::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+void APIService::Stub::experimental_async::GetAggregatedVirtualMemInfo(::grpc::ClientContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetAggregatedVirtualMemInfo_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::PrepareAsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyArrayMessage, ::FetchRequestMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetAggregatedVirtualMemInfo_, context, request);
+::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::PrepareAsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::FetchReplyArrayMessage, ::FetchRequestArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetAggregatedVirtualMemInfo_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::AsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestMessage& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::FetchReplyArrayMessage>* APIService::Stub::AsyncGetAggregatedVirtualMemInfoRaw(::grpc::ClientContext* context, const ::FetchRequestArrayMessage& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetAggregatedVirtualMemInfoRaw(context, request, cq);
   result->StartCall();
@@ -191,20 +191,20 @@ APIService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       APIService_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](APIService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::FetchRequestMessage* req,
+             const ::FetchRequestArrayMessage* req,
              ::FetchReplyArrayMessage* resp) {
                return service->GetClusterMetric(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       APIService_method_names[4],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::FetchRequestMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< APIService::Service, ::FetchRequestArrayMessage, ::FetchReplyArrayMessage, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](APIService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::FetchRequestMessage* req,
+             const ::FetchRequestArrayMessage* req,
              ::FetchReplyArrayMessage* resp) {
                return service->GetAggregatedVirtualMemInfo(ctx, req, resp);
              }, this)));
@@ -234,14 +234,14 @@ APIService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status APIService::Service::GetClusterMetric(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response) {
+::grpc::Status APIService::Service::GetClusterMetric(::grpc::ServerContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status APIService::Service::GetAggregatedVirtualMemInfo(::grpc::ServerContext* context, const ::FetchRequestMessage* request, ::FetchReplyArrayMessage* response) {
+::grpc::Status APIService::Service::GetAggregatedVirtualMemInfo(::grpc::ServerContext* context, const ::FetchRequestArrayMessage* request, ::FetchReplyArrayMessage* response) {
   (void) context;
   (void) request;
   (void) response;

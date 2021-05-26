@@ -31,11 +31,11 @@ class ConcreteAPIService final : public APIService::Service {
 	                                  ::StringArrayMessage* response) override;
 
   ::grpc::Status GetClusterMetric(::grpc::ServerContext* context,
-                                  const ::FetchRequestMessage* request,
+                                  const ::FetchRequestArrayMessage* request,
                                   ::FetchReplyArrayMessage* response) override;
 
   ::grpc::Status GetAggregatedVirtualMemInfo(
-      ::grpc::ServerContext* context, const ::FetchRequestMessage* request,
+      ::grpc::ServerContext* context, const ::FetchRequestArrayMessage* request,
       ::FetchReplyArrayMessage* response) override;
 };
 
