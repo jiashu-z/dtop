@@ -54,97 +54,122 @@ void dtop::client::Client::add_api_target(const std::string& addr) {
 
 void dtop::client::Client::get_cluster_status(::ServerStatusArrayMessage *response,
                                              const ::StringArrayMessage* request) {
-	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	for (const auto& iter : this->grpc_client_map) {
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-		std::cout << iter.first << std::endl;
-		::grpc::ClientContext context;
-		ServerStatusMessage local_response;
-		iter.second->stub->GetServerStatus(&context, *request, &local_response);
-		auto* reply_ptr = response->add_server_status_arr();
-		reply_ptr->CopyFrom(local_response);
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	}
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  for (const auto& iter : this->grpc_client_map) {
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    std::cout << iter.first << std::endl;
+    ::grpc::ClientContext context;
+    ServerStatusMessage local_response;
+    iter.second->stub->GetServerStatus(&context, *request, &local_response);
+    auto* reply_ptr = response->add_server_status_arr();
+    reply_ptr->CopyFrom(local_response);
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  }
 }
 
 void dtop::client::Client::exec_cluster_command(StringArrayMessage *response,
-																								const CommandArrayMessage *request) {
-	std::unordered_map<std::string, CommandArrayMessage> cmd_arr_map;
-	// init map
-	for (const auto& iter : this->grpc_client_map) {
-		cmd_arr_map.insert(std::make_pair<std::string, CommandArrayMessage>(
-						std::string(iter.first), CommandArrayMessage()));
-	}
-	// set command array for each client
-	for (const auto& command : request->command_arr()) {
-		if (command.addr().empty()) {
-			// broadcast
-			for (auto& iter : cmd_arr_map) {
-				iter.second.mutable_command_arr()->Add()->CopyFrom(command);
-			}
-		} else {
-			auto iter = cmd_arr_map.find(command.addr());
-			if (iter != cmd_arr_map.end()) {
-				auto* command_ptr = iter->second.mutable_command_arr()->Add();
-				command_ptr->set_worker_name(command.worker_name());    // no addr field
-				command_ptr->set_cmd_type(command.cmd_type());
-			} else {
-				std::cout << "Unknown host " << iter->first << std::endl;
-			}
-		}
-	}
-	// send command to target host
-	for (const auto& iter : this->grpc_client_map) {
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-		std::cout << iter.first << std::endl;
-		::grpc::ClientContext context;
-		const CommandArrayMessage* local_request = &cmd_arr_map[iter.first];   // must contain
-		StringArrayMessage local_response;
-		iter.second->stub->ExecCommand(&context, *local_request, &local_response);
-		response->MergeFrom(local_response);
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	}
+                                                const CommandArrayMessage *request) {
+  std::unordered_map<std::string, CommandArrayMessage> cmd_arr_map;
+  // init map
+  for (const auto& iter : this->grpc_client_map) {
+    cmd_arr_map.insert(std::make_pair<std::string, CommandArrayMessage>(
+            std::string(iter.first), CommandArrayMessage()));
+  }
+  // set command array for each client
+  for (const auto& command : request->command_arr()) {
+    if (command.addr().empty()) {
+      // broadcast
+      for (auto& iter : cmd_arr_map) {
+        iter.second.mutable_command_arr()->Add()->CopyFrom(command);
+      }
+    } else {
+      auto iter = cmd_arr_map.find(command.addr());
+      if (iter != cmd_arr_map.end()) {
+        auto* command_ptr = iter->second.mutable_command_arr()->Add();
+        command_ptr->set_worker_name(command.worker_name());    // no addr field
+        command_ptr->set_cmd_type(command.cmd_type());
+      } else {
+        std::cout << "Unknown addr " << command.addr() << std::endl;
+      }
+    }
+  }
+  // send command to target host
+  for (const auto& iter : this->grpc_client_map) {
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    std::cout << iter.first << std::endl;
+    ::grpc::ClientContext context;
+    const CommandArrayMessage* local_request = &cmd_arr_map[iter.first];   // must contain
+    StringArrayMessage local_response;
+    iter.second->stub->ExecCommand(&context, *local_request, &local_response);
+    response->MergeFrom(local_response);
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  }
 }
 
 void dtop::client::Client::get_cluster_metric(
     FetchReplyArrayMessage* response, const FetchRequestArrayMessage* request) {
 
-	std::unordered_map<std::string, FetchRequestMessage> req_map;
-	// init map
-	for (const auto& iter : this->grpc_client_map) {
-		req_map.insert(std::make_pair<std::string, FetchRequestMessage>(
-						std::string(iter.first), FetchRequestMessage()));
-	}
-	// set broadcast request
-	for (const auto& fetch_req : request->fetch_request_arr()) {
-		if (fetch_req.addr().empty()) {
-			for (auto& iter : req_map) {
-				iter.second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
-				iter.second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
-			}
-		}
-	}
-	// set non-broadcast request, it will overwrite broadcast req if exits
-	for (const auto& fetch_req : request->fetch_request_arr()) {
-		if (!fetch_req.addr().empty()) {
-			auto iter = req_map.find(fetch_req.addr());
-			if (iter != req_map.end()) {    // overwrite request
-				iter->second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
-				iter->second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
-			} else {
-				std::cout << "Unknown host " << iter->first << std::endl;
-			}
-		}
-	}
-	// send command to target host
-	for (const auto& iter : this->grpc_client_map) {
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-		std::cout << iter.first << std::endl;
-		::grpc::ClientContext context;
-		const FetchRequestMessage* local_request = &req_map[iter.first];   // must contain
-		FetchReplyMessage local_response;
-		iter.second->stub->GetServerMetric(&context, *local_request, &local_response);
-		response->mutable_fetch_reply_arr()->Add()->CopyFrom(local_response);
-		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-	}
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  std::unordered_map<std::string, FetchRequestMessage> req_map;
+  // init map
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  for (const auto& iter : this->grpc_client_map) {
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    req_map.insert(std::make_pair<std::string, FetchRequestMessage>(
+            std::string(iter.first), FetchRequestMessage()));
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  }
+  // set broadcast request
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  for (const auto& fetch_req : request->fetch_request_arr()) {
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    if (fetch_req.addr().empty()) {
+      std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+      for (auto& iter : req_map) {
+        std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+        iter.second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
+        std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+        iter.second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
+      }
+    }
+  }
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
+  // set non-broadcast request, it will overwrite broadcast req if exits
+  for (const auto& fetch_req : request->fetch_request_arr()) {
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    if (!fetch_req.addr().empty()) {
+      std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+      std::cout << "debug: " << fetch_req.addr() << std::endl;
+      auto iter = req_map.find(fetch_req.addr());
+      std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+      if (iter != req_map.end()) {    // overwrite request
+        std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+        
+        iter->second.mutable_future_arr()->CopyFrom(fetch_req.future_arr());
+        
+        std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+        iter->second.mutable_param_arr()->CopyFrom(fetch_req.param_arr());
+      } else {
+        std::cout << "Unknown addr " << fetch_req.addr() << std::endl;
+      }
+    }
+  }
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  // send command to target host
+  for (const auto& iter : this->grpc_client_map) {
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    std::cout << iter.first << std::endl;
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    ::grpc::ClientContext context;
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    const FetchRequestMessage* local_request = &req_map[iter.first];   // must contain
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    FetchReplyMessage local_response;
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    iter.second->stub->GetServerMetric(&context, *local_request, &local_response);
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+    response->mutable_fetch_reply_arr()->Add()->CopyFrom(local_response);
+    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+  }
 }

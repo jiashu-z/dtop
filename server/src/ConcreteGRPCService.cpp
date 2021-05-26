@@ -64,6 +64,7 @@
 ::grpc::Status dtop::server::ConcreteGRPCService::GetServerStatus(
     ::grpc::ServerContext *context, const ::StringArrayMessage *request,
     ::ServerStatusMessage *response) {
+  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   this->server->get_server_status(request, response);
   return grpc::Status::OK;
 }
