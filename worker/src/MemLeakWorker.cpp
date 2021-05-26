@@ -140,3 +140,18 @@ void dtop::worker::MemLeakWorker::rm_pids(const std::list<int64_t>& to_rm) {
   }
   this->mut.unlock();
 }
+
+std::list<dtop::worker::MemLeakWorker::malloc_entry_t> dtop::worker::MemLeakWorker::scan_and_find_leaks() const {
+  std::list<dtop::worker::MemLeakWorker::malloc_entry_t> leaks;
+  int64_t time = std::time(nullptr);
+  for (const auto& pid_iter : pid_map_) {
+    for (const auto& addr_iter : pid_iter.second) {
+      const auto& p = addr_iter.second;
+      if (time - p.second > leak_threshold) {
+        dtop::worker::MemLeakWorker::malloc_entry_t entry{time, p.first.pid, p.first.size, p.first.addr, p.first.caller};
+        leaks.push_back(entry);
+      }
+    }
+  }
+  return leaks;
+}
