@@ -14,6 +14,11 @@
 #include <atomic>
 #include <list>
 
+#define malloc_msg_size sizeof(malloc_free_msg_t)
+#define mode_malloc 0
+#define mode_free 1
+#define leak_threshold 5
+
 namespace dtop {
 namespace worker {
 
@@ -47,10 +52,6 @@ class MemLeakWorker : public BaseWorker {
     int64_t caller;
   };
 
-  #define malloc_msg_size sizeof(malloc_free_msg_t)
-  #define mode_malloc 0
-  #define mode_free 1
-
   std::mutex mut;
   
   typedef std::pair<struct malloc_free_msg_t, int64_t> msg_ts_pair_t;
@@ -77,27 +78,37 @@ class MemLeakWorker : public BaseWorker {
 
   void rm_pids(const std::list<int64_t>& to_rm);
 
+  typedef struct malloc_entry_t {
+    int64_t time;
+    int64_t pid;
+    int64_t size;
+    int64_t addr;
+    int64_t caller;
+  } malloc_entry_t;
+
+  std::list<malloc_entry_t> scan_and_find_leaks() const;
+
  public:
 
-	static void record_malloc(int pid, int64_t addr, int64_t size) {
-		if (mem_map.find(pid) == mem_map.end()) {
-			std::map<int64_t, MemTraceEntry> map;
-			mem_map.insert(std::pair<int, std::map<int64_t, MemTraceEntry>>(pid, map));
-		}
-		int64_t time = std::time(nullptr);
-		MemTraceEntry malloc_entry(addr, time, size);
-		mem_map[pid].insert(std::pair<int64_t, MemTraceEntry>(addr, malloc_entry));
-	};
+  static void record_malloc(int pid, int64_t addr, int64_t size) {
+    if (mem_map.find(pid) == mem_map.end()) {
+      std::map<int64_t, MemTraceEntry> map;
+      mem_map.insert(std::pair<int, std::map<int64_t, MemTraceEntry>>(pid, map));
+    }
+    int64_t time = std::time(nullptr);
+    MemTraceEntry malloc_entry(addr, time, size);
+    mem_map[pid].insert(std::pair<int64_t, MemTraceEntry>(addr, malloc_entry));
+  };
 
-	static void record_free(int pid, int64_t addr) {
-		if (mem_map.find(pid) == mem_map.end()) {
-			return;
-		}
-		auto &proc_map = mem_map[pid];
-		proc_map.erase(addr);
-	}
+  static void record_free(int pid, int64_t addr) {
+    if (mem_map.find(pid) == mem_map.end()) {
+      return;
+    }
+    auto &proc_map = mem_map[pid];
+    proc_map.erase(addr);
+  }
 
-	MemLeakWorker();
+  MemLeakWorker();
 };
 
 }  // namespace worker
