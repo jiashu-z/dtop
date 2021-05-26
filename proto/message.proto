@@ -95,7 +95,8 @@ message FetchReplyMessage {
   CpuMessage cpu_message = 2;
   MemUsageMessage mem_usage_message = 3;
   MemoryMonitorMessage memory_monitor_message = 4;
-  repeated string infos = 5;
+  MemLeakMessage mem_leak_message = 5;
+  repeated string infos = 6;
 }
 
 
@@ -133,13 +134,25 @@ message ProcessMessage {
 }
 
 message ThreadMessage {
-    int64 tid = 1;
+  int64 tid = 1;
 
-    int64 rss = 2;
-    int64 vms = 3;
-    int64 shared = 4;
-    int64 text = 5;
-    int64 lib = 6;
-    int64 data = 7;
-    int64 dirty = 8;
+  int64 rss = 2;
+  int64 vms = 3;
+  int64 shared = 4;
+  int64 text = 5;
+  int64 lib = 6;
+  int64 data = 7;
+  int64 dirty = 8;
+}
+
+message MemLeakMessage {
+  repeated MallocEntryMessage malloc_entry_arr = 1;
+}
+
+message MallocEntryMessage {
+  int64 time = 1;
+  int64 pid = 2;
+  int64 size = 3;
+  int64 addr = 4;
+  int64 caller = 5;
 }

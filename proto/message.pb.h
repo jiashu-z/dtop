@@ -46,7 +46,7 @@ struct TableStruct_message_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[25]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[27]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -99,6 +99,12 @@ extern LongArrayMessageDefaultTypeInternal _LongArrayMessage_default_instance_;
 class LongMessage;
 struct LongMessageDefaultTypeInternal;
 extern LongMessageDefaultTypeInternal _LongMessage_default_instance_;
+class MallocEntryMessage;
+struct MallocEntryMessageDefaultTypeInternal;
+extern MallocEntryMessageDefaultTypeInternal _MallocEntryMessage_default_instance_;
+class MemLeakMessage;
+struct MemLeakMessageDefaultTypeInternal;
+extern MemLeakMessageDefaultTypeInternal _MemLeakMessage_default_instance_;
 class MemUsageMessage;
 struct MemUsageMessageDefaultTypeInternal;
 extern MemUsageMessageDefaultTypeInternal _MemUsageMessage_default_instance_;
@@ -145,6 +151,8 @@ template<> ::IntegerArrayMessage* Arena::CreateMaybeMessage<::IntegerArrayMessag
 template<> ::IntegerMessage* Arena::CreateMaybeMessage<::IntegerMessage>(Arena*);
 template<> ::LongArrayMessage* Arena::CreateMaybeMessage<::LongArrayMessage>(Arena*);
 template<> ::LongMessage* Arena::CreateMaybeMessage<::LongMessage>(Arena*);
+template<> ::MallocEntryMessage* Arena::CreateMaybeMessage<::MallocEntryMessage>(Arena*);
+template<> ::MemLeakMessage* Arena::CreateMaybeMessage<::MemLeakMessage>(Arena*);
 template<> ::MemUsageMessage* Arena::CreateMaybeMessage<::MemUsageMessage>(Arena*);
 template<> ::MemoryMonitorMessage* Arena::CreateMaybeMessage<::MemoryMonitorMessage>(Arena*);
 template<> ::ProcessMessage* Arena::CreateMaybeMessage<::ProcessMessage>(Arena*);
@@ -3206,13 +3214,14 @@ class FetchReplyMessage PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfosFieldNumber = 5,
+    kInfosFieldNumber = 6,
     kAddrFieldNumber = 1,
     kCpuMessageFieldNumber = 2,
     kMemUsageMessageFieldNumber = 3,
     kMemoryMonitorMessageFieldNumber = 4,
+    kMemLeakMessageFieldNumber = 5,
   };
-  // repeated string infos = 5;
+  // repeated string infos = 6;
   int infos_size() const;
   private:
   int _internal_infos_size() const;
@@ -3306,6 +3315,24 @@ class FetchReplyMessage PROTOBUF_FINAL :
       ::MemoryMonitorMessage* memory_monitor_message);
   ::MemoryMonitorMessage* unsafe_arena_release_memory_monitor_message();
 
+  // .MemLeakMessage mem_leak_message = 5;
+  bool has_mem_leak_message() const;
+  private:
+  bool _internal_has_mem_leak_message() const;
+  public:
+  void clear_mem_leak_message();
+  const ::MemLeakMessage& mem_leak_message() const;
+  ::MemLeakMessage* release_mem_leak_message();
+  ::MemLeakMessage* mutable_mem_leak_message();
+  void set_allocated_mem_leak_message(::MemLeakMessage* mem_leak_message);
+  private:
+  const ::MemLeakMessage& _internal_mem_leak_message() const;
+  ::MemLeakMessage* _internal_mutable_mem_leak_message();
+  public:
+  void unsafe_arena_set_allocated_mem_leak_message(
+      ::MemLeakMessage* mem_leak_message);
+  ::MemLeakMessage* unsafe_arena_release_mem_leak_message();
+
   // @@protoc_insertion_point(class_scope:FetchReplyMessage)
  private:
   class _Internal;
@@ -3318,6 +3345,7 @@ class FetchReplyMessage PROTOBUF_FINAL :
   ::CpuMessage* cpu_message_;
   ::MemUsageMessage* mem_usage_message_;
   ::MemoryMonitorMessage* memory_monitor_message_;
+  ::MemLeakMessage* mem_leak_message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -4320,6 +4348,333 @@ class ThreadMessage PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int64 lib_;
   ::PROTOBUF_NAMESPACE_ID::int64 data_;
   ::PROTOBUF_NAMESPACE_ID::int64 dirty_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MemLeakMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MemLeakMessage) */ {
+ public:
+  inline MemLeakMessage() : MemLeakMessage(nullptr) {}
+  virtual ~MemLeakMessage();
+  explicit constexpr MemLeakMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MemLeakMessage(const MemLeakMessage& from);
+  MemLeakMessage(MemLeakMessage&& from) noexcept
+    : MemLeakMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline MemLeakMessage& operator=(const MemLeakMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MemLeakMessage& operator=(MemLeakMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MemLeakMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MemLeakMessage* internal_default_instance() {
+    return reinterpret_cast<const MemLeakMessage*>(
+               &_MemLeakMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    25;
+
+  friend void swap(MemLeakMessage& a, MemLeakMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MemLeakMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MemLeakMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MemLeakMessage* New() const final {
+    return CreateMaybeMessage<MemLeakMessage>(nullptr);
+  }
+
+  MemLeakMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MemLeakMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MemLeakMessage& from);
+  void MergeFrom(const MemLeakMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MemLeakMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MemLeakMessage";
+  }
+  protected:
+  explicit MemLeakMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMallocEntryArrFieldNumber = 1,
+  };
+  // repeated .MallocEntryMessage malloc_entry_arr = 1;
+  int malloc_entry_arr_size() const;
+  private:
+  int _internal_malloc_entry_arr_size() const;
+  public:
+  void clear_malloc_entry_arr();
+  ::MallocEntryMessage* mutable_malloc_entry_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MallocEntryMessage >*
+      mutable_malloc_entry_arr();
+  private:
+  const ::MallocEntryMessage& _internal_malloc_entry_arr(int index) const;
+  ::MallocEntryMessage* _internal_add_malloc_entry_arr();
+  public:
+  const ::MallocEntryMessage& malloc_entry_arr(int index) const;
+  ::MallocEntryMessage* add_malloc_entry_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MallocEntryMessage >&
+      malloc_entry_arr() const;
+
+  // @@protoc_insertion_point(class_scope:MemLeakMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MallocEntryMessage > malloc_entry_arr_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_message_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MallocEntryMessage PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MallocEntryMessage) */ {
+ public:
+  inline MallocEntryMessage() : MallocEntryMessage(nullptr) {}
+  virtual ~MallocEntryMessage();
+  explicit constexpr MallocEntryMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MallocEntryMessage(const MallocEntryMessage& from);
+  MallocEntryMessage(MallocEntryMessage&& from) noexcept
+    : MallocEntryMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline MallocEntryMessage& operator=(const MallocEntryMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MallocEntryMessage& operator=(MallocEntryMessage&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MallocEntryMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MallocEntryMessage* internal_default_instance() {
+    return reinterpret_cast<const MallocEntryMessage*>(
+               &_MallocEntryMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    26;
+
+  friend void swap(MallocEntryMessage& a, MallocEntryMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MallocEntryMessage* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MallocEntryMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MallocEntryMessage* New() const final {
+    return CreateMaybeMessage<MallocEntryMessage>(nullptr);
+  }
+
+  MallocEntryMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MallocEntryMessage>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MallocEntryMessage& from);
+  void MergeFrom(const MallocEntryMessage& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MallocEntryMessage* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MallocEntryMessage";
+  }
+  protected:
+  explicit MallocEntryMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_message_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTimeFieldNumber = 1,
+    kPidFieldNumber = 2,
+    kSizeFieldNumber = 3,
+    kAddrFieldNumber = 4,
+    kCallerFieldNumber = 5,
+  };
+  // int64 time = 1;
+  void clear_time();
+  ::PROTOBUF_NAMESPACE_ID::int64 time() const;
+  void set_time(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_time() const;
+  void _internal_set_time(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 pid = 2;
+  void clear_pid();
+  ::PROTOBUF_NAMESPACE_ID::int64 pid() const;
+  void set_pid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_pid() const;
+  void _internal_set_pid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 size = 3;
+  void clear_size();
+  ::PROTOBUF_NAMESPACE_ID::int64 size() const;
+  void set_size(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_size() const;
+  void _internal_set_size(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 addr = 4;
+  void clear_addr();
+  ::PROTOBUF_NAMESPACE_ID::int64 addr() const;
+  void set_addr(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_addr() const;
+  void _internal_set_addr(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 caller = 5;
+  void clear_caller();
+  ::PROTOBUF_NAMESPACE_ID::int64 caller() const;
+  void set_caller(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_caller() const;
+  void _internal_set_caller(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:MallocEntryMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 time_;
+  ::PROTOBUF_NAMESPACE_ID::int64 pid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 size_;
+  ::PROTOBUF_NAMESPACE_ID::int64 addr_;
+  ::PROTOBUF_NAMESPACE_ID::int64 caller_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -6115,7 +6470,90 @@ inline void FetchReplyMessage::set_allocated_memory_monitor_message(::MemoryMoni
   // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.memory_monitor_message)
 }
 
-// repeated string infos = 5;
+// .MemLeakMessage mem_leak_message = 5;
+inline bool FetchReplyMessage::_internal_has_mem_leak_message() const {
+  return this != internal_default_instance() && mem_leak_message_ != nullptr;
+}
+inline bool FetchReplyMessage::has_mem_leak_message() const {
+  return _internal_has_mem_leak_message();
+}
+inline void FetchReplyMessage::clear_mem_leak_message() {
+  if (GetArena() == nullptr && mem_leak_message_ != nullptr) {
+    delete mem_leak_message_;
+  }
+  mem_leak_message_ = nullptr;
+}
+inline const ::MemLeakMessage& FetchReplyMessage::_internal_mem_leak_message() const {
+  const ::MemLeakMessage* p = mem_leak_message_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MemLeakMessage&>(
+      ::_MemLeakMessage_default_instance_);
+}
+inline const ::MemLeakMessage& FetchReplyMessage::mem_leak_message() const {
+  // @@protoc_insertion_point(field_get:FetchReplyMessage.mem_leak_message)
+  return _internal_mem_leak_message();
+}
+inline void FetchReplyMessage::unsafe_arena_set_allocated_mem_leak_message(
+    ::MemLeakMessage* mem_leak_message) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mem_leak_message_);
+  }
+  mem_leak_message_ = mem_leak_message;
+  if (mem_leak_message) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:FetchReplyMessage.mem_leak_message)
+}
+inline ::MemLeakMessage* FetchReplyMessage::release_mem_leak_message() {
+  
+  ::MemLeakMessage* temp = mem_leak_message_;
+  mem_leak_message_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::MemLeakMessage* FetchReplyMessage::unsafe_arena_release_mem_leak_message() {
+  // @@protoc_insertion_point(field_release:FetchReplyMessage.mem_leak_message)
+  
+  ::MemLeakMessage* temp = mem_leak_message_;
+  mem_leak_message_ = nullptr;
+  return temp;
+}
+inline ::MemLeakMessage* FetchReplyMessage::_internal_mutable_mem_leak_message() {
+  
+  if (mem_leak_message_ == nullptr) {
+    auto* p = CreateMaybeMessage<::MemLeakMessage>(GetArena());
+    mem_leak_message_ = p;
+  }
+  return mem_leak_message_;
+}
+inline ::MemLeakMessage* FetchReplyMessage::mutable_mem_leak_message() {
+  // @@protoc_insertion_point(field_mutable:FetchReplyMessage.mem_leak_message)
+  return _internal_mutable_mem_leak_message();
+}
+inline void FetchReplyMessage::set_allocated_mem_leak_message(::MemLeakMessage* mem_leak_message) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete mem_leak_message_;
+  }
+  if (mem_leak_message) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(mem_leak_message);
+    if (message_arena != submessage_arena) {
+      mem_leak_message = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mem_leak_message, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  mem_leak_message_ = mem_leak_message;
+  // @@protoc_insertion_point(field_set_allocated:FetchReplyMessage.mem_leak_message)
+}
+
+// repeated string infos = 6;
 inline int FetchReplyMessage::_internal_infos_size() const {
   return infos_.size();
 }
@@ -6977,9 +7415,160 @@ inline void ThreadMessage::set_dirty(::PROTOBUF_NAMESPACE_ID::int64 value) {
   // @@protoc_insertion_point(field_set:ThreadMessage.dirty)
 }
 
+// -------------------------------------------------------------------
+
+// MemLeakMessage
+
+// repeated .MallocEntryMessage malloc_entry_arr = 1;
+inline int MemLeakMessage::_internal_malloc_entry_arr_size() const {
+  return malloc_entry_arr_.size();
+}
+inline int MemLeakMessage::malloc_entry_arr_size() const {
+  return _internal_malloc_entry_arr_size();
+}
+inline void MemLeakMessage::clear_malloc_entry_arr() {
+  malloc_entry_arr_.Clear();
+}
+inline ::MallocEntryMessage* MemLeakMessage::mutable_malloc_entry_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:MemLeakMessage.malloc_entry_arr)
+  return malloc_entry_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MallocEntryMessage >*
+MemLeakMessage::mutable_malloc_entry_arr() {
+  // @@protoc_insertion_point(field_mutable_list:MemLeakMessage.malloc_entry_arr)
+  return &malloc_entry_arr_;
+}
+inline const ::MallocEntryMessage& MemLeakMessage::_internal_malloc_entry_arr(int index) const {
+  return malloc_entry_arr_.Get(index);
+}
+inline const ::MallocEntryMessage& MemLeakMessage::malloc_entry_arr(int index) const {
+  // @@protoc_insertion_point(field_get:MemLeakMessage.malloc_entry_arr)
+  return _internal_malloc_entry_arr(index);
+}
+inline ::MallocEntryMessage* MemLeakMessage::_internal_add_malloc_entry_arr() {
+  return malloc_entry_arr_.Add();
+}
+inline ::MallocEntryMessage* MemLeakMessage::add_malloc_entry_arr() {
+  // @@protoc_insertion_point(field_add:MemLeakMessage.malloc_entry_arr)
+  return _internal_add_malloc_entry_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MallocEntryMessage >&
+MemLeakMessage::malloc_entry_arr() const {
+  // @@protoc_insertion_point(field_list:MemLeakMessage.malloc_entry_arr)
+  return malloc_entry_arr_;
+}
+
+// -------------------------------------------------------------------
+
+// MallocEntryMessage
+
+// int64 time = 1;
+inline void MallocEntryMessage::clear_time() {
+  time_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::_internal_time() const {
+  return time_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::time() const {
+  // @@protoc_insertion_point(field_get:MallocEntryMessage.time)
+  return _internal_time();
+}
+inline void MallocEntryMessage::_internal_set_time(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  time_ = value;
+}
+inline void MallocEntryMessage::set_time(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_time(value);
+  // @@protoc_insertion_point(field_set:MallocEntryMessage.time)
+}
+
+// int64 pid = 2;
+inline void MallocEntryMessage::clear_pid() {
+  pid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::_internal_pid() const {
+  return pid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::pid() const {
+  // @@protoc_insertion_point(field_get:MallocEntryMessage.pid)
+  return _internal_pid();
+}
+inline void MallocEntryMessage::_internal_set_pid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  pid_ = value;
+}
+inline void MallocEntryMessage::set_pid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_pid(value);
+  // @@protoc_insertion_point(field_set:MallocEntryMessage.pid)
+}
+
+// int64 size = 3;
+inline void MallocEntryMessage::clear_size() {
+  size_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::_internal_size() const {
+  return size_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::size() const {
+  // @@protoc_insertion_point(field_get:MallocEntryMessage.size)
+  return _internal_size();
+}
+inline void MallocEntryMessage::_internal_set_size(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  size_ = value;
+}
+inline void MallocEntryMessage::set_size(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_size(value);
+  // @@protoc_insertion_point(field_set:MallocEntryMessage.size)
+}
+
+// int64 addr = 4;
+inline void MallocEntryMessage::clear_addr() {
+  addr_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::_internal_addr() const {
+  return addr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::addr() const {
+  // @@protoc_insertion_point(field_get:MallocEntryMessage.addr)
+  return _internal_addr();
+}
+inline void MallocEntryMessage::_internal_set_addr(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  addr_ = value;
+}
+inline void MallocEntryMessage::set_addr(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_addr(value);
+  // @@protoc_insertion_point(field_set:MallocEntryMessage.addr)
+}
+
+// int64 caller = 5;
+inline void MallocEntryMessage::clear_caller() {
+  caller_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::_internal_caller() const {
+  return caller_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 MallocEntryMessage::caller() const {
+  // @@protoc_insertion_point(field_get:MallocEntryMessage.caller)
+  return _internal_caller();
+}
+inline void MallocEntryMessage::_internal_set_caller(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  caller_ = value;
+}
+inline void MallocEntryMessage::set_caller(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_caller(value);
+  // @@protoc_insertion_point(field_set:MallocEntryMessage.caller)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

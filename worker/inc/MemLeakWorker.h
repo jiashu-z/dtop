@@ -62,7 +62,7 @@ class MemLeakWorker : public BaseWorker {
 
   std::unique_ptr<std::thread> map_thread_ptr;
 
-  std::atomic<bool> should_break;
+  std::atomic<bool> should_break{};
 
   static void update_map(MemLeakWorker *self);
 

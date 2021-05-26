@@ -60,9 +60,7 @@ bool dtop::worker::Manager::process_query(const FetchRequestMessage* request,
 
   for (BaseWorker* worker_ptr : manager_meta->get_workers()) {
     try {
-      if (!worker_ptr->process(&query, reply)) {
-        success = false;
-      }
+    	success = worker_ptr->process(&query, reply);
     } catch (std::exception& e) {
       PRINT_ERROR("setup config in " + worker_ptr->worker_name, e)
       success = false;

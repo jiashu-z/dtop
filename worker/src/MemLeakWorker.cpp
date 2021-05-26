@@ -3,16 +3,18 @@
 #include "pslib.h"
 #include <memory>
 #include <thread>
+#include <boost/algorithm/string.hpp>
+#include <cassert>
+
+#define add_and_rm_delimiter "|"
 
 std::map<int, std::map<int64_t, dtop::worker::MemLeakWorker::MemTraceEntry>> dtop::worker::MemLeakWorker::mem_map = {};
 
-dtop::worker::MemLeakWorker::MemLeakWorker() : BaseWorker("Memory usage worker") {};
+dtop::worker::MemLeakWorker::MemLeakWorker() : BaseWorker("Memory usage worker"), should_break(true) {}
 
 void dtop::worker::MemLeakWorker::init_futures() {
-  this->should_break = true;
-  futures.push_back(new Future("MEM_USAGE", "The overall memory usage"));
-  futures.push_back(
-      new Future("MEM_PER_PROC", "The detail memory info of processes"));
+  futures.push_back(new Future("REPORT_MEM_LEAK", "Report the memory leak"));
+  futures.push_back(new Future("UPDATE_TRACE_PROC", "Modify the processes to trace"));
 }
 
 bool dtop::worker::MemLeakWorker::setup_config(
@@ -28,27 +30,62 @@ bool dtop::worker::MemLeakWorker::handle_start() {
 
 bool dtop::worker::MemLeakWorker::handle_process(
     dtop::worker::ProfileQuery* query, FetchReplyMessage* reply) {
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  std::cout << query->to_string() << std::endl;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  VmemInfo info;
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  memset(&info, 0, sizeof(VmemInfo));
-  std::cout << __FILE__ << ": " << __LINE__ << std::endl;
-  if (!virtual_memory(&info)) {
-    return false;
-  }
 
-  auto mut_msg = reply->mutable_mem_usage_message();
-  mut_msg->set_total(info.total);
-  mut_msg->set_available(info.available);
-  mut_msg->set_used(info.used);
-  mut_msg->set_free(info.free);
-  mut_msg->set_active(info.active);
-  mut_msg->set_inactive(info.inactive);
-  mut_msg->set_buffers(info.buffers);
-  mut_msg->set_cached(info.cached);
-  mut_msg->set_wired(info.wired);
+	std::cout << query->to_string() << std::endl;
+
+	const auto& it1 = query->req_map.find("UPDATE_TRACE_PROC");
+	if (it1 != query->req_map.end()) {
+		std::vector<std::string> add_and_rm;
+		boost::split(add_and_rm, it1->second, boost::is_any_of(add_and_rm_delimiter));
+		assert(add_and_rm.size() == 2);
+
+		std::list<std::string> add_tokens;
+		std::list<std::string> rm_tokens;
+		boost::split(add_tokens, add_and_rm[0], boost::is_any_of(" "));
+		boost::split(rm_tokens, add_and_rm[1], boost::is_any_of(" "));
+		std::list<int64_t> to_add;
+		std::list<int64_t> to_rm;
+		for (const auto& iter : add_tokens) {
+			int64_t pid = std::stoll(iter);
+			if (0 == pid) {
+				continue;
+			}
+			to_add.push_back(pid);
+		}
+		for (const auto& iter : rm_tokens) {
+			int64_t pid = std::stoll(iter);
+			if (0 == pid) {
+				continue;
+			}
+			to_rm.push_back(pid);
+		}
+		update_pids(to_add, to_rm);
+	}
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+
+	const auto& it2 = query->req_map.find("REPORT_MEM_LEAK");
+	if (it2 != query->req_map.end()) {
+		std::cout << "REPORT_MEM_LEAK REPORT_MEM_LEAK" << std::endl;
+		auto leaks = scan_and_find_leaks();
+		auto mem_leak_msg = reply->mutable_mem_leak_message();
+		auto malloc_entries = mem_leak_msg->mutable_malloc_entry_arr();
+		for (auto& entry : leaks) {
+			auto* entry_ptr = malloc_entries->Add();
+			std::cout << entry.pid << std::endl;
+			entry_ptr->set_time(entry.time);
+			entry_ptr->set_pid(entry.pid);
+			entry_ptr->set_size(entry.size);
+			entry_ptr->set_addr(entry.addr);
+			entry_ptr->set_caller(entry.caller);
+		}
+	}
+	else {
+		std::cout << __FILE__ << ": " << __LINE__ << std::endl;
+		for (auto iter : query->req_map) {
+			std::cout << iter.first << std::endl;
+		}
+	}
+	std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 
   return true;
 }

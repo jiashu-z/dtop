@@ -6,8 +6,7 @@ dtop::worker::MemoryMonitorWorker::MemoryMonitorWorker()
         : BaseWorker("Memory monitor worker") {}
 
 void dtop::worker::MemoryMonitorWorker::init_futures() {
-    futures.push_back(
-            new Future("MEM_PER_PROC", "The detail memory info of processes"));
+    futures.push_back(new Future("REPORT_PROC_MEM", "Report the detail memory info of processes"));
 }
 
 bool dtop::worker::MemoryMonitorWorker::setup_config(
@@ -19,6 +18,11 @@ bool dtop::worker::MemoryMonitorWorker::handle_start() { return true; }
 
 bool dtop::worker::MemoryMonitorWorker::handle_process(
         dtop::worker::ProfileQuery* query, FetchReplyMessage* reply) {
+
+	if (query->req_map.find("REPORT_PROC_MEM") == query->req_map.end()) {
+		return true;
+	}
+
 //    std::cout << __FILE__ << ": " << __LINE__ << std::endl;
 //    std::cout << query->to_string() << std::endl;
 //    std::cout << __FILE__ << ": " << __LINE__ << std::endl;

@@ -6,9 +6,7 @@ dtop::worker::MemUsageWorker::MemUsageWorker()
     : BaseWorker("Memory usage worker") {}
 
 void dtop::worker::MemUsageWorker::init_futures() {
-  futures.push_back(new Future("MEM_USAGE", "The overall memory usage"));
-  futures.push_back(
-      new Future("MEM_PER_PROC", "The detail memory info of processes"));
+  futures.push_back(new Future("REPORT_MEM_USAGE", "Report the overall memory usage on this server"));
 }
 
 bool dtop::worker::MemUsageWorker::setup_config(
@@ -20,6 +18,11 @@ bool dtop::worker::MemUsageWorker::handle_start() { return true; }
 
 bool dtop::worker::MemUsageWorker::handle_process(
     dtop::worker::ProfileQuery* query, FetchReplyMessage* reply) {
+
+	if (query->req_map.find("REPORT_MEM_USAGE") == query->req_map.end()) {
+		return true;
+	}
+
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;
   std::cout << query->to_string() << std::endl;
   std::cout << __FILE__ << ": " << __LINE__ << std::endl;

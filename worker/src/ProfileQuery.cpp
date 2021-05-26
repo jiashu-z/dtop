@@ -3,14 +3,14 @@
 #include <sstream>
 
 bool dtop::worker::ProfileQuery::decode(const FetchRequestMessage* request) {
-//  if (request->request_arr_size() != request->param_arr_size()) {
-//    return false;
-//  }
-//  int idx = 0;
-//  for (auto& req : request->request_arr()) {
-//    // suppose no conflict for now
-//    req_map[req] = request->param_arr()[idx++];
-//  }
+  if (request->future_arr_size() != request->param_arr_size()) {
+    return false;
+  }
+  int idx = 0;
+  for (auto& req : request->future_arr()) {
+    // suppose no conflict for now
+    req_map[req] = request->param_arr()[idx++];
+  }
   return true;
 }
 
