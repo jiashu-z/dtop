@@ -135,17 +135,17 @@ We plan to finish this project by 05.25 or earlier if we are requested by this c
 
 - [x] 05.05 Build RPC framework of this project. Jiashu
 
-- [ ] 05.05 Investigate memory leak detection. Zunyao
+- [x] 05.05 Investigate memory leak detection. Zunyao
 
-- [ ] 05.08 Implement memory allocation condition request. All
+- [x] 05.08 Implement memory allocation condition request. All
 
-- [ ] 05.12 Implement memory allocation aggregation and display. All
+- [x] 05.12 Implement memory allocation aggregation and display. All
 
-- [ ] 05.14 Implement the memory allocation monitor SDK. All
+- [x] 05.14 Implement the memory allocation monitor SDK. All
 
-- [ ] 05.19 Implement memory leak detection. All
+- [x] 05.19 Implement memory leak detection. All
 
-- [ ] 05.25 Improve usability and release. All
+- [x] 05.25 Improve usability and release. All
 
 ## Division of Labor
 
