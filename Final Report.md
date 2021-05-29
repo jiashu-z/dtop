@@ -41,8 +41,9 @@ We use /proc/[pid]/ subdirectory for process monitoring. This directory contains
  ### 2.2 hook function and PR_LOAD_LIBRARY
 
 
-​	LD_PRELOAD is an environment variable of the Linux system. It can affect the runtime linker of the program. It allows you to define the dynamic link library to be loaded first before the program runs. Different dynamically link the same functions in this library. Through environment variables, we can load the dynamic link library between the main program and the dynamic link library, and even cover the normal function library. Our own developer's own method (no need for other people's source code), and in our own direction, we can also use other people's programs to inject the program to achieve our own goals.（加一张C++调用malloc函数时系统的调用流程图）
+​	LD_PRELOAD is an environment variable of the Linux system. It can affect the runtime linker of the program. It allows you to define the dynamic link library to be loaded first before the program runs. Different dynamically link the same functions in this library. Through environment variables, we can load the dynamic link library between the main program and the dynamic link library, and even cover the normal function library. Our own developer's own method (no need for other people's source code), and in our own direction, we can also use other people's programs to inject the program to achieve our own goals.
 
+<img src="./misc/malloc.png" alt="malloc.png" style="zoom:67%;" />
 
 ### 2.3 Cluster communication
 
@@ -55,9 +56,7 @@ RPC adopts a client/server model. The requestor is a client, and the service pro
 
 ​	gRPC was originally developed by Google as a language-neutral, platform-neutral, and open source remote procedure call (RPC) system. In gRPC, client applications can directly call methods of server applications on a different machine just like calling local objects, making it easier for you to create distributed applications and services. Similar to many RPC systems, gRPC is also based on the following concept: define a service and specify the methods (including parameters and return types) that can be called remotely. Implement this interface on the server side and run a gRPC server to handle client calls. Having a stub on the client can act like a method on the server.
 
-![](D:\2021Spring_course\CS304\dtop\misc\landing-2.svg)
-
-
+<img src="./misc/landing-2.svg" alt="landing-2.svg" style="zoom:67%;" />
 
 #### Proto buffer 
 
