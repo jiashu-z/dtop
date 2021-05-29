@@ -32,17 +32,34 @@
 
 ### 2.1 Memory usage information extracting 
 
-We use /proc/[pid]/ subdirectory for process monitoring. This directory contains almost all useful information that we want.
+We use `/proc/[pid]/` subdirectory for process monitoring. This directory contains almost all useful information that we want. Specifically, `/proc/[pid]/statm` contains the process memory parameters as follows: 
 
-#### Memory Parameters:
+#### Process Memory Parameters:
 
-- **rss**: aka “Resident Set Size”, this is the non-swapped physical memory a process has used. On UNIX it matches “top“‘s RES column). 
-- **vms**: aka “Virtual Memory Size”, this is the total amount of virtual memory used by the process. On UNIX it matches “top“‘s VIRT column. On Windows this is an alias for pagefile field and it matches “Mem Usage” “VM Size” column of taskmgr.exe.
-- **shared**: memory that could be potentially shared with other processes. This matches “top“‘s SHR column).
-- **text**  aka TRS (text resident set) the amount of memory devoted to executable code. This matches “top“‘s CODE column).
-- **data**  aka DRS (data resident set) the amount of physical memory devoted to other than executable code. It matches “top“‘s DATA column).
-- **lib** the memory used by shared libraries.
-- **dirty** the number of dirty pages.
+- **RSS**: It is aka name for `Resident Set Size`, this is the non-swapped physical memory a process has used. It including the private memory a process occupy as well as shared library memory.   
+- **VMS**: It is aka name for `Virtual Memory Size`, this is the total amount of virtual memory used by the process. Besides RSS, it includes unallocated memory, which can be used later by process.
+- **SHARED**: Memory that could be potentially shared with other processes. 
+- **TEXT**: The amount of physical memory devoted to executable code.
+- **DATA** : The amount of physical memory devoted to other than executable code.
+- **LIB** :The memory used by shared libraries.
+- **DIRTY**: The number of dirty pages.
+
+The RSS is an effective parameter to tell the memory usage of processes, which is widely used by `psutil` and `top` library. When client sends a request to get memory information, we iterate the file, and get the present information we want.
+
+#### System Memory Parameters:
+
+According to [kernel.org](https://www.kernel.org/doc/html/latest/filesystems/proc.html), the following parameters can indicate the situation of  the whole system memory:
+
+- **total**: The total RAM memory space can be used.
+- **available**: The memory that can be given instantly to processes without the system going into swap. This is calculated by summing different memory values depending on the platform and it is supposed to be used to monitor actual memory usage in a cross platform fashion.
+
+- **Used**: Memory used, calculated differently depending on the platform and designed for informational purposes only. **total - free** does not necessarily match **used**.
+- **Free**: An estimate of how much memory is available for starting new applications, without swapping. Calculated from MemFree, SReclaimable, the size of the file LRU lists, and the low watermarks in each zone. The estimate takes into account that the system needs some page cache to function well, and that not all reclaimable slab will be reclaimable, due to items being in use. The impact of those factors will vary from system to system.
+- **Active** ): Memory that has been used more recently and usually not reclaimed unless absolutely necessary.
+- **Inactive** : Memory which has been less recently used. It is more eligible to be reclaimed for other purposes.
+- **Buffers** : Relatively temporary storage for raw disk blocks shouldn’t get tremendously large.
+- **Cached** : In-memory cache for files read from the disk (the pagecache). 
+- **Shared** Total memory used by shared memory (shmem) and tmpfs.
 
  ### 2.2 Hook function and LD_PRELOAD
 
@@ -124,3 +141,14 @@ The second class we have learned is that the  using `/proc` directory to realize
 2.Wriring part of gRPC communication function
 
 3.Researching the memory leak detection library
+
+## 6. Reference:
+
+1.https://github.com/hamon-in/cpslib a set of C library for system memory information profilling.
+
+2.https://psutil.readthedocs.io/en/latest/ psutil A cross-platform library for retrieving information on running  processes and system utilization (CPU, memory, disks, network, sensors) in Python.
+
+3.https://grpc.io/ A modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.
+
+4.https://www.kernel.org/doc/html/latest/filesystems/proc.html Linux kernel man page.
+
