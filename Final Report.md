@@ -61,7 +61,9 @@ RPC adopts a client/server model. The requestor is a client, and the service pro
 
 ​	gRPC was originally developed by Google as a language-neutral, platform-neutral, and open source remote procedure call (RPC) system. In gRPC, client applications can directly call methods of server applications on a different machine just like calling local objects, making it easier for you to create distributed applications and services. Similar to many RPC systems, gRPC is also based on the following concept: define a service and specify the methods (including parameters and return types) that can be called remotely. Implement this interface on the server side and run a gRPC server to handle client calls. Having a stub on the client can act like a method on the server.
 
-<img src="./misc/landing-2.svg" alt="landing-2.svg" style="zoom:67%;" />
+<img src="./misc/landing-2.svg" alt="System overview" style="zoom:100%;" />
+
+
 
 #### Proto buffer 
 
