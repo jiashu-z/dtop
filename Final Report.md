@@ -8,19 +8,25 @@
   | 11811919   | 游正新 |
   | 11811620   | 毛尊尧 |
 
-## 1.Result analysis: 
+## 1.Result analysis
 
 - Real Time Process Memory Monitor
 
-  Implemented.
+<img src="./misc/frontend_monitor.png" alt="frontend_monitor.png" style="zoom:67%;" />
 
-- Memory detection for certain C/C++ program
+  Using web frontend, user can monitor the cluster status and view the detail of server, such as memory usage, and so on.
 
-  Implemented.
+- Memory leak detection for certain program
+
+<img src="./misc/frontend_mem_leak.png" alt="frontend_mem_leak.png" style="zoom:67%;" />
+
+  User can set the pid of process to trace on specific server in the cluster. The system will report the infomation of the memory malloc that may have leakage risk, including the time, size, memory address.
 
 - Cluster aggregated query support
 
-  Implemented.
+<img src="./misc/frontend_aggregate.png" alt="frontend_aggregate.png" style="zoom:67%;" />
+
+  The system also allows user to launch a aggregated query on whole cluster to trace one specific program (chrome here). For now, we provide the total memory usage of target program.
 
 ## 2.Implementation: Discuss the main technologies used in the project.
 
@@ -38,8 +44,7 @@ We use /proc/[pid]/ subdirectory for process monitoring. This directory contains
 - **lib** the memory used by shared libraries.
 - **dirty** the number of dirty pages.
 
- ### 2.2 hook function and PR_LOAD_LIBRARY
-
+ ### 2.2 Hook function and LD_PRELOAD
 
 ​	LD_PRELOAD is an environment variable of the Linux system. It can affect the runtime linker of the program. It allows you to define the dynamic link library to be loaded first before the program runs. Different dynamically link the same functions in this library. Through environment variables, we can load the dynamic link library between the main program and the dynamic link library, and even cover the normal function library. Our own developer's own method (no need for other people's source code), and in our own direction, we can also use other people's programs to inject the program to achieve our own goals.
 
