@@ -57,7 +57,7 @@ According to [kernel.org](https://www.kernel.org/doc/html/latest/filesystems/pro
 
 - **Used**: Memory used, calculated differently depending on the platform and designed for informational purposes only. **total - free** does not necessarily match **used**.
 - **Free**: An estimate of how much memory is available for starting new applications, without swapping. Calculated from MemFree, SReclaimable, the size of the file LRU lists, and the low watermarks in each zone. The estimate takes into account that the system needs some page cache to function well, and that not all reclaimable slab will be reclaimable, due to items being in use. The impact of those factors will vary from system to system.
-- **Active** ): Memory that has been used more recently and usually not reclaimed unless absolutely necessary.
+- **Active** : Memory that has been used more recently and usually not reclaimed unless absolutely necessary.
 - **Inactive** : Memory which has been less recently used. It is more eligible to be reclaimed for other purposes.
 - **Buffers** : Relatively temporary storage for raw disk blocks shouldn’t get tremendously large.
 - **Cached** : In-memory cache for files read from the disk (the pagecache). 
@@ -66,6 +66,22 @@ According to [kernel.org](https://www.kernel.org/doc/html/latest/filesystems/pro
  ### 2.2 Hook function and LD_PRELOAD
 
 LD_PRELOAD is an environment variable of the Linux system. It can affect the runtime linker of the program. It allows you to define the dynamic link library to be loaded first before the program runs. Different dynamically link the same functions in this library. Through environment variables, we can load the dynamic link library between the main program and the dynamic link library, and even cover the normal function library. Our own developer's own method (no need for other people's source code), and in our own direction, we can also use other people's programs to inject the program to achieve our own goals.
+
+To implement the memory leak analysis function, we need to record each call of`malloc` and `free`. For each process, we set up a `FIFO` , the FIFO will store a list of information:
+
+```C++
+typedef struct malloc_entry_t {
+    int64_t time;
+    int64_t pid;
+    int64_t size;
+    int64_t addr;
+    int64_t caller;
+  } malloc_entry_t;
+```
+
+The `molloc` handler will write to the FIFO, and Server will read and update its list periodically and metadata. Because there exist concurrent read-write conflict, STL `mutex` are used to the process memory map. The function call overview can be summarized as the following figure: 
+
+
 
 <img src="./misc/malloc.png" alt="malloc.png" style="zoom:67%;" />
 
